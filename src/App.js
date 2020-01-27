@@ -3,8 +3,9 @@ import { Router, Link } from "@reach/router";
 import Header from './components/global/Header'
 const App = ({ children }) => (
   <div>
+    
     <Header>
-      <Link to="/">where is this link at</Link>
+      <Link to="/">where is this link at?!!!!</Link>
     </Header>
     <Router>
       <Home path="/" />
@@ -20,7 +21,8 @@ const Home = () => (
   </div>
 );
 const Login = () => (
-  <div>
+  <div class="flex flex justify-center self-center py-20 bg-gray-500">
+
     <div className="w-full max-w-md bg-white pt-8" >
     <form className=" bg-white shadow-md rounded px-8 py-8 pt-8">
     <div className="px-4 pb-4">
