@@ -1,12 +1,10 @@
 import React from 'react';
-import { Router, Link } from "@reach/router";
+import { Router } from "@reach/router";
 import Header from './components/global/Header'
-const App = ({ children }) => (
+const App = () => (
   <div>
     
-    <Header>
-      <Link to="/">where is this link at?!!!!</Link>
-    </Header>
+    <Header/>
     <Router>
       <Home path="/" />
       <Login path="/login"/>
@@ -21,7 +19,7 @@ const Home = () => (
   </div>
 );
 const Login = () => (
-  <div class="flex flex justify-center self-center py-20 bg-gray-500">
+  <div className="flex flex justify-center self-center py-20 bg-gray-500">
 
     <div className="w-full max-w-md bg-white pt-8" >
     <form className=" bg-white shadow-md rounded px-8 py-8 pt-8">
