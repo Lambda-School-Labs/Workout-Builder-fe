@@ -2,6 +2,7 @@ import React from 'react';
 import { Router } from "@reach/router";
 import Header from './components/global/Header';
 import Login from './components/auth/Login';
+import SignUp from './components/auth/SignUp'
 
 const App = (props) => (
   <div>
@@ -10,7 +11,7 @@ const App = (props) => (
     <Router>
       <Home exact path="/" />
       <Login exact path="/login" {...props}/>
-      <SignUp path="/SignUp"/>
+      <SignUp exact path="/signup" {...props}/>
     </Router>
   </div>
 );
@@ -22,10 +23,4 @@ const Home = () => (
 );
 
 
-
-const SignUp = () => (
-  <div>
-    <h1>welcome to the temporary SignUp page till it is set up</h1>
-  </div>
-)
 export default App;
