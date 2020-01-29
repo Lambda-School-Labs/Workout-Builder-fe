@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import reducer from './components/reducers/index'
 import { globalHistory } from "@reach/router";
+import './styles/index.css'
 
 globalHistory.listen(({ location, action }) => {
   console.log({ location, action });
