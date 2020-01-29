@@ -3,6 +3,9 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 
+// sessionStorage.setItem("logged-in-user", {first_name: data.first_name, last_name: data.last_name, email: credentials.email})
+// Dispatch({ type: "SET_LOGGED", payload: sessionStorage.getItem('logged-in-user')});
+
 const Login = (props) => {
     const Dispatch = useDispatch();
     const [credentials, setCredentials] = useState({
@@ -12,7 +15,9 @@ const Login = (props) => {
     const [isLoggedIn, setLogged] = useState(false);
 
     const setLoggedInUser = (data) => {
-        // sessionStorage.setItem("logged-in-user", {first_name: data.first_name, last_name: data.last_name, email: credentials.email})
+        sessionStorage.setItem("logged-in-email", credentials.email);
+        sessionStorage.setItem("logged-in-first-name", data.first_name);
+        sessionStorage.setItem("logged-in-last-name", data.last_name);
         Dispatch({ type: "SET_LOGGED", payload: {first_name: data.first_name, last_name: data.last_name, email: credentials.email}});
     }
 
@@ -26,12 +31,11 @@ const Login = (props) => {
 
     const login = e => {
         // post request to retrieve a token from the backend
-        console.log("fire!");
+        console.log(props);
         e.preventDefault();
         axios
         .post("https://labs20-workout-builder.herokuapp.com/auth/login", credentials)
         .then(response => {
-            console.log(response);
             sessionStorage.setItem("token", response.data.token);
             setLoggedInUser(response.data);
             // once token is handeled, navigate to profile page
@@ -51,8 +55,6 @@ const Login = (props) => {
             setLogged(false);
         }
     },[props.updates]);
-
-    console.log(props);
 
     if(isLoggedIn && props.loggedInUser) {
         return (

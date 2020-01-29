@@ -1,5 +1,9 @@
 const initialState = {
-  loggedInUser: sessionStorage.getItem('logged-in-user'),
+  loggedInUser: {
+    first_name: sessionStorage.getItem('logged-in-first-name'),
+    last_name: sessionStorage.getItem('logged-in-last-name'),
+    email: sessionStorage.getItem('logged-in-email'),
+  },
   userID: sessionStorage.getItem('user-id'),
   updates: 0,
 }
