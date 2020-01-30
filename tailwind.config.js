@@ -1,6 +1,9 @@
 module.exports = {
   theme: {
-    extend: {}
+    extend: {},
+    lineHeight: {
+      middle: "0.1em"
+    }
   },
   variants: {},
   plugins: []
