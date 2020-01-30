@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
+import GoogleLogo from '../../img/GoogleLogo.jpg';
 
 // sessionStorage.setItem("logged-in-user", {first_name: data.first_name, last_name: data.last_name, email: credentials.email})
 // Dispatch({ type: "SET_LOGGED", payload: sessionStorage.getItem('logged-in-user')});
@@ -67,12 +68,18 @@ const Login = (props) => {
     } else {
         return (
             <div className="flex flex justify-center self-center py-20 bg-gray-500">
-                <div className="w-full max-w-md bg-white pt-8" >
+                <div className="w-full max-w-md bg-gray-800 pt-8" >
                     <form className=" bg-white shadow-md rounded px-8 py-8 pt-8">
+                        <h1 className="flex justify-center text-5xl">Login</h1>
+                        <button className="flex hover:bg-blue-300 text-white border-2 font-bold py-2 px-4 rounded text-gray-700 focus:outline-none focus:shadow-outline">
+                            <img src={GoogleLogo} alt="Google Logo"/>
+                            Login with Google
+                        </button>
+                        <h5 className="w-full text-center border-b border-solid border-bottom border-black-600 my-4"><span className="bg-white px-2 inline-block"> or </span></h5>
                         <div className="px-4 pb-4">
                             <label htmlFor="email" className="text-sm block font-bold  pb-2">Email</label>
                                 <input
-                                className="textshadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-blue-300"
+                                className="textshadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
                                 placeholder="email"
                                 type="text"
                                 name="email"
@@ -84,10 +91,10 @@ const Login = (props) => {
                         <label 
                             htmlFor="password" 
                             className="text-sm block font-bold pb-2">
-                            PASSWORD
+                            Password
                         </label>
                         <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-blue-300"
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
                             placeholder="Enter your password"
                             type="password"
                             name="password"
@@ -95,9 +102,11 @@ const Login = (props) => {
                             onChange={handleChange}
                         />
                     </div>  
-                        <button className="bg-indigo-900 hover:bg-green-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={login}>
-                            Login!
+                        <button className="hover:bg-blue-300 bg-gray-500 font-bold py-2 px-4 rounded text-white focus:outline-none focus:shadow-outline" type="submit" onClick={login}>
+                            Login
                         </button>
+                        <div>Not a member yet? <a href="#" className="text-blue-700 hover:font-bold">Sign Up</a></div>
+                        <div>Forgot Password? <a href="#" className="text-blue-700 hover:font-bold">Recover Password</a></div>
                     </form>
                 </div>
             </div>
