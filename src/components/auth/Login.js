@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
-import GoogleLogo from '../../img/GoogleLogo.jpg';
+import GoogleLogo from '../../img/google_icon.png';
 
 // sessionStorage.setItem("logged-in-user", {first_name: data.first_name, last_name: data.last_name, email: credentials.email})
 // Dispatch({ type: "SET_LOGGED", payload: sessionStorage.getItem('logged-in-user')});
@@ -80,7 +80,6 @@ const Login = (props) => {
                             <label htmlFor="email" className="text-sm block font-bold  pb-2">Email</label>
                                 <input
                                 className="textshadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
-                                placeholder="email"
                                 type="text"
                                 name="email"
                                 value={credentials.email}
@@ -95,7 +94,6 @@ const Login = (props) => {
                         </label>
                         <input
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
-                            placeholder="Enter your password"
                             type="password"
                             name="password"
                             value={credentials.password}
