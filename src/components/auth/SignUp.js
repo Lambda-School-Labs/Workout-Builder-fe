@@ -29,14 +29,11 @@ const SignUp = (props) => {
         });
     };
 
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://labs20-workout-builder.herokuapp.com/auth/register";
-
     const signUp = e => {
         // post request to retrieve a token from the backend
         e.preventDefault();
         axios
-        .post(proxyurl + url, credentials)
+        .post(https://labs20-workout-builder.herokuapp.com/auth/register)
         .then(response => {
             sessionStorage.setItem("token", response.data.token);
             setSignedUpUser(response.data);
