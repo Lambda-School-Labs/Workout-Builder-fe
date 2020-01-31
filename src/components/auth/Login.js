@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
+import GoogleLogo from '../../img/google_icon.png';
 
 // sessionStorage.setItem("logged-in-user", {first_name: data.first_name, last_name: data.last_name, email: credentials.email})
 // Dispatch({ type: "SET_LOGGED", payload: sessionStorage.getItem('logged-in-user')});
@@ -69,35 +70,52 @@ const Login = (props) => {
             <div className="flex flex justify-center self-center py-20 bg-gray-500">
                 <div className="w-full max-w-md bg-white pt-8" >
                     <form className=" bg-white shadow-md rounded px-8 py-8 pt-8">
-                        <div className="px-4 pb-4">
-                            <label htmlFor="email" className="text-sm block font-bold  pb-2">Email</label>
-                                <input
-                                className="textshadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-blue-300"
-                                placeholder="email"
+
+                        <h1 className="flex justify-center mb-12 text-5xl">Login</h1>
+
+                        <button className="flex justify-center items-center relative hover:bg-blue-300 text-white border-2 font-bold py-2 px-4 w-full h-16 rounded text-gray-700 focus:outline-none focus:shadow-outline">
+                            <img src={GoogleLogo} alt="Google Logo" className="absolute left-0 ml-5"/>
+                            <p className="text-xl">Login with Google</p>
+                        </button>
+
+                        <p className="w-full text-center border-b leading-middle my-10 inline-block border-black">
+                            <small className="bg-white px-2 text-base">Or</small>
+                        </p>
+
+                        <div className="py-2 pb-2">
+                            <label htmlFor="email" className="text-sm block text-xl">Email</label>
+                            <input
+                                className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
                                 type="text"
                                 name="email"
                                 value={credentials.email}
                                 onChange={handleChange}
-                                />
+                            />
                         </div>
-                    <div className="px-4 pb-4">
-                        <label 
-                            htmlFor="password" 
-                            className="text-sm block font-bold pb-2">
-                            PASSWORD
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-blue-300"
-                            placeholder="Enter your password"
-                            type="password"
-                            name="password"
-                            value={credentials.password}
-                            onChange={handleChange}
-                        />
-                    </div>  
-                        <button className="bg-indigo-900 hover:bg-green-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={login}>
-                            Login!
+
+                        <div className="py-2 pb-2">
+                            <label 
+                                htmlFor="password" 
+                                className="text-sm block text-xl">
+                                Password
+                            </label>
+                            <input
+                                className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
+                                type="password"
+                                name="password"
+                                value={credentials.password}
+                                onChange={handleChange}
+                            />
+                        </div>
+
+                        <button className="hover:bg-blue-300 bg-gray-500 py-2 px-4 my-4 w-full h-16 rounded text-white text-3xl focus:outline-none focus:shadow-outline" type="submit" onClick={login}>
+                            Login
                         </button>
+
+                        <div>Not a member yet? <a href="#" className="text-blue-700 hover:font-bold">Sign Up</a></div>
+                        
+                        <div>Forgot Password? <a href="#" className="text-blue-700 hover:font-bold">Recover Password</a></div>
+                        <br/><br/><br/>
                     </form>
                 </div>
             </div>
