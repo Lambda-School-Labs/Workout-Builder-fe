@@ -14,6 +14,7 @@ const App = (props) => (
       <Login exact path="/login" {...props}/>
       <SignUp exact path="/signup" {...props}/>
     </Router>
+    
   </div>
 );
 

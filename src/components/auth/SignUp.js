@@ -33,7 +33,7 @@ const SignUp = (props) => {
         // post request to retrieve a token from the backend
         e.preventDefault();
         axios
-        .post("https://labs20-workout-builder.herokuapp.com/auth/register")
+        .post("https://labs20-workout-builder.herokuapp.com/auth/register", credentials)
         .then(response => {
             sessionStorage.setItem("token", response.data.token);
             setSignedUpUser(response.data);
