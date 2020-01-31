@@ -14,7 +14,7 @@ globalHistory.listen(({ location, action }) => {
 });
 
 const store = createStore(reducer, applyMiddleware(thunk));
-
+console.log('idk', store)
 ReactDOM.render(
   <Provider store = {store}>
     <App />
