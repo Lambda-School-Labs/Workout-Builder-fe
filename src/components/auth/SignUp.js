@@ -80,8 +80,8 @@ const SignUp = (props) => {
                             <small className="bg-white px-2 text-base">Or</small>
                         </p>
 
-                        <div className="flex flex-row">
-                            <div className="py-2 pb-2 pr-3">
+                        {/* <div className="flex flex-row"> */}
+                            <div className="py-2 pb-2">
                                 <label htmlFor="email" className="text-sm block text-xl">First Name</label>
                                 <input
                                     className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
@@ -91,7 +91,7 @@ const SignUp = (props) => {
                                     onChange={handleChange}
                                 />
                             </div>
-                            <div className="py-2 pb-2 pl-3">
+                            <div className="py-2 pb-2">
                                 <label htmlFor="email" className="text-sm block text-xl">Last Name</label>
                                 <input
                                     className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
@@ -101,7 +101,7 @@ const SignUp = (props) => {
                                     onChange={handleChange}
                                 />
                             </div>
-                        </div>
+                        {/* </div> */}
 
                         <div className="py-2 pb-2">
                             <label htmlFor="email" className="text-sm block text-xl">Email</label>
@@ -136,7 +136,7 @@ const SignUp = (props) => {
                             Sign Up
                         </button>
                         
-                        <div>Already a Member?<Link to="/login" className="text-blue-700 hover:font-bold"> Login here</Link></div>
+                        <div>Already a Member?<Link to="/login" className="text-blue-700 hover:font-bold"> Log In</Link></div>
                         <br/><br/><br/>
                     </form>
                 </div>

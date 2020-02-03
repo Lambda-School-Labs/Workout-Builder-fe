@@ -115,7 +115,7 @@ const Login = (props) => {
 
                         <div>Not a member yet?<Link to="/signup" className="text-blue-700 hover:font-bold"> Sign Up</Link></div>
                         
-                        <div>Forgot Password? <a href="#" className="text-blue-700 hover:font-bold">Recover Password</a></div>
+                        <div><a href="#" className="hover:text-blue-700 hover:font-bold">Forgot Password?</a></div>
                         <br/><br/><br/>
                     </form>
                 </div>
