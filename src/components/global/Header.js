@@ -8,7 +8,7 @@ export default function Header(){
 <div className="flex items-center justify-between mb-4 md:mb-0">
     <h1 className="leading-none text-2xl text-grey-darkest">
       <Link to="/" className="no-underline text-grey-darkest hover:text-black">
-        StrongerFaster
+        StrongR FasteR
       </Link>
     </h1>
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import { Link } from '@reach/router'
-
+import GoogleLogo from '../../img/google_icon.png'
 
 const SignUp = (props) => {
     const Dispatch = useDispatch();
@@ -47,6 +47,13 @@ const SignUp = (props) => {
             console.log(err);
         })
     };
+
+    
+    const authWithGoogle = (event) => {
+        event.preventDefault();
+        window.open('https://labs20-workout-builder.herokuapp.com/auth/google', '_self');
+    };
+
     useEffect(() => {
         if (sessionStorage.getItem("token")) {
             setSignedUp(true);
@@ -67,6 +74,18 @@ const SignUp = (props) => {
             <div className="flex justify-center self-center py-20 bg-gray-500">
                 <div className="w-full max-w-md bg-white pt-8" >
                     <form className=" bg-white shadow-md rounded px-8 py-8 pt-8">
+                        
+                    <h1 className="flex justify-center mb-12 text-5xl">Login</h1>
+
+                    <button
+                        className="flex justify-center items-center relative hover:bg-blue-300 text-white border-2 font-bold py-2 px-4 w-full h-16 rounded text-gray-700 focus:outline-none focus:shadow-outline"
+                        onClick={authWithGoogle}>
+                        <img 
+                            src={GoogleLogo} 
+                            alt="Google Logo" 
+                            className="absolute left-0 ml-5"/>
+                            <p className="text-xl">Login with Google</p>
+                    </button>
                         <div className="px-4 pb-4">
                             <label htmlFor="first_name" className="text-sm block font-bold  pb-2">First Name</label>
                                 <input
