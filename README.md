@@ -4,7 +4,9 @@
 
 🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements.
 
-# 1️⃣ Title of project goes here
+# Workout Builder
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/ec547d1af13580d3e0b5/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/Workout-Builder-fe/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/ec547d1af13580d3e0b5/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/Workout-Builder-fe/test_coverage)
 
 1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
 
