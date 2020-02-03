@@ -8,7 +8,6 @@ import GoogleAuth from './utils/googleAuth';
 const App = (props) => (
   
   <div>
-    
     <Header/>
     <Router>
       <Home exact path="/" />
