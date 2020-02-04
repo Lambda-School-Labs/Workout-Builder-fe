@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import { Link } from '@reach/router';
-import GoogleLogo from '../../img/google_icon.png';
+import GoogleLogo from '../../img/google-icon.svg';
 
 const SignUp = (props) => {
   const Dispatch = useDispatch();
@@ -101,57 +101,54 @@ const SignUp = (props) => {
                 onChange={handleChange}
               />
             </div>
-            <div className="py-2 pb-2">
-              <label htmlFor="last_name" className="text-sm block text-xl">last Name</label>
-              <input
-                className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
-                placeholder="Last Name"
-                type="text"
-                name="last_name"
-                value={credentials.last_name}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="py-2 pb-2">
-              <label htmlFor="email" className="text-sm block text-xl">Email</label>
-              <input
-                className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
-                placeholder="email"
-                type="text"
-                name="email"
-                value={credentials.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="py-2 pb-2">
-              <label 
-                htmlFor="password" 
-                className="text-sm block text-xl">
-                                PASSWORD
-              </label>
-              <input
-                className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
-                placeholder="Enter your password"
-                type="password"
-                name="password"
-                value={credentials.password}
-                onChange={handleChange}
-              />
-            </div>  
-            <button 
-              className="hover:bg-blue-300 bg-gray-500 py-2 px-4 my-4 w-full h-16 rounded text-white text-3xl focus:outline-none focus:shadow-outline" 
-              type="submit" 
-              onClick={signUp}>
+                            <div className="py-2 pb-2">
+                                <label htmlFor="email" className="text-sm block text-xl">Last Name</label>
+                                <input
+                                    className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
+                                    type="text"
+                                    name="last_name"
+                                    value={credentials.last_name}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        <div className="py-2 pb-2">
+                            <label htmlFor="email" className="text-sm block text-xl">Email</label>
+                            <input
+                                className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
+                                type="text"
+                                name="email"
+                                value={credentials.email}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="py-2 pb-2">
+                            <label 
+                                htmlFor="password" 
+                                className="text-sm block text-xl">
+                                Password
+                            </label>
+                            <input
+                                className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
+                                type="password"
+                                name="password"
+                                value={credentials.password}
+                                onChange={handleChange}
+                            />
+                        </div>  
+                        <button 
+                            className="hover:bg-blue-300 bg-gray-500 py-2 px-4 my-4 w-full h-16 rounded text-white text-3xl focus:outline-none focus:shadow-outline" 
+                            type="submit" 
+                            onClick={signUp}>
                             Sign Up
-            </button>
-            <Link to="/login" className="text-blue-700 hover:font-bold">
-                            Already a Member? Login here
-            </Link>
-          </form>
-        </div>
-      </div>
-    );
-  }
+                        </button>
+                        
+                        <div>Already a Member?<Link to="/login" className="text-blue-700 hover:font-bold"> Log In</Link></div>
+                        <br/><br/><br/>
+                    </form>
+                </div>
+            </div>
+        );
+    }
 
     
 

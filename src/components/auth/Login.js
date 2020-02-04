@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
+import { Link } from '@reach/router';
 import GoogleLogo from '../../img/google_icon.png';
 import { Link } from '@reach/router';
 
