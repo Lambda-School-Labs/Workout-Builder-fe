@@ -107,7 +107,7 @@ const SignUp = (props) => {
                 className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
                 type="text"
                 id="last_name"
-                name="lastName"
+                name="last_name"
                 value={credentials.last_name}
                 onChange={handleChange}
               />
