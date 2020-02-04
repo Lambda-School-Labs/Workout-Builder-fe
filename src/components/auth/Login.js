@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import { Link } from '@reach/router';
 import GoogleLogo from '../../img/google_icon.png';
-import { Link } from '@reach/router';
 
 // localStorage.setItem("logged-in-user", {first_name: data.first_name, last_name: data.last_name, email: credentials.email})
 // Dispatch({ type: "SET_LOGGED", payload: localStorage.getItem('logged-in-user')});
@@ -104,8 +103,8 @@ const Login = (props) => {
             </div>
 
             <div className="py-2 pb-2">
-              <label 
-                htmlFor="password" 
+              <label
+                htmlFor="password"
                 className="text-sm block text-xl">
                                 Password
               </label>
@@ -119,11 +118,11 @@ const Login = (props) => {
             </div>
 
             <button className="hover:bg-blue-300 bg-gray-500 py-2 px-4 my-4 w-full h-16 rounded text-white text-3xl focus:outline-none focus:shadow-outline" type="submit" onClick={login}>
-                            Login
+              Login
             </button>
 
             <div>Not a member yet? <Link to="/signup" className="text-blue-700 hover:font-bold">Sign Up</Link></div>
-                        
+
             <div>Forgot Password? <Link to="/forgot-password" className="text-blue-700 hover:font-bold">Recover Password</Link></div>
             <br/><br/><br/>
           </form>
@@ -132,35 +131,14 @@ const Login = (props) => {
     );
   }
 
-    
-
 };
-    
+
 const mapStateToProps = state => ({
   loggedInUser: state.loggedInUser,
   updates: state.updates,
 });
 
-
 export default connect(
   mapStateToProps,
 )(Login);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    

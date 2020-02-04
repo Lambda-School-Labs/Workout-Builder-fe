@@ -40,7 +40,7 @@ const SignUp = (props) => {
         // once token is handeled, navigate to profile page
         props.navigate("/");
         Dispatch({ type: "UPDATE"});
-            
+
       })
       .catch(err => {
         console.log("there was an error attempting to SignUp");
@@ -73,15 +73,15 @@ const SignUp = (props) => {
       <div className="flex justify-center self-center py-20 bg-gray-500">
         <div className="w-full max-w-lg bg-white pt-8" >
           <form className=" bg-white shadow-md rounded px-8 py-8 pt-8">
-                        
+
             <h1 className="flex justify-center mb-12 text-5xl">Sign Up</h1>
 
             <button
               className="flex justify-center items-center relative hover:bg-blue-300 text-white border-2 font-bold py-2 px-4 w-full h-16 rounded text-gray-700 focus:outline-none focus:shadow-outline"
               onClick={authWithGoogle}>
-              <img 
-                src={GoogleLogo} 
-                alt="Google Logo" 
+              <img
+                src={GoogleLogo}
+                alt="Google Logo"
                 className="absolute left-0 ml-5"/>
               <p className="text-xl">Sign Up With Google</p>
             </button>
@@ -94,70 +94,65 @@ const SignUp = (props) => {
               <label htmlFor="first_name" className="text-sm block text-xl">First Name</label>
               <input
                 className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
-                placeholder="First Name"
                 type="text"
                 name="first_name"
                 value={credentials.first_name}
                 onChange={handleChange}
               />
             </div>
-                            <div className="py-2 pb-2">
-                                <label htmlFor="email" className="text-sm block text-xl">Last Name</label>
-                                <input
-                                    className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
-                                    type="text"
-                                    name="last_name"
-                                    value={credentials.last_name}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                        <div className="py-2 pb-2">
-                            <label htmlFor="email" className="text-sm block text-xl">Email</label>
-                            <input
-                                className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
-                                type="text"
-                                name="email"
-                                value={credentials.email}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="py-2 pb-2">
-                            <label 
-                                htmlFor="password" 
-                                className="text-sm block text-xl">
-                                Password
-                            </label>
-                            <input
-                                className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
-                                type="password"
-                                name="password"
-                                value={credentials.password}
-                                onChange={handleChange}
-                            />
-                        </div>  
-                        <button 
-                            className="hover:bg-blue-300 bg-gray-500 py-2 px-4 my-4 w-full h-16 rounded text-white text-3xl focus:outline-none focus:shadow-outline" 
-                            type="submit" 
-                            onClick={signUp}>
-                            Sign Up
-                        </button>
-                        
-                        <div>Already a Member?<Link to="/login" className="text-blue-700 hover:font-bold"> Log In</Link></div>
-                        <br/><br/><br/>
-                    </form>
-                </div>
+            <div className="py-2 pb-2">
+              <label htmlFor="email" className="text-sm block text-xl">Last Name</label>
+              <input
+                className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
+                type="text"
+                name="last_name"
+                value={credentials.last_name}
+                onChange={handleChange}
+              />
             </div>
-        );
-    }
+            <div className="py-2 pb-2">
+              <label htmlFor="email" className="text-sm block text-xl">Email</label>
+              <input
+                className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
+                type="text"
+                name="email"
+                value={credentials.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="py-2 pb-2">
+              <label
+                htmlFor="password"
+                className="text-sm block text-xl">
+                                Password
+              </label>
+              <input
+                className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
+                type="password"
+                name="password"
+                value={credentials.password}
+                onChange={handleChange}
+              />
+            </div>
+            <button
+              className="hover:bg-blue-300 bg-gray-500 py-2 px-4 my-4 w-full h-16 rounded text-white text-3xl focus:outline-none focus:shadow-outline"
+              type="submit"
+              onClick={signUp}>
+                Sign Up
+            </button>
 
-    
-
+            <div>Already a Member?<Link to="/login" className="text-blue-700 hover:font-bold"> Log In</Link></div>
+            <br/><br/><br/>
+          </form>
+        </div>
+      </div>
+    );
+  }
 };
 // loggedInUser: state.loggedInUser,
 // updates: state.updates,
 const mapStateToProps = state => {
   return {...state};
 };
-
 
 export default connect(mapStateToProps)(SignUp);
