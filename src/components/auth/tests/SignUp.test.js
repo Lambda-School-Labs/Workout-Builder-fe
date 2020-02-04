@@ -1,54 +1,64 @@
 import '@testing-library/jest-dom/extend-expect'
 import React from 'react'
-import {render, fireEvent, screen, wait} from '@testing-library/react'
+import {render, fireEvent, screen} from '@testing-library/react'
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import reducer from '../../../components/reducers/index'
-import Login from '../login'
+import SignUp from '../SignUp'
 import axios from 'axios';
 
 jest.mock('axios');
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
-test('renders Login component', () => {
+test('renders SignUp component', () => {
 
     render (<Provider store = {store}>
-        <Login />
+        <SignUp />
         </Provider>)
 
+    
+    const first_name = screen.getByLabelText(/First Name/i);
+    const last_name = screen.getByLabelText(/Last Name/i);
     const email = screen.getByLabelText(/email/i);
     const password = screen.getByLabelText(/password/i);
 
+    expect(first_name).toBeInTheDocument();
+    expect(last_name).toBeInTheDocument();
     expect(email).toBeInTheDocument();
     expect(password).toBeInTheDocument();
 })
 
-test('allows the user to login successfully', async () => {
+test('allows the user to sign up successfully', async () => {
 
-    const fakeResponse = { data: {token: '12345', first_name: 'bob', last_name: 'bob'}}
+    const fakeResponse = { data: {token: '12345', message: 'asdf', first_name: 'bob', last_name: 'bob'}}
 
     axios.post.mockResolvedValue(fakeResponse);
 
     render (<Provider store = {store}>
-        <Login />
+        <SignUp />
         </Provider>)
 
     // fill out the form
+    fireEvent.change(screen.getByLabelText(/First Name/i), {
+        target: {value: 'test'},
+    })
+    fireEvent.change(screen.getByLabelText(/Last Name/i), {
+        target: {value: 'test'},
+    })
     fireEvent.change(screen.getByLabelText(/email/i), {
-        target: {value: 'BobBobbington@gmail.com'},
+        target: {value: 'test@gmail.com'},
     })
     fireEvent.change(screen.getByLabelText(/password/i), {
-        target: {value: 'Bob12345'},
+        target: {value: 'Test12345'},
     })
 
     // click the login button
-    fireEvent.click(screen.getByRole('login'))
+    fireEvent.click(screen.getByRole('signup'))
 
     // wait 4 seconds for the server to work
     await new Promise((r) => setTimeout(r, 1000));
-    // await wait(() => screen.getByText('Welcome this is a temporary landing page till it is set up'));
 
     // expecting a token of length 164
     expect(window.localStorage.getItem('token')).toBe('12345');
