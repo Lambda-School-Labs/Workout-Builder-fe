@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
+import { Link } from '@reach/router';
 import GoogleLogo from '../../img/google_icon.png';
 
 // sessionStorage.setItem("logged-in-user", {first_name: data.first_name, last_name: data.last_name, email: credentials.email})
@@ -112,9 +113,9 @@ const Login = (props) => {
                             Login
                         </button>
 
-                        <div>Not a member yet? <a href="#" className="text-blue-700 hover:font-bold">Sign Up</a></div>
+                        <div>Not a member yet?<Link to="/signup" className="text-blue-700 hover:font-bold"> Sign Up</Link></div>
                         
-                        <div>Forgot Password? <a href="#" className="text-blue-700 hover:font-bold">Recover Password</a></div>
+                        <div><a href="#" className="hover:text-blue-700 hover:font-bold">Forgot Password?</a></div>
                         <br/><br/><br/>
                     </form>
                 </div>
