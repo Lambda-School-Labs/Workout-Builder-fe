@@ -36,6 +36,14 @@ test('allows the user to sign up successfully', async () => {
 
     axios.post.mockResolvedValue(fakeResponse);
 
+    const localStorageMock = {
+        getItem: jest.fn(),
+        setItem: jest.fn(),
+        clear: jest.fn()
+    };
+
+    global.localStorage = localStorageMock;
+
     render (<Provider store = {store}>
         <SignUp />
         </Provider>)
