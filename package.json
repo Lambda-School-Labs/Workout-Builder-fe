@@ -26,7 +26,24 @@
     "prestart": "yarn run build:styles"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "rules": {
+      "indent": [
+        "error",
+        2
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "no-trailing-spaces": "error",
+      "no-multiple-empty-lines": [
+        "error",
+        {
+          "max": 1
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
