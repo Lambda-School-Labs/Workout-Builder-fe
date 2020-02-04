@@ -33,7 +33,6 @@ const Login = (props) => {
 
   const login = e => {
     // post request to retrieve a token from the backend
-    console.log(props);
     e.preventDefault();
     axios
       .post("https://labs20-workout-builder.herokuapp.com/auth/login", credentials)
@@ -96,6 +95,7 @@ const Login = (props) => {
               <input
                 className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
                 type="text"
+                id="email"
                 name="email"
                 value={credentials.email}
                 onChange={handleChange}
@@ -111,13 +111,14 @@ const Login = (props) => {
               <input
                 className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
                 type="password"
+                id="password"
                 name="password"
                 value={credentials.password}
                 onChange={handleChange}
               />
             </div>
 
-            <button className="hover:bg-blue-300 bg-gray-500 py-2 px-4 my-4 w-full h-16 rounded text-white text-3xl focus:outline-none focus:shadow-outline" type="submit" onClick={login}>
+            <button role="login" className="hover:bg-blue-300 bg-gray-500 py-2 px-4 my-4 w-full h-16 rounded text-white text-3xl focus:outline-none focus:shadow-outline" type="submit" onClick={login}>
               Login
             </button>
 

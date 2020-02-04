@@ -95,17 +95,19 @@ const SignUp = (props) => {
               <input
                 className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
                 type="text"
+                id="first_name"
                 name="first_name"
                 value={credentials.first_name}
                 onChange={handleChange}
               />
             </div>
             <div className="py-2 pb-2">
-              <label htmlFor="email" className="text-sm block text-xl">Last Name</label>
+              <label htmlFor="last_name" className="text-sm block text-xl">Last Name</label>
               <input
                 className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
                 type="text"
-                name="last_name"
+                id="last_name"
+                name="lastName"
                 value={credentials.last_name}
                 onChange={handleChange}
               />
@@ -115,6 +117,7 @@ const SignUp = (props) => {
               <input
                 className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
                 type="text"
+                id="email"
                 name="email"
                 value={credentials.email}
                 onChange={handleChange}
@@ -128,6 +131,7 @@ const SignUp = (props) => {
               </label>
               <input
                 className="textshadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-gray-500"
+                id="password"
                 type="password"
                 name="password"
                 value={credentials.password}
@@ -137,6 +141,7 @@ const SignUp = (props) => {
             <button
               className="hover:bg-blue-300 bg-gray-500 py-2 px-4 my-4 w-full h-16 rounded text-white text-3xl focus:outline-none focus:shadow-outline"
               type="submit"
+              role="signup"
               onClick={signUp}>
                 Sign Up
             </button>
