@@ -1,10 +1,10 @@
 const initialState = {
   loggedInUser: {
-    first_name: sessionStorage.getItem('logged-in-first-name'),
-    last_name: sessionStorage.getItem('logged-in-last-name'),
-    email: sessionStorage.getItem('logged-in-email'),
+    first_name: localStorage.getItem('logged-in-first-name'),
+    last_name: localStorage.getItem('logged-in-last-name'),
+    email: localStorage.getItem('logged-in-email'),
   },
-  userID: sessionStorage.getItem('user-id'),
+  userID: localStorage.getItem('user-id'),
   updates: 0,
 }
 
