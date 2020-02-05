@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 
 const GoogleAuth = (props) => {
   useEffect(() => {
@@ -17,7 +17,7 @@ const GoogleAuth = (props) => {
     <p>
       Redirecting...
     </p>
-  )
-}
+  );
+};
 
- export default GoogleAuth;
+export default GoogleAuth;
