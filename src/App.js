@@ -5,6 +5,7 @@ import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import GoogleAuth from './utils/googleAuth';
 import Dashboard from "./components/dashboard/Dashboard";
+import Program from "./components/program/ProgramHome";
 
 const App = (props) => (
   <div>
@@ -12,6 +13,7 @@ const App = (props) => (
     <Router>
       <Home exact path="/" />
       <Dashboard exact path="/dashboard" />
+      <Program exact path="/program" />
       <Login exact path="/login" {...props}/>
       <SignUp exact path="/signup" {...props}/>
       <GoogleAuth path="/auth" />
