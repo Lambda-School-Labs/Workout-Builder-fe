@@ -2,12 +2,27 @@ import React, { useRef } from 'react';
 import { Link } from '@reach/router';
 
 export default function AuthHeader() {
-  const event = new Date();
-  const options = {weekday: 'long', month: 'long', day: 'numeric'};
-  const navTime =(event.toLocaleDateString('en-US', options));
-  console.log('weekday', navTime.weekday);
-  const navEl = useRef(null);
 
+  const months = ['January', 'February', 'March' , 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const date = new Date();
+  const month = months[date.getMonth()];
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const day = date.getDate();
+  const dayOfWeek = days[date.getDate()];
+  let suffix;
+  if (String(day).endsWith("1")) {
+    suffix = 'st';
+  } else if (String(day).endsWith("2")) {
+    suffix = 'nd';
+  } else if (String(day).endsWith("3")) {
+    suffix = 'rd';
+  } else {
+    suffix = 'th';
+  }
+  const displayDay = `${dayOfWeek}`;
+  const displayDate = `${month} ${day}${suffix}`;
+
+  const navEl = useRef(null);
   const toggleNav = () => {
     console.log('click');
     navEl.current.classList.toggle('hidden');
@@ -16,8 +31,12 @@ export default function AuthHeader() {
   return (
     <nav className="pb-24">
       <div className="flex items-center flex-wrap bg-uxlightgrey px-6 py-8 absolute w-full z-10">
-        <div className="flex w-full items-center justify-center text-black absolute left-0 text-center">
-          <Link to="/" className="font-semibold font-display text-xl tracking-tight">{navTime}</Link>
+
+        <div className="flex w-full items-center justify-center text-black absolute left-0 text-center px-4 py-2 m-2">
+          <div className="flex flex-col mb-2">
+            <div className="font-display text-uxline text-md tracking-tight -mb-2 text-left">{displayDay}</div>
+            <div className="font-semibold font-display text-xl tracking-tight">{displayDate}</div>
+          </div>
         </div>
         <div className="lg:hidden z-10">
           <button className="flex items-center text-black focus:outline-none" onClick={toggleNav}>
