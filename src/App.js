@@ -8,7 +8,7 @@ import AuthHeader from './components/global/AuthHeader';
 
 const App = (props) => (
   <div>
-    <Header/>
+    {/* <Header/> */}
     <AuthHeader/>
     <Router>
       <Home exact path="/" />

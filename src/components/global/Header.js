@@ -1,7 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Link } from '@reach/router';
-import AuthHeader from './AuthHeader';
-import HamburgerIcon from '../../img/list.png';
 
 export default function Header(){
   return(
