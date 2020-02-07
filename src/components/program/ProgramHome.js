@@ -19,17 +19,17 @@ const programList = [
     {
         id: 2,
         title: "Joe's Program",
-        activeUsers: 1
+        activeUsers: 10
     },
     {
         id: 3,
         title: "Mary's Program",
-        activeUsers: 1
+        activeUsers: 7
     },
     {
         id: 4,
         title: "Olympic Lifting",
-        activeUsers: 1
+        activeUsers: 8
     }
 ]
 
@@ -42,7 +42,7 @@ const ProgramHome = (props) => {
             <h2 class="main-title">Programs</h2>
             <button class="add-program-button" onClick={() => showProgramModal(true)}>+ Create Program</button>
 
-            <Modal isOpen={ProgramModal} contentp="Create Program" className="program-modal">
+            <Modal isOpen={ProgramModal} contentp="Create Program" className="program-modal" overlayClassName="program-overaly">
                 
                 <h3>Create Program</h3>
                 <form>
@@ -67,8 +67,8 @@ const ProgramHome = (props) => {
 
             <div class="program-list-div">
                 <div class="program-list-header">
-                    <div class="header-section">Title</div>
-                    <div class="header-section">Active</div>
+                    <h4 className="header-title">Title</h4>
+                    <h4 className="header-active">Active</h4>
                 </div>
                 {programList.map(element => {
                     return(

@@ -8,7 +8,7 @@ const ProgramListElement = (props) => {
     return(
         <div class="program-element">
             <div class="checkbox-div">
-                <img src="https://i.imgur.com/hNmAXfP.png"></img>
+                <img src="https://i.imgur.com/tKDzdPT.png"></img>
             </div>
             <div class="title-div">
                 <p>{props.title}</p>
@@ -16,11 +16,11 @@ const ProgramListElement = (props) => {
             <div class="active-div">
                 <p>{props.activeUsers}</p>
             </div>
-            <div class="send-div">
-                <img src="https://i.imgur.com/N17ItX7.png"></img>
+            <div class="assign-div">
+                <img src="https://i.imgur.com/4Qxt7a2.png"></img>
             </div>
             <div class="options-div">
-                <img src="https://i.imgur.com/qXWAARK.png"></img>
+                <img src="https://i.imgur.com/U4s9yte.png"></img>
             </div>
         </div>
     )

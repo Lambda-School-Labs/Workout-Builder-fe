@@ -12,15 +12,20 @@
 .main-title {
     font-family: 'Roboto', sans-serif;
     font-size: 24px;
+    font-weight: 500;
     margin: 30px 0px 25px 16px;
+    line-height: 28px;
 }
 
 .add-program-button {
     margin: 0 16px;
-    border: 1px solid black;
+    background: #666666;
+    border-radius: 5px;
+    color: white;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     border-radius: 5px;
+    height: 37px;
 }
 
 .search-div {
@@ -39,87 +44,112 @@
 
 .program-list-div {
     margin: 11px 16px;
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     margin-bottom: 5rem;
+    .program-element:nth-of-type(2n) {
+        background-color: rgba(196, 196, 196, 0.7);;
+    }
     .program-list-header {
+        background: #C4C4C4;
+        border-radius: 5px 5px 0px 0px;
         width: 100%;
-        height: 2.5em;
+        height: 50px;
         display: flex;
-        .header-section {
-            width: 50%;
-            padding-left: 15%;
+        .header-title {
+            margin: 17px 0 12px 41px;
             font-family: 'Roboto', sans-serif;
             font-size: 18px;
+            line-height: 21px;
+            font-weight: bold;
+        }
+        .header-active {
+            margin: 17px 0 12px 115px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 18px;
+            line-height: 21px;
+            font-weight: bold;
         }
     }
     .program-list-footer {
         width: 100%;
-        height: 2.5em;
+        height: 50px;
         background-color: lightgray;
     }
 }
 
 .program-element {
     width: 100%;
-    height: 2.5em;
+    height: 50px;
     display: flex;
-    border: 1px solid black;
+    background: white;
     .checkbox-div {
         height: 100%;
-        width: 15%;
+        width: 34px;
         display: flex;
         justify-content: flex-end;
+        align-items: center;
         img {
-            height: 80%;
+            height: 14px;
+            width: 14px;
         }
     }
     .title-div {
         height: 100%;
-        width: 50%;
+        width: 177px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
         p {
             font-family: 'Roboto', sans-serif;
             font-size: 14px;
+            margin-left: 7px;
         }
     }
     .active-div {
         height: 100%;
-        width: 15%;
         display: flex;
         justify-content: center;
+        align-items: center;
+        width: 16px;
         p {
             font-family: 'Roboto', sans-serif;
             font-size: 14px;
         }
     }
-    .send-div {
+    .assign-div {
         height: 100%;
-        width: 10%;
+        width: 82px;
         display: flex;
         justify-content: center;
+        align-items: center;
         img {
-            height: 80%;
+            width: 22px;
+            height: 16px;
         }
     }
     .options-div {
         height: 100%;
-        width: 10%;
+        width: 26px;
         display: flex;
         justify-content: center;
+        align-items: center;
         img {
-            height: 80%;
+            height: 20px;
+            width: 5px;
         }
     }
 }
+
+
 
 .program-modal {
     width: 343px;
     height: 487px;
     margin: 100px auto;
     background-color: white;
-    border: 1px solid black;
     h3 {
+        padding-top: 16px;
         font-family: 'Roboto', sans-serif;
         font-size: 24px;
         margin: 16px 15px;
@@ -162,4 +192,13 @@
         margin: 0 0 10px 15px;
     }
     
+}
+
+.program-overaly {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.600);
 }
