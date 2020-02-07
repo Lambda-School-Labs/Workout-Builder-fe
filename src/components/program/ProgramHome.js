@@ -30,7 +30,17 @@ const programList = [
         id: 4,
         title: "Olympic Lifting",
         activeUsers: 8
-    }
+    },
+    // {
+    //     id: 5,
+    //     title: "Test",
+    //     activeUsers: 8
+    // },
+    // {
+    //     id: 6,
+    //     title: "Test Test",
+    //     activeUsers: 8
+    // }
 ]
 
 const ProgramHome = (props) => {
@@ -75,7 +85,7 @@ const ProgramHome = (props) => {
                         <ProgramListElement id={element.id} title={element.title} activeUsers={element.activeUsers} />
                     )
                 })}
-                <div class="program-list-footer"></div>
+                <div class="program-element"></div>
             </div>
         </div>
     )
