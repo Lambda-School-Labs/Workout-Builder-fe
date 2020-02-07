@@ -35,7 +35,7 @@ const Login = (props) => {
     // post request to retrieve a token from the backend
     e.preventDefault();
     axios
-      .post("https://labs20-workout-builder.herokuapp.com/auth/login", credentials)
+      .post(`${process.env.REACT_APP_BACKEND_URL}/auth/login`, credentials)
       .then(response => {
         localStorage.setItem("token", response.data.token);
         setLoggedInUser(response.data);
@@ -51,7 +51,7 @@ const Login = (props) => {
 
   const authWithGoogle = (e) => {
     e.preventDefault();
-    window.open('http://localhost:4000/auth/google', '_self');
+    window.open(`${process.env.REACT_APP_BACKEND_URL}/auth/google`, '_self');
   };
 
   useEffect(() => {
