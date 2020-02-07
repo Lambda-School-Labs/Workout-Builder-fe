@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 .outer-program {
-    width: 500px;
+    width: 375px;
+    height: 603px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -8,31 +10,35 @@
 }
 
 .main-title {
-    font-size: 2rem;
-    margin: 1rem 2rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    margin: 30px 0px 25px 16px;
 }
 
 .add-program-button {
-    margin: .5rem 2rem;
-    font-size: 1.5rem;
+    margin: 0 16px;
     border: 1px solid black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    border-radius: 5px;
 }
 
 .search-div {
-    margin: .5rem 2rem;
+    margin: 15px 16px;
     border-bottom: 1px solid black;
     display: flex;
-    height: 2.5em;
+    height: 26px;
     .magnifying-icon {
-        width: 10%;
+        width: 20px;
+        height: 20px;
     }
     .search-bar {
-        width: 90%;
+        width: 323px;
     }
 }
 
 .program-list-div {
-    margin: .5rem 2rem;
+    margin: 11px 16px;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -44,7 +50,8 @@
         .header-section {
             width: 50%;
             padding-left: 15%;
-            font-size: 1.5rem;
+            font-family: 'Roboto', sans-serif;
+            font-size: 18px;
         }
     }
     .program-list-footer {
@@ -72,7 +79,8 @@
         height: 100%;
         width: 50%;
         p {
-            font-size: 1.2rem;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
         }
     }
     .active-div {
@@ -81,7 +89,8 @@
         display: flex;
         justify-content: center;
         p {
-            font-size: 1.2rem;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
         }
     }
     .send-div {
@@ -105,8 +114,52 @@
 }
 
 .program-modal {
-    width: 450px;
-    height: 500px;
+    width: 343px;
+    height: 487px;
     margin: 100px auto;
     background-color: white;
+    border: 1px solid black;
+    h3 {
+        font-family: 'Roboto', sans-serif;
+        font-size: 24px;
+        margin: 16px 15px;
+        font-weight: bold;
+    }
+    p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        margin: 16px 15px;
+    }
+    input {
+        margin: 0 15px;
+        width: 313px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        border-bottom: 1px solid gray;
+    }
+    .program-button-div {
+        display: flex;
+        .cancel-button {
+            margin-top: 115px;
+            margin-left: 100px;
+            margin-bottom: 12px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 18px;
+        }
+        .create-button {
+            margin: 98px 15px 0px 30px;
+            width: 143px;
+            height: 50px;
+            background: #C4C4C4;
+            border-radius: 5px;
+            color: white;
+        }
+    }
+    .legend-p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0 0 10px 15px;
+    }
+    
 }

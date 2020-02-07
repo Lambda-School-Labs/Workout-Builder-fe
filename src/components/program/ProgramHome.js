@@ -42,8 +42,22 @@ const ProgramHome = (props) => {
             <h2 class="main-title">Programs</h2>
             <button class="add-program-button" onClick={() => showProgramModal(true)}>+ Create Program</button>
 
-            <Modal isOpen={ProgramModal} contentLabel="Create Program" className="program-modal">
-                <button onClick={() => showProgramModal(false)}>Close Modal</button>
+            <Modal isOpen={ProgramModal} contentp="Create Program" className="program-modal">
+                
+                <h3>Create Program</h3>
+                <form>
+                    <p htmlFor="program-name">Program Name *</p>
+                    <input id="program-name" placeholder="Ex: Olympic Lifting"></input>
+                    <p htmlFor="program-phase">Phase *</p>
+                    <input id="program-phase" placeholder="Ex: Strength"></input>
+                    <p htmlFor="program-days">Number of days in program *</p>
+                    <input id="program-days" placeholder="Ex: 21"></input>
+                </form>
+                <div className="program-button-div">
+                    <button onClick={() => showProgramModal(false)} className="cancel-button">Cancel</button>
+                    <button onClick={() => showProgramModal(false)} className="create-button">+ Create program</button>
+                </div>
+                <p className="legend-p">*Required</p>
             </Modal>
 
             <div class="search-div">
