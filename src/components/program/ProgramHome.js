@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import { Link } from '@reach/router';
+import Modal from 'react-modal';
 import ProgramListElement from './ProgramListElement';
 
 // remove below styling before applying tailwind
@@ -34,10 +35,17 @@ const programList = [
 
 const ProgramHome = (props) => {
 
+    const [ProgramModal, showProgramModal] = useState(false);
+
     return(
         <div class="outer-program">
             <h2 class="main-title">Programs</h2>
-            <button class="add-program-button">+ Create Program</button>
+            <button class="add-program-button" onClick={() => showProgramModal(true)}>+ Create Program</button>
+
+            <Modal isOpen={ProgramModal} contentLabel="Create Program" className="program-modal">
+                <button onClick={() => showProgramModal(false)}>Close Modal</button>
+            </Modal>
+
             <div class="search-div">
                 <img class="magnifying-icon" src="https://i.imgur.com/dJIfxYP.png"></img>
                 <input class="search-bar"></input>
