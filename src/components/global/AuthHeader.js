@@ -1,14 +1,24 @@
 import React, { useRef } from 'react';
 import { Link } from '@reach/router';
+import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
-export default function AuthHeader() {
+const  AuthHeader= (props) =>{
+  const Dispatch = useDispatch();
+
+  const handleLogout = (data) => {
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('user-id');
+    Dispatch({type: "UPDATE", payload:{userID: data.user_id}});
+  };
 
   const months = ['January', 'February', 'March' , 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const date = new Date();
   const month = months[date.getMonth()];
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const day = date.getDate();
-  const dayOfWeek = days[date.getDate()];
+  const dayOfWeek = days[date.getDay()];
   let suffix;
   if (String(day).endsWith("1")) {
     suffix = 'st';
@@ -19,8 +29,10 @@ export default function AuthHeader() {
   } else {
     suffix = 'th';
   }
+
   const displayDay = `${dayOfWeek}`;
   const displayDate = `${month} ${day}${suffix}`;
+  console.log(day);
 
   const navEl = useRef(null);
   const toggleNav = () => {
@@ -101,10 +113,20 @@ export default function AuthHeader() {
               <path d="M16 13V11H7V8L2 12L7 16V13H16Z" fill="#0E0E0E"/>
               <path d="M20 3H11C9.897 3 9 3.897 9 5V9H11V5H20V19H11V15H9V19C9 20.103 9.897 21 11 21H20C21.103 21 22 20.103 22 19V5C22 3.897 21.103 3 20 3Z" fill="#0E0E0E"/>
             </svg>
-            <span className="ml-4">Log Out</span>
+            <button onClick={handleLogout} className="ml-4">Log Out</button>
           </div>
         </div>
       </div>
     </nav>
   );
-}
+};
+
+const mapStateToProps = state => ({
+  loggedInUser: state.loggedInUser,
+  userID: state.user_id,
+  updates: state.updates,
+});
+export default connect(
+  mapStateToProps,
+)(AuthHeader);
+
