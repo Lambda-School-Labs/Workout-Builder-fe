@@ -20,7 +20,7 @@ const ProgramListElement = (props) => {
                 <img src="https://i.imgur.com/4Qxt7a2.png"></img>
             </div>
             <div class="options-div">
-                <img src="https://i.imgur.com/U4s9yte.png"></img>
+                <img src="https://i.imgur.com/DPz3fj4.png"></img>
             </div>
         </div>
     )
