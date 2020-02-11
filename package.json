@@ -24,7 +24,8 @@
     "eject": "react-scripts eject",
     "build:styles": "postcss src/styles/tailwind.css -o src/styles/index.css",
     "prebuild": "NODE_ENV=production yarn run build:styles",
-    "prestart": "yarn run build:styles"
+    "prestart": "yarn run build:styles",
+    "coverage": "npm run test -- --coverage"
   },
   "eslintConfig": {
     "extends": "react-app",
@@ -58,6 +59,7 @@
       "last 1 safari version"
     ]
   },
+  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^9.7.4",
     "postcss-cli": "^7.1.0",
