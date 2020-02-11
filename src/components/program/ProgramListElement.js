@@ -33,6 +33,9 @@ const ProgramListElement = (props) => {
 const mapStateToProps = state => ({
     loggedInUser: state.loggedInUser,
     updates: state.updates,
+    coach_clients: state.coach_clients,
+    coach_exercises: state.coach_exercises,
+    coach_programs: state.coach_programs,
   });
   
   export default connect(

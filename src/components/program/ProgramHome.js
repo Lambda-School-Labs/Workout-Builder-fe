@@ -10,40 +10,6 @@ import CreateProgram from './modals/CreateProgram'
 // remove below styling before applying tailwind
 import "./program-temp-style.scss"
 
-// temporary list of coach's programs - this should be pulled from the back end
-const programList = [
-    {
-        id: 1,
-        title: "Team 1 programming",
-        activeUsers: 1
-    },
-    {
-        id: 2,
-        title: "Joe's Program",
-        activeUsers: 10
-    },
-    {
-        id: 3,
-        title: "Mary's Program",
-        activeUsers: 7
-    },
-    {
-        id: 4,
-        title: "Olympic Lifting",
-        activeUsers: 8
-    },
-    {
-        id: 5,
-        title: "Test",
-        activeUsers: 8
-    },
-    {
-        id: 6,
-        title: "Very long phrase that won't fit in small screen",
-        activeUsers: 8
-    }
-]
-
 const ProgramHome = (props) => {
     const [CreateProgramModal, ToggleCreateProgramModal] = useState(false);
 
@@ -64,9 +30,9 @@ const ProgramHome = (props) => {
                     <h4 className="header-title">Title</h4>
                     <h4 className="header-active">Active</h4>
                 </div>
-                {programList.map(element => {
+                {props.coach_programs.map(program => {
                     return(
-                        <ProgramListElement id={element.id} title={element.title} activeUsers={element.activeUsers} />
+                        <ProgramListElement id={program.id} title={program.name} activeUsers={program.assigned_clients.length} />
                     )
                 })}
                 <div class="program-element"></div>
@@ -78,6 +44,9 @@ const ProgramHome = (props) => {
 const mapStateToProps = state => ({
     loggedInUser: state.loggedInUser,
     updates: state.updates,
+    coach_clients: state.coach_clients,
+    coach_exercises: state.coach_exercises,
+    coach_programs: state.coach_programs,
   });
   
   export default connect(
