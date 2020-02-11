@@ -48,9 +48,9 @@ const ProgramOptions = (props) => {
                         <div className="options-right">
                             <p>Edit</p>
                         </div>
-                        <div className="options-x">
+                        {/* <div className="options-x">
                             <img src="https://i.imgur.com/XjN61mQ.png" onClick={closeModal}></img>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="options-element">
                         <div className="options-left">
@@ -67,7 +67,6 @@ const ProgramOptions = (props) => {
                         <div className="options-right">
                             <p>Delete Program</p>
                         </div>
-                        {/* <button onClick={() => console.log(compRef.current)}>focus</button> */}
                     </div>
                     </div>
             </Modal>

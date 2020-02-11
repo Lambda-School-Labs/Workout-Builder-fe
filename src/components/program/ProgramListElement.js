@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import ProgramOptions from './modals/ProgramOptions';
+import AssignProgram from './modals/AssignProgram';
 
 const ProgramListElement = (props) => {
     const [AssignProgramModal, ToggleAssignProgramModal] = useState(false);
@@ -17,11 +18,12 @@ const ProgramListElement = (props) => {
             <div class="active-div">
                 <p>{props.activeUsers}</p>
             </div>
-            <div class="assign-div">
-                <img src="https://i.imgur.com/4Qxt7a2.png"></img>
+            <div class="assign-div" id={`assign-div-${props.id}`}>
+                <img src="https://i.imgur.com/4Qxt7a2.png" onClick={() => ToggleAssignProgramModal(true)}></img>
+                <AssignProgram AssignProgramModal={AssignProgramModal} ToggleAssignProgramModal={ToggleAssignProgramModal} id={props.id}/>
             </div>
-            <div className="options-div" onClick={() => ToggleProgramOptionsModal(true)} id={`options-div-${props.id}`}>
-                <img src="https://i.imgur.com/DPz3fj4.png"></img>
+            <div className="options-div" id={`options-div-${props.id}`}>
+                <img src="https://i.imgur.com/DPz3fj4.png" onClick={() => ToggleProgramOptionsModal(true)}></img>
                 <ProgramOptions ProgramOptionsModal={ProgramOptionsModal} ToggleProgramOptionsModal={ToggleProgramOptionsModal} id={props.id}/>
             </div>
         </div>

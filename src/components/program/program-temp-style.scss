@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Exo|Roboto&display=swap');
 
 $program-width: 90%;
 $program-modal-width: $program-width - 10%;
@@ -126,6 +126,7 @@ $program-modal-margin: $program-modal-width - 27%;
         }
     }
     .assign-div {
+        position: relative;
         height: 100%;
         width: 24%;
         display: flex;
@@ -225,10 +226,11 @@ $program-modal-margin: $program-modal-width - 27%;
     width: 10rem;
     background-color: white;
     position: absolute;
-    right: 2.5rem;
+    right: 0rem;
+    margin-right: 50%;;
     display: flex;
     flex-direction: column;
-    box-shadow: 4px 6px 12px -1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
     .options-element {
         padding: 2px;
         &:hover {
@@ -244,7 +246,7 @@ $program-modal-margin: $program-modal-width - 27%;
             img {
                 width: 15px;
                 height: 15px;
-                margin-right: 5px;;
+                margin-right: 5px;
             }
         }
         .options-right {
@@ -252,7 +254,7 @@ $program-modal-margin: $program-modal-width - 27%;
             font-size: 0.875rem;
             display: flex;
             align-items: center;
-            width: 70%;
+            width: 80%;
         }
         .options-x {
             cursor: pointer;
@@ -275,4 +277,62 @@ $program-modal-margin: $program-modal-width - 27%;
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0);
+}
+
+.assign-modal {
+    z-index: 1;
+    width: 10rem;
+    background-color: white;
+    position: absolute;
+    right: 0rem;
+    margin-right: 50%;
+    width: 15rem;
+    height: 21rem;
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+    border: 0.5px solid #C4C4C4;
+    .assign-internal {
+        display: flex;
+        flex-direction: column;
+        .assign-header {
+            display: flex;
+            height: 3rem;
+            align-items: center;
+            font-family: 'Exo', sans-serif;
+            font-weight: 500;
+            font-size: 1.1rem;
+            line-height: 1.3rem;
+            .assign-header-clients {
+                margin-left: 1rem;
+                border-bottom: 2px solid black;
+                padding: 1rem .8rem .7rem .4rem;
+            }
+            .assign-header-teams {
+                border-bottom: 2px solid #979797;;
+                padding: 1rem .8rem .7rem 0.4rem;
+                color: #a8a8a8;
+            }
+        }
+        .assign-clients {
+            border: 1px solid black;
+            height: 15rem;
+            overflow: hidden;
+        }
+        .assign-button-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 3rem;
+            .assign-button {
+                width: 206px;
+                height: 30px;
+                background: #AFAFAF;
+                border-radius: 5px;
+                font-family: 'Roboto', sans-serif;
+                font-size: 0.875rem;
+                line-height: 1rem;
+                color: #FFFFFF;
+            }
+        }
+    }
 }
