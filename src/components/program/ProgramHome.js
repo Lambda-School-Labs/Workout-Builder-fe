@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Link } from '@reach/router';
 import Modal from 'react-modal';
 import ProgramListElement from './ProgramListElement';
+import CreateProgram from './modals/CreateProgram'
 
 // remove below styling before applying tailwind
 import "./program-temp-style.scss"
@@ -31,44 +32,27 @@ const programList = [
         title: "Olympic Lifting",
         activeUsers: 8
     },
-    // {
-    //     id: 5,
-    //     title: "Test",
-    //     activeUsers: 8
-    // },
-    // {
-    //     id: 6,
-    //     title: "Test Test",
-    //     activeUsers: 8
-    // }
+    {
+        id: 5,
+        title: "Test",
+        activeUsers: 8
+    },
+    {
+        id: 6,
+        title: "Very long phrase that won't fit in small screen",
+        activeUsers: 8
+    }
 ]
 
 const ProgramHome = (props) => {
-
-    const [ProgramModal, showProgramModal] = useState(false);
+    const [CreateProgramModal, ToggleCreateProgramModal] = useState(false);
 
     return(
-        <div class="outer-program">
+        <div className="outer-program">
             <h2 class="main-title">Programs</h2>
-            <button class="add-program-button" onClick={() => showProgramModal(true)}>+ Create Program</button>
+            <button class="add-program-button" onClick={() => ToggleCreateProgramModal(true)}>+ Create Program</button>
 
-            <Modal isOpen={ProgramModal} contentp="Create Program" className="program-modal" overlayClassName="program-overaly">
-                
-                <h3>Create Program</h3>
-                <form>
-                    <p htmlFor="program-name">Program Name *</p>
-                    <input id="program-name" placeholder="Ex: Olympic Lifting"></input>
-                    <p htmlFor="program-phase">Phase *</p>
-                    <input id="program-phase" placeholder="Ex: Strength"></input>
-                    <p htmlFor="program-days">Number of days in program *</p>
-                    <input id="program-days" placeholder="Ex: 21"></input>
-                </form>
-                <div className="program-button-div">
-                    <button onClick={() => showProgramModal(false)} className="cancel-button">Cancel</button>
-                    <button onClick={() => showProgramModal(false)} className="create-button">+ Create program</button>
-                </div>
-                <p className="legend-p">*Required</p>
-            </Modal>
+            <CreateProgram CreateProgramModal={CreateProgramModal} ToggleCreateProgramModal={ToggleCreateProgramModal} />
 
             <div class="search-div">
                 <img class="magnifying-icon" src="https://i.imgur.com/dJIfxYP.png"></img>
