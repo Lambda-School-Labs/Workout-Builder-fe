@@ -27,6 +27,7 @@ const AssignProgram = (props) => {
         });
     }
 
+
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
 
@@ -43,8 +44,17 @@ const AssignProgram = (props) => {
                             <div className="assign-header-clients">Clients</div>
                             <div className="assign-header-teams">Teams</div>
                         </div>
-                        <div className="assign-clients">
-
+                        <div className="assign-clients" style={{}}>
+                            {props.coach_clients.map(client => {
+                                return(
+                                    <div className="assign-clients-row" id={`assign-client-${client.id}`}>
+                                            <label class="assign-client-container">
+                                                <input type="checkbox" checked="" />
+                                                {client.first_name} {client.last_name}
+                                            </label>
+                                    </div>
+                                )
+                            })}
                         </div>
                         <div className="assign-button-div">
                             <button className="assign-button" onClick={closeModal}>Assign to client</button>
@@ -57,6 +67,9 @@ const AssignProgram = (props) => {
 const mapStateToProps = state => ({
     loggedInUser: state.loggedInUser,
     updates: state.updates,
+    coach_clients: state.coach_clients,
+    coach_exercises: state.coach_exercises,
+    coach_programs: state.coach_programs,
 });
   
 export default connect(
