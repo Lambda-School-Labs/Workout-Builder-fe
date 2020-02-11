@@ -25,11 +25,6 @@ function reducer(state = initialState, action) {
       ...state,
       updates: (state.updates + 1),
     };
-  case "LOGOUT":
-    return {
-      ...state,
-      userID: action.payload
-    };
   default:
     return state;
   }

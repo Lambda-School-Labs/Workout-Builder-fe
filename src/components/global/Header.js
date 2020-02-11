@@ -28,7 +28,7 @@ export default function Header(){
             </Link>
           </li>
           <li className="md:ml-4">
-            <Link to="/login" className="border-t block no-underline hover:underline py-2 text-grey-darkest hover:text-black md:border-none md:p-0">
+            <Link to="/" className="border-t block no-underline hover:underline py-2 text-grey-darkest hover:text-black md:border-none md:p-0">
           Login
             </Link>
           </li>
