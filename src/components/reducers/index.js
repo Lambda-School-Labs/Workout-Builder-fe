@@ -119,22 +119,36 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch(action.type) {
       case "SET_LOGGED":
-          return {
-              ...state,
-              loggedInUser: action.payload,
-          };
+        return {
+            ...state,
+            loggedInUser: action.payload,
+        };
       case "SET_ID":
-              return {
-                  ...state,
-                  userID: action.payload,
-              };
+        return {
+            ...state,
+            userID: action.payload,
+        };
       case "UPDATE":
-      return {
+        return {
+            ...state,
+            updates: (state.updates + 1),
+        };
+      case "UPDATE_PROGRAMS":
+        // get coach programs
+        const myList = [...state.coach_programs];
+
+        // find index of old program data
+        const programIndex = myList.indexOf(action.payload.old);
+
+        // replace old data with new data
+        myList[programIndex] = action.payload.new[programIndex];
+
+        return {
           ...state,
-          updates: (state.updates + 1),
-      };
+          coach_programs: [...myList]
+        }
       default:
-          return state;
+        return state;
   }
 }
 

@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 
 const AssignProgram = (props) => {
+    const Dispatch = useDispatch();
+
     Modal.setAppElement('#root');
 
     const closeModal = (e) => {
@@ -27,9 +30,43 @@ const AssignProgram = (props) => {
         });
     }
 
-
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
+
+    const isChecked = (client_id) => {
+        // This is the current program for which the assign list is being displayed
+        const thisProgram = props.coach_programs.filter(program => program.id === props.program_id)[0];
+
+        // if the client's id is included in the assigned_clients field of the current program, mark the box checked
+        if (thisProgram.assigned_clients.includes(client_id)) {
+            return "checked";
+        } else {
+            return "";
+        }
+    }
+
+    const toggleAssign = (client_id) => {
+        // This is the current program for which the assign list is being displayed
+        const thisProgram = props.coach_programs.filter(program => program.id === props.program_id)[0];
+
+        // Get the array of assigned clients
+        const listOfClients = thisProgram.assigned_clients;
+
+        if (listOfClients.includes(client_id)) {
+            // remove client
+            const index = listOfClients.indexOf(client_id);
+            listOfClients.splice(index, 1);
+            const updatedProgram = {... thisProgram, assigned_clients: listOfClients};
+
+            Dispatch({ type: "UPDATE_PROGRAMS", payload: {old: props.coach_programs, new: updatedProgram} });
+        } else {
+            // add client
+            listOfClients.push(client_id);
+            const updatedProgram = {... thisProgram, assigned_clients: listOfClients};
+
+            Dispatch({ type: "UPDATE_PROGRAMS", payload: {old: props.coach_programs, new: updatedProgram} });
+        }
+    }
 
     return(
             <Modal isOpen={props.AssignProgramModal} 
@@ -49,7 +86,7 @@ const AssignProgram = (props) => {
                                 return(
                                     <div className="assign-clients-row" id={`assign-client-${client.id}`}>
                                             <label class="assign-client-container">
-                                                <input type="checkbox" checked="" />
+                                                <input type="checkbox" checked={isChecked(client.id)} onClick={() => toggleAssign(client.id)}/>
                                                 {client.first_name} {client.last_name}
                                             </label>
                                     </div>

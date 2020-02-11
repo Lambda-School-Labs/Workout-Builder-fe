@@ -20,7 +20,7 @@ const ProgramListElement = (props) => {
             </div>
             <div class="assign-div" id={`assign-div-${props.id}`}>
                 <img src="https://i.imgur.com/4Qxt7a2.png" onClick={() => ToggleAssignProgramModal(true)}></img>
-                <AssignProgram AssignProgramModal={AssignProgramModal} ToggleAssignProgramModal={ToggleAssignProgramModal} id={props.id}/>
+                <AssignProgram program_id={props.id} AssignProgramModal={AssignProgramModal} ToggleAssignProgramModal={ToggleAssignProgramModal} id={props.id}/>
             </div>
             <div className="options-div" id={`options-div-${props.id}`}>
                 <img src="https://i.imgur.com/DPz3fj4.png" onClick={() => ToggleProgramOptionsModal(true)}></img>
