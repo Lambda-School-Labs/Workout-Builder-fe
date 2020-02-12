@@ -9,9 +9,10 @@ module.exports = {
         "cornflower-blue": "#F7F7FA",
         "mine-shaft": "#333333",
         "dove-grey": "#666666",
+        "dark-grey": "#AFAFAF",
         silver: "#BEBEBE",
-        greyish: "#757575",
-        redish: "#FF0F0F"
+        grey: "#757575",
+        red: "#FF0F0F"
       },
       lineHeight: {
         middle: "0.1em"
