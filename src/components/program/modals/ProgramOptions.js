@@ -34,7 +34,16 @@ const ProgramOptions = (props) => {
         closeModal(e);
     }
     
-    // dispatch clone call
+    // Duplicate a program from the list and add it to the redux store
+    const duplicateProgram = (e) => {
+        // This is the current program for which the options menu is being displayed
+        const thisProgram = props.coach_programs.filter(program => program.id === props.program_id)[0];
+        const newProgram = {...thisProgram, name: `${thisProgram.name} (copy)`, assigned_clients: []};
+
+        Dispatch({ type: "CREATE_A_PROGRAM", payload: newProgram });
+        Dispatch({ type: "UPDATE" });
+        closeModal(e);
+    }
 
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
@@ -50,7 +59,7 @@ const ProgramOptions = (props) => {
                             <p>Edit</p>
                         </div>
                     </div>
-                    <div className="options-element">
+                    <div className="options-element" onClick={duplicateProgram}>
                         <div className="options-left">
                             <img src="https://i.imgur.com/DZgRwQr.png"></img>
                         </div>

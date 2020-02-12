@@ -16,7 +16,6 @@ const ProgramHome = (props) => {
     const [searchResults, setSearchResults] = useState(props.coach_programs);
 
     useEffect(() => {
-        console.log("fire");
         let results = props.coach_programs.filter(program => program.name.toLowerCase().includes(searchTerm.toLowerCase()));
         setSearchResults(results);
     }, [searchTerm, props.updates]);

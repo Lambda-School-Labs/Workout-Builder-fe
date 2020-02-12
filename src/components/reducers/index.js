@@ -113,7 +113,8 @@ const initialState = {
     ],
     assigned_clients: [9]
     },
-  ]
+  ],
+  temp_next_program_id: 5,
 }
 
 function reducer(state = initialState, action) {
@@ -139,25 +140,38 @@ function reducer(state = initialState, action) {
 
       case "UPDATE_A_PROGRAM":
         // get coach programs
-        const myList = [...state.coach_programs];
+        const updatedList = [...state.coach_programs];
 
         // find index of old program data
-        const programIndex = myList.indexOf(action.payload.old);
+        const programIndex = updatedList.indexOf(action.payload.old);
 
         // replace old data with new data
-        myList[programIndex] = action.payload.new[programIndex];
+        updatedList[programIndex] = action.payload.new[programIndex];
 
         return {
           ...state,
-          coach_programs: [...myList]
+          coach_programs: [...updatedList]
+        };
+
+      case "DELETE_A_PROGRAM":
+        return {
+          ...state,
+          coach_programs: state.coach_programs.filter((program) => {return program.id != action.payload})
         };
       
-        case "DELETE_A_PROGRAM":
-          console.log(state.coach_programs.filter((program) => {return program.id != action.payload}));
-          return {
-            ...state,
-            coach_programs: state.coach_programs.filter((program) => {return program.id != action.payload})
-          };
+      case "CREATE_A_PROGRAM":
+        // get coach programs
+        let createList = [...state.coach_programs];
+
+        // add a new program
+        createList.push({...action.payload, id: state.temp_next_program_id});
+        
+        return {
+          ...state,
+          coach_programs: createList,
+          // increment to the next id - to be removed after back end integration
+          temp_next_program_id: (state.temp_next_program_id + 1)
+        };
       
       default:
         return state;
