@@ -18,6 +18,7 @@ const initialState = {
     {id: 9, first_name: "Jordan", last_name: "Logan", email: "A9.com", coach_id: 1},
   ],
   coach_exercises: [
+    {id: 0, coach_id: 1, name: "", type: "", focal_points: "", video_url: "", thumbnail_url: ""}, 
     {id: 1, coach_id: 1, name: "bench press", type: "anaerobic", focal_points: "chest", video_url: "https://www.youtube.com/watch?v=vthMCtgVtFw", thumbnail_url: "http://i3.ytimg.com/vi/vthMCtgVtFw/hqdefault.jpg"}, 
     {id: 2, coach_id: 1, name: "shoulder press", type: "anaerobic", focal_points: "shoulders", video_url: "https://www.youtube.com/watch?v=qEwKCR5JCog", thumbnail_url: "http://i3.ytimg.com/vi/qEwKCR5JCog/hqdefault.jpg"},
     {id: 3, coach_id: 1, name: "skull crushers", type: "anaerobic", focal_points: "triceps", video_url: "https://www.youtube.com/watch?v=d_KZxkY_0cM", thumbnail_url: "http://i3.ytimg.com/vi/d_KZxkY_0cM/hqdefault.jpg"},
@@ -117,7 +118,7 @@ const initialState = {
   temp_next_program_id: 5,
   temp_next_workout_id: 13,
   new_program: {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
-  workouts: [],
+  workouts: [ ],
   assigned_clients: []
   },
 }

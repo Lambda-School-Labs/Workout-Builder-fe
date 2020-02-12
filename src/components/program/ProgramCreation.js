@@ -38,30 +38,25 @@ const ProgramCreation = (props) => {
     // Current day number
     const [currentDay, setCurrentDay] = useState(1);
 
-    // Add a day to the program
     const addWorkout = () => {
         // Add a workout to the data
         let updatedProgram = {...props.new_program};
         updatedProgram.workouts.push({ id: props.temp_next_workout_id, name: "", description: "",  day: currentDay,
             exercises: []
         });
-
         // cycle the current day
         setCurrentDay(currentDay + 1);
-
         // update the program data in redux
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
-
         // cycle the next workout id - temp dispatch until backend integration
         Dispatch({ type: "CYCLE_WORKOUT_ID" });
-    }
+    };
 
     const deleteWorkout = (input_id) => {
         // filter out the workout from the program by id
         let updatedProgram = {...props.new_program};
         updatedProgram.workouts = updatedProgram.workouts.filter((workout) => workout.id != input_id);
-
-        // reset day numbers (in case you delete a day in the middle of the program)
+        // reapply day numbers - in case you delete a day in the middle of the program
         if (updatedProgram.workouts.length > 0) {
             let daynumber = 1;
             updatedProgram.workouts.forEach(workout => {
@@ -70,9 +65,42 @@ const ProgramCreation = (props) => {
                 setCurrentDay(daynumber);
             });
         } else {
+            // all workout days have been deleted so reset the day to 1
             setCurrentDay(1);
         }
-        
+        // update the program data in redux
+        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
+    };
+
+    const addExercise = (workout_id) => {
+        // hard copy props.newprogram
+        // CAN NOT use a spread here because for some ungodly reason the .push() command three lines down was still modifying the original.
+        let updatedProgram = JSON.parse(JSON.stringify(props.new_program));
+        let index = updatedProgram.workouts.findIndex(workout => workout.id === workout_id);
+        updatedProgram.workouts[index].exercises.push({ exercise_id: 0, order: 0, exercise_details: ""});
+        // reapply order numbers
+        let ordernumber = 1
+        updatedProgram.workouts[index].exercises.forEach(exercise => {
+            exercise.order = ordernumber;
+            ordernumber += 1;
+        });
+        // update the program data in redux
+        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
+    };
+
+    const deleteExercise = (workout_id, order) => {
+        // hard copy props.newprogram
+        // another issue where the spread operator doesn't create a separate duplicate
+        let updatedProgram = JSON.parse(JSON.stringify(props.new_program));
+        let index = updatedProgram.workouts.findIndex(workout => workout.id === workout_id);
+        updatedProgram.workouts[index].exercises = updatedProgram.workouts[index].exercises.filter((exercise) => (exercise.order !== order));
+
+        // reapply order numbers
+        let ordernumber = 1
+        updatedProgram.workouts[index].exercises.forEach(exercise => {
+            exercise.order = ordernumber;
+            ordernumber += 1;
+        });
 
         // update the program data in redux
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
@@ -101,18 +129,18 @@ const ProgramCreation = (props) => {
                                 <div className="exercise-div">
                                     <div className="icon-div">
                                         <p className="icon-letter">{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
-                                        <img className="delete-button" src="https://i.imgur.com/nGDM0fq.png"></img>
+                                        <img className="delete-button" src="https://i.imgur.com/nGDM0fq.png" onClick={() => deleteExercise(day.id, exercise.order)}></img>
                                     </div>
                                     <input className="exercise-input" value={getExerciseName(exercise.exercise_id)}></input>
                                     <input className="exercise-info" value={exercise.exercise_details}></input>
                                 </div>
                             )
                         })}
-                        <button className="add-exercise-button">+ Add exercise</button>
+                        <button className="add-exercise-button" onClick={() => addExercise(day.id)}>+ Add exercise</button>
                     </div>
                 )
             })}
-            <button className="add-day-button" onClick={addWorkout}>+ Add day</button>
+            <button className="add-day-button" onClick={() => addWorkout()}>+ Add day</button>
         </div>
     )
 }
