@@ -220,7 +220,169 @@ export default function Dashboard() {
             />
           </svg>
         </div>
-      </>
+      </div>
+      <div className="mt-12 hidden lg:block">
+        <div
+          className="grid grid-cols-8 text-dark-grey bg-cornflower-blue font-semibold text-xs py-3 rounded"
+          style={{ justifyItems: "center" }}
+        >
+          <span className="col-start-2">Name</span>
+          <span>Program start</span>
+          <span>Program length</span>
+          <span>Program phase</span>
+          <span>Program end</span>
+          <span>Repeat workout</span>
+          <span>Add program</span>
+        </div>
+        <div
+          className="mt-2 grid grid-cols-8 bg-cornflower-blue"
+          style={{ justifyItems: "center", alignItems: "center" }}
+        >
+          <div className="p-3">
+            <img className="rounded" src="https://picsum.photos/110" alt="" />
+          </div>
+          <span className="font-semibold text-lg">Joe Smith</span>
+          <span className="text-smz">1/1/2020</span>
+          <span className="text-smz">4 weeks</span>
+          <span className="text-smz">Strength</span>
+          <span className="text-red">5 days left</span>
+          <svg
+            width="22"
+            height="20"
+            viewBox="0 0 22 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M16.4199 15H4.73071V12L0.0550537 16L4.73071 20V17H18.7577V11H16.4199V15ZM4.73071 5H16.4199V8L21.0955 4L16.4199 0V3H2.39288V9H4.73071V5Z"
+              fill="#BEBEBE"
+            />
+          </svg>
+          <svg
+            width="20"
+            height="16"
+            viewBox="0 0 20 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19.3212 10H12.3078V16H7.63212V10H0.618652V6H7.63212V0H12.3078V6H19.3212V10Z"
+              fill="#BEBEBE"
+            />
+          </svg>
+        </div>
+        <div
+          className="mt-2 grid grid-cols-8 bg-cornflower-blue"
+          style={{ justifyItems: "center", alignItems: "center" }}
+        >
+          <div className="p-3">
+            <img className="rounded" src="https://picsum.photos/110" alt="" />
+          </div>
+          <span className="font-semibold text-lg">Joe Smith</span>
+          <span className="text-smz">1/1/2020</span>
+          <span className="text-smz">4 weeks</span>
+          <span className="text-smz">Strength</span>
+          <span className="text-red">5 days left</span>
+          <svg
+            width="22"
+            height="20"
+            viewBox="0 0 22 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M16.4199 15H4.73071V12L0.0550537 16L4.73071 20V17H18.7577V11H16.4199V15ZM4.73071 5H16.4199V8L21.0955 4L16.4199 0V3H2.39288V9H4.73071V5Z"
+              fill="#BEBEBE"
+            />
+          </svg>
+          <svg
+            width="20"
+            height="16"
+            viewBox="0 0 20 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19.3212 10H12.3078V16H7.63212V10H0.618652V6H7.63212V0H12.3078V6H19.3212V10Z"
+              fill="#BEBEBE"
+            />
+          </svg>
+        </div>
+        <div
+          className="mt-2 grid grid-cols-8 bg-cornflower-blue"
+          style={{ justifyItems: "center", alignItems: "center" }}
+        >
+          <div className="p-3">
+            <img className="rounded" src="https://picsum.photos/110" alt="" />
+          </div>
+          <span className="font-semibold text-lg">Joe Smith</span>
+          <span className="text-smz">1/1/2020</span>
+          <span className="text-smz">4 weeks</span>
+          <span className="text-smz">Strength</span>
+          <span className="text-red">5 days left</span>
+          <svg
+            width="22"
+            height="20"
+            viewBox="0 0 22 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M16.4199 15H4.73071V12L0.0550537 16L4.73071 20V17H18.7577V11H16.4199V15ZM4.73071 5H16.4199V8L21.0955 4L16.4199 0V3H2.39288V9H4.73071V5Z"
+              fill="#BEBEBE"
+            />
+          </svg>
+          <svg
+            width="20"
+            height="16"
+            viewBox="0 0 20 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19.3212 10H12.3078V16H7.63212V10H0.618652V6H7.63212V0H12.3078V6H19.3212V10Z"
+              fill="#BEBEBE"
+            />
+          </svg>
+        </div>
+        <div
+          className="mt-2 grid grid-cols-8 bg-cornflower-blue"
+          style={{ justifyItems: "center", alignItems: "center" }}
+        >
+          <div className="p-3">
+            <img className="rounded" src="https://picsum.photos/110" alt="" />
+          </div>
+          <span className="font-semibold text-lg">Joe Smith</span>
+          <span className="text-smz">1/1/2020</span>
+          <span className="text-smz">4 weeks</span>
+          <span className="text-smz">Strength</span>
+          <span className="text-red">5 days left</span>
+          <svg
+            width="22"
+            height="20"
+            viewBox="0 0 22 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M16.4199 15H4.73071V12L0.0550537 16L4.73071 20V17H18.7577V11H16.4199V15ZM4.73071 5H16.4199V8L21.0955 4L16.4199 0V3H2.39288V9H4.73071V5Z"
+              fill="#BEBEBE"
+            />
+          </svg>
+          <svg
+            width="20"
+            height="16"
+            viewBox="0 0 20 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19.3212 10H12.3078V16H7.63212V10H0.618652V6H7.63212V0H12.3078V6H19.3212V10Z"
+              fill="#BEBEBE"
+            />
+          </svg>
+        </div>
+      </div>
     </div>
   );
 }
