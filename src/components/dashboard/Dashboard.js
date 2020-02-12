@@ -9,16 +9,16 @@ export default function Dashboard() {
 
   return (
     <div className="p-4 font-body lg:p-8">
-      <div className="flex flex-wrap items-end lg:flex-row lg:justify-between lg:items-end">
+      <div className="flex flex-wrap items-end lg:flex-row lg:justify-between lg:items-center">
         <div className="flex flex-col text-dove-grey flex-grow lg:flex-grow-0 lg:flex-row lg:items-center">
           <span className="text-xs">Wednesday</span>
           <span className="mr-2 hidden lg:inline">,</span>
           <span className="font-semibold">January 29th</span>
         </div>
         <button className="bg-blaze-orange text-white px-6 py-1 rounded">
-          <span className="font-medium">+ Add client</span>
+          <span className="font-medium">+ Add new client</span>
         </button>
-        <h1 className="flex items-center w-full mt-4 border-b border-blaze-orange pb-1 lg:order-first lg:border-none lg:pb-0 lg:w-auto">
+        <h1 className="flex items-center w-full mt-4 border-b border-blaze-orange pb-1 lg:order-first lg:border-none lg:pb-0 lg:mt-0 lg:w-auto">
           <span className="text-xl font-semibold lg:mr-2">Reminders</span>
           <svg
             width="20"
@@ -330,36 +330,90 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="mt-12 hidden lg:block">
-        <div
-          className="grid grid-cols-8 text-dark-grey bg-cornflower-blue font-semibold text-xs py-3 rounded"
-          style={{ justifyItems: "center" }}
-        >
-          <span className="col-start-2">Name</span>
-          <span>Program start</span>
+        <div className="grid grid-cols-10 gap-4 items-center text-dark-grey bg-cornflower-blue font-semibold text-xs py-3 rounded">
+          <span className="col-start-2 col-span-2">Name</span>
+          <span className="col-start-4">Program start</span>
           <span>Program length</span>
           <span>Program phase</span>
           <span>Program end</span>
-          <span>Repeat workout</span>
-          <span>Add program</span>
+          <span className="col-start-9" style={{ justifySelf: "center" }}>
+            Repeat
+            <br />
+            workout
+          </span>
+          <span>
+            Add
+            <br />
+            program
+          </span>
         </div>
-        <div
-          className="mt-2 grid grid-cols-8 bg-cornflower-blue"
-          style={{ justifyItems: "center", alignItems: "center" }}
-        >
-          <div className="p-3">
+        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center">
+          <div className="p-2">
             <img className="rounded" src="https://picsum.photos/110" alt="" />
           </div>
-          <span className="font-semibold text-lg">Joe Smith</span>
-          <span className="text-smz">1/1/2020</span>
-          <span className="text-smz">4 weeks</span>
-          <span className="text-smz">Strength</span>
-          <span className="text-red">5 days left</span>
+          <span className="font-semibold text-lg col-span-2">
+            Justine Gennaro
+          </span>
+          <span className="text-sm font-medium col-start-4">1/1/2020</span>
+          <span className="text-sm font-medium">4 weeks</span>
+          <span className="text-sm font-medium">Strength</span>
+          <span className="text-red font-medium">5 days left</span>
           <svg
             width="22"
             height="20"
             viewBox="0 0 22 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="col-start-9"
+            style={{ justifySelf: "center" }}
+          >
+            <path
+              d="M16.4199 15H4.73071V12L0.0550537 16L4.73071 20V17H18.7577V11H16.4199V15ZM4.73071 5H16.4199V8L21.0955 4L16.4199 0V3H2.39288V9H4.73071V5Z"
+              fill="#BEBEBE"
+            />
+          </svg>
+          <div className="relative">
+            <svg
+              width="20"
+              height="16"
+              viewBox="0 0 20 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M19.3212 10H12.3078V16H7.63212V10H0.618652V6H7.63212V0H12.3078V6H19.3212V10Z"
+                fill="#BEBEBE"
+              />
+            </svg>
+            <div className="absolute top-0 right-0 mt-8 bg-white shadow hidden">
+              <input
+                type="text"
+                placeholder="Search programs"
+                className="py-4 px-8 border-b"
+              />
+              <div className="overflow-y-scroll h-64"></div>
+            </div>
+          </div>
+        </div>
+        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center">
+          <div className="p-2">
+            <img className="rounded" src="https://picsum.photos/110" alt="" />
+          </div>
+          <span className="font-semibold text-lg col-span-2">
+            Lisa Arcangel
+          </span>
+          <span className="text-sm font-medium col-start-4">1/1/2020</span>
+          <span className="text-sm font-medium">4 weeks</span>
+          <span className="text-sm font-medium">Strength</span>
+          <span className="text-red font-medium">5 days left</span>
+          <svg
+            width="22"
+            height="20"
+            viewBox="0 0 22 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="col-start-9"
+            style={{ justifySelf: "center" }}
           >
             <path
               d="M16.4199 15H4.73071V12L0.0550537 16L4.73071 20V17H18.7577V11H16.4199V15ZM4.73071 5H16.4199V8L21.0955 4L16.4199 0V3H2.39288V9H4.73071V5Z"
@@ -379,24 +433,25 @@ export default function Dashboard() {
             />
           </svg>
         </div>
-        <div
-          className="mt-2 grid grid-cols-8 bg-cornflower-blue"
-          style={{ justifyItems: "center", alignItems: "center" }}
-        >
-          <div className="p-3">
+        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center">
+          <div className="p-2">
             <img className="rounded" src="https://picsum.photos/110" alt="" />
           </div>
-          <span className="font-semibold text-lg">Joe Smith</span>
-          <span className="text-smz">1/1/2020</span>
-          <span className="text-smz">4 weeks</span>
-          <span className="text-smz">Strength</span>
-          <span className="text-red">5 days left</span>
+          <span className="font-semibold text-lg col-span-2">
+            Jonathan Picazo
+          </span>
+          <span className="text-sm font-medium col-start-4">1/1/2020</span>
+          <span className="text-sm font-medium">4 weeks</span>
+          <span className="text-sm font-medium">Strength</span>
+          <span className="text-red font-medium">5 days left</span>
           <svg
             width="22"
             height="20"
             viewBox="0 0 22 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="col-start-9"
+            style={{ justifySelf: "center" }}
           >
             <path
               d="M16.4199 15H4.73071V12L0.0550537 16L4.73071 20V17H18.7577V11H16.4199V15ZM4.73071 5H16.4199V8L21.0955 4L16.4199 0V3H2.39288V9H4.73071V5Z"
@@ -416,61 +471,23 @@ export default function Dashboard() {
             />
           </svg>
         </div>
-        <div
-          className="mt-2 grid grid-cols-8 bg-cornflower-blue"
-          style={{ justifyItems: "center", alignItems: "center" }}
-        >
-          <div className="p-3">
+        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center">
+          <div className="p-2">
             <img className="rounded" src="https://picsum.photos/110" alt="" />
           </div>
-          <span className="font-semibold text-lg">Joe Smith</span>
-          <span className="text-smz">1/1/2020</span>
-          <span className="text-smz">4 weeks</span>
-          <span className="text-smz">Strength</span>
-          <span className="text-red">5 days left</span>
+          <span className="font-semibold text-lg col-span-2">Joe Smith</span>
+          <span className="text-sm font-medium col-start-4">1/1/2020</span>
+          <span className="text-sm font-medium">4 weeks</span>
+          <span className="text-sm font-medium">Strength</span>
+          <span className="text-red font-medium">5 days left</span>
           <svg
             width="22"
             height="20"
             viewBox="0 0 22 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M16.4199 15H4.73071V12L0.0550537 16L4.73071 20V17H18.7577V11H16.4199V15ZM4.73071 5H16.4199V8L21.0955 4L16.4199 0V3H2.39288V9H4.73071V5Z"
-              fill="#BEBEBE"
-            />
-          </svg>
-          <svg
-            width="20"
-            height="16"
-            viewBox="0 0 20 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M19.3212 10H12.3078V16H7.63212V10H0.618652V6H7.63212V0H12.3078V6H19.3212V10Z"
-              fill="#BEBEBE"
-            />
-          </svg>
-        </div>
-        <div
-          className="mt-2 grid grid-cols-8 bg-cornflower-blue"
-          style={{ justifyItems: "center", alignItems: "center" }}
-        >
-          <div className="p-3">
-            <img className="rounded" src="https://picsum.photos/110" alt="" />
-          </div>
-          <span className="font-semibold text-lg">Joe Smith</span>
-          <span className="text-smz">1/1/2020</span>
-          <span className="text-smz">4 weeks</span>
-          <span className="text-smz">Strength</span>
-          <span className="text-red">5 days left</span>
-          <svg
-            width="22"
-            height="20"
-            viewBox="0 0 22 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+            className="col-start-9"
+            style={{ justifySelf: "center" }}
           >
             <path
               d="M16.4199 15H4.73071V12L0.0550537 16L4.73071 20V17H18.7577V11H16.4199V15ZM4.73071 5H16.4199V8L21.0955 4L16.4199 0V3H2.39288V9H4.73071V5Z"
