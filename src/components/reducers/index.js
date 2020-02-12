@@ -133,7 +133,11 @@ function reducer(state = initialState, action) {
             ...state,
             updates: (state.updates + 1),
         };
-      case "UPDATE_PROGRAMS":
+      
+
+      /*******  Program reducers *******/
+
+      case "UPDATE_A_PROGRAM":
         // get coach programs
         const myList = [...state.coach_programs];
 
@@ -146,7 +150,15 @@ function reducer(state = initialState, action) {
         return {
           ...state,
           coach_programs: [...myList]
-        }
+        };
+      
+        case "DELETE_A_PROGRAM":
+          console.log(state.coach_programs.filter((program) => {return program.id != action.payload}));
+          return {
+            ...state,
+            coach_programs: state.coach_programs.filter((program) => {return program.id != action.payload})
+          };
+      
       default:
         return state;
   }

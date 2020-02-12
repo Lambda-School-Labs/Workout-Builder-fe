@@ -12,6 +12,22 @@ import "./program-temp-style.scss"
 
 const ProgramHome = (props) => {
     const [CreateProgramModal, ToggleCreateProgramModal] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResults, setSearchResults] = useState(props.coach_programs);
+
+    useEffect(() => {
+        console.log("fire");
+        let results = props.coach_programs.filter(program => program.name.toLowerCase().includes(searchTerm.toLowerCase()));
+        setSearchResults(results);
+    }, [searchTerm, props.updates]);
+
+    const handleChange = (e) => {
+        setSearchTerm(e.target.value);
+    }
+
+    // useEffect(() => {
+    //     console.log("update!");
+    // }, [props.updates]);
 
     return(
         <div className="outer-program">
@@ -22,7 +38,12 @@ const ProgramHome = (props) => {
 
             <div class="search-div">
                 <img class="magnifying-icon" src="https://i.imgur.com/dJIfxYP.png"></img>
-                <input class="search-bar"></input>
+                <input 
+                    class="search-bar"
+                    placeholder="Search Program"
+                    onChange={handleChange}
+                    value={searchTerm}
+                />
             </div>
 
             <div class="program-list-div">
@@ -30,7 +51,7 @@ const ProgramHome = (props) => {
                     <h4 className="header-title">Title</h4>
                     <h4 className="header-active">Active</h4>
                 </div>
-                {props.coach_programs.map(program => {
+                {searchResults.map(program => {
                     return(
                         <ProgramListElement id={program.id} title={program.name} activeUsers={program.assigned_clients.length} />
                     )

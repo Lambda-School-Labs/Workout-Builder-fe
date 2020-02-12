@@ -1,18 +1,18 @@
 import React, { useEffect, useRef } from "react";
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import Modal from 'react-modal';
 
 const AssignProgram = (props) => {
+    // adding redux dispatch capabilities
     const Dispatch = useDispatch();
 
-    Modal.setAppElement('#root');
-
+    // closing the modal function
     const closeModal = (e) => {
         e.stopPropagation();
         props.ToggleAssignProgramModal(false);
     }
 
+    // function that determines if outside the modal was clicked
     function useOutsideAlerter(ref) {
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) {
@@ -30,9 +30,11 @@ const AssignProgram = (props) => {
         });
     }
 
+    // part of useOutsideAlerter functionality
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
 
+    // function to determine if a box should be checked for each client name
     const isChecked = (client_id) => {
         // This is the current program for which the assign list is being displayed
         const thisProgram = props.coach_programs.filter(program => program.id === props.program_id)[0];
@@ -45,6 +47,7 @@ const AssignProgram = (props) => {
         }
     }
 
+    // function to check / uncheck boxes and update the redux data
     const toggleAssign = (client_id) => {
         // This is the current program for which the assign list is being displayed
         const thisProgram = props.coach_programs.filter(program => program.id === props.program_id)[0];
@@ -58,24 +61,18 @@ const AssignProgram = (props) => {
             listOfClients.splice(index, 1);
             const updatedProgram = {... thisProgram, assigned_clients: listOfClients};
 
-            Dispatch({ type: "UPDATE_PROGRAMS", payload: {old: props.coach_programs, new: updatedProgram} });
+            Dispatch({ type: "UPDATE_A_PROGRAM", payload: {old: props.coach_programs, new: updatedProgram} });
         } else {
             // add client
             listOfClients.push(client_id);
             const updatedProgram = {... thisProgram, assigned_clients: listOfClients};
 
-            Dispatch({ type: "UPDATE_PROGRAMS", payload: {old: props.coach_programs, new: updatedProgram} });
+            Dispatch({ type: "UPDATE_A_PROGRAM", payload: {old: props.coach_programs, new: updatedProgram} });
         }
     }
 
     return(
-            <Modal isOpen={props.AssignProgramModal} 
-                className="assign-modal"
-                overlayClassName="assign-overaly"
-                shouldCloseOnOverlayClick={true}
-                onRequestClose={closeModal}
-                parentSelector={() => document.body.querySelector(`#assign-div-${props.id}`)}
-                >
+            <div className="assign-modal">
                     <div ref={wrapperRef} className="assign-internal">
                         <div className="assign-header">
                             <div className="assign-header-clients">Clients</div>
@@ -87,6 +84,7 @@ const AssignProgram = (props) => {
                                     <div className="assign-clients-row" id={`assign-client-${client.id}`}>
                                             <label class="assign-client-container">
                                                 <input type="checkbox" checked={isChecked(client.id)} onClick={() => toggleAssign(client.id)}/>
+                                                {/* checked={isChecked(client.id)} */}
                                                 {client.first_name} {client.last_name}
                                             </label>
                                     </div>
@@ -97,7 +95,7 @@ const AssignProgram = (props) => {
                             <button className="assign-button" onClick={closeModal}>Assign to client</button>
                         </div>
                     </div>
-            </Modal>
+            </div>
     )
 }
 

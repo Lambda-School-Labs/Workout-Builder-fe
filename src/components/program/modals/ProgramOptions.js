@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from 'react-redux';
-import Modal from 'react-modal';
+import { useDispatch } from 'react-redux';
 
 const ProgramOptions = (props) => {
-    Modal.setAppElement('#root');
+    const Dispatch = useDispatch();
 
     const closeModal = (e) => {
         e.stopPropagation();
@@ -27,19 +27,20 @@ const ProgramOptions = (props) => {
         });
     }
 
+    // Delete a program from the list and the redux store
+    const deleteProgram = (e) => {
+        Dispatch({ type: "DELETE_A_PROGRAM", payload: props.program_id });
+        Dispatch({ type: "UPDATE" });
+        closeModal(e);
+    }
+    
+    // dispatch clone call
+
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
 
     return(
-            <Modal isOpen={props.ProgramOptionsModal} 
-                className="options-modal"
-                overlayClassName="options-overaly"
-                // style= {customStyles}
-                shouldCloseOnOverlayClick={true}
-                onRequestClose={closeModal}
-                parentSelector={() => document.body.querySelector(`#options-div-${props.id}`)}
-                // parentSelector={() => document.body.querySelector('.main-title')}
-                >
+            <div className="options-modal">
                     <div ref={wrapperRef}>
                     <div className="options-element">
                         <div className="options-left">
@@ -48,9 +49,6 @@ const ProgramOptions = (props) => {
                         <div className="options-right">
                             <p>Edit</p>
                         </div>
-                        {/* <div className="options-x">
-                            <img src="https://i.imgur.com/XjN61mQ.png" onClick={closeModal}></img>
-                        </div> */}
                     </div>
                     <div className="options-element">
                         <div className="options-left">
@@ -60,7 +58,7 @@ const ProgramOptions = (props) => {
                             <p>Duplicate</p>
                         </div>
                     </div>
-                    <div className="options-element">
+                    <div className="options-element" onClick={deleteProgram}>
                         <div className="options-left">
                             <img src="https://i.imgur.com/xsHoyAy.png"></img>
                         </div>
@@ -69,13 +67,16 @@ const ProgramOptions = (props) => {
                         </div>
                     </div>
                     </div>
-            </Modal>
+            </div>
     )
 }
 
 const mapStateToProps = state => ({
     loggedInUser: state.loggedInUser,
     updates: state.updates,
+    coach_clients: state.coach_clients,
+    coach_exercises: state.coach_exercises,
+    coach_programs: state.coach_programs,
 });
   
 export default connect(
