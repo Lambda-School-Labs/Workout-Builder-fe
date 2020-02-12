@@ -31,7 +31,7 @@ const CreateProgram = (props) => {
 
     const openProgramCreationPage = e => {
         e.preventDefault();
-        // props.navigate("/");
+        props.navigate("/program/create");
         closeModal(e);
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: newProgramData });
         Dispatch({ type: "UPDATE" });

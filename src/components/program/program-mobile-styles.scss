@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Exo|Roboto&display=swap');
 
-$program-width: 90%;
+$program-width: 100%;
 $program-modal-width: $program-width - 10%;
 $program-modal-margin: $program-modal-width - 27%;
 
@@ -365,6 +365,167 @@ $program-modal-margin: $program-modal-width - 27%;
         }
     }
 }
+
+// Program Creation page
+
+.program-creation {
+    width: $program-width;
+    min-width: 375px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    .back-div {
+        display: flex;
+        align-items: center;
+        width: 90%;
+        margin: 0.6875rem auto;
+        height: 3rem;
+        img {
+            height: 1rem;
+            width: 1rem;
+            margin-right: .5rem;
+        }
+        p {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.125rem;
+            line-height: 1.3125rem
+        }
+    }
+    .publish-button {
+        width: 90%;
+        margin: auto;
+        background: #666666;
+        border-radius: 5px;
+        height: 2.3125rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.125rem;
+        line-height: 1.3125rem;
+        color: #FFFFFF;
+    }
+    .delete-button {
+        height: .7rem;
+        width: .7rem;
+    }
+    .day-div {
+        width: 90%;
+        margin: 1rem auto;
+        .day-title-div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .day-title {
+                font-family: 'Roboto', sans-serif;
+                font-weight: 500;
+                font-size: 1.125rem;
+                line-height: 1.3125rem;
+            }
+        }
+        .coach-instructions {
+            width: 100%;
+            background: #FFFFFF;
+            border: 1px solid #000000;
+            border-radius: 0.3125rem;
+            margin: 1.1875rem auto;
+            color: #8D8888;
+            padding: 5px 18px;
+            .instructions-title {
+                font-family: 'Roboto', sans-serif;
+                font-weight: bold;
+                font-size: 0.8125rem;
+                line-height: 0.9375rem;
+            }
+            .instructions-text {
+                font-family: 'Roboto', sans-serif;
+                font-size: 0.75rem;
+                line-height: 0.875rem;
+            }
+        }
+        .exercise-div {
+            width: 100%;
+            .icon-div{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: .5rem 0;
+                .icon-letter{
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 0.875rem;
+                    line-height: 1rem;
+                    width: 1rem;
+                    height: 1rem;
+                    text-align: center;
+                    border: 1px solid black;
+                    border-radius: 50%;
+                }
+            }
+            .exercise-input {
+                width: 100%;
+                height: 2.5rem;
+                border: 1px solid #000000;
+                border-radius: 0.3125rem;
+                font-family: 'Roboto', sans-serif;
+                font-size: 1.125rem;
+                line-height: 1.3125rem;
+                padding: .5rem 1rem;
+                margin-bottom: 1rem;
+            }
+            .exercise-info {
+                width: 100%;
+                height: 2.5rem;
+                border: 1px solid #000000;
+                border-radius: 0.3125rem;
+                font-family: 'Exo', sans-serif;
+                font-weight: 500;
+                font-size: 0.875rem;
+                line-height: 1.1875rem;
+                padding: .5rem 1rem;
+                margin-bottom: 2rem;
+            }
+        }
+        .add-exercise-button {
+            height: 2.75rem;
+            background: #C4C4C4;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.875rem;
+            line-height: 1rem;
+        }
+    }
+    .add-day-button {
+        height: 2.75rem;
+        background: rgba(196, 196, 196, 0.5);
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.875rem;
+        line-height: 1rem;
+        margin: 0 auto 1rem auto;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 // just for testing purposes
 .TestModal {
