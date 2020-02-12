@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
-import { Link } from '@reach/router';
-import Modal from 'react-modal';
 import ProgramListElement from './ProgramListElement';
 import CreateProgram from './modals/CreateProgram'
 
-// remove below styling before applying tailwind
-import "./program-temp-style.scss"
+// mobile styling - desktop can be done in tailwind
+import "./program-mobile-styles.scss"
 
 const ProgramHome = (props) => {
     const [CreateProgramModal, ToggleCreateProgramModal] = useState(false);
@@ -24,16 +21,12 @@ const ProgramHome = (props) => {
         setSearchTerm(e.target.value);
     }
 
-    // useEffect(() => {
-    //     console.log("update!");
-    // }, [props.updates]);
-
     return(
         <div className="outer-program">
             <h2 class="main-title">Programs</h2>
             <button class="add-program-button" onClick={() => ToggleCreateProgramModal(true)}>+ Create Program</button>
 
-            <CreateProgram CreateProgramModal={CreateProgramModal} ToggleCreateProgramModal={ToggleCreateProgramModal} />
+            <CreateProgram CreateProgramModal={CreateProgramModal} ToggleCreateProgramModal={ToggleCreateProgramModal} {...props}/>
 
             <div class="search-div">
                 <img class="magnifying-icon" src="https://i.imgur.com/dJIfxYP.png"></img>

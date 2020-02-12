@@ -115,6 +115,10 @@ const initialState = {
     },
   ],
   temp_next_program_id: 5,
+  new_program: {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
+  workouts: [],
+  assigned_clients: []
+  },
 }
 
 function reducer(state = initialState, action) {
@@ -171,6 +175,12 @@ function reducer(state = initialState, action) {
           coach_programs: createList,
           // increment to the next id - to be removed after back end integration
           temp_next_program_id: (state.temp_next_program_id + 1)
+        };
+
+      case "UPDATE_NEW_PROGRAM_DATA":
+        return {
+          ...state,
+          new_program: {...state.new_program, ...action.payload}
         };
       
       default:

@@ -13,7 +13,7 @@ const App = (props) => (
     <Router>
       <Home exact path="/" />
       <Dashboard exact path="/dashboard" />
-      <Program exact path="/program" />
+      <Program exact path="/program" {...props}/>
       <Login exact path="/login" {...props}/>
       <SignUp exact path="/signup" {...props}/>
       <GoogleAuth path="/auth" />
