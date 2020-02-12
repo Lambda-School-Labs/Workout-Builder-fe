@@ -28,9 +28,54 @@ assigned_clients: [1, 3, 5, 7, 9]
 }
 
 const ProgramCreation = (props) => {
+    const Dispatch = useDispatch();
+
     // find the name of the selected exercise (by id) from the exercise library
     const getExerciseName = (input_id) => {
         return props.coach_exercises.filter((exercise) => {return exercise.id === input_id})[0].name;
+    }
+
+    // Current day number
+    const [currentDay, setCurrentDay] = useState(1);
+
+    // Add a day to the program
+    const addWorkout = () => {
+        // Add a workout to the data
+        let updatedProgram = {...props.new_program};
+        updatedProgram.workouts.push({ id: props.temp_next_workout_id, name: "", description: "",  day: currentDay,
+            exercises: []
+        });
+
+        // cycle the current day
+        setCurrentDay(currentDay + 1);
+
+        // update the program data in redux
+        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
+
+        // cycle the next workout id - temp dispatch until backend integration
+        Dispatch({ type: "CYCLE_WORKOUT_ID" });
+    }
+
+    const deleteWorkout = (input_id) => {
+        // filter out the workout from the program by id
+        let updatedProgram = {...props.new_program};
+        updatedProgram.workouts = updatedProgram.workouts.filter((workout) => workout.id != input_id);
+
+        // reset day numbers (in case you delete a day in the middle of the program)
+        if (updatedProgram.workouts.length > 0) {
+            let daynumber = 1;
+            updatedProgram.workouts.forEach(workout => {
+                workout.day = daynumber;
+                daynumber += 1;
+                setCurrentDay(daynumber);
+            });
+        } else {
+            setCurrentDay(1);
+        }
+        
+
+        // update the program data in redux
+        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
     }
 
     return(
@@ -40,12 +85,12 @@ const ProgramCreation = (props) => {
                 <p className="back-text">Back</p>
             </div>
             <button className="publish-button">Publish Program</button>
-            {testProgram.workouts.map(day => {
+            {props.new_program.workouts.map(day => {
                 return (
                     <div className="day-div">
                         <div className="day-title-div">
                             <h2 className="day-title">Day {day.day}:</h2>
-                            <img className="delete-button" src="https://i.imgur.com/nGDM0fq.png"></img>
+                            <img className="delete-button" src="https://i.imgur.com/nGDM0fq.png" onClick={() => deleteWorkout(day.id)}></img>
                         </div>
                         <div className="coach-instructions">
                             <h3 className="instructions-title">Coach Instructions</h3>
@@ -67,7 +112,7 @@ const ProgramCreation = (props) => {
                     </div>
                 )
             })}
-            <button className="add-day-button">+ Add day</button>
+            <button className="add-day-button" onClick={addWorkout}>+ Add day</button>
         </div>
     )
 }
@@ -78,6 +123,8 @@ const mapStateToProps = state => ({
     coach_clients: state.coach_clients,
     coach_exercises: state.coach_exercises,
     coach_programs: state.coach_programs,
+    new_program: state.new_program,
+    temp_next_workout_id: state.temp_next_workout_id,
   });
   
   export default connect(

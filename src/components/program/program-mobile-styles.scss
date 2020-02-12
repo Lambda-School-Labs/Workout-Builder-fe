@@ -11,7 +11,6 @@ $program-modal-margin: $program-modal-width - 27%;
     margin: auto;
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
     position: relative;
 }
 
@@ -398,7 +397,7 @@ $program-modal-margin: $program-modal-width - 27%;
         margin: auto;
         background: #666666;
         border-radius: 5px;
-        height: 2.3125rem;
+        height: 2.75rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -413,7 +412,7 @@ $program-modal-margin: $program-modal-width - 27%;
     }
     .day-div {
         width: 90%;
-        margin: 1rem auto;
+        margin: 1rem auto 0 auto;
         .day-title-div {
             display: flex;
             justify-content: space-between;
@@ -512,7 +511,7 @@ $program-modal-margin: $program-modal-width - 27%;
         font-family: 'Roboto', sans-serif;
         font-size: 0.875rem;
         line-height: 1rem;
-        margin: 0 auto 1rem auto;
+        margin: 1rem auto 1rem auto;
     }
 }
 
