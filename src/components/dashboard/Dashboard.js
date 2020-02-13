@@ -5,7 +5,12 @@ export default function Dashboard() {
     setInfo({ ...info, [id]: !info[id] });
   };
 
+  const toggleProgram = id => () => {
+    setPrograms({ ...programs, [id]: !programs[id] });
+  };
+
   const [info, setInfo] = useState({});
+  const [programs, setPrograms] = useState({});
 
   return (
     <div className="p-4 font-body lg:p-8">
@@ -379,20 +384,65 @@ export default function Dashboard() {
               viewBox="0 0 20 16"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              onClick={toggleProgram(1)}
             >
               <path
                 d="M19.3212 10H12.3078V16H7.63212V10H0.618652V6H7.63212V0H12.3078V6H19.3212V10Z"
                 fill="#BEBEBE"
               />
             </svg>
-            <div className="absolute top-0 right-0 mt-8 bg-white shadow hidden">
-              <input
-                type="text"
-                placeholder="Search programs"
-                className="py-4 px-8 border-b"
-              />
-              <div className="overflow-y-scroll h-64"></div>
-            </div>
+            {programs[1] && (
+              <div className="absolute top-0 right-0 mt-8 bg-white shadow w-84 z-10">
+                <input
+                  type="text"
+                  placeholder="Search programs"
+                  className="py-4 px-8 border-b placeholder-grey68 text-sm font-medium w-full"
+                />
+                <div className="overflow-y-scroll h-64 mb-4 px-8">
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">
+                      System A glute emphasis
+                    </span>
+                    <span className="text-xs font-medium text-grey68">
+                      2 day split
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 1</span>
+                    <span className="text-xs font-medium text-grey68">
+                      2 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 2</span>
+                    <span className="text-xs font-medium text-grey68">
+                      6 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 3</span>
+                    <span className="text-xs font-medium text-grey68">
+                      4 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 4</span>
+                    <span className="text-xs font-medium text-grey68">
+                      3 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 5</span>
+                    <span className="text-xs font-medium text-grey68">
+                      1 week
+                    </span>
+                  </div>
+                </div>
+                <div className="bg-grey98 p-3 text-center text-blaze-orange font-semibold text-sm">
+                  <span>Create new program</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
         <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center">
@@ -420,18 +470,73 @@ export default function Dashboard() {
               fill="#BEBEBE"
             />
           </svg>
-          <svg
-            width="20"
-            height="16"
-            viewBox="0 0 20 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M19.3212 10H12.3078V16H7.63212V10H0.618652V6H7.63212V0H12.3078V6H19.3212V10Z"
-              fill="#BEBEBE"
-            />
-          </svg>
+          <div className="relative">
+            <svg
+              width="20"
+              height="16"
+              viewBox="0 0 20 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              onClick={toggleProgram(2)}
+            >
+              <path
+                d="M19.3212 10H12.3078V16H7.63212V10H0.618652V6H7.63212V0H12.3078V6H19.3212V10Z"
+                fill="#BEBEBE"
+              />
+            </svg>
+            {programs[2] && (
+              <div className="absolute top-0 right-0 mt-8 bg-white shadow w-84 z-10">
+                <input
+                  type="text"
+                  placeholder="Search programs"
+                  className="py-4 px-8 border-b placeholder-grey68 text-sm font-medium w-full"
+                />
+                <div className="overflow-y-scroll h-64 mb-4 px-8">
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">
+                      System A glute emphasis
+                    </span>
+                    <span className="text-xs font-medium text-grey68">
+                      2 day split
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 1</span>
+                    <span className="text-xs font-medium text-grey68">
+                      2 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 2</span>
+                    <span className="text-xs font-medium text-grey68">
+                      6 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 3</span>
+                    <span className="text-xs font-medium text-grey68">
+                      4 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 4</span>
+                    <span className="text-xs font-medium text-grey68">
+                      3 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 5</span>
+                    <span className="text-xs font-medium text-grey68">
+                      1 week
+                    </span>
+                  </div>
+                </div>
+                <div className="bg-grey98 p-3 text-center text-blaze-orange font-semibold text-sm">
+                  <span>Create new program</span>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
         <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center">
           <div className="p-2">
@@ -458,18 +563,73 @@ export default function Dashboard() {
               fill="#BEBEBE"
             />
           </svg>
-          <svg
-            width="20"
-            height="16"
-            viewBox="0 0 20 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M19.3212 10H12.3078V16H7.63212V10H0.618652V6H7.63212V0H12.3078V6H19.3212V10Z"
-              fill="#BEBEBE"
-            />
-          </svg>
+          <div className="relative">
+            <svg
+              width="20"
+              height="16"
+              viewBox="0 0 20 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              onClick={toggleProgram(3)}
+            >
+              <path
+                d="M19.3212 10H12.3078V16H7.63212V10H0.618652V6H7.63212V0H12.3078V6H19.3212V10Z"
+                fill="#BEBEBE"
+              />
+            </svg>
+            {programs[3] && (
+              <div className="absolute top-0 right-0 mt-8 bg-white shadow w-84 z-10">
+                <input
+                  type="text"
+                  placeholder="Search programs"
+                  className="py-4 px-8 border-b placeholder-grey68 text-sm font-medium w-full"
+                />
+                <div className="overflow-y-scroll h-64 mb-4 px-8">
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">
+                      System A glute emphasis
+                    </span>
+                    <span className="text-xs font-medium text-grey68">
+                      2 day split
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 1</span>
+                    <span className="text-xs font-medium text-grey68">
+                      2 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 2</span>
+                    <span className="text-xs font-medium text-grey68">
+                      6 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 3</span>
+                    <span className="text-xs font-medium text-grey68">
+                      4 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 4</span>
+                    <span className="text-xs font-medium text-grey68">
+                      3 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 5</span>
+                    <span className="text-xs font-medium text-grey68">
+                      1 week
+                    </span>
+                  </div>
+                </div>
+                <div className="bg-grey98 p-3 text-center text-blaze-orange font-semibold text-sm">
+                  <span>Create new program</span>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
         <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center">
           <div className="p-2">
@@ -494,18 +654,73 @@ export default function Dashboard() {
               fill="#BEBEBE"
             />
           </svg>
-          <svg
-            width="20"
-            height="16"
-            viewBox="0 0 20 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M19.3212 10H12.3078V16H7.63212V10H0.618652V6H7.63212V0H12.3078V6H19.3212V10Z"
-              fill="#BEBEBE"
-            />
-          </svg>
+          <div className="relative">
+            <svg
+              width="20"
+              height="16"
+              viewBox="0 0 20 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              onClick={toggleProgram(4)}
+            >
+              <path
+                d="M19.3212 10H12.3078V16H7.63212V10H0.618652V6H7.63212V0H12.3078V6H19.3212V10Z"
+                fill="#BEBEBE"
+              />
+            </svg>
+            {programs[4] && (
+              <div className="absolute top-0 right-0 mt-8 bg-white shadow w-84 z-10">
+                <input
+                  type="text"
+                  placeholder="Search programs"
+                  className="py-4 px-8 border-b placeholder-grey68 text-sm font-medium w-full"
+                />
+                <div className="overflow-y-scroll h-64 mb-4 px-8">
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">
+                      System A glute emphasis
+                    </span>
+                    <span className="text-xs font-medium text-grey68">
+                      2 day split
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 1</span>
+                    <span className="text-xs font-medium text-grey68">
+                      2 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 2</span>
+                    <span className="text-xs font-medium text-grey68">
+                      6 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 3</span>
+                    <span className="text-xs font-medium text-grey68">
+                      4 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 4</span>
+                    <span className="text-xs font-medium text-grey68">
+                      3 weeks
+                    </span>
+                  </div>
+                  <div className="flex flex-col mt-4">
+                    <span className="text-sm font-medium">Program 5</span>
+                    <span className="text-xs font-medium text-grey68">
+                      1 week
+                    </span>
+                  </div>
+                </div>
+                <div className="bg-grey98 p-3 text-center text-blaze-orange font-semibold text-sm">
+                  <span>Create new program</span>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
