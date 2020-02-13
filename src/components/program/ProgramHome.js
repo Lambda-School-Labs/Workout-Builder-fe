@@ -45,7 +45,7 @@ const ProgramHome = (props) => {
                 </div>
                 {searchResults.map(program => {
                     return(
-                        <ProgramListElement id={program.id} title={program.name} activeUsers={program.assigned_clients.length} />
+                        <ProgramListElement id={program.id} title={program.name} activeUsers={program.assigned_clients.length} {...props}/>
                     )
                 })}
                 <div class="program-element"></div>

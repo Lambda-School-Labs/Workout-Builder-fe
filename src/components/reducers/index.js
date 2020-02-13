@@ -119,7 +119,7 @@ const initialState = {
   temp_next_workout_id: 13,
   new_program: {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
   workouts: [ ],
-  assigned_clients: []
+  assigned_clients: [],
   },
 }
 
@@ -145,14 +145,20 @@ function reducer(state = initialState, action) {
       /*******  Program reducers *******/
 
       case "UPDATE_A_PROGRAM":
+        console.log(action.payload);
+
         // get coach programs
         const updatedList = [...state.coach_programs];
+        console.log(updatedList);
 
         // find index of old program data
-        const programIndex = updatedList.indexOf(action.payload.old);
+        // const programIndex = updatedList.indexOf(action.payload.old);
+        const programIndex = updatedList.findIndex(i => i.id === action.payload.old.id);
+        console.log(programIndex);
 
         // replace old data with new data
-        updatedList[programIndex] = action.payload.new[programIndex];
+        updatedList[programIndex] = action.payload.new;
+        console.log(updatedList[programIndex]);
 
         return {
           ...state,

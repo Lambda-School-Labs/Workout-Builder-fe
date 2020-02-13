@@ -50,7 +50,7 @@ const ExerciseInput = (props) => {
 
     useEffect(() => {
         // close modal if input is empty
-        if(input === ""){
+        if(input === "" || input === getExerciseName(props.exercise.exercise_id)){
             ToggleExerciseListModal(false);
         } else {
             ToggleExerciseListModal(true);

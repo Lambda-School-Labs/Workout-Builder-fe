@@ -30,9 +30,16 @@ const CreateProgram = (props) => {
     }
 
     const openProgramCreationPage = e => {
+        const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
+        workouts: [ ],
+        assigned_clients: []
+        }
         e.preventDefault();
         props.navigate("/program/create");
         closeModal(e);
+        // reset new program data
+        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
+        // update redux with entered data
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: newProgramData });
         Dispatch({ type: "UPDATE" });
     };

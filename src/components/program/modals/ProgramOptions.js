@@ -45,13 +45,24 @@ const ProgramOptions = (props) => {
         closeModal(e);
     }
 
+    const editProgram = (e) => {
+        // This is the current program for which the options menu is being displayed
+        const thisProgram = props.coach_programs.filter(program => program.id === props.program_id)[0];
+
+        // Set current program data to new program data
+        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: thisProgram });
+
+        closeModal(e);
+        props.navigate("/program/edit");
+    }
+
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
 
     return(
             <div className="options-modal">
                     <div ref={wrapperRef}>
-                    <div className="options-element">
+                    <div className="options-element" onClick={editProgram}>
                         <div className="options-left">
                             <img src="https://i.imgur.com/L3ARWfG.png"></img>
                         </div>

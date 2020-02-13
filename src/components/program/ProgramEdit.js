@@ -7,8 +7,10 @@ import ExerciseDetails from './modals/ExerciseDetails';
 // mobile styling - desktop can be done in tailwind
 import "./program-mobile-styles.scss"
 
-const ProgramCreation = (props) => {
+const ProgramEdit = (props) => {
     const Dispatch = useDispatch();
+
+    const [oldData, setOldData] = useState(props.new_program);
 
     const goBackProgramHome = e => {
         e.preventDefault();
@@ -16,7 +18,8 @@ const ProgramCreation = (props) => {
     };
 
     // Current day number
-    const [currentDay, setCurrentDay] = useState(1);
+    const nextDay = props.new_program.workouts.length + 1;
+    const [currentDay, setCurrentDay] = useState(nextDay);
 
     const addWorkout = () => {
         // Add a workout to the data
@@ -86,12 +89,12 @@ const ProgramCreation = (props) => {
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
     }
 
-    const publishExercise = () => {
+    const submitEdits = () => {
         const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
         workouts: [ ],
         assigned_clients: []
         }
-        Dispatch({ type: "CREATE_A_PROGRAM", payload: props.new_program });
+        Dispatch({ type: "UPDATE_A_PROGRAM", payload: {old: oldData, new: props.new_program} });
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
         props.navigate("/program");
     }
@@ -102,7 +105,7 @@ const ProgramCreation = (props) => {
                 <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome}></img>
                 <p className="back-text" onClick={goBackProgramHome}>Back</p>
             </div>
-            <button className="publish-button" onClick={() => publishExercise()}>Publish Program</button>
+            <button className="publish-button" onClick={() => submitEdits()}>Submit Edits</button>
             {props.new_program.workouts.map(day => {
                 return (
                     <div className="day-div">
@@ -131,9 +134,6 @@ const ProgramCreation = (props) => {
                 )
             })}
             <button className="add-day-button" onClick={() => addWorkout()}>+ Add day</button>
-
-
-
         </div>
     )
 }
@@ -150,4 +150,4 @@ const mapStateToProps = state => ({
   
   export default connect(
     mapStateToProps,
-  )(ProgramCreation);
+  )(ProgramEdit);
