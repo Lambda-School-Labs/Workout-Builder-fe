@@ -12,13 +12,20 @@ module.exports = {
         "dark-grey": "#AFAFAF",
         silver: "#BEBEBE",
         grey: "#757575",
-        red: "#FF0F0F"
+        red: "#FF0F0F",
+        grey98: "#FAFAFA",
+        grey68: "#ADADAD"
       },
       lineHeight: {
         middle: "0.1em"
       },
       fontSize: {
         half: ".5rem"
+      },
+      spacing: {
+        "72": "18rem",
+        "84": "21rem",
+        "96": "24rem"
       }
     }
   },
