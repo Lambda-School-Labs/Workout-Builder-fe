@@ -61,13 +61,13 @@ const AssignProgram = (props) => {
             listOfClients.splice(index, 1);
             const updatedProgram = {... thisProgram, assigned_clients: listOfClients};
 
-            Dispatch({ type: "UPDATE_A_PROGRAM", payload: {old: props.coach_programs, new: updatedProgram} });
+            Dispatch({ type: "UPDATE_A_PROGRAM", payload: updatedProgram });
         } else {
             // add client
             listOfClients.push(client_id);
             const updatedProgram = {... thisProgram, assigned_clients: listOfClients};
 
-            Dispatch({ type: "UPDATE_A_PROGRAM", payload: {old: props.coach_programs, new: updatedProgram} });
+            Dispatch({ type: "UPDATE_A_PROGRAM", payload: updatedProgram });
         }
     }
 

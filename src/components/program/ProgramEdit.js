@@ -10,8 +10,6 @@ import "./program-mobile-styles.scss"
 const ProgramEdit = (props) => {
     const Dispatch = useDispatch();
 
-    const [oldData, setOldData] = useState(props.new_program);
-
     const goBackProgramHome = e => {
         e.preventDefault();
         props.navigate("/program");
@@ -94,7 +92,7 @@ const ProgramEdit = (props) => {
         workouts: [ ],
         assigned_clients: []
         }
-        Dispatch({ type: "UPDATE_A_PROGRAM", payload: {old: oldData, new: props.new_program} });
+        Dispatch({ type: "UPDATE_A_PROGRAM", payload: props.new_program });
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
         props.navigate("/program");
     }

@@ -153,11 +153,11 @@ function reducer(state = initialState, action) {
 
         // find index of old program data
         // const programIndex = updatedList.indexOf(action.payload.old);
-        const programIndex = updatedList.findIndex(i => i.id === action.payload.old.id);
+        const programIndex = updatedList.findIndex(i => i.id === action.payload.id);
         console.log(programIndex);
 
         // replace old data with new data
-        updatedList[programIndex] = action.payload.new;
+        updatedList[programIndex] = action.payload;
         console.log(updatedList[programIndex]);
 
         return {
