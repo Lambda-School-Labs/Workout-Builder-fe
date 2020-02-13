@@ -70,7 +70,10 @@ export default function Dashboard() {
               5 days left
             </span>
             <div className="flex-1 px-2 flex flex-col items-center">
-              <button className="flex flex-col items-center">
+              <button
+                className="flex flex-col items-center"
+                onClick={confirmRepeat(1)}
+              >
                 <svg
                   width="20"
                   height="20"
@@ -85,24 +88,30 @@ export default function Dashboard() {
                 </svg>
                 <span className="text-half">Repeat</span>
               </button>
-              <button className="flex flex-col items-center mt-4">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              <div className="relative">
+                <button
+                  className="flex flex-col items-center mt-4"
+                  onClick={toggleProgram(1)}
                 >
-                  <path
-                    d="M18 12H12V18H8V12H2V8H8V2H12V8H18V12Z"
-                    fill="#BEBEBE"
-                  />
-                </svg>
-                <span className="text-half">Add program</span>
-              </button>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18 12H12V18H8V12H2V8H8V2H12V8H18V12Z"
+                      fill="#BEBEBE"
+                    />
+                  </svg>
+                  <span className="text-half">Add program</span>
+                </button>
+                {programs[1] && <ProgramList />}
+              </div>
             </div>
           </div>
-          {info["1"] && (
+          {info[1] && (
             <div className="text-xs px-2 mt-4 mb-6">
               <p className="mb-2">
                 <span className="font-medium text-sm">Start:</span> 01/1/2020
@@ -123,7 +132,7 @@ export default function Dashboard() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className={`absolute bottom-0 mb-2 self-center transform ${
-              info["1"] ? "rotate-180" : ""
+              info[1] ? "rotate-180" : ""
             }`}
             onClick={toggleInfo("1")}
           >
@@ -143,7 +152,10 @@ export default function Dashboard() {
               5 days left
             </span>
             <div className="flex-1 px-2 flex flex-col items-center">
-              <button className="flex flex-col items-center">
+              <button
+                className="flex flex-col items-center"
+                onClick={confirmRepeat(2)}
+              >
                 <svg
                   width="20"
                   height="20"
@@ -175,7 +187,7 @@ export default function Dashboard() {
               </button>
             </div>
           </div>
-          {info["2"] && (
+          {info[2] && (
             <div className="text-xs px-2 mt-4 mb-6">
               <p className="mb-2">
                 <span className="font-medium text-sm">Start:</span> 01/1/2020
@@ -196,7 +208,7 @@ export default function Dashboard() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className={`absolute bottom-0 mb-2 self-center transform ${
-              info["2"] ? "rotate-180" : ""
+              info[2] ? "rotate-180" : ""
             }`}
             onClick={toggleInfo("2")}
           >
@@ -216,7 +228,10 @@ export default function Dashboard() {
               5 days left
             </span>
             <div className="flex-1 px-2 flex flex-col items-center">
-              <button className="flex flex-col items-center">
+              <button
+                className="flex flex-col items-center"
+                onClick={confirmRepeat(3)}
+              >
                 <svg
                   width="20"
                   height="20"
@@ -248,7 +263,7 @@ export default function Dashboard() {
               </button>
             </div>
           </div>
-          {info["3"] && (
+          {info[3] && (
             <div className="text-xs px-2 mt-4 mb-6">
               <p className="mb-2">
                 <span className="font-medium text-sm">Start:</span> 01/1/2020
@@ -269,7 +284,7 @@ export default function Dashboard() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className={`absolute bottom-0 mb-2 self-center transform ${
-              info["3"] ? "rotate-180" : ""
+              info[3] ? "rotate-180" : ""
             }`}
             onClick={toggleInfo("3")}
           >
@@ -289,7 +304,10 @@ export default function Dashboard() {
               5 days left
             </span>
             <div className="flex-1 px-2 flex flex-col items-center">
-              <button className="flex flex-col items-center">
+              <button
+                className="flex flex-col items-center"
+                onClick={confirmRepeat(4)}
+              >
                 <svg
                   width="20"
                   height="20"
@@ -321,7 +339,7 @@ export default function Dashboard() {
               </button>
             </div>
           </div>
-          {info["4"] && (
+          {info[4] && (
             <div className="text-xs px-2 mt-4 mb-6">
               <p className="mb-2">
                 <span className="font-medium text-sm">Start:</span> 01/1/2020
@@ -342,7 +360,7 @@ export default function Dashboard() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className={`absolute bottom-0 mb-2 self-center transform ${
-              info["4"] ? "rotate-180" : ""
+              info[4] ? "rotate-180" : ""
             }`}
             onClick={toggleInfo("4")}
           >
@@ -353,7 +371,7 @@ export default function Dashboard() {
           </svg>
         </div>
       </div>
-      <div className="mt-12 hidden lg:block">
+      <div className="mt-12 hidden lg:block flex justify-center items-center">
         <div className="grid grid-cols-10 gap-4 items-center text-dark-grey bg-cornflower-blue font-semibold text-xs py-3 rounded">
           <span className="col-start-2 col-span-2">Name</span>
           <span className="col-start-4">Program start</span>
@@ -390,6 +408,7 @@ export default function Dashboard() {
             xmlns="http://www.w3.org/2000/svg"
             className="col-start-9"
             style={{ justifySelf: "center" }}
+            onClick={confirmRepeat(1)}
           >
             <path
               d="M16.4199 15H4.73071V12L0.0550537 16L4.73071 20V17H18.7577V11H16.4199V15ZM4.73071 5H16.4199V8L21.0955 4L16.4199 0V3H2.39288V9H4.73071V5Z"
@@ -410,58 +429,7 @@ export default function Dashboard() {
                 fill="#BEBEBE"
               />
             </svg>
-            {programs[1] && (
-              <div className="absolute top-0 right-0 mt-8 bg-white shadow w-84 z-10">
-                <input
-                  type="text"
-                  placeholder="Search programs"
-                  className="py-4 px-8 border-b placeholder-grey68 text-sm font-medium w-full"
-                />
-                <div className="overflow-y-scroll h-64 mb-4 px-8">
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">
-                      System A glute emphasis
-                    </span>
-                    <span className="text-xs font-medium text-grey68">
-                      2 day split
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 1</span>
-                    <span className="text-xs font-medium text-grey68">
-                      2 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 2</span>
-                    <span className="text-xs font-medium text-grey68">
-                      6 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 3</span>
-                    <span className="text-xs font-medium text-grey68">
-                      4 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 4</span>
-                    <span className="text-xs font-medium text-grey68">
-                      3 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 5</span>
-                    <span className="text-xs font-medium text-grey68">
-                      1 week
-                    </span>
-                  </div>
-                </div>
-                <div className="bg-grey98 p-3 text-center text-blaze-orange font-semibold text-sm">
-                  <span>Create new program</span>
-                </div>
-              </div>
-            )}
+            {programs[1] && <ProgramList />}
           </div>
         </div>
         <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center">
@@ -483,6 +451,7 @@ export default function Dashboard() {
             xmlns="http://www.w3.org/2000/svg"
             className="col-start-9"
             style={{ justifySelf: "center" }}
+            onClick={confirmRepeat(2)}
           >
             <path
               d="M16.4199 15H4.73071V12L0.0550537 16L4.73071 20V17H18.7577V11H16.4199V15ZM4.73071 5H16.4199V8L21.0955 4L16.4199 0V3H2.39288V9H4.73071V5Z"
@@ -503,58 +472,7 @@ export default function Dashboard() {
                 fill="#BEBEBE"
               />
             </svg>
-            {programs[2] && (
-              <div className="absolute top-0 right-0 mt-8 bg-white shadow w-84 z-10">
-                <input
-                  type="text"
-                  placeholder="Search programs"
-                  className="py-4 px-8 border-b placeholder-grey68 text-sm font-medium w-full"
-                />
-                <div className="overflow-y-scroll h-64 mb-4 px-8">
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">
-                      System A glute emphasis
-                    </span>
-                    <span className="text-xs font-medium text-grey68">
-                      2 day split
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 1</span>
-                    <span className="text-xs font-medium text-grey68">
-                      2 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 2</span>
-                    <span className="text-xs font-medium text-grey68">
-                      6 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 3</span>
-                    <span className="text-xs font-medium text-grey68">
-                      4 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 4</span>
-                    <span className="text-xs font-medium text-grey68">
-                      3 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 5</span>
-                    <span className="text-xs font-medium text-grey68">
-                      1 week
-                    </span>
-                  </div>
-                </div>
-                <div className="bg-grey98 p-3 text-center text-blaze-orange font-semibold text-sm">
-                  <span>Create new program</span>
-                </div>
-              </div>
-            )}
+            {programs[2] && <ProgramList />}
           </div>
         </div>
         <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center">
@@ -576,6 +494,7 @@ export default function Dashboard() {
             xmlns="http://www.w3.org/2000/svg"
             className="col-start-9"
             style={{ justifySelf: "center" }}
+            onClick={confirmRepeat(3)}
           >
             <path
               d="M16.4199 15H4.73071V12L0.0550537 16L4.73071 20V17H18.7577V11H16.4199V15ZM4.73071 5H16.4199V8L21.0955 4L16.4199 0V3H2.39288V9H4.73071V5Z"
@@ -596,58 +515,7 @@ export default function Dashboard() {
                 fill="#BEBEBE"
               />
             </svg>
-            {programs[3] && (
-              <div className="absolute top-0 right-0 mt-8 bg-white shadow w-84 z-10">
-                <input
-                  type="text"
-                  placeholder="Search programs"
-                  className="py-4 px-8 border-b placeholder-grey68 text-sm font-medium w-full"
-                />
-                <div className="overflow-y-scroll h-64 mb-4 px-8">
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">
-                      System A glute emphasis
-                    </span>
-                    <span className="text-xs font-medium text-grey68">
-                      2 day split
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 1</span>
-                    <span className="text-xs font-medium text-grey68">
-                      2 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 2</span>
-                    <span className="text-xs font-medium text-grey68">
-                      6 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 3</span>
-                    <span className="text-xs font-medium text-grey68">
-                      4 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 4</span>
-                    <span className="text-xs font-medium text-grey68">
-                      3 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 5</span>
-                    <span className="text-xs font-medium text-grey68">
-                      1 week
-                    </span>
-                  </div>
-                </div>
-                <div className="bg-grey98 p-3 text-center text-blaze-orange font-semibold text-sm">
-                  <span>Create new program</span>
-                </div>
-              </div>
-            )}
+            {programs[3] && <ProgramList />}
           </div>
         </div>
         <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center">
@@ -667,6 +535,7 @@ export default function Dashboard() {
             xmlns="http://www.w3.org/2000/svg"
             className="col-start-9"
             style={{ justifySelf: "center" }}
+            onClick={confirmRepeat(4)}
           >
             <path
               d="M16.4199 15H4.73071V12L0.0550537 16L4.73071 20V17H18.7577V11H16.4199V15ZM4.73071 5H16.4199V8L21.0955 4L16.4199 0V3H2.39288V9H4.73071V5Z"
