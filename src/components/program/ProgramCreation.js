@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import ExerciseInput from './modals/ExerciseInput';
+import ExerciseDetails from './modals/ExerciseDetails';
 
 // mobile styling - desktop can be done in tailwind
 import "./program-mobile-styles.scss"
@@ -13,11 +14,6 @@ const ProgramCreation = (props) => {
         e.preventDefault();
         props.navigate("/program");
     };
-
-    // find the name of the selected exercise (by id) from the exercise library
-    const getExerciseName = (input_id) => {
-        return props.coach_exercises.filter((exercise) => {return exercise.id === input_id})[0].name;
-    }
 
     // Current day number
     const [currentDay, setCurrentDay] = useState(1);
@@ -90,12 +86,14 @@ const ProgramCreation = (props) => {
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
     }
 
-    // const updateExerciseInfo = (workout_id, order) => {
-    //     // hard copy props.newprogram
-    //     let updatedProgram = JSON.parse(JSON.stringify(props.new_program));
-    //     let index = updatedProgram.workouts.findIndex(workout => workout.id === workout_id);
-
-    // }
+    const publishExercise = () => {
+        const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
+        workouts: [ ],
+        assigned_clients: []
+        }
+        Dispatch({ type: "CREATE_A_PROGRAM", payload: props.new_program });
+        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
+    }
 
     return(
         <div className="program-creation">
@@ -103,7 +101,7 @@ const ProgramCreation = (props) => {
                 <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome}></img>
                 <p className="back-text" onClick={goBackProgramHome}>Back</p>
             </div>
-            <button className="publish-button">Publish Program</button>
+            <button className="publish-button" onClick={() => publishExercise()}>Publish Program</button>
             {props.new_program.workouts.map(day => {
                 return (
                     <div className="day-div">
@@ -122,8 +120,8 @@ const ProgramCreation = (props) => {
                                         <p className="icon-letter">{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
                                         <img className="delete-button" src="https://i.imgur.com/nGDM0fq.png" onClick={() => deleteExercise(day.id, exercise.order)}></img>
                                     </div>
-                                    <ExerciseInput day={day} exercise={exercise}/>
-                                    <input className="exercise-info" value={exercise.exercise_details}></input>
+                                    <ExerciseInput day={day} exercise={exercise} />
+                                    <ExerciseDetails day={day} exercise={exercise} />
                                 </div>
                             )
                         })}
