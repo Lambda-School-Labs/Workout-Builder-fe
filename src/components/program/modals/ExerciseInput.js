@@ -43,6 +43,11 @@ const ExerciseInput = (props) => {
 
     const [input, setInput] = useState(getExerciseName(props.exercise.exercise_id));
 
+    // Ensure that the input is updated every time the "update" redux command is run
+    useEffect(() => {
+        setInput(getExerciseName(props.exercise.exercise_id));
+    }, [props.updates]);
+
     const handleChange = (e) => {
         e.preventDefault();
         setInput(e.target.value);

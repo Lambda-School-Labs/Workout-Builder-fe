@@ -51,6 +51,7 @@ const ProgramEdit = (props) => {
         }
         // update the program data in redux
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
+        Dispatch({ type: "UPDATE" });
     };
 
     const addExercise = (workout_id) => {
@@ -85,6 +86,7 @@ const ProgramEdit = (props) => {
 
         // update the program data in redux
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
+        Dispatch({ type: "UPDATE" });
     }
 
     const submitEdits = () => {
@@ -103,12 +105,17 @@ const ProgramEdit = (props) => {
                 <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome}></img>
                 <p className="back-text" onClick={goBackProgramHome}>Back</p>
             </div>
+            <div className="program-info">
+                <h2>{props.new_program.name}</h2>
+                <h3>Phase: {props.new_program.phase}</h3>
+                <h3>{props.new_program.length} days</h3>
+            </div>
             <button className="publish-button" onClick={() => submitEdits()}>Submit Edits</button>
             {props.new_program.workouts.map(day => {
                 return (
                     <div className="day-div">
                         <div className="day-title-div">
-                            <h2 className="day-title">Day {day.day}:</h2>
+                            <h2 className="day-title">Day {day.day}: {day.name}</h2>
                             <img className="delete-button" src="https://i.imgur.com/nGDM0fq.png" onClick={() => deleteWorkout(day.id)}></img>
                         </div>
                         <div className="coach-instructions">

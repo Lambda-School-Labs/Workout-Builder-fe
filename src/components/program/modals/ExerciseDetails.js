@@ -7,6 +7,11 @@ const ExerciseDetails = (props) => {
 
     const [details, setDetails] = useState(props.exercise.exercise_details);
 
+    // Ensure that the details are updated every time the "update" redux command is run
+    useEffect(() => {
+        setDetails(props.exercise.exercise_details);
+    }, [props.updates]);
+
     const handleChange = (e) => {
         e.preventDefault();
         setDetails(e.target.value);

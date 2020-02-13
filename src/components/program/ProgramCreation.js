@@ -50,6 +50,7 @@ const ProgramCreation = (props) => {
         }
         // update the program data in redux
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
+        Dispatch({ type: "UPDATE" });
     };
 
     const addExercise = (workout_id) => {
@@ -84,6 +85,7 @@ const ProgramCreation = (props) => {
 
         // update the program data in redux
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
+        Dispatch({ type: "UPDATE" });
     }
 
     const publishExercise = () => {
@@ -101,6 +103,11 @@ const ProgramCreation = (props) => {
             <div className="back-div">
                 <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome}></img>
                 <p className="back-text" onClick={goBackProgramHome}>Back</p>
+            </div>
+            <div className="program-info">
+                <h2>{props.new_program.name}</h2>
+                <h3>Phase: {props.new_program.phase}</h3>
+                <h3>{props.new_program.length} days</h3>
             </div>
             <button className="publish-button" onClick={() => publishExercise()}>Publish Program</button>
             {props.new_program.workouts.map(day => {
