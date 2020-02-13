@@ -6,7 +6,6 @@ const TestModal = (props) => {
     const Dispatch = useDispatch();
 
     const closeModal = (e) => {
-        console.log("test");
         e.stopPropagation();
         props.xToggleTestModal(false);
     }

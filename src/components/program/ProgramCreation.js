@@ -1,34 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
+import ExerciseInput from './modals/ExerciseInput';
 
 // mobile styling - desktop can be done in tailwind
 import "./program-mobile-styles.scss"
 
-const testProgram = {id: 1, name: "Program 1", description: "Test program description", coach_id: 1, length: 10, phase: "strength",
-    workouts: [
-    {id: 1, name: "push day", description: "push day arm workout", day: 1, 
-    exercises: [
-        {exercise_id: 1, order: 1, exercise_details: "135lbs bar - 5 sets of 5"},
-        {exercise_id: 2, order: 2, exercise_details: "50lbs dumbbells - 5 sets of 5"},
-        {exercise_id: 3, order: 3, exercise_details: "70lbs bar - 5 sets of 5"}
-    ]}, 
-    {id: 2, name: "pull day", description: "pull day arm and back workout", day: 2, exercises: [
-        {exercise_id: 4, order: 1, exercise_details: "bodyweight - 5 sets of 5"},
-        {exercise_id: 5, order: 2, exercise_details: "135lbs bar - 5 sets of 5"},
-        {exercise_id: 6, order: 3, exercise_details: "30lbs dumbbells - 5 sets of 5"}
-    ]},
-    {id: 3, name: "legs and core", description: "legs and core day workout", day: 3, exercises: [
-        {exercise_id: 7, order: 1, exercise_details: "135lbs bar - 5 sets of 5"},
-        {exercise_id: 8, order: 2, exercise_details: "135lbs bar - 5 sets of 5"},
-        {exercise_id: 9, order: 3, exercise_details: "bodyweight - 5 sets of 5"},
-    ]},
-    ],
-assigned_clients: [1, 3, 5, 7, 9]
-}
-
 const ProgramCreation = (props) => {
     const Dispatch = useDispatch();
+
+    const goBackProgramHome = e => {
+        e.preventDefault();
+        props.navigate("/program");
+    };
 
     // find the name of the selected exercise (by id) from the exercise library
     const getExerciseName = (input_id) => {
@@ -106,11 +90,18 @@ const ProgramCreation = (props) => {
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
     }
 
+    // const updateExerciseInfo = (workout_id, order) => {
+    //     // hard copy props.newprogram
+    //     let updatedProgram = JSON.parse(JSON.stringify(props.new_program));
+    //     let index = updatedProgram.workouts.findIndex(workout => workout.id === workout_id);
+
+    // }
+
     return(
         <div className="program-creation">
             <div className="back-div">
-                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png"></img>
-                <p className="back-text">Back</p>
+                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome}></img>
+                <p className="back-text" onClick={goBackProgramHome}>Back</p>
             </div>
             <button className="publish-button">Publish Program</button>
             {props.new_program.workouts.map(day => {
@@ -131,7 +122,7 @@ const ProgramCreation = (props) => {
                                         <p className="icon-letter">{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
                                         <img className="delete-button" src="https://i.imgur.com/nGDM0fq.png" onClick={() => deleteExercise(day.id, exercise.order)}></img>
                                     </div>
-                                    <input className="exercise-input" value={getExerciseName(exercise.exercise_id)}></input>
+                                    <ExerciseInput day={day} exercise={exercise}/>
                                     <input className="exercise-info" value={exercise.exercise_details}></input>
                                 </div>
                             )
@@ -141,6 +132,9 @@ const ProgramCreation = (props) => {
                 )
             })}
             <button className="add-day-button" onClick={() => addWorkout()}>+ Add day</button>
+
+
+
         </div>
     )
 }
