@@ -4,8 +4,8 @@ import {render, fireEvent, screen, wait} from '@testing-library/react'
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import reducer from '../../../components/reducers/index'
-import Login from '../login'
+import reducer from '../../../components/reducers/index';
+import Login from '../Login';
 import axios from 'axios';
 
 jest.mock('axios');
