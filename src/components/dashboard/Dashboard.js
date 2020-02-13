@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 export default function Dashboard() {
   const toggleInfo = id => () => {
@@ -9,8 +9,27 @@ export default function Dashboard() {
     setPrograms({ ...programs, [id]: !programs[id] });
   };
 
+  const cancelEvent = event => {
+    if (event.target === repeatRef.current) {
+      cancelRepeat();
+    }
+  };
+
+  const confirmRepeat = id => () => {
+    setRepeating(id);
+    document.addEventListener("click", cancelEvent);
+  };
+
+  const cancelRepeat = () => {
+    setRepeating(false);
+    document.removeEventListener("click", cancelEvent);
+  };
+
+  const repeatRef = useRef();
+
   const [info, setInfo] = useState({});
   const [programs, setPrograms] = useState({});
+  const [repeating, setRepeating] = useState();
 
   return (
     <div className="p-4 font-body lg:p-8">
@@ -668,60 +687,76 @@ export default function Dashboard() {
                 fill="#BEBEBE"
               />
             </svg>
-            {programs[4] && (
-              <div className="absolute top-0 right-0 mt-8 bg-white shadow w-84 z-10">
-                <input
-                  type="text"
-                  placeholder="Search programs"
-                  className="py-4 px-8 border-b placeholder-grey68 text-sm font-medium w-full"
-                />
-                <div className="overflow-y-scroll h-64 mb-4 px-8">
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">
-                      System A glute emphasis
-                    </span>
-                    <span className="text-xs font-medium text-grey68">
-                      2 day split
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 1</span>
-                    <span className="text-xs font-medium text-grey68">
-                      2 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 2</span>
-                    <span className="text-xs font-medium text-grey68">
-                      6 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 3</span>
-                    <span className="text-xs font-medium text-grey68">
-                      4 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 4</span>
-                    <span className="text-xs font-medium text-grey68">
-                      3 weeks
-                    </span>
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <span className="text-sm font-medium">Program 5</span>
-                    <span className="text-xs font-medium text-grey68">
-                      1 week
-                    </span>
-                  </div>
-                </div>
-                <div className="bg-grey98 p-3 text-center text-blaze-orange font-semibold text-sm">
-                  <span>Create new program</span>
-                </div>
-              </div>
-            )}
+            {programs[4] && <ProgramList />}
           </div>
         </div>
+      </div>
+      {repeating && (
+        <div
+          ref={repeatRef}
+          className="flex justify-center items-center h-full left-0 overflow-auto fixed top-0 w-full z-10"
+          style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
+        >
+          <div className="flex justify-center items-center bg-white w-4/5 lg:w-120 h-72 lg:h-96 p-12 rounded">
+            <div className="flex flex-col items-center">
+              <p className="font-medium text-xl lg:text-2xl text-center">
+                Are you sure you want to repeat this program?
+              </p>
+              <div className="flex flex-col w-2/3 mt-6">
+                <button className="bg-blaze-orange text-white py-2 lg:py-4 rounded uppercase">
+                  yes
+                </button>
+                <button
+                  className="mt-4 border border-blaze-orange text-blaze-orange py-2 lg:py-4 rounded uppercase"
+                  onClick={cancelRepeat}
+                >
+                  cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ProgramList() {
+  return (
+    <div className="absolute top-0 right-0 mt-14 lg:mt-8 bg-white shadow w-72 lg:w-84 z-10">
+      <input
+        type="text"
+        placeholder="Search programs"
+        className="py-4 px-8 border-b placeholder-grey68 text-sm font-medium w-full"
+      />
+      <div className="overflow-y-scroll h-64 mb-4 px-8">
+        <div className="flex flex-col mt-4">
+          <span className="text-sm font-medium">System A glute emphasis</span>
+          <span className="text-xs font-medium text-grey68">2 day split</span>
+        </div>
+        <div className="flex flex-col mt-4">
+          <span className="text-sm font-medium">Program 1</span>
+          <span className="text-xs font-medium text-grey68">2 weeks</span>
+        </div>
+        <div className="flex flex-col mt-4">
+          <span className="text-sm font-medium">Program 2</span>
+          <span className="text-xs font-medium text-grey68">6 weeks</span>
+        </div>
+        <div className="flex flex-col mt-4">
+          <span className="text-sm font-medium">Program 3</span>
+          <span className="text-xs font-medium text-grey68">4 weeks</span>
+        </div>
+        <div className="flex flex-col mt-4">
+          <span className="text-sm font-medium">Program 4</span>
+          <span className="text-xs font-medium text-grey68">3 weeks</span>
+        </div>
+        <div className="flex flex-col mt-4">
+          <span className="text-sm font-medium">Program 5</span>
+          <span className="text-xs font-medium text-grey68">1 week</span>
+        </div>
+      </div>
+      <div className="bg-grey98 p-3 text-center text-blaze-orange font-semibold text-sm">
+        <span>Create new program</span>
       </div>
     </div>
   );
