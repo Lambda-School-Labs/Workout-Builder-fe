@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 
 export default function Dashboard(props) {
-  console.log(props);
   const toggleProgram = id => () => {
     setPrograms({ ...programs, [id]: !programs[id] });
   };
@@ -99,12 +98,12 @@ export default function Dashboard(props) {
                 </button>
                 <button
                   className="font-semibold ml-5"
-                  onClick={toggleProgram(1)}
+                  onClick={toggleProgram(2)}
                 >
                   Add program
                 </button>
               </div>
-              {programs[1] && <ProgramList />}
+              {programs[2] && <ProgramList />}
             </div>
           </div>
           <div className="flex flex-col py-2 border-b border-light-grey">
@@ -135,12 +134,12 @@ export default function Dashboard(props) {
                 </button>
                 <button
                   className="font-semibold ml-5"
-                  onClick={toggleProgram(1)}
+                  onClick={toggleProgram(3)}
                 >
                   Add program
                 </button>
               </div>
-              {programs[1] && <ProgramList />}
+              {programs[3] && <ProgramList />}
             </div>
           </div>
           <div className="flex flex-col py-2 border-b border-light-grey">
@@ -171,12 +170,12 @@ export default function Dashboard(props) {
                 </button>
                 <button
                   className="font-semibold ml-5"
-                  onClick={toggleProgram(1)}
+                  onClick={toggleProgram(4)}
                 >
                   Add program
                 </button>
               </div>
-              {programs[1] && <ProgramList />}
+              {programs[4] && <ProgramList />}
             </div>
           </div>
           <div className="flex flex-col py-2 border-b border-light-grey">
@@ -207,12 +206,12 @@ export default function Dashboard(props) {
                 </button>
                 <button
                   className="font-semibold ml-5"
-                  onClick={toggleProgram(1)}
+                  onClick={toggleProgram(5)}
                 >
                   Add program
                 </button>
               </div>
-              {programs[1] && <ProgramList />}
+              {programs[5] && <ProgramList />}
             </div>
           </div>
           <div className="flex flex-col py-2 border-b border-light-grey">
@@ -243,12 +242,12 @@ export default function Dashboard(props) {
                 </button>
                 <button
                   className="font-semibold ml-5"
-                  onClick={toggleProgram(1)}
+                  onClick={toggleProgram(6)}
                 >
                   Add program
                 </button>
               </div>
-              {programs[1] && <ProgramList />}
+              {programs[6] && <ProgramList />}
             </div>
           </div>
         </div>
@@ -256,7 +255,32 @@ export default function Dashboard(props) {
           + Add new client
         </button>
       </div>
-      <div className="mt-12 hidden lg:block flex justify-center items-center">
+      <div className="hidden lg:block flex justify-center items-center p-8">
+        <div className="flex justify-between my-4">
+          <div className="flex items-center">
+            <h2 className="text-x text-2xxl font-bold mr-2 text-dove-grey">
+              Programs due
+            </h2>
+            <svg
+              width="20"
+              height="22"
+              viewBox="0 0 20 22"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12.2222 19.8C12.2222 20.3835 11.9881 20.9431 11.5713 21.3556C11.1546 21.7682 10.5894 22 10 22C9.41063 22 8.8454 21.7682 8.42865 21.3556C8.0119 20.9431 7.77778 20.3835 7.77778 19.8H12.2222ZM10 0C10.2947 0 10.5773 0.115892 10.7857 0.322183C10.994 0.528472 11.1111 0.808262 11.1111 1.1V2.288C14.2667 2.816 16.6667 5.533 16.6667 8.8V15.4L20 18.7H0L3.33333 15.4V8.8C3.33333 5.533 5.73333 2.816 8.88889 2.288V1.1C8.88889 0.808262 9.00595 0.528472 9.21433 0.322183C9.4227 0.115892 9.70532 0 10 0Z"
+                fill="#FD6A02"
+              />
+            </svg>
+          </div>
+          <div>
+            <span className="font-medium text-nobel mr-2">Wednesday,</span>
+            <span className="font-medium text-xxl text-dove-grey">
+              January 23rd
+            </span>
+          </div>
+        </div>
         <div className="grid grid-cols-10 gap-4 items-center text-medium-grey bg-cornflower-blue font-semibold text-xs py-3 rounded">
           <span className="col-start-2 col-span-2">Name</span>
           <span className="col-start-4">Program start</span>
@@ -274,7 +298,7 @@ export default function Dashboard(props) {
             program
           </span>
         </div>
-        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center">
+        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center rounded">
           <div className="p-2">
             <img className="rounded" src="https://picsum.photos/110" alt="" />
           </div>
@@ -317,7 +341,7 @@ export default function Dashboard(props) {
             {programs[1] && <ProgramList />}
           </div>
         </div>
-        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center">
+        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center rounded">
           <div className="p-2">
             <img className="rounded" src="https://picsum.photos/110" alt="" />
           </div>
@@ -360,7 +384,7 @@ export default function Dashboard(props) {
             {programs[2] && <ProgramList />}
           </div>
         </div>
-        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center">
+        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center rounded">
           <div className="p-2">
             <img className="rounded" src="https://picsum.photos/110" alt="" />
           </div>
@@ -403,7 +427,7 @@ export default function Dashboard(props) {
             {programs[3] && <ProgramList />}
           </div>
         </div>
-        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center">
+        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center rounded">
           <div className="p-2">
             <img className="rounded" src="https://picsum.photos/110" alt="" />
           </div>
