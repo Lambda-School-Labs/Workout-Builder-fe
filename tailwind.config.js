@@ -9,7 +9,9 @@ module.exports = {
         "cornflower-blue": "#F7F7FA",
         "mine-shaft": "#333333",
         "dove-grey": "#666666",
-        "dark-grey": "#AFAFAF",
+        "medium-grey": "#AFAFAF",
+        "dark-grey": "#333333",
+        "light-grey": "#D4D4D4",
         silver: "#BEBEBE",
         grey: "#757575",
         red: "#FF0F0F",
@@ -20,6 +22,8 @@ module.exports = {
         middle: "0.1em"
       },
       fontSize: {
+        "2xs": ".625rem",
+        xxl: "1.375rem",
         half: ".5rem"
       },
       spacing: {
