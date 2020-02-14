@@ -16,15 +16,17 @@ module.exports = {
         grey: "#757575",
         red: "#FF0F0F",
         grey98: "#FAFAFA",
-        grey68: "#ADADAD"
+        grey68: "#ADADAD",
+        nobel: "#9B9B9B"
       },
       lineHeight: {
         middle: "0.1em"
       },
       fontSize: {
+        half: ".5rem",
         "2xs": ".625rem",
         xxl: "1.375rem",
-        half: ".5rem"
+        "2xxl": "1.625rem"
       },
       spacing: {
         "14": "3.5rem",
