@@ -1,7 +1,7 @@
 module.exports = {
   theme: {
     fontFamily: {
-      body: ["Montserrat", "sans-serif"]
+      body: ["Hind Madurai", "sans-serif"]
     },
     extend: {
       colors: {
