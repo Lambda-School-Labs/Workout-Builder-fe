@@ -3772,6 +3772,10 @@ video {
   clear: both;
 }
 
+.font-display {
+  font-family: Patrick Hand, cursive;
+}
+
 .font-body {
   font-family: Hind Madurai, sans-serif;
 }
@@ -15392,6 +15396,10 @@ video {
 
   .sm\:clear-both {
     clear: both;
+  }
+
+  .sm\:font-display {
+    font-family: Patrick Hand, cursive;
   }
 
   .sm\:font-body {
@@ -27017,6 +27025,10 @@ video {
     clear: both;
   }
 
+  .md\:font-display {
+    font-family: Patrick Hand, cursive;
+  }
+
   .md\:font-body {
     font-family: Hind Madurai, sans-serif;
   }
@@ -38640,6 +38652,10 @@ video {
     clear: both;
   }
 
+  .lg\:font-display {
+    font-family: Patrick Hand, cursive;
+  }
+
   .lg\:font-body {
     font-family: Hind Madurai, sans-serif;
   }
@@ -50261,6 +50277,10 @@ video {
 
   .xl\:clear-both {
     clear: both;
+  }
+
+  .xl\:font-display {
+    font-family: Patrick Hand, cursive;
   }
 
   .xl\:font-body {

@@ -1,6 +1,7 @@
 module.exports = {
   theme: {
     fontFamily: {
+      display: ["Patrick Hand", "cursive"],
       body: ["Hind Madurai", "sans-serif"]
     },
     extend: {

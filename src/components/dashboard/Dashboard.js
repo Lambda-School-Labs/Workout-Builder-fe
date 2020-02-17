@@ -43,7 +43,10 @@ export default function Dashboard(props) {
                   className="rounded"
                 />
                 <div className="ml-2">
-                  <h3 className="font-bold" style={{ fontSize: 15 }}>
+                  <h3
+                    className="font-bold text-mine-shaft"
+                    style={{ fontSize: 15 }}
+                  >
                     Joe Smith
                   </h3>
                   <p className="text-xs">Program: Olympic Lifting</p>
@@ -79,7 +82,10 @@ export default function Dashboard(props) {
                   className="rounded"
                 />
                 <div className="ml-2">
-                  <h3 className="font-bold" style={{ fontSize: 15 }}>
+                  <h3
+                    className="font-bold text-mine-shaft"
+                    style={{ fontSize: 15 }}
+                  >
                     Joe Smith
                   </h3>
                   <p className="text-xs">Program: Olympic Lifting</p>
@@ -115,7 +121,10 @@ export default function Dashboard(props) {
                   className="rounded"
                 />
                 <div className="ml-2">
-                  <h3 className="font-bold" style={{ fontSize: 15 }}>
+                  <h3
+                    className="font-bold text-mine-shaft"
+                    style={{ fontSize: 15 }}
+                  >
                     Joe Smith
                   </h3>
                   <p className="text-xs">Program: Olympic Lifting</p>
@@ -151,7 +160,10 @@ export default function Dashboard(props) {
                   className="rounded"
                 />
                 <div className="ml-2">
-                  <h3 className="font-bold" style={{ fontSize: 15 }}>
+                  <h3
+                    className="font-bold text-mine-shaft"
+                    style={{ fontSize: 15 }}
+                  >
                     Joe Smith
                   </h3>
                   <p className="text-xs">Program: Olympic Lifting</p>
@@ -187,7 +199,10 @@ export default function Dashboard(props) {
                   className="rounded"
                 />
                 <div className="ml-2">
-                  <h3 className="font-bold" style={{ fontSize: 15 }}>
+                  <h3
+                    className="font-bold text-mine-shaft"
+                    style={{ fontSize: 15 }}
+                  >
                     Joe Smith
                   </h3>
                   <p className="text-xs">Program: Olympic Lifting</p>
@@ -223,7 +238,10 @@ export default function Dashboard(props) {
                   className="rounded"
                 />
                 <div className="ml-2">
-                  <h3 className="font-bold" style={{ fontSize: 15 }}>
+                  <h3
+                    className="font-bold text-mine-shaft"
+                    style={{ fontSize: 15 }}
+                  >
                     Joe Smith
                   </h3>
                   <p className="text-xs">Program: Olympic Lifting</p>
@@ -281,7 +299,7 @@ export default function Dashboard(props) {
             </span>
           </div>
         </div>
-        <div className="grid grid-cols-10 gap-4 items-center text-medium-grey bg-cornflower-blue font-semibold text-xs py-3 rounded">
+        <div className="grid grid-cols-10 gap-4 items-center text-medium-grey border-b font-semibold text-xs py-3 rounded">
           <span className="col-start-2 col-span-2">Name</span>
           <span className="col-start-4">Program start</span>
           <span>Program length</span>
@@ -298,7 +316,7 @@ export default function Dashboard(props) {
             program
           </span>
         </div>
-        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center rounded">
+        <div className="mt-2 grid grid-cols-10 gap-4 border-b items-center rounded">
           <div className="p-2">
             <img className="rounded" src="https://picsum.photos/110" alt="" />
           </div>
@@ -341,7 +359,7 @@ export default function Dashboard(props) {
             {programs[1] && <ProgramList />}
           </div>
         </div>
-        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center rounded">
+        <div className="mt-2 grid grid-cols-10 gap-4 border-b items-center rounded">
           <div className="p-2">
             <img className="rounded" src="https://picsum.photos/110" alt="" />
           </div>
@@ -384,7 +402,7 @@ export default function Dashboard(props) {
             {programs[2] && <ProgramList />}
           </div>
         </div>
-        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center rounded">
+        <div className="mt-2 grid grid-cols-10 gap-4 border-b items-center rounded">
           <div className="p-2">
             <img className="rounded" src="https://picsum.photos/110" alt="" />
           </div>
@@ -427,7 +445,7 @@ export default function Dashboard(props) {
             {programs[3] && <ProgramList />}
           </div>
         </div>
-        <div className="mt-2 grid grid-cols-10 gap-4 bg-cornflower-blue items-center rounded">
+        <div className="mt-2 grid grid-cols-10 gap-4 border-b items-center rounded">
           <div className="p-2">
             <img className="rounded" src="https://picsum.photos/110" alt="" />
           </div>
@@ -495,7 +513,7 @@ export default function Dashboard(props) {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
