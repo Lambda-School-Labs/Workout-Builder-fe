@@ -1,0 +1,581 @@
+@import url('https://fonts.googleapis.com/css?family=Exo|Roboto&display=swap');
+
+$program-width: 100%;
+$program-modal-width: $program-width - 10%;
+$program-modal-margin: $program-modal-width - 27%;
+
+.outer-program {
+    width: $program-width;
+    min-width: 375px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.main-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 1.9rem 0 1.6rem 1rem;
+    line-height: 1.75rem;
+}
+
+.add-program-button {
+    margin: 0 1rem;
+    background: #666666;
+    border-radius: .3rem;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.125rem;
+    height: 2.3rem;
+}
+
+.search-div {
+    margin: 1rem;
+    border-bottom: 1px solid black;
+    display: flex;
+    height: 1.625rem;
+    .magnifying-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+    .search-bar {
+        width: calc(100% - 1.25rem);
+    }
+}
+
+.program-list-div {
+    margin: .7rem 1rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5rem;
+    .program-element:nth-of-type(2n) {
+        background-color: rgba(196, 196, 196, 0.7);;
+    }
+    .program-list-header {
+        background: #C4C4C4;
+        border-radius: .3rem .3rem 0px 0px;
+        width: 100%;
+        height: 3.125rem;
+        display: flex;
+        .header-title {
+            margin: 17px 0 12px calc(10% + 7px);
+            width: calc(46.6% - 14px);
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.125rem;
+            line-height: 1.3125rem;
+            font-weight: bold;
+        }
+        .header-active {
+            margin: 17px 0 12px .5%;
+            width: 9.4%;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.125rem;
+            line-height: 1.3125rem;
+            font-weight: bold;
+        }
+    }
+    // .program-list-footer {
+    //     width: 100%;
+    //     height: 50px;
+    //     background-color: lightgray;
+    // }
+}
+
+.program-element {
+    width: 100%;
+    height: 3.125rem;
+    display: flex;
+    background: white;
+    .checkbox-div {
+        height: 100%;
+        width: 10%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        img {
+            height: .9rem;
+            width: .9rem;
+        }
+    }
+    .title-div {
+        height: 100%;
+        width: 46.6%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        p {
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            margin-left: 7px;
+        }
+    }
+    .active-div {
+        position: relative;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 9.4%;
+        p {
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+        }
+    }
+    .assign-div {
+        position: relative;
+        height: 100%;
+        width: 24%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 22px;
+            height: 16px;
+        }
+    }
+    .options-div {
+        position: relative;
+        height: 100%;
+        width: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            height: 20px;
+            width: 5px;
+        }
+    }
+}
+
+// Program Modal styles
+
+.program-modal {
+    // width: $program-modal-width;
+    // margin: 5rem auto;
+    background-color: white;
+    position: absolute;
+    top: 5em;
+    right: 10%;
+    left:10%;
+    h3 {
+        padding-top: 16px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 24px;
+        margin: 16px 15px;
+        font-weight: bold;
+    }
+    p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        margin: 16px 15px;
+    }
+    input {
+        margin: 0 15px;
+        width: calc(100% - 33px);
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        border-bottom: 1px solid gray;
+    }
+    .program-button-div {
+        display: flex;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        .cancel-button {
+            margin-top: 115px;
+            margin-bottom: 12px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 18px;
+        }
+        .create-button {
+            margin: 98px 15px 0px 30px;
+            width: 143px;
+            height: 50px;
+            background: #C4C4C4;
+            border-radius: 5px;
+            color: white;
+        }
+    }
+    .legend-p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0 0 10px 15px;
+        padding-bottom: 10px;
+    }
+    
+}
+
+.program-overaly {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.600);
+}
+
+// Options Modal Styles
+
+.options-modal {
+    z-index: 1;
+    width: 10rem;
+    background-color: white;
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+    .options-element {
+        padding: 2px;
+        &:hover {
+            background-color: rgb(194, 194, 194);
+        }
+        display: flex;
+        .options-left {
+            cursor: pointer;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 20%;
+            img {
+                width: 15px;
+                height: 15px;
+                margin-right: 5px;
+            }
+        }
+        .options-right {
+            cursor: pointer;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            width: 80%;
+        }
+        .options-x {
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-end;
+            width: 10%;
+            img {
+                width: 10px;
+                height: 10px;
+            }
+        }
+    }
+}
+
+.options-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.assign-modal {
+    z-index: 1;
+    width: 10rem;
+    background-color: white;
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    width: 15rem;
+    height: 21rem;
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+    border: 0.5px solid #C4C4C4;
+    .assign-internal {
+        display: flex;
+        flex-direction: column;
+        .assign-header {
+            display: flex;
+            height: 3rem;
+            align-items: center;
+            font-family: 'Exo', sans-serif;
+            font-weight: 500;
+            font-size: 1.1rem;
+            line-height: 1.3rem;
+            .assign-header-clients {
+                margin-left: 1rem;
+                border-bottom: 2px solid black;
+                padding: 1rem .8rem .7rem .4rem;
+            }
+            .assign-header-teams {
+                border-bottom: 2px solid #979797;;
+                padding: 1rem .8rem .7rem 0.4rem;
+                color: #a8a8a8;
+            }
+        }
+        .assign-clients {
+            height: 15rem;
+            overflow-y: scroll;
+            &::-webkit-scrollbar {
+                width: 3px;
+                background: #cecece;
+            } 
+            &::-webkit-scrollbar-thumb {
+                width: 3px;
+                background: #666666;
+            }
+            margin-right: 5px;
+            .assign-clients-row {
+                color: #666666;
+                display: flex;
+                align-items: center;
+                height: 3rem;
+                .assign-client-container {
+                    display: flex;
+                    align-items: center;
+                    font-family: 'Exo', sans-serif;
+                    font-size: 1rem;
+                    position: relative;
+                    padding-left: 1rem;
+                    input {
+                        width: 1rem;
+                        height: 1rem;
+                        color: red;
+                        margin-right: 1rem;
+                    }
+                }
+            }
+        }
+        .assign-button-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 3rem;
+            .assign-button {
+                width: 206px;
+                height: 30px;
+                background: #AFAFAF;
+                border-radius: 5px;
+                font-family: 'Roboto', sans-serif;
+                font-size: 0.875rem;
+                line-height: 1rem;
+                color: #FFFFFF;
+            }
+        }
+    }
+}
+
+// Program Creation page
+
+.program-creation {
+    width: $program-width;
+    min-width: 375px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    .back-div {
+        display: flex;
+        align-items: center;
+        width: 90%;
+        margin: 0.6875rem auto;
+        height: 3rem;
+        img {
+            cursor: pointer;
+            height: 1rem;
+            width: 1rem;
+        }
+        p {
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.125rem;
+            line-height: 1.3125rem;
+            padding-left: .5rem;
+        }
+    }
+    .program-info {
+        width: 90%;
+        margin: .5rem auto 2rem auto;
+        h2 {
+            font-family: 'Exo', sans-serif;
+            font-size: 2.5rem;
+            line-height: 3.5rem;
+        }
+        h3 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.3rem;
+            line-height: 2rem;
+        }
+    }
+    .publish-button {
+        width: 90%;
+        margin: auto;
+        background: #666666;
+        border-radius: 5px;
+        height: 2.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.125rem;
+        line-height: 1.3125rem;
+        color: #FFFFFF;
+    }
+    .delete-button {
+        height: .7rem;
+        width: .7rem;
+    }
+    .day-div {
+        width: 90%;
+        margin: 1rem auto 0 auto;
+        .day-title-div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .day-title {
+                font-family: 'Roboto', sans-serif;
+                font-weight: 500;
+                font-size: 1.125rem;
+                line-height: 1.3125rem;
+            }
+        }
+        .coach-instructions {
+            width: 100%;
+            background: #FFFFFF;
+            border: 1px solid #000000;
+            border-radius: 0.3125rem;
+            margin: 1.1875rem auto;
+            color: #8D8888;
+            padding: 5px 18px;
+            .instructions-title {
+                font-family: 'Roboto', sans-serif;
+                font-weight: bold;
+                font-size: 0.8125rem;
+                line-height: 0.9375rem;
+            }
+            .instructions-text {
+                font-family: 'Roboto', sans-serif;
+                font-size: 0.75rem;
+                line-height: 0.875rem;
+            }
+        }
+        .exercise-div {
+            width: 100%;
+            .icon-div{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: .5rem 0;
+                .icon-letter{
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 0.875rem;
+                    line-height: 1rem;
+                    width: 1rem;
+                    height: 1rem;
+                    text-align: center;
+                    border: 1px solid black;
+                    border-radius: 50%;
+                }
+            }
+            .exercise-details {
+                width: 100%;
+                height: 2.5rem;
+                border: 1px solid #000000;
+                border-radius: 0.3125rem;
+                font-family: 'Exo', sans-serif;
+                font-weight: 500;
+                font-size: 0.875rem;
+                line-height: 1.1875rem;
+                padding: .5rem 1rem;
+                margin-bottom: 2rem;
+            }
+        }
+        .add-exercise-button {
+            height: 2.75rem;
+            background: #C4C4C4;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.875rem;
+            line-height: 1rem;
+        }
+    }
+    .add-day-button {
+        height: 2.75rem;
+        background: rgba(196, 196, 196, 0.5);
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.875rem;
+        line-height: 1rem;
+        margin: 1rem auto 1rem auto;
+    }
+}
+
+// specific stylings for the exercise input
+.exercise-input-div {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 1rem;
+    .exercise-input {
+        position: relative;
+        width: 100%;
+        height: 2.5rem;
+        border: 1px solid #000000;
+        border-radius: 0.3125rem;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.125rem;
+        line-height: 1.3125rem;
+        padding: .5rem 1rem;
+        margin-bottom: 1rem;
+        margin: auto;
+    }
+    .exercise-list-outer {
+        overflow-y: hidden;
+        width: 100%;
+        max-height: 11rem;
+        background-color: white;
+        position: absolute;
+        top: 99%;
+        padding: 1rem;
+        box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+        margin-right: 5px;
+        .exercise-list-inner {
+            overflow-y: scroll;
+            max-height: 9rem;
+            &::-webkit-scrollbar {
+                width: 3px;
+                background: #cecece;
+            } 
+            &::-webkit-scrollbar-thumb {
+                width: 3px;
+                background: #666666;
+            }
+        }
+        .exercise-element {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.125rem;
+            line-height: 1.5rem;
+            cursor: pointer;
+            &:hover {
+                background-color: rgb(194, 194, 194);
+            }
+        }
+        
+    }
+}
+
+
+
+
+
+
