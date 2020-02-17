@@ -5,6 +5,9 @@ import Login from "./components/auth/Login";
 import SignUp from "./components/auth/SignUp";
 import GoogleAuth from "./utils/googleAuth";
 import Dashboard from "./components/dashboard/Dashboard";
+import Program from "./components/program/ProgramHome";
+import ProgramCreation from "./components/program/ProgramCreation";
+import ProgramEdit from "./components/program/ProgramEdit";
 
 const App = props => (
   <Router>
@@ -14,6 +17,9 @@ const App = props => (
       <SignUp exact path="signup" {...props} />
       <GoogleAuth path="auth" />
       <Dashboard path="dashboard" />
+      <Program exact path="/program" {...props}/>
+      <ProgramCreation exact path="/program/create" {...props} />
+      <ProgramEdit exact path="/program/edit" {...props} />
     </NavBar>
   </Router>
 );
