@@ -8,45 +8,28 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/ec547d1af13580d3e0b5/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/Workout-Builder-fe/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/ec547d1af13580d3e0b5/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/Workout-Builder-fe/test_coverage)
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+1️⃣ You can find the deployed project at [www.strongerfaster.fit](https://www.strongerfaster.fit/)
 
-## 4️⃣ Contributors
+##  Contributors
 
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
 
-|                                       [Student 1](https://github.com/)                                        |                                       [Student 2](https://github.com/)                                        |                                       [Student 3](https://github.com/)                                        |                                       [Student 4](https://github.com/)                                        |                                       [Student 5](https://github.com/)                                        |
-| :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
-|                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |
-|                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/honda0306)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Mister-Corn)            |          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/NandoTheessen)           |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wvandolah)             |
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
-
-<br>
-<br>
-
-🚫 4️⃣ Optional examples of using images with links for your tech stack, make sure to change these to fit your project
-
-![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
-![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
-![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](netlify link goes in these parenthesis)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-
-🚫 more info on using badges [here](https://github.com/badges/shields)
+| [Christopher Hernandez](https://github.com/ChristopherHernandezW22)                                                                           | [Nikolai Gaivoronski](https://github.com/ngaivoronski)                                                                                | [Harrison Seaborn](https://github.com/harrisonms)                                                                                 | [Jonathan Picazo](https://github.com/macjabeth)                                                                                   |                                                                             
+| :--------------------------------------------------------------------------------------------------------------------------------------------:| :------------------------------------------------------------------------------------------------------------------------------------:| :--------------------------------------------------------------------------------------------------------------------------------:| :--------------------------------------------------------------------------------------------------------------------------------:|
+| [<img src="https://avatars2.githubusercontent.com/u/47870832?s=400&v=4" width = "200" />](https://github.com/ChristopherHernandezW22)         | [<img src="https://ca.slack-edge.com/T4JUEB3ME-UMB9H2HB7-6c42b9c4ba76-512" width = "200" />](https://github.com/ngaivoronski)         | [<img src="https://avatars1.githubusercontent.com/u/54726103?s=460&v=4" width = "200" />](https://github.com/harrisonms)          | [<img src="https://avatars0.githubusercontent.com/u/8473052?s=400&v=4" width = "200" />](https://github.com/macjabeth)            |                    
+| [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/ChristopherHernandezW22)                                          | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/ngaivoronski)                                             | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/harrisonms)                                           | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/macjabeth)                                            |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                                 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                         | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                     | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                     |
 
 ## Project Overview
 
-1️⃣ [Trello Board](🚫add link to trello board here)
+#### [Trello Board](https://trello.com/b/DiOkveab/workout-builder)
 
-1️⃣ [Product Canvas](🚫add link to product canvas here)
+#### [Product Canvas](https://www.notion.so/Workout-Builder-StrongerFaster-fit-cdd36e897fc14df9a58c723fab7c2e6e)
 
-1️⃣ [UX Design files](🚫add link to design files here) - 🚫 delete if not applicable
+#### [UX Design files](https://www.figma.com/file/iyvWwtRJ8gvXJSSF0SID8I/Workout-Builder%2C-Lisa-Arcangel%2C-Justine-Gennaro?node-id=1201%3A634)
 
-🚫 Replace lorem ipsum with a description of your project
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
+This is a workout builder for the professional trainer or highly trained individual that likes to build complex programming of sets, tempos, super sets, failure sets, and all sorts of variations. 
+This products UX should outshine other existing products' interactions and interface. 
 
 ### 4️⃣ Key Features
 
@@ -56,18 +39,24 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 -    feature four
 -    feature five
 
-## 1️⃣ Tech Stack
+## Tech Stack
 
 ### Front end built using:
 
-#### _Front end framework goes here_
 
-🚫 Why did you choose this framework?
+🚫 more info on using badges [here](https://github.com/badges/shields)
 
--    point one
--    point two
--    point three
--    point four
+![React](https://img.shields.io/badge/react-v16.12.0-blue)
+![Redux](https://img.shields.io/badge/react--redux-v7.1.3-purple)
+![Reach Router](https://img.shields.io/badge/%40reach%2Frouter-v1.3.1-blue)
+![Tailwind](https://img.shields.io/badge/tailwindcss-v1.2-green)
+
+#### Why we chose these frameworks?
+
+-    Popularity
+-    Familiarity
+-    State management is built for large applications
+-    Tailwind has easy to follow documentation and can be implemented alongside native CSS; makes it easier to add styling within the JSX; less of a learning curve
 
 🚫List the rest of the front end features and libraries in the same format as the framework above.
 
@@ -85,11 +74,9 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 
 # APIs
 
-## 2️⃣ Authentication API here
+## ![Passport](https://img.shields.io/badge/Passport.js-v0.4.1-blue)
 
-🚫Replace text below with a description of the API
-
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
+Passport is authentication middleware for Node. It is designed to serve a singular purpose: authenticate requests. 
 
 ## 2️⃣ Payment API here
 
@@ -196,4 +183,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Backend Documentation](🚫_link to your backend readme here_) for details on the backend of our project.
+See [Backend Documentation](https://github.com/Lambda-School-Labs/workout-builder-be) for details on the backend of our project.
