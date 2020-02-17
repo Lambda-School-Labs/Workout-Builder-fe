@@ -47,7 +47,7 @@ const NavBar = ({ children, location: { pathname } }) => {
           {!menuOpen && (
             <div className="flex items-center justify-center p-5 bg-cornflower-blue border-b">
               <span className="font-semibold text-dove-grey">{title}</span>
-              <div className="block absolute left-0 ml-6">
+              <div className="block absolute left-0 ml-4">
                 <button onClick={openMenu}>
                   <svg
                     width="18"
@@ -468,6 +468,7 @@ const NavBar = ({ children, location: { pathname } }) => {
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                className="-ml-1"
               >
                 <path d="M16 13V11H7V8L2 12L7 16V13H16Z" fill="#666666" />
                 <path
@@ -475,7 +476,7 @@ const NavBar = ({ children, location: { pathname } }) => {
                   fill="#666666"
                 />
               </svg>
-              <span className="ml-5">Logout</span>
+              <span className="ml-6">Logout</span>
             </div>
           </div>
           <div className="bg-white rounded-t-lg max-w-screen-xl">
