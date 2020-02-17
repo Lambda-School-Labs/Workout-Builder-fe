@@ -12,9 +12,9 @@ import ProgramEdit from "./components/program/ProgramEdit";
 const App = props => (
   <Router>
     <NavBar path="/">
-      <Home exact path="home" />
-      <Login exact path="login" {...props} />
-      <SignUp exact path="signup" {...props} />
+      <Home path="home" />
+      <Login path="login" {...props} />
+      <SignUp path="signup" {...props} />
       <GoogleAuth path="auth" />
       <Dashboard path="dashboard" />
       <Program exact path="/program" {...props}/>

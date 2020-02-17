@@ -15,7 +15,7 @@ const NavLink = props => (
   />
 );
 
-const NavBar = ({ children, location: { pathname } }) => {
+const NavBar = ({ children, location }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const menuRef = useRef();
@@ -36,8 +36,8 @@ const NavBar = ({ children, location: { pathname } }) => {
     window.removeEventListener("click", menuEvent);
   };
 
-  let title = pathname[1]
-    ? pathname[1].toUpperCase() + pathname.slice(2)
+  let title = location?.pathname[1]
+    ? location.pathname[1].toUpperCase() + location.pathname.slice(2)
     : "???";
 
   return (
