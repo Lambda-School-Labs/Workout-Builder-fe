@@ -304,7 +304,7 @@ export default function Dashboard(props) {
           <span className="col-start-4">Program start</span>
           <span>Program length</span>
           <span>Program phase</span>
-          <span>Program end</span>
+          <span className="col-span-2">Program end</span>
           <span className="col-start-9" style={{ justifySelf: "center" }}>
             Repeat
             <br />
@@ -326,7 +326,9 @@ export default function Dashboard(props) {
           <span className="text-sm font-medium col-start-4">1/1/2020</span>
           <span className="text-sm font-medium">4 weeks</span>
           <span className="text-sm font-medium">Strength</span>
-          <span className="text-red font-medium">5 days left</span>
+          <span className="text-blaze-orange font-medium col-span-2">
+            5 days left
+          </span>
           <svg
             width="22"
             height="20"
@@ -369,7 +371,9 @@ export default function Dashboard(props) {
           <span className="text-sm font-medium col-start-4">1/1/2020</span>
           <span className="text-sm font-medium">4 weeks</span>
           <span className="text-sm font-medium">Strength</span>
-          <span className="text-red font-medium">5 days left</span>
+          <span className="text-blaze-orange font-medium col-span-2">
+            5 days left
+          </span>
           <svg
             width="22"
             height="20"
@@ -412,7 +416,9 @@ export default function Dashboard(props) {
           <span className="text-sm font-medium col-start-4">1/1/2020</span>
           <span className="text-sm font-medium">4 weeks</span>
           <span className="text-sm font-medium">Strength</span>
-          <span className="text-red font-medium">5 days left</span>
+          <span className="text-blaze-orange font-medium col-span-2">
+            5 days left
+          </span>
           <svg
             width="22"
             height="20"
@@ -453,7 +459,9 @@ export default function Dashboard(props) {
           <span className="text-sm font-medium col-start-4">1/1/2020</span>
           <span className="text-sm font-medium">4 weeks</span>
           <span className="text-sm font-medium">Strength</span>
-          <span className="text-red font-medium">5 days left</span>
+          <span className="text-blaze-orange font-medium col-span-2">
+            5 days left
+          </span>
           <svg
             width="22"
             height="20"
