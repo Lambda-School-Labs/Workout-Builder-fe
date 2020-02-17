@@ -27,8 +27,11 @@ export default function Dashboard(props) {
   const [repeating, setRepeating] = useState();
 
   return (
-    <div className="font-body">
-      <div className="lg:hidden h-screen p-4 flex flex-col">
+    <>
+      <div
+        className="lg:hidden p-4 flex flex-col"
+        style={{ height: "calc(100vh - 4rem)" }}
+      >
         <div className="border-b border-blaze-orange pb-1">
           <h2 className="font-semibold text-xl text-dark-grey">Program due:</h2>
           <p className="text-xs text-dove-grey">Wednesday January 29th</p>

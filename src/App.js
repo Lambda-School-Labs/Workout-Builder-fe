@@ -1,22 +1,21 @@
 import React from "react";
 import { Router } from "@reach/router";
-import Header from "./components/global/Header";
+import NavBar from "./components/global/NavBar";
 import Login from "./components/auth/Login";
 import SignUp from "./components/auth/SignUp";
 import GoogleAuth from "./utils/googleAuth";
 import Dashboard from "./components/dashboard/Dashboard";
 
 const App = props => (
-  <div>
-    {/* <Header /> */}
-    <Router>
-      <Home exact path="/" />
-      <Login exact path="/login" {...props} />
-      <SignUp exact path="/signup" {...props} />
-      <GoogleAuth path="/auth" />
-      <Dashboard path="/dashboard" />
-    </Router>
-  </div>
+  <Router>
+    <NavBar path="/">
+      <Home exact path="home" />
+      <Login exact path="login" {...props} />
+      <SignUp exact path="signup" {...props} />
+      <GoogleAuth path="auth" />
+      <Dashboard path="dashboard" />
+    </NavBar>
+  </Router>
 );
 
 const Home = () => (
