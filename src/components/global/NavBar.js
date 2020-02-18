@@ -3,12 +3,13 @@ import { Link } from "@reach/router";
 
 const NavLink = props => (
   <Link
-    onClick={props.onClick}
     {...props}
+    onClick={props.onClick}
     getProps={({ isCurrent }) => {
       return {
+        className: "bg-cornflower-blue hover:bg-white",
         style: {
-          backgroundColor: isCurrent ? "white" : "#F7F7FA",
+          backgroundColor: isCurrent && "white",
           borderRadius: "10px 0px 0px 10px"
         }
       };
@@ -279,6 +280,7 @@ const NavBar = ({ children, location, navigate }) => {
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  className="-ml-1"
                 >
                   <path d="M16 13V11H7V8L2 12L7 16V13H16Z" fill="#666666" />
                   <path
@@ -286,7 +288,7 @@ const NavBar = ({ children, location, navigate }) => {
                     fill="#666666"
                   />
                 </svg>
-                <span className="ml-5">Logout</span>
+                <span className="ml-6">Logout</span>
               </div>
             </div>
           </div>
@@ -471,7 +473,7 @@ const NavBar = ({ children, location, navigate }) => {
               </div>
             </NavLink>
             <div
-              className="grid items-center py-4 px-8 cursor-pointer"
+              className="grid items-center py-4 px-8 cursor-pointer hover:bg-white"
               style={{ gridTemplateColumns: "0.1fr 1.9fr" }}
               onClick={logout}
             >
