@@ -1,9 +1,10 @@
 import React from "react";
 import { Router } from "@reach/router";
+import PrivateRoute from "./utils/PrivateRoute";
 import NavBar from "./components/global/NavBar";
 import Login from "./components/auth/Login";
 import SignUp from "./components/auth/SignUp";
-import GoogleAuth from "./utils/googleAuth";
+import GoogleAuth from "./utils/GoogleAuth";
 import Dashboard from "./components/dashboard/Dashboard";
 import Program from "./components/program/ProgramHome";
 import ProgramCreation from "./components/program/ProgramCreation";
@@ -11,15 +12,15 @@ import ProgramEdit from "./components/program/ProgramEdit";
 
 const App = props => (
   <Router>
+    <Login path="login" {...props} />
+    <SignUp path="signup" {...props} />
+    <GoogleAuth path="auth" />
     <NavBar path="/">
       <Home path="home" />
-      <Login path="login" {...props} />
-      <SignUp path="signup" {...props} />
-      <GoogleAuth path="auth" />
-      <Dashboard path="dashboard" />
-      <Program exact path="/program" {...props}/>
-      <ProgramCreation exact path="/program/create" {...props} />
-      <ProgramEdit exact path="/program/edit" {...props} />
+      <PrivateRoute as={Dashboard} path="dashboard" />
+      <PrivateRoute as={Program} path="/program" {...props} />
+      <PrivateRoute as={ProgramCreation} path="/program/create" {...props} />
+      <PrivateRoute as={ProgramEdit} path="/program/edit" {...props} />
     </NavBar>
   </Router>
 );
