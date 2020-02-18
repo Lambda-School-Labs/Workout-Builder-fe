@@ -28,7 +28,7 @@ const ProgramHome = (props) => {
 
             <CreateProgram CreateProgramModal={CreateProgramModal} ToggleCreateProgramModal={ToggleCreateProgramModal} {...props}/>
 
-            <div class="search-div">
+            <div class="search-div" >
                 <img class="magnifying-icon" src="https://i.imgur.com/dJIfxYP.png"></img>
                 <input 
                     class="search-bar"
