@@ -319,7 +319,7 @@ export default function Dashboard(props) {
             program
           </span>
         </div>
-        <div className="mt-2 grid grid-cols-10 gap-4 border-b items-center rounded">
+        <div className="grid grid-cols-10 gap-4 border-b items-center rounded">
           <div className="p-2">
             <img className="rounded" src="https://picsum.photos/110" alt="" />
           </div>
@@ -364,7 +364,7 @@ export default function Dashboard(props) {
             {programs[1] && <ProgramList />}
           </div>
         </div>
-        <div className="mt-2 grid grid-cols-10 gap-4 border-b items-center rounded">
+        <div className="grid grid-cols-10 gap-4 border-b items-center rounded">
           <div className="p-2">
             <img className="rounded" src="https://picsum.photos/110" alt="" />
           </div>
@@ -409,7 +409,7 @@ export default function Dashboard(props) {
             {programs[2] && <ProgramList />}
           </div>
         </div>
-        <div className="mt-2 grid grid-cols-10 gap-4 border-b items-center rounded">
+        <div className="grid grid-cols-10 gap-4 border-b items-center rounded">
           <div className="p-2">
             <img className="rounded" src="https://picsum.photos/110" alt="" />
           </div>
@@ -454,7 +454,7 @@ export default function Dashboard(props) {
             {programs[3] && <ProgramList />}
           </div>
         </div>
-        <div className="mt-2 grid grid-cols-10 gap-4 border-b items-center rounded">
+        <div className="grid grid-cols-10 gap-4 border-b items-center rounded">
           <div className="p-2">
             <img className="rounded" src="https://picsum.photos/110" alt="" />
           </div>

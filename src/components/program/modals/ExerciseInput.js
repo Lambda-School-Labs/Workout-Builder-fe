@@ -1,117 +1,117 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 const ExerciseInput = (props) => {
-    const Dispatch = useDispatch();
+  const Dispatch = useDispatch();
 
-    /***** Modal methods *****/ 
+  /***** Modal methods *****/
 
-    const [ExerciseListModal, ToggleExerciseListModal] = useState(false);
-    
-    const closeModal = (e) => {
-        e.stopPropagation();
-        ToggleExerciseListModal(false);
-    }
+  const [ExerciseListModal, ToggleExerciseListModal] = useState(false);
 
-    function useOutsideAlerter(ref) {
-        function handleClickOutside(event) {
-            if (ref.current && !ref.current.contains(event.target)) {
-            closeModal(event);
-            }
-        }
+  const closeModal = (e) => {
+    e.stopPropagation();
+    ToggleExerciseListModal(false);
+  };
 
-        useEffect(() => {
-            // Bind the event listener
-            document.addEventListener("mousedown", handleClickOutside);
-            return () => {
-            // Unbind the event listener on clean up
-            document.removeEventListener("mousedown", handleClickOutside);
-            };
-        });
-    }
-
-    const wrapperRef = useRef(null);
-    useOutsideAlerter(wrapperRef);
-
-    /***** Input methods *****/ 
-
-    const getExerciseName = (input_id) => {
-        // find the name of the selected exercise (by id) from the exercise library
-        return props.coach_exercises.filter((exercise) => {return exercise.id === input_id})[0].name;
-    }
-
-    const [input, setInput] = useState(getExerciseName(props.exercise.exercise_id));
-
-    // Ensure that the input is updated every time the "update" redux command is run
-    useEffect(() => {
-        setInput(getExerciseName(props.exercise.exercise_id));
-    }, [props.updates]);
-
-    const handleChange = (e) => {
-        e.preventDefault();
-        setInput(e.target.value);
+  function useOutsideAlerter(ref) {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        closeModal(event);
+      }
     }
 
     useEffect(() => {
-        // close modal if input is empty
-        if(input === "" || input === getExerciseName(props.exercise.exercise_id)){
-            ToggleExerciseListModal(false);
-        } else {
-            ToggleExerciseListModal(true);
-        }
-    },[input]);
+      // Bind the event listener
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    });
+  }
 
-    const chooseExercise = (exercise) => {
-        // find index of workout and index of exercise
-        let updatedProgram = JSON.parse(JSON.stringify(props.new_program));
-        let indexWorkout = updatedProgram.workouts.findIndex(workout => workout.id === props.day.id);
-        let indexExercise = updatedProgram.workouts[indexWorkout].exercises.findIndex(exercise => exercise.order === props.exercise.order);
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
 
-        // update the exercise id
-        updatedProgram.workouts[indexWorkout].exercises[indexExercise].exercise_id = exercise.id;
+  /***** Input methods *****/
 
-        // update the program data in redux
-        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
-        // update the input
-        setInput(exercise.name);
-        setTimeout(function(){ ToggleExerciseListModal(false); }, 10);
-        
+  const getExerciseName = useCallback((input_id) => {
+    // find the name of the selected exercise (by id) from the exercise library
+    return props.coach_exercises.filter((exercise) => {return exercise.id === input_id;})[0].name;
+  });
+
+  const [input, setInput] = useState(getExerciseName(props.exercise.exercise_id));
+
+  // Ensure that the input is updated every time the "update" redux command is run
+  useEffect(() => {
+    setInput(getExerciseName(props.exercise.exercise_id));
+  }, [getExerciseName, props.exercise.exercise_id, props.updates]);
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setInput(e.target.value);
+  };
+
+  useEffect(() => {
+    // close modal if input is empty
+    if(input === "" || input === getExerciseName(props.exercise.exercise_id)){
+      ToggleExerciseListModal(false);
+    } else {
+      ToggleExerciseListModal(true);
     }
+  },[getExerciseName, input, props.exercise.exercise_id]);
 
-    return(
-        <div className="exercise-input-div" ref={wrapperRef}>
-            <input className="exercise-input"
-                value={input}
-                onChange={handleChange}
-            ></input>
-            {ExerciseListModal ? 
-                <div className="exercise-list-outer">
-                    <div className="exercise-list-inner">
-                    {props.coach_exercises.filter(exercise => exercise.name.toLowerCase().includes(input.toLowerCase())).map(exercise => {
-                        return (
-                            <div className="exercise-element" onClick={() => chooseExercise(exercise)}>
-                                {exercise.name}
-                            </div>
-                        )
-                    })}
-                    </div>
+  const chooseExercise = (exercise) => {
+    // find index of workout and index of exercise
+    let updatedProgram = JSON.parse(JSON.stringify(props.new_program));
+    let indexWorkout = updatedProgram.workouts.findIndex(workout => workout.id === props.day.id);
+    let indexExercise = updatedProgram.workouts[indexWorkout].exercises.findIndex(exercise => exercise.order === props.exercise.order);
+
+    // update the exercise id
+    updatedProgram.workouts[indexWorkout].exercises[indexExercise].exercise_id = exercise.id;
+
+    // update the program data in redux
+    Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
+    // update the input
+    setInput(exercise.name);
+    setTimeout(function(){ ToggleExerciseListModal(false); }, 10);
+
+  };
+
+  return(
+    <div className="exercise-input-div" ref={wrapperRef}>
+      <input className="exercise-input"
+        value={input}
+        onChange={handleChange}
+      ></input>
+      {ExerciseListModal ?
+        <div className="exercise-list-outer">
+          <div className="exercise-list-inner">
+            {props.coach_exercises.filter(exercise => exercise.name.toLowerCase().includes(input.toLowerCase())).map(exercise => {
+              return (
+                <div className="exercise-element" onClick={() => chooseExercise(exercise)}>
+                  {exercise.name}
                 </div>
-            : <div />}
+              );
+            })}
+          </div>
         </div>
-            
-    )
-}
+        : <div />}
+    </div>
+
+  );
+};
 
 const mapStateToProps = state => ({
-    loggedInUser: state.loggedInUser,
-    updates: state.updates,
-    coach_clients: state.coach_clients,
-    coach_exercises: state.coach_exercises,
-    coach_programs: state.coach_programs,
-    new_program: state.new_program,
+  loggedInUser: state.loggedInUser,
+  updates: state.updates,
+  coach_clients: state.coach_clients,
+  coach_exercises: state.coach_exercises,
+  coach_programs: state.coach_programs,
+  new_program: state.new_program,
 });
 
 export default connect(
-    mapStateToProps,
+  mapStateToProps,
 )(ExerciseInput);
