@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
-import ExerciseInput from './modals/ExerciseInput';
-import ExerciseDetails from './modals/ExerciseDetails';
+import ExerciseInput from './inputs/ExerciseInput';
+import ExerciseDetails from './inputs/ExerciseDetails';
+import PhaseInput from "./inputs/PhaseInput";
+import LengthInput from "./inputs/LengthInput";
+import ProgramNameInput from "./inputs/ProgramNameInput";
+import WorkoutNameInput from "./inputs/WorkoutNameInput";
 
 // mobile styling - desktop can be done in tailwind
 import "./program-mobile-styles.scss"
@@ -106,39 +110,55 @@ const ProgramEdit = (props) => {
                 <p className="back-text" onClick={goBackProgramHome}>Back</p>
             </div>
             <div className="program-info">
-                <h2>{props.new_program.name}</h2>
-                <h3>Phase: {props.new_program.phase}</h3>
-                <h3>{props.new_program.length} days</h3>
+                <div className="title-line">
+                    <div className="title-left">
+                        <img className="delete-button" src="https://i.imgur.com/58I3xb1.png"></img>
+                        <ProgramNameInput />
+                    </div>
+                    <p className="title-preview">Preview</p>
+                </div>
+                <div className="info-input-div">
+                    <h3>Phase: </h3><PhaseInput />
+                </div>
+                <div className="info-input-div">
+                    <h3>Days programmed: </h3><LengthInput />
+                </div>
             </div>
-            <button className="publish-button" onClick={() => submitEdits()}>Submit Edits</button>
             {props.new_program.workouts.map(day => {
                 return (
                     <div className="day-div">
                         <div className="day-title-div">
-                            <h2 className="day-title">Day {day.day}: {day.name}</h2>
-                            <img className="delete-button" src="https://i.imgur.com/nGDM0fq.png" onClick={() => deleteWorkout(day.id)}></img>
+                            <h2 className="day-label">Day {day.day}:</h2>
+                            <WorkoutNameInput day={day} />
+                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteWorkout(day.id)}></img>
                         </div>
                         <div className="coach-instructions">
                             <h3 className="instructions-title">Coach Instructions</h3>
-                            <div className="instructions-text">Use this area to help the athlete understand goals for today’s session</div>
+                            <input className="instructions-text" value={day.description}></input>
                         </div>
                         {day.exercises.map(exercise => {
                             return(
                                 <div className="exercise-div">
-                                    <div className="icon-div">
+                                    <h3 className="exercise-label">Exercise Title</h3>
+                                    <div className="exercise-title-div">
                                         <p className="icon-letter">{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
-                                        <img className="delete-button" src="https://i.imgur.com/nGDM0fq.png" onClick={() => deleteExercise(day.id, exercise.order)}></img>
+                                        <div className="exercise-title-right">
+                                            <ExerciseInput day={day} exercise={exercise} />
+                                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteExercise(day.id, exercise.order)}></img>
+                                        </div>
                                     </div>
-                                    <ExerciseInput day={day} exercise={exercise} />
+                                    <h3 className="exercise-label">Sets, reps, tempo, rest, etc.</h3>
                                     <ExerciseDetails day={day} exercise={exercise} />
                                 </div>
                             )
                         })}
                         <button className="add-exercise-button" onClick={() => addExercise(day.id)}>+ Add exercise</button>
+                        <hr />
                     </div>
                 )
             })}
             <button className="add-day-button" onClick={() => addWorkout()}>+ Add day</button>
+            <button className="publish-button" onClick={() => submitEdits()}>Save</button>
         </div>
     )
 }
