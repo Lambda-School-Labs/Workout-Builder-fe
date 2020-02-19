@@ -153,8 +153,9 @@ const SignUp = ({ navigate }) => {
           <button
             type="submit"
             className="mt-4 py-2 w-full bg-blaze-orange rounded font-semibold text-white text-xl"
+            data-testid="signup"
           >
-            Sign up
+            Sign Up
           </button>
         </form>
         <div className="flex self-start text-xs mt-2">

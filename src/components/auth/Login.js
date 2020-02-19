@@ -31,7 +31,9 @@ const Login = ({ navigate }) => {
         console.error("Something went wrong;", response.statusText);
       }
     } catch (error) {
-      setError(error.response.data.message.toLowerCase());
+      setError(
+        error?.response?.data?.message.toLowerCase() ?? "something went wrong"
+      );
       setTimeout(() => {
         setError("");
       }, 5000);
@@ -41,7 +43,7 @@ const Login = ({ navigate }) => {
   return (
     <div className="lg:bg-cornflower-blue h-screen lg:flex lg:items-center">
       <div className="flex flex-col items-center p-4 font-body w-full max-w-xl mx-auto lg:bg-white lg:rounded-lg lg:px-20">
-        <h2 className="text-4xl mt-4 mb-8">Login</h2>
+        <h2 className="text-4xl mt-4 mb-8">Log In</h2>
         <button
           className="flex items-center justify-center w-full py-3 border rounded relative"
           onClick={authWithGoogle}
@@ -116,6 +118,7 @@ const Login = ({ navigate }) => {
           <button
             type="submit"
             className="mt-4 py-2 w-full bg-blaze-orange rounded font-semibold text-white text-xl"
+            data-testid="login"
           >
             Log In
           </button>
