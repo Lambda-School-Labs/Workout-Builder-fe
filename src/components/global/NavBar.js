@@ -116,7 +116,7 @@ const NavBar = ({ children, location, navigate }) => {
                   <span className="ml-5">Home</span>
                 </div>
               </NavLink>
-              <NavLink to="/programs" onClick={closeMenu}>
+              <NavLink to="/program" onClick={closeMenu}>
                 <div
                   className="grid items-center py-4 px-8"
                   style={{ gridTemplateColumns: "0.1fr 1.9fr" }}
@@ -319,7 +319,7 @@ const NavBar = ({ children, location, navigate }) => {
                 <span className="ml-5">Home</span>
               </div>
             </NavLink>
-            <NavLink to="/programs">
+            <NavLink to="/program">
               <div
                 className="grid items-center py-4 px-8"
                 style={{ gridTemplateColumns: "0.1fr 1.9fr" }}
