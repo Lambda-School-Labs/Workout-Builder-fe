@@ -15,12 +15,12 @@ const App = props => (
     <Login path="login" {...props} />
     <SignUp path="signup" {...props} />
     <GoogleAuth path="auth" />
+    <Home path="/" />
     <NavBar path="/">
-      <Home path="home" />
       <PrivateRoute as={Dashboard} path="dashboard" />
-      <PrivateRoute as={Program} path="/program" {...props} />
-      <PrivateRoute as={ProgramCreation} path="/program/create" {...props} />
-      <PrivateRoute as={ProgramEdit} path="/program/edit" {...props} />
+      <PrivateRoute as={Program} path="program" {...props} />
+      <PrivateRoute as={ProgramCreation} path="program/create" {...props} />
+      <PrivateRoute as={ProgramEdit} path="program/edit" {...props} />
     </NavBar>
   </Router>
 );
