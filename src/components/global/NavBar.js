@@ -294,7 +294,7 @@ const NavBar = ({ children, location, navigate }) => {
           </div>
           {children}
         </div>
-        <div className="hidden lg:flex h-screen bg-cornflower-blue pt-8 pr-8 pl-4">
+        <div className="hidden lg:flex h-screen bg-cornflower-blue pt-14 pr-12 pl-4">
           <div className="flex flex-col h-full w-84 bg-cornflower-blue text-dove-grey rounded-tr-lg rounded-br-lg py-4">
             <h1 className="text-blaze-orange text-4xl font-display ml-8 mb-8">
               Stronger Faster
