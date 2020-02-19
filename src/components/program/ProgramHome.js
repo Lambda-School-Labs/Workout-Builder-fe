@@ -23,16 +23,12 @@ const ProgramHome = (props) => {
 
     return(
         <div className="outer-program">
-            <h2 class="main-title">Programs</h2>
-            <button class="add-program-button" onClick={() => ToggleCreateProgramModal(true)}>+ Create Program</button>
-
-            <CreateProgram CreateProgramModal={CreateProgramModal} ToggleCreateProgramModal={ToggleCreateProgramModal} {...props}/>
 
             <div class="search-div" >
                 <img class="magnifying-icon" src="https://i.imgur.com/dJIfxYP.png"></img>
                 <input 
                     class="search-bar"
-                    placeholder="Search Program"
+                    placeholder="Search"
                     onChange={handleChange}
                     value={searchTerm}
                 />
@@ -48,8 +44,11 @@ const ProgramHome = (props) => {
                         <ProgramListElement id={program.id} title={program.name} activeUsers={program.assigned_clients.length} {...props}/>
                     )
                 })}
-                <div class="program-element"></div>
             </div>
+
+            <button class="add-program-button" onClick={() => ToggleCreateProgramModal(true)}>Create Program</button>
+
+            <CreateProgram CreateProgramModal={CreateProgramModal} ToggleCreateProgramModal={ToggleCreateProgramModal} {...props}/>
         </div>
     )
 }

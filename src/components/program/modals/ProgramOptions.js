@@ -64,7 +64,7 @@ const ProgramOptions = (props) => {
                     <div ref={wrapperRef}>
                     <div className="options-element" onClick={editProgram}>
                         <div className="options-left">
-                            <img src="https://i.imgur.com/L3ARWfG.png"></img>
+                            <img src="https://i.imgur.com/VDEt22i.png"></img>
                         </div>
                         <div className="options-right">
                             <p>Edit</p>

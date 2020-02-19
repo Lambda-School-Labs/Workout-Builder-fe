@@ -10,7 +10,7 @@ const ProgramListElement = (props) => {
     return(
         <div class="program-element">
             <div class="checkbox-div">
-                <img src="https://i.imgur.com/tKDzdPT.png"></img>
+            <input type="checkbox" checked=""/>
             </div>
             <div class="title-div">
                 <p>{props.title}</p>
@@ -19,7 +19,7 @@ const ProgramListElement = (props) => {
                 <p>{props.activeUsers}</p>
             </div>
             <div class="assign-div" id={`assign-div-${props.id}`}>
-                <img src="https://i.imgur.com/4Qxt7a2.png" onClick={() => ToggleAssignProgramModal(true)}></img>
+                <img src="https://i.imgur.com/kMrt2fe.png" onClick={() => ToggleAssignProgramModal(true)}></img>
                 {AssignProgramModal ? <AssignProgram program_id={props.id} AssignProgramModal={AssignProgramModal} ToggleAssignProgramModal={ToggleAssignProgramModal} id={props.id} {...props}/>
                 : <div />}
             </div>
