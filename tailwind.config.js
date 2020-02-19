@@ -16,6 +16,7 @@ module.exports = {
         silver: "#BEBEBE",
         grey: "#757575",
         red: "#FF0F0F",
+        blue: "#0049D6",
         grey98: "#FAFAFA",
         grey68: "#ADADAD",
         nobel: "#9B9B9B"
