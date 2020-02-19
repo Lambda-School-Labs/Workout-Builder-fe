@@ -55,18 +55,18 @@ const CreateProgram = (props) => {
                 
                 <h3>Create Program</h3>
                 <form onSubmit={openProgramCreationPage}>
-                    <p htmlFor="name">Program Name *</p>
+                    <div className="create-row"><p htmlFor="name">Program Name</p><p className="asterix">*</p></div>
                     <input id="name" name="name" placeholder="Ex: Olympic Lifting" required type="text" value={newProgramData.program_name} onChange={handleChange}></input>
-                    <p htmlFor="phase">Phase *</p>
+                    <div className="create-row"><p htmlFor="phase">Phase</p><p className="asterix">*</p></div>
                     <input id="phase" name="phase" placeholder="Ex: Strength" required type="text" value={newProgramData.program_phase} onChange={handleChange}></input>
-                    <p htmlFor="length">Number of days in program *</p>
+                    <div className="create-row"><p htmlFor="length">Number of days in program</p><p className="asterix">*</p></div>
                     <input id="length" name="length" placeholder="Ex: 21" required type="number" value={newProgramData.program_days} onChange={handleChange}></input>
+                    <p className="legend-p">*Required</p>
                     <div className="program-button-div">
+                        <button className="save-button" type="submit">Save</button>
                         <button onClick={closeModal} className="cancel-button">Cancel</button>
-                        <button className="create-button" type="submit">+ Create program</button>
                     </div>
                 </form>
-                <p className="legend-p">*Required</p>
             </Modal>
     )
 }

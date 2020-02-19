@@ -188,54 +188,77 @@ $program-modal-margin: $program-modal-width - 27%;
     // margin: 5rem auto;
     background-color: white;
     position: absolute;
-    top: 5em;
+    top: calc(50% - 17rem);
     right: 10%;
     left:10%;
+    width: 80%;
+    height: 34rem;
     h3 {
-        padding-top: 16px;
-        font-family: 'Roboto', sans-serif;
-        font-size: 24px;
-        margin: 16px 15px;
-        font-weight: bold;
+        margin: 2rem 1rem .5rem 1rem;
+        font-family: 'Hind Madurai', sans-serif;
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    .create-row {
+        display:flex;
+        align-items: flex-start;
+        .asterix {
+            color: red;
+            margin: 1.5rem 0 .5rem 0;
+        }
     }
     p {
-        font-family: 'Roboto', sans-serif;
-        font-size: 18px;
-        margin: 16px 15px;
+        font-family: 'Hind Madurai', sans-serif;
+        font-size: 1.125rem;
+        line-height: 1.5625rem;
+        margin: 1.5rem 0 .5rem 1rem;
+        color: #666666;
     }
     input {
         margin: 0 15px;
+        padding: .5rem;
         width: calc(100% - 33px);
-        font-family: 'Roboto', sans-serif;
-        font-size: 14px;
-        border-bottom: 1px solid gray;
-    }
-    .program-button-div {
-        display: flex;
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        .cancel-button {
-            margin-top: 115px;
-            margin-bottom: 12px;
-            font-family: 'Roboto', sans-serif;
-            font-size: 18px;
-        }
-        .create-button {
-            margin: 98px 15px 0px 30px;
-            width: 143px;
-            height: 50px;
-            background: #C4C4C4;
-            border-radius: 5px;
-            color: white;
-        }
+        font-family: 'Hind Madurai', sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.1875rem;
+        background: #FFFFFF;
+        border: 1px solid #C4C4C4;
+        border-radius: 5px;
     }
     .legend-p {
-        font-family: 'Roboto', sans-serif;
-        font-size: 14px;
+        font-family: 'Hind Madurai', sans-serif;
         font-weight: 500;
-        margin: 0 0 10px 15px;
-        padding-bottom: 10px;
+        font-size: 0.875rem;
+        line-height: 1.1875rem;
+        margin: .5rem 0 0 1rem;
+        font-weight: bold;
+    }
+    .program-button-div {
+        width: 100%;
+        height: 10rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .save-button {
+            width: 12rem;
+            height: 2.25rem;
+            background: #FD6A02;
+            border-radius: 5px;
+            color: white;
+            margin-bottom: .5rem;
+            font-family: 'Hind Madurai', sans-serif;
+            font-style: normal;
+            font-size: 1.125rem;
+            line-height: 1.5625rem;
+        }
+        .cancel-button {
+            font-family: 'Hind Madurai', sans-serif;
+            font-size: 1.125rem;
+            line-height: 1.5625rem;
+            text-decoration-line: underline;
+        }
     }
     
 }
@@ -312,7 +335,7 @@ $program-modal-margin: $program-modal-width - 27%;
 // Assign Modal
 
 .assign-modal {
-    z-index: 0;
+    z-index: 1;
     width: 10rem;
     background-color: white;
     position: absolute;
@@ -441,6 +464,16 @@ $program-modal-margin: $program-modal-width - 27%;
         width: 4.4rem;
         margin: 1.375rem 0;
     }
+}
+
+.assign-confirm-overaly {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.600);
 }
 
 // Program Creation page

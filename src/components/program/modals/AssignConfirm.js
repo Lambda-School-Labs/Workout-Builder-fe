@@ -36,7 +36,7 @@ const AssignConfirm = (props) => {
     return(
             <Modal isOpen={props.confirmModal} 
             className="assign-confirm" 
-            // overlayClassName="program-overaly"
+            overlayClassName="assign-confirm-overaly"
             shouldCloseOnOverlayClick={true}
             onRequestClose={closeModal}
             >
