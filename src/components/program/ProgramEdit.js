@@ -7,17 +7,26 @@ import PhaseInput from "./inputs/PhaseInput";
 import LengthInput from "./inputs/LengthInput";
 import ProgramNameInput from "./inputs/ProgramNameInput";
 import WorkoutNameInput from "./inputs/WorkoutNameInput";
+import EditConfirm from "./modals/EditConfirm";
 
 // mobile styling - desktop can be done in tailwind
 import "./program-mobile-styles.scss"
 
 const ProgramEdit = (props) => {
     const Dispatch = useDispatch();
+    const [confirmModal, toggleConfirmModal] = useState(false);
 
     const goBackProgramHome = e => {
         e.preventDefault();
         props.navigate("/program");
     };
+
+    // leave the page if name is empty - to avoid errors in case user refreshes and data resets
+    useEffect(() => {
+        if(props.new_program.name === "") {
+            props.navigate("/program");
+        }
+    }, []);
 
     // Current day number
     const nextDay = props.new_program.workouts.length + 1;
@@ -93,12 +102,29 @@ const ProgramEdit = (props) => {
         Dispatch({ type: "UPDATE" });
     }
 
-    const submitEdits = () => {
+    // const submitEdits = () => {
+    //     const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
+    //     workouts: [ ],
+    //     assigned_clients: []
+    //     }
+    //     Dispatch({ type: "UPDATE_A_PROGRAM", payload: props.new_program });
+    //     Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
+    //     props.navigate("/program");
+    // }
+
+    // submitEdits function has been moved to editConfirm modal
+
+    const showPreview = () => {
+        props.navigate("/program/preview");
+    }
+
+    const discardProgram = () => {
+        // discard changes and navigate to program home
         const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
         workouts: [ ],
         assigned_clients: []
         }
-        Dispatch({ type: "UPDATE_A_PROGRAM", payload: props.new_program });
+
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
         props.navigate("/program");
     }
@@ -112,10 +138,10 @@ const ProgramEdit = (props) => {
             <div className="program-info">
                 <div className="title-line">
                     <div className="title-left">
-                        <img className="delete-button" src="https://i.imgur.com/58I3xb1.png"></img>
+                        <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => discardProgram()}></img>
                         <ProgramNameInput />
                     </div>
-                    <p className="title-preview">Preview</p>
+                    <p className="title-preview" onClick={() => showPreview()}>Preview</p>
                 </div>
                 <div className="info-input-div">
                     <h3>Phase: </h3><PhaseInput />
@@ -158,7 +184,10 @@ const ProgramEdit = (props) => {
                 )
             })}
             <button className="add-day-button" onClick={() => addWorkout()}>+ Add day</button>
-            <button className="publish-button" onClick={() => submitEdits()}>Save</button>
+            <button className="publish-button" onClick={() => toggleConfirmModal(true)}>Save</button>
+            {confirmModal ? <EditConfirm thisProgram={props.new_program} 
+            confirmModal={confirmModal} toggleConfirmModal={toggleConfirmModal} {...props}/>
+            : <div />}
         </div>
     )
 }

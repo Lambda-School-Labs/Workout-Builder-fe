@@ -8,6 +8,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Program from "./components/program/ProgramHome";
 import ProgramCreation from "./components/program/ProgramCreation";
 import ProgramEdit from "./components/program/ProgramEdit";
+import ProgramPreview from './components/program/ProgramPreview';
 
 const App = (props) => (
   <div>
@@ -18,6 +19,7 @@ const App = (props) => (
       <Program exact path="/program" {...props}/>
       <ProgramCreation exact path="/program/create" {...props} />
       <ProgramEdit exact path="/program/edit" {...props} />
+      <ProgramPreview exact path="/program/preview" {...props} />
       <Login exact path="/login" {...props}/>
       <SignUp exact path="/signup" {...props}/>
       <GoogleAuth path="/auth" />

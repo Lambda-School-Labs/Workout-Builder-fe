@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 
-const AssignConfirm = (props) => {
+const PublishConfirm = (props) => {
     const Dispatch = useDispatch();
 
     /***** Modal methods *****/ 
@@ -33,15 +33,28 @@ const AssignConfirm = (props) => {
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
 
+    const publishExercise = () => {
+        const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
+        workouts: [ ],
+        assigned_clients: []
+        }
+
+        props.toggleConfirmModal(false);
+        Dispatch({ type: "CREATE_A_PROGRAM", payload: props.new_program });
+        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
+        props.navigate("/program");
+    }
+
     return(
             <Modal isOpen={props.confirmModal} 
             className="confirm-modal" 
             overlayClassName="confirm-modal-overaly"
             shouldCloseOnOverlayClick={true}
             onRequestClose={closeModal}
+            onAfterClose={() => publishExercise()}
             >
-                <h3>{props.thisProgram.name} assigned to client!</h3>
-                <button>Done</button>
+                <h3>{props.thisProgram.name} published!</h3>
+                <button onClick={closeModal}>Done</button>
             </Modal>
     )
 }
@@ -56,4 +69,4 @@ const mapStateToProps = state => ({
   
 export default connect(
     mapStateToProps,
-  )(AssignConfirm);
+  )(PublishConfirm);

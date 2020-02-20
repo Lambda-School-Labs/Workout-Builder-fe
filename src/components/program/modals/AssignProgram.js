@@ -103,8 +103,7 @@ const AssignProgram = (props) => {
                         <div className="assign-button-div">
                             <button className="assign-button" onClick={assignToClient}>Assign to client</button>
                         </div>
-                        {confirmModal ? <AssignConfirm program_id={props.id} ProgramOptionsModal={props.ProgramOptionsModal} 
-                        ToggleProgramOptionsModal={props.ToggleProgramOptionsModal} id={props.id} thisProgram={thisProgram} 
+                        {confirmModal ? <AssignConfirm thisProgram={thisProgram} 
                         confirmModal={confirmModal} toggleConfirmModal={toggleConfirmModal} {...props}/>
                         : <div />}
                     </div>

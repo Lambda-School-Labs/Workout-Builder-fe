@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import ProgramListElement from './ProgramListElement';
 import CreateProgram from './modals/CreateProgram'
@@ -41,7 +40,7 @@ const ProgramHome = (props) => {
                 </div>
                 {searchResults.map(program => {
                     return(
-                        <ProgramListElement id={program.id} title={program.name} activeUsers={program.assigned_clients.length} {...props}/>
+                        <ProgramListElement program={program} id={program.id} title={program.name} activeUsers={program.assigned_clients.length} {...props}/>
                     )
                 })}
             </div>

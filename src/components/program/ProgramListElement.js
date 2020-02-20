@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import ProgramOptions from './modals/ProgramOptions';
 import AssignProgram from './modals/AssignProgram';
 
 const ProgramListElement = (props) => {
+    const Dispatch = useDispatch();
+
     const [AssignProgramModal, ToggleAssignProgramModal] = useState(false);
     const [ProgramOptionsModal, ToggleProgramOptionsModal] = useState(false);
+
+    const viewProgram = () => {
+        // Set the program to new program data and view it in the preview page
+        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: props.program });
+
+        props.navigate("/program/preview");
+    }
+
 
     return(
         <div class="program-element">
@@ -13,7 +24,7 @@ const ProgramListElement = (props) => {
             <input type="checkbox" checked=""/>
             </div>
             <div class="title-div">
-                <p>{props.title}</p>
+                <p onClick={() => viewProgram()}>{props.title}</p>
             </div>
             <div class="active-div">
                 <p>{props.activeUsers}</p>
