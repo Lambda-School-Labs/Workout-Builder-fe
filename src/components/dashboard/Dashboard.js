@@ -316,7 +316,7 @@ function ProgramList() {
         placeholder="Search programs"
         className="py-4 px-8 border-b placeholder-grey68 text-sm font-medium w-full focus:outline-none"
       />
-      <div className="overflow-y-scroll h-64">
+      <div className="overflow-y-scroll h-64 py-2">
         <div className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer">
           <span className="text-sm font-medium">System A glute emphasis</span>
           <span className="text-xs font-medium text-grey68">2 day split</span>
