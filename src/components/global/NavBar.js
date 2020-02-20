@@ -56,7 +56,7 @@ const NavBar = ({ children, location, navigate }) => {
         <div className="lg:hidden">
           <div
             className={`${
-              menuOpen ? "hidden" : ""
+              menuOpen ? "invisible" : "visible"
             } flex items-center justify-center p-5 bg-cornflower-blue border-b`}
           >
             <span className="font-semibold text-dove-grey">{title}</span>
