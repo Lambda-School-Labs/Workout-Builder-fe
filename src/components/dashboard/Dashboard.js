@@ -1,8 +1,60 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import serverHandshake from "../../utils/serverHandshake";
 
-export default function Dashboard(props) {
+const dummyData = [
+  {
+    "client_id": 1,
+    "first_name": "Jonathan",
+    "last_name": "Picazo",
+    "start_date": "2020-2-17",
+    "program_id": 1,
+    "name": "Super Sets",
+    "length": 21,
+    "phase": "Strength"
+  },
+  {
+    "client_id": 2,
+    "first_name": "Justine",
+    "last_name": "Gennaro",
+    "start_date": "2020-2-17",
+    "program_id": 9,
+    "name": "Other Sets",
+    "length": 14,
+    "phase": "Endurance"
+  }
+];
+
+export default function Dashboard() {
+  const repeatRef = useRef();
+  const [data, setData] = useState(dummyData);
+  const [openProgram, setOpenProgram] = useState();
+  const [repeating, setRepeating] = useState();
+  const [confirmed, setConfirmed] = useState();
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await serverHandshake(true).get(
+          "/clients-programs/dashboard"
+        );
+        if (response.status === 200 && response.data.length) setData(response.data);
+      } catch (error) {
+        setError(error?.response?.data?.message ?? 'Something went wrong.');
+      }
+    })();
+    (async () => {
+      try {
+        const response = await serverHandshake(true).get('/programs');
+        if (response.status === 200 && response.data.length) {}
+      } catch (error) {
+        setError(error);
+      }
+    })();
+  }, []);
+
   const toggleProgram = id => () => {
-    setPrograms({ ...programs, [id]: !programs[id] });
+    setOpenProgram(!openProgram ? id : null);
   };
 
   const cancelEvent = event => {
@@ -29,12 +81,6 @@ export default function Dashboard(props) {
     document.removeEventListener("click", cancelEvent);
   };
 
-  const repeatRef = useRef();
-
-  const [programs, setPrograms] = useState({});
-  const [repeating, setRepeating] = useState(false);
-  const [confirmed, setConfirmed] = useState(false);
-
   return (
     <>
       <div
@@ -46,42 +92,19 @@ export default function Dashboard(props) {
           <p className="text-xs text-dove-grey">Wednesday January 29th</p>
         </div>
         <div className="overflow-y-scroll flex-grow my-2">
-          <ProgramCardMobile
-            confirmRepeat={confirmRepeat}
-            toggleProgram={toggleProgram}
-            programs={programs}
-            id={1}
-          />
-          <ProgramCardMobile
-            confirmRepeat={confirmRepeat}
-            toggleProgram={toggleProgram}
-            programs={programs}
-            id={2}
-          />
-          <ProgramCardMobile
-            confirmRepeat={confirmRepeat}
-            toggleProgram={toggleProgram}
-            programs={programs}
-            id={3}
-          />
-          <ProgramCardMobile
-            confirmRepeat={confirmRepeat}
-            toggleProgram={toggleProgram}
-            programs={programs}
-            id={4}
-          />
-          <ProgramCardMobile
-            confirmRepeat={confirmRepeat}
-            toggleProgram={toggleProgram}
-            programs={programs}
-            id={5}
-          />
-          <ProgramCardMobile
-            confirmRepeat={confirmRepeat}
-            toggleProgram={toggleProgram}
-            programs={programs}
-            id={6}
-          />
+          {data.length ? (
+            data.map(program => (
+              <ProgramCardMobile
+                key={program.program_id}
+                confirmRepeat={confirmRepeat}
+                toggleProgram={toggleProgram}
+                openProgram={openProgram}
+                program={program}
+              />
+            ))
+          ) : (
+            <p>You have not assigned any programs yet.</p>
+          )}
         </div>
         <button className="bg-blaze-orange rounded text-white font-semibold text-sm w-full py-3 focus:outline-none">
           + Add new client
@@ -113,13 +136,12 @@ export default function Dashboard(props) {
             </span>
           </div>
         </div>
-        <div className="grid grid-cols-10 gap-4 items-center text-medium-grey border-b font-semibold text-xs py-3 rounded">
+        <div className="grid grid-cols-9 gap-4 items-center text-medium-grey border-b font-semibold text-xs py-3 rounded">
           <span className="col-start-2 col-span-2">Name</span>
           <span className="col-start-4">Program start</span>
-          <span>Program length</span>
           <span>Program phase</span>
           <span className="col-span-2">Program end</span>
-          <span className="col-start-9" style={{ justifySelf: "center" }}>
+          <span className="col-start-8" style={{ justifySelf: "center" }}>
             Repeat
             <br />
             workout
@@ -130,30 +152,19 @@ export default function Dashboard(props) {
             program
           </span>
         </div>
-        <ProgramCardDesktop
-          confirmRepeat={confirmRepeat}
-          toggleProgram={toggleProgram}
-          programs={programs}
-          id={1}
-        />
-        <ProgramCardDesktop
-          confirmRepeat={confirmRepeat}
-          toggleProgram={toggleProgram}
-          programs={programs}
-          id={2}
-        />
-        <ProgramCardDesktop
-          confirmRepeat={confirmRepeat}
-          toggleProgram={toggleProgram}
-          programs={programs}
-          id={3}
-        />
-        <ProgramCardDesktop
-          confirmRepeat={confirmRepeat}
-          toggleProgram={toggleProgram}
-          programs={programs}
-          id={4}
-        />
+        {data.length ? (
+          data.map(program => (
+            <ProgramCardDesktop
+              key={program.program_id}
+              confirmRepeat={confirmRepeat}
+              toggleProgram={toggleProgram}
+              openProgram={openProgram}
+              program={program}
+            />
+          ))
+        ) : (
+          <p className="mt-4">You have not assigned any programs yet.</p>
+        )}
       </div>
       {repeating && (
         <ConfirmModal
@@ -221,7 +232,7 @@ function ConfirmModal({ repeatRef, acceptRepeat, cancelRepeat, confirmed }) {
   );
 }
 
-function ProgramCardMobile({ confirmRepeat, toggleProgram, programs, id }) {
+function ProgramCardMobile({ confirmRepeat, toggleProgram, openProgram, program }) {
   return (
     <div className="flex flex-col py-2 border-b border-light-grey">
       <div className="flex justify-between items-center">
@@ -229,48 +240,47 @@ function ProgramCardMobile({ confirmRepeat, toggleProgram, programs, id }) {
           <img src="https://picsum.photos/70" alt="" className="rounded" />
           <div className="ml-2">
             <h3 className="font-bold text-mine-shaft" style={{ fontSize: 15 }}>
-              Joe Smith
+              {program.first_name} {program.last_name}
             </h3>
-            <p className="text-xs">Program: Olympic Lifting</p>
-            <p className="text-xs">Phase: Strength</p>
-            <p className="text-xs">Start: 2/13/20</p>
+            <p className="text-xs">Program: {program.name}</p>
+            <p className="text-xs">Phase: {program.phase}</p>
+            <p className="text-xs">Start: {program.start_date}</p>
           </div>
         </div>
-        <p className="font-extrabold text-xs text-blaze-orange">2 days left</p>
+        <p className="font-extrabold text-xs text-blaze-orange">{program.length} day{program.length > 1 ? 's' : ''} left</p>
       </div>
       <div className="relative">
         <div className="text-right text-2xs text-blaze-orange">
           <button
             className="font-semibold focus:outline-none"
-            onClick={confirmRepeat(id)}
+            onClick={confirmRepeat(program.program_id)}
           >
             Repeat
           </button>
           <button
             className="font-semibold ml-5 focus:outline-none"
-            onClick={toggleProgram(id)}
+            onClick={toggleProgram(program.program_id)}
           >
             Add program
           </button>
         </div>
-        {programs[id] && <ProgramList />}
+        {openProgram === program.program_id && <ProgramList />}
       </div>
     </div>
   );
 }
 
-function ProgramCardDesktop({ confirmRepeat, toggleProgram, programs, id }) {
+function ProgramCardDesktop({ confirmRepeat, toggleProgram, openProgram, program }) {
   return (
-    <div className="grid grid-cols-10 gap-4 border-b items-center rounded hover:bg-cornflower-blue">
+    <div className="grid grid-cols-9 gap-4 border-b items-center rounded hover:bg-cornflower-blue">
       <div className="p-2">
         <img className="rounded" src="https://picsum.photos/110" alt="" />
       </div>
-      <span className="font-semibold text-lg col-span-2">Justine Gennaro</span>
-      <span className="text-sm font-medium col-start-4">1/1/2020</span>
-      <span className="text-sm font-medium">4 weeks</span>
-      <span className="text-sm font-medium">Strength</span>
+      <span className="font-semibold text-lg col-span-2">{program.first_name} {program.last_name}</span>
+      <span className="text-sm font-medium col-start-4">{program.start_date}</span>
+      <span className="text-sm font-medium">{program.phase}</span>
       <span className="text-blaze-orange font-medium col-span-2">
-        5 days left
+        {program.length} day{program.length > 1 ? 's' : ''} left
       </span>
       <svg
         width="22"
@@ -278,9 +288,9 @@ function ProgramCardDesktop({ confirmRepeat, toggleProgram, programs, id }) {
         viewBox="0 0 22 20"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="col-start-9 cursor-pointer"
+        className="col-start-8 cursor-pointer"
         style={{ justifySelf: "center" }}
-        onClick={confirmRepeat(id)}
+        onClick={confirmRepeat(program.program_id)}
       >
         <path
           d="M16.4199 15H4.73071V12L0.0550537 16L4.73071 20V17H18.7577V11H16.4199V15ZM4.73071 5H16.4199V8L21.0955 4L16.4199 0V3H2.39288V9H4.73071V5Z"
@@ -295,14 +305,14 @@ function ProgramCardDesktop({ confirmRepeat, toggleProgram, programs, id }) {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="cursor-pointer"
-          onClick={toggleProgram(id)}
+          onClick={toggleProgram(program.program_id)}
         >
           <path
             d="M19.3212 10H12.3078V16H7.63212V10H0.618652V6H7.63212V0H12.3078V6H19.3212V10Z"
             fill="#BEBEBE"
           />
         </svg>
-        {programs[id] && <ProgramList />}
+        {openProgram === program.program_id && <ProgramList />}
       </div>
     </div>
   );
