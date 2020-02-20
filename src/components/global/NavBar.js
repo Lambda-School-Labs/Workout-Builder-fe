@@ -82,7 +82,7 @@ const NavBar = ({ children, location, navigate }) => {
             ref={menuRef}
             className={`${
               !menuOpen ? "hidden" : ""
-            } w-full h-full absolute top-0 left-0 overflow-hidden absolute z-10`}
+            } w-full h-screen absolute top-0 left-0 overflow-hidden absolute z-10`}
             style={{
               backgroundColor: "rgba(0,0,0,0.4)"
             }}
