@@ -8,6 +8,7 @@ import LengthInput from "./inputs/LengthInput";
 import ProgramNameInput from "./inputs/ProgramNameInput";
 import WorkoutNameInput from "./inputs/WorkoutNameInput";
 import PublishConfirm from "./modals/PublishConfirm";
+import InstructionsInput from "./inputs/InstructionsInput";
 
 // mobile styling - desktop can be done in tailwind
 import "./program-mobile-styles.scss"
@@ -149,7 +150,7 @@ const ProgramCreation = (props) => {
                         </div>
                         <div className="coach-instructions">
                             <h3 className="instructions-title">Coach Instructions</h3>
-                            <input className="instructions-text" value={day.description}></input>
+                            <InstructionsInput day={day} />
                         </div>
                         {day.exercises.map(exercise => {
                             return(
