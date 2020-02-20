@@ -7,10 +7,9 @@ const NavLink = props => (
     onClick={props.onClick}
     getProps={({ isCurrent }) => {
       return {
-        className: "bg-cornflower-blue hover:bg-white",
+        className: "bg-cornflower-blue hover:bg-white lg:rounded-nav",
         style: {
-          backgroundColor: isCurrent && "white",
-          borderRadius: "10px 0px 0px 10px"
+          backgroundColor: isCurrent && "white"
         }
       };
     }}

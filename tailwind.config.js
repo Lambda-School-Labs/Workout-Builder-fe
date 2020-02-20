@@ -38,6 +38,9 @@ module.exports = {
         "96": "24rem",
         "108": "27rem",
         "120": "30rem"
+      },
+      borderRadius: {
+        nav: "10px 0px 0px 10px"
       }
     }
   },
