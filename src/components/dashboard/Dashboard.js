@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import serverHandshake from "../../utils/serverHandshake";
 
-const dummyData = [
+const dummyClientPrograms = [
   {
     "client_id": 1,
     "first_name": "Jonathan",
@@ -24,9 +24,100 @@ const dummyData = [
   }
 ];
 
+const dummyPrograms = [
+  {
+    id: 1,
+    name: "Program 1",
+    description: "program1 description",
+    coach_id: 1,
+    length: 10,
+    phase: "strength",
+    workouts: [
+      {
+        id: 1,
+        name: "push day",
+        description: "push day arm workout",
+        day: 1,
+        exercises: [
+          {exercise_id: 1, order: 1, exercise_details: "135lbs bar - 5 sets of 5"},
+          {exercise_id: 2, order: 2, exercise_details: "50lbs dumbbells - 5 sets of 5"},
+          {exercise_id: 3, order: 3, exercise_details: "70lbs bar - 5 sets of 5"}
+        ]
+      },
+      {
+        id: 2,
+        name: "pull day",
+        description: "pull day arm and back workout",
+        day: 2,
+        exercises: [
+          {exercise_id: 4, order: 1, exercise_details: "bodyweight - 5 sets of 5"},
+          {exercise_id: 5, order: 2, exercise_details: "135lbs bar - 5 sets of 5"},
+          {exercise_id: 6, order: 3, exercise_details: "30lbs dumbbells - 5 sets of 5"}
+        ]
+      },
+      {
+        id: 3,
+        name: "legs and core",
+        description: "legs and core day workout",
+        day: 3,
+        exercises: [
+          {exercise_id: 7, order: 1, exercise_details: "135lbs bar - 5 sets of 5"},
+          {exercise_id: 8, order: 2, exercise_details: "135lbs bar - 5 sets of 5"},
+          {exercise_id: 9, order: 3, exercise_details: "bodyweight - 5 sets of 5"},
+        ]
+      },
+    ],
+    assigned_clients: [1, 3, 5, 7, 9]
+  },
+  {
+    id: 2,
+    name: "Program 2",
+    description: "Test program description",
+    coach_id: 1,
+    length: 22,
+    phase: "strength",
+    workouts: [
+      {
+        id: 4,
+        name: "push day",
+        description: "push day arm workout",
+        day: 1,
+        exercises: [
+          {exercise_id: 1, order: 1, exercise_details: "135lbs bar - 5 sets of 5"},
+          {exercise_id: 2, order: 2, exercise_details: "50lbs dumbbells - 5 sets of 5"},
+          {exercise_id: 3, order: 3, exercise_details: "70lbs bar - 5 sets of 5"}
+        ]
+      },
+      {
+        id: 5,
+        name: "pull day",
+        description: "pull day arm and back workout",
+        day: 2,
+        exercises: [
+          {exercise_id: 4, order: 1, exercise_details: "bodyweight - 5 sets of 5"},
+          {exercise_id: 5, order: 2, exercise_details: "135lbs bar - 5 sets of 5"},
+          {exercise_id: 6, order: 3, exercise_details: "30lbs dumbbells - 5 sets of 5"}
+        ]
+      },
+      {
+        id: 6,
+        name: "legs and core",
+        description: "legs and core day workout",
+        day: 3,
+        exercises: [
+          {exercise_id: 7, order: 1, exercise_details: "135lbs bar - 5 sets of 5"},
+          {exercise_id: 8, order: 2, exercise_details: "135lbs bar - 5 sets of 5"},
+          {exercise_id: 9, order: 3, exercise_details: "bodyweight - 5 sets of 5"},
+        ]
+      },
+    ],
+    assigned_clients: [2, 4, 6]
+  }
+];
+
 export default function Dashboard() {
   const repeatRef = useRef();
-  const [data, setData] = useState(dummyData);
+  const [clientPrograms, setClientPrograms] = useState(dummyClientPrograms);
   const [openProgram, setOpenProgram] = useState();
   const [repeating, setRepeating] = useState();
   const [confirmed, setConfirmed] = useState();
@@ -38,17 +129,9 @@ export default function Dashboard() {
         const response = await serverHandshake(true).get(
           "/clients-programs/dashboard"
         );
-        if (response.status === 200 && response.data.length) setData(response.data);
+        if (response.status === 200 && response.data.length) setClientPrograms(response.data);
       } catch (error) {
         setError(error?.response?.data?.message ?? 'Something went wrong.');
-      }
-    })();
-    (async () => {
-      try {
-        const response = await serverHandshake(true).get('/programs');
-        if (response.status === 200 && response.data.length) {}
-      } catch (error) {
-        setError(error);
       }
     })();
   }, []);
@@ -92,8 +175,8 @@ export default function Dashboard() {
           <p className="text-xs text-dove-grey">Wednesday January 29th</p>
         </div>
         <div className="overflow-y-scroll flex-grow my-2">
-          {data.length ? (
-            data.map(program => (
+          {clientPrograms.length ? (
+            clientPrograms.map(program => (
               <ProgramCardMobile
                 key={program.program_id}
                 confirmRepeat={confirmRepeat}
@@ -152,8 +235,8 @@ export default function Dashboard() {
             program
           </span>
         </div>
-        {data.length ? (
-          data.map(program => (
+        {clientPrograms.length ? (
+          clientPrograms.map(program => (
             <ProgramCardDesktop
               key={program.program_id}
               confirmRepeat={confirmRepeat}
@@ -319,6 +402,20 @@ function ProgramCardDesktop({ confirmRepeat, toggleProgram, openProgram, program
 }
 
 function ProgramList() {
+  const [programs, setPrograms] = useState(dummyPrograms);
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await serverHandshake(true).get('/programs');
+        if (response.status === 200 && response.data.length) setPrograms(response.data);
+      } catch (error) {
+        setError(error);
+      }
+    })();
+  }, []);
+
   return (
     <div className="absolute top-0 right-0 mt-6 mr-2 lg:mt-8 bg-white shadow w-72 lg:w-84 z-10">
       <input
@@ -327,30 +424,16 @@ function ProgramList() {
         className="py-4 px-8 border-b placeholder-grey68 text-sm font-medium w-full focus:outline-none"
       />
       <div className="overflow-y-scroll h-64 py-2">
-        <div className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer">
-          <span className="text-sm font-medium">System A glute emphasis</span>
-          <span className="text-xs font-medium text-grey68">2 day split</span>
-        </div>
-        <div className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer">
-          <span className="text-sm font-medium">Program 1</span>
-          <span className="text-xs font-medium text-grey68">2 weeks</span>
-        </div>
-        <div className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer">
-          <span className="text-sm font-medium">Program 2</span>
-          <span className="text-xs font-medium text-grey68">6 weeks</span>
-        </div>
-        <div className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer">
-          <span className="text-sm font-medium">Program 3</span>
-          <span className="text-xs font-medium text-grey68">4 weeks</span>
-        </div>
-        <div className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer">
-          <span className="text-sm font-medium">Program 4</span>
-          <span className="text-xs font-medium text-grey68">3 weeks</span>
-        </div>
-        <div className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer">
-          <span className="text-sm font-medium">Program 5</span>
-          <span className="text-xs font-medium text-grey68">1 week</span>
-        </div>
+        {programs.length ? (
+          programs.map(program => (
+            <div key={program.id} className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer">
+              <span className="text-sm font-medium">{program.name}</span>
+              <span className="text-xs font-medium text-grey68">{program.length} day{program.length > 1 ? 's' : ''}</span>
+            </div>
+          ))
+        ) : (
+          <p>There are no programs to assign.</p>
+        )}
       </div>
       <div className="bg-grey98 p-3 text-center text-blaze-orange font-semibold text-sm">
         <span>Create new program</span>
