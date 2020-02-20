@@ -16,6 +16,14 @@ export default function Dashboard(props) {
     document.addEventListener("click", cancelEvent);
   };
 
+  const acceptRepeat = () => {
+    setConfirmed(true);
+    setTimeout(() => {
+      setConfirmed(false);
+      setRepeating(false);
+    }, 3000);
+  };
+
   const cancelRepeat = () => {
     setRepeating(false);
     document.removeEventListener("click", cancelEvent);
@@ -24,13 +32,14 @@ export default function Dashboard(props) {
   const repeatRef = useRef();
 
   const [programs, setPrograms] = useState({});
-  const [repeating, setRepeating] = useState();
+  const [repeating, setRepeating] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
 
   return (
     <>
       <div
-        className="lg:hidden p-4 flex flex-col"
-        style={{ height: "calc(100vh - 4rem)" }}
+        className="lg:hidden p-4 pb-2 flex flex-col"
+        style={{ height: "calc(100vh - 4.375rem)" }}
       >
         <div className="border-b border-blaze-orange pb-1">
           <h2 className="font-semibold text-xl text-dark-grey">Program due:</h2>
@@ -74,7 +83,7 @@ export default function Dashboard(props) {
             id={6}
           />
         </div>
-        <button className="bg-blaze-orange rounded text-white font-semibold text-sm w-full py-3">
+        <button className="bg-blaze-orange rounded text-white font-semibold text-sm w-full py-3 focus:outline-none">
           + Add new client
         </button>
       </div>
@@ -147,13 +156,18 @@ export default function Dashboard(props) {
         />
       </div>
       {repeating && (
-        <ConfirmModal repeatRef={repeatRef} cancelRepeat={cancelRepeat} />
+        <ConfirmModal
+          repeatRef={repeatRef}
+          acceptRepeat={acceptRepeat}
+          cancelRepeat={cancelRepeat}
+          confirmed={confirmed}
+        />
       )}
     </>
   );
 }
 
-function ConfirmModal({ repeatRef, cancelRepeat }) {
+function ConfirmModal({ repeatRef, acceptRepeat, cancelRepeat, confirmed }) {
   return (
     <div
       ref={repeatRef}
@@ -162,20 +176,45 @@ function ConfirmModal({ repeatRef, cancelRepeat }) {
     >
       <div className="flex justify-center items-center bg-white w-4/5 lg:w-120 h-72 lg:h-96 p-12 rounded">
         <div className="flex flex-col items-center">
-          <p className="font-medium text-xl lg:text-2xl text-center">
-            Are you sure you want to repeat this program?
-          </p>
-          <div className="flex flex-col w-2/3 mt-6">
-            <button className="bg-blaze-orange text-white py-2 lg:py-4 rounded uppercase">
-              yes
-            </button>
-            <button
-              className="mt-4 border border-blaze-orange text-blaze-orange py-2 lg:py-4 rounded uppercase"
-              onClick={cancelRepeat}
-            >
-              cancel
-            </button>
-          </div>
+          {confirmed ? (
+            <>
+              <svg
+                width="102"
+                height="74"
+                viewBox="0 0 102 74"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M35.2382 74L0 38.8525L7.42907 31.4425L35.2382 59.1801L94.5709 0L102 7.40995"
+                  fill="#27CF2D"
+                />
+              </svg>
+              <p className="mt-10 font-medium text-xl">
+                Program successfully repeated
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="font-medium text-xl lg:text-2xl text-center">
+                Are you sure you want to repeat this program?
+              </p>
+              <div className="flex flex-col w-2/3 mt-6">
+                <button
+                  className="bg-blaze-orange text-white py-2 lg:py-4 rounded uppercase focus:outline-none"
+                  onClick={acceptRepeat}
+                >
+                  yes
+                </button>
+                <button
+                  className="mt-2 border border-blaze-orange text-blaze-orange py-2 lg:py-4 rounded uppercase focus:outline-none"
+                  onClick={cancelRepeat}
+                >
+                  cancel
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -201,10 +240,16 @@ function ProgramCardMobile({ confirmRepeat, toggleProgram, programs, id }) {
       </div>
       <div className="relative">
         <div className="text-right text-2xs text-blaze-orange">
-          <button className="font-semibold" onClick={confirmRepeat(id)}>
+          <button
+            className="font-semibold focus:outline-none"
+            onClick={confirmRepeat(id)}
+          >
             Repeat
           </button>
-          <button className="font-semibold ml-5" onClick={toggleProgram(id)}>
+          <button
+            className="font-semibold ml-5 focus:outline-none"
+            onClick={toggleProgram(id)}
+          >
             Add program
           </button>
         </div>
@@ -233,7 +278,7 @@ function ProgramCardDesktop({ confirmRepeat, toggleProgram, programs, id }) {
         viewBox="0 0 22 20"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="col-start-9"
+        className="col-start-9 cursor-pointer"
         style={{ justifySelf: "center" }}
         onClick={confirmRepeat(id)}
       >
@@ -249,6 +294,7 @@ function ProgramCardDesktop({ confirmRepeat, toggleProgram, programs, id }) {
           viewBox="0 0 20 16"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          className="cursor-pointer"
           onClick={toggleProgram(id)}
         >
           <path
@@ -268,30 +314,30 @@ function ProgramList() {
       <input
         type="text"
         placeholder="Search programs"
-        className="py-4 px-8 border-b placeholder-grey68 text-sm font-medium w-full"
+        className="py-4 px-8 border-b placeholder-grey68 text-sm font-medium w-full focus:outline-none"
       />
-      <div className="overflow-y-scroll h-64 mb-4 px-8">
-        <div className="flex flex-col mt-4">
+      <div className="overflow-y-scroll h-64">
+        <div className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer">
           <span className="text-sm font-medium">System A glute emphasis</span>
           <span className="text-xs font-medium text-grey68">2 day split</span>
         </div>
-        <div className="flex flex-col mt-4">
+        <div className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer">
           <span className="text-sm font-medium">Program 1</span>
           <span className="text-xs font-medium text-grey68">2 weeks</span>
         </div>
-        <div className="flex flex-col mt-4">
+        <div className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer">
           <span className="text-sm font-medium">Program 2</span>
           <span className="text-xs font-medium text-grey68">6 weeks</span>
         </div>
-        <div className="flex flex-col mt-4">
+        <div className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer">
           <span className="text-sm font-medium">Program 3</span>
           <span className="text-xs font-medium text-grey68">4 weeks</span>
         </div>
-        <div className="flex flex-col mt-4">
+        <div className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer">
           <span className="text-sm font-medium">Program 4</span>
           <span className="text-xs font-medium text-grey68">3 weeks</span>
         </div>
-        <div className="flex flex-col mt-4">
+        <div className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer">
           <span className="text-sm font-medium">Program 5</span>
           <span className="text-xs font-medium text-grey68">1 week</span>
         </div>
