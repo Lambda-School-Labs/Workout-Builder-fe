@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
+import { useDispatch, connect } from 'react-redux';
 
 const NavLink = props => (
   <Link
@@ -296,7 +297,7 @@ const NavBar = ({ children, location, navigate }) => {
         </div>
         <div className="hidden lg:flex h-screen bg-cornflower-blue pt-14 pr-12 pl-4">
           <div className="flex flex-col h-full w-84 bg-cornflower-blue text-dove-grey rounded-tr-lg rounded-br-lg py-4">
-            <h1 className="text-blaze-orange text-4xl font-display ml-8 mb-8">
+            <h1 className="text-blaze-orange text-4xl font-display ml-8">
               Stronger Faster
             </h1>
             <NavLink to="/dashboard">
@@ -491,7 +492,7 @@ const NavBar = ({ children, location, navigate }) => {
                   fill="#666666"
                 />
               </svg>
-              <span className="ml-6">Logout</span>
+              <button onClick={logout} className="ml-5">Logout</button>
             </div>
           </div>
           <div
@@ -506,4 +507,12 @@ const NavBar = ({ children, location, navigate }) => {
   );
 };
 
-export default NavBar;
+const mapStateToProps = state => ({
+  loggedInUser: state.loggedInUser,
+  userID: state.user_id,
+  updates: state.updates,
+});
+export default connect(
+  mapStateToProps,
+)(NavBar);
+

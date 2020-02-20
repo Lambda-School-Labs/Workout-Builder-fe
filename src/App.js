@@ -9,6 +9,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Program from "./components/program/ProgramHome";
 import ProgramCreation from "./components/program/ProgramCreation";
 import ProgramEdit from "./components/program/ProgramEdit";
+import Home from "./components/global/Home";
 
 const App = props => (
   <Router>
@@ -23,12 +24,6 @@ const App = props => (
       <PrivateRoute as={ProgramEdit} path="program/edit" {...props} />
     </NavBar>
   </Router>
-);
-
-const Home = () => (
-  <div>
-    <h2>Welcome this is a temporary landing page till it is set up</h2>
-  </div>
 );
 
 export default App;
