@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 import ProgramListElement from './ProgramListElement';
 import CreateProgram from './modals/CreateProgram'
 
-// mobile styling - desktop can be done in tailwind
+// mobile styling
 import "./program-mobile-styles.scss"
+
+// desktop styling
+import "./program-desktop-styles.scss"
 
 const ProgramHome = (props) => {
     const [CreateProgramModal, ToggleCreateProgramModal] = useState(false);
@@ -21,6 +24,7 @@ const ProgramHome = (props) => {
     }
 
     return(
+        <>
         <div className="outer-program">
 
             <div class="search-div" >
@@ -49,6 +53,38 @@ const ProgramHome = (props) => {
 
             <CreateProgram CreateProgramModal={CreateProgramModal} ToggleCreateProgramModal={ToggleCreateProgramModal} {...props}/>
         </div>
+
+        {/* DESKTOP VIEW */}
+
+        <div className="d-outer-program">
+            <div className="d-outer-top">
+                <div class="d-search-div" >
+                    <img class="magnifying-icon" src="https://i.imgur.com/dJIfxYP.png"></img>
+                    <input 
+                        class="search-bar"
+                        placeholder="Search"
+                        onChange={handleChange}
+                        value={searchTerm}
+                    />
+                </div>
+                <button class="add-program-button" onClick={() => ToggleCreateProgramModal(true)}>Create Program</button>
+            </div>
+            <div className="d-program-list-div">
+                <div class="program-list-header">
+                    <h4 className="header-title">Title</h4>
+                    <h4 className="header-active">Active</h4>
+                    <h4 className="header-assign"></h4>
+                    <h4 className="header-actions">Actions</h4>
+                </div>
+                {searchResults.map(program => {
+                        return(
+                            <ProgramListElement program={program} id={program.id} title={program.name} activeUsers={program.assigned_clients.length} {...props}/>
+                        )
+                    })}
+            </div>
+            
+        </div>
+        </>
     )
 }
 

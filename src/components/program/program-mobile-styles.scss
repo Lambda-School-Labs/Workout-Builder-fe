@@ -4,8 +4,6 @@ $program-width: 100%;
 $program-modal-width: $program-width - 10%;
 $program-modal-margin: $program-modal-width - 27%;
 
-// desktop setup
-
 .outer-program {
     width: $program-width;
     min-width: 375px;
@@ -14,6 +12,10 @@ $program-modal-margin: $program-modal-width - 27%;
     display: flex;
     flex-direction: column;
     position: relative;
+    // desktop setup
+    @media (min-width: 960px) {
+        display: none;
+    }
 }
 
 // Search bar
@@ -157,6 +159,12 @@ $program-modal-margin: $program-modal-width - 27%;
             width: 22px;
             height: 16px;
         }
+        p {
+            display: none;
+        }
+    }
+    .d-assign-div {
+        display: none;
     }
     .options-div {
         position: relative;
@@ -165,9 +173,12 @@ $program-modal-margin: $program-modal-width - 27%;
         display: flex;
         justify-content: center;
         align-items: center;
-        img {
+        .vertical-dots {
             height: 20px;
             width: 5px;
+        }
+        .horizontal-dots {
+            display: none;
         }
     }
 }
