@@ -1,15 +1,15 @@
 import React from 'react';
 import{ Link } from "@reach/router";
 
-const Home= props => {
+const Home= () => {
   return (
-    <div className="flex flex-col justify-center items-center mt-32 sm:flex-row sm:absolutesm:m-0 sm:mt-0 sm:w-screen sm:justify-start sm:justify-between bg-cornflower-blue">
-      <h1 className="text-blaze-orange items-center text-4xl font-display pb-16 sm:pb-0 sm:ml-6">
-      Stronger Faster
-      </h1>
-      <div className="flex flex-col items-center sm:flex sm:flex-row sm:items-center sm:justify-end sm:justify-between sm:mr-6">
-        <Link to ="/login"><button className ="bg-white rounded text-blaze-orange border-2 border-blaze-orange rounded font-semibold text-sm mb-6 py-2 w-48 h-10 px-4 rounded sm:mb-0 sm:mr-6 ">Login</button></Link>
-        <Link to ="/signup"><button className ="bg-blaze-orange rounded text-white font-semibold text-sm py-2 w-48 h-10 px-4 rounded">Sign Up</button></Link>
+    <div className="h-screen bg-cornflower-blue">
+      <div className="pt-24 flex flex-col items-center lg:px-8 lg:pt-8 lg:flex-row">
+        <h1 className="font-display text-4xl text-blaze-orange lg:flex-grow">Stronger Faster</h1>
+        <div className="mt-24 flex flex-col lg:mt-0 lg:flex-row lg:items-center lg:w-auto">
+          <Link to="/login" className="py-4 font-semibold text-blaze-orange bg-white border border-blaze-orange rounded px-20 text-center lg:mr-4 lg:py-2 lg:px-12">Login</Link>
+          <Link to="/signup" className="mt-4 py-4 font-semibold text-white bg-blaze-orange rounded px-20 text-center lg:mt-0 lg:py-2 lg:px-12 lg:whitespace-no-wrap">Sign Up</Link>
+        </div>
       </div>
     </div>
   );
