@@ -3,7 +3,7 @@ import{ Link } from "@reach/router";
 
 const Home= props => {
   return (
-    <div className="flex flex-col justify-center items-center mt-32 sm:flex-row sm:absolutesm:m-0 sm:mt-0 sm:w-screen sm:justify-start sm:justify-between ">
+    <div className="flex flex-col justify-center items-center mt-32 sm:flex-row sm:absolutesm:m-0 sm:mt-0 sm:w-screen sm:justify-start sm:justify-between bg-cornflower-blue">
       <h1 className="text-blaze-orange items-center text-4xl font-display pb-16 sm:pb-0 sm:ml-6">
       Stronger Faster
       </h1>

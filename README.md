@@ -7,10 +7,9 @@
 # Workout Builder
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/ec547d1af13580d3e0b5/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/Workout-Builder-fe/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/ec547d1af13580d3e0b5/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/Workout-Builder-fe/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/ec547d1af13580d3e0b5/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/key-conservation-mobile/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/ec547d1af13580d3e0b5/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs key-conservation-mobile/test_coverage)
 
 
-
+https://codeclimate.com/github/Lambda-School-Labs/key-conservation-mobile
 
 You can find the deployed project at [www.strongerfaster.fit](https://www.strongerfaster.fit/)
 
