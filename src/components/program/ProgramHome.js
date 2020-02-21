@@ -25,6 +25,9 @@ const ProgramHome = (props) => {
 
     return(
         <>
+
+        {/* MOBILE VIEW */}
+
         <div className="outer-program">
 
             <div class="search-div" >
@@ -71,7 +74,7 @@ const ProgramHome = (props) => {
             </div>
             <div className="d-program-list-div">
                 <div class="program-list-header">
-                    <h4 className="header-title">Title</h4>
+                    <h4 className="header-title">Name</h4>
                     <h4 className="header-active">Active</h4>
                     <h4 className="header-assign"></h4>
                     <h4 className="header-actions">Actions</h4>

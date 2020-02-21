@@ -23,7 +23,6 @@ const ProgramNameInput = (props) => {
     return (
             <input onChange={updateName} value={props.new_program.name}
             style={{}}
-            onkeypress="this.style.width = ((this.value.length + 1) * 8) + 'px';"
             ></input>
     )
 }
