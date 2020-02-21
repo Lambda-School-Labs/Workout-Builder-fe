@@ -116,12 +116,20 @@ const dummyPrograms = [
 ];
 
 export default function Dashboard() {
-  const repeatRef = useRef();
+  // backend data
   const [clientPrograms, setClientPrograms] = useState(dummyClientPrograms);
-  const [openProgram, setOpenProgram] = useState();
-  const [repeating, setRepeating] = useState();
+  // track which program we're repeating
+  const [repeating, setRepeating] = useState(false);
+  // track which program list should be open
+  const [openProgram, setOpenProgram] = useState(false);
+  // track which program we're adding
+  const [program, setProgram] = useState(false);
+  // track modal confirmation
   const [confirmed, setConfirmed] = useState();
+  // track any errors for display
   const [error, setError] = useState();
+
+  const modalRef = useRef();
 
   useEffect(() => {
     (async () => {
@@ -136,32 +144,39 @@ export default function Dashboard() {
     })();
   }, []);
 
-  const toggleProgram = id => () => {
-    setOpenProgram(!openProgram ? id : null);
-  };
-
-  const cancelEvent = event => {
-    if (event.target === repeatRef.current) {
-      cancelRepeat();
+  const modalEvent = event => {
+    if (event.target === modalRef.current) {
+      cancelModal();
     }
   };
 
-  const confirmRepeat = id => () => {
-    setRepeating(id);
-    document.addEventListener("click", cancelEvent);
+  const handleProgramRepeat = program => () => {
+    setRepeating(program);
+    document.addEventListener("click", modalEvent);
   };
 
-  const acceptRepeat = () => {
+  const handleProgramList = program => () => {
+    setOpenProgram(!openProgram ? program : false);
+  };
+
+  const addNewProgram = id => () => {
+    setProgram(id);
+  };
+
+  const confirmModal = () => {
     setConfirmed(true);
     setTimeout(() => {
       setConfirmed(false);
       setRepeating(false);
+      setOpenProgram(false);
+      setProgram(false);
     }, 3000);
   };
 
-  const cancelRepeat = () => {
+  const cancelModal = () => {
     setRepeating(false);
-    document.removeEventListener("click", cancelEvent);
+    setProgram(false);
+    document.removeEventListener("click", modalEvent);
   };
 
   return (
@@ -179,8 +194,9 @@ export default function Dashboard() {
             clientPrograms.map(program => (
               <ProgramCardMobile
                 key={program.program_id}
-                confirmRepeat={confirmRepeat}
-                toggleProgram={toggleProgram}
+                handleProgramRepeat={handleProgramRepeat}
+                handleProgramList={handleProgramList}
+                addNewProgram={addNewProgram}
                 openProgram={openProgram}
                 program={program}
               />
@@ -239,8 +255,9 @@ export default function Dashboard() {
           clientPrograms.map(program => (
             <ProgramCardDesktop
               key={program.program_id}
-              confirmRepeat={confirmRepeat}
-              toggleProgram={toggleProgram}
+              handleProgramRepeat={handleProgramRepeat}
+              handleProgramList={handleProgramList}
+              addNewProgram={addNewProgram}
               openProgram={openProgram}
               program={program}
             />
@@ -249,22 +266,25 @@ export default function Dashboard() {
           <p className="mt-4">You have not assigned any programs yet.</p>
         )}
       </div>
-      {repeating && (
+      {(repeating || program) && (
         <ConfirmModal
-          repeatRef={repeatRef}
-          acceptRepeat={acceptRepeat}
-          cancelRepeat={cancelRepeat}
+          modalRef={modalRef}
+          repeating={repeating}
+          openProgram={openProgram}
+          program={program}
           confirmed={confirmed}
+          confirmModal={confirmModal}
+          cancelModal={cancelModal}
         />
       )}
     </>
   );
 }
 
-function ConfirmModal({ repeatRef, acceptRepeat, cancelRepeat, confirmed }) {
+function ConfirmModal({ modalRef, repeating, openProgram, program, confirmed, confirmModal, cancelModal }) {
   return (
     <div
-      ref={repeatRef}
+      ref={modalRef}
       className="flex justify-center items-center h-full left-0 overflow-auto fixed top-0 w-full z-10"
       style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
     >
@@ -284,25 +304,25 @@ function ConfirmModal({ repeatRef, acceptRepeat, cancelRepeat, confirmed }) {
                   fill="#27CF2D"
                 />
               </svg>
-              <p className="mt-10 font-medium text-xl">
-                Program successfully repeated
+              <p className="mt-10 font-medium text-xl text-center">
+                {program ? program.name : repeating.name} successfully added
               </p>
             </>
           ) : (
             <>
               <p className="font-medium text-xl lg:text-2xl text-center">
-                Are you sure you want to repeat this program?
+                {program ? `Are you sure you want to add ${program.name} to ${openProgram.first_name} ${openProgram.last_name}?` : `Are you sure you want to repeat ${repeating.name}?`}
               </p>
               <div className="flex flex-col w-2/3 mt-6">
                 <button
                   className="bg-blaze-orange text-white py-2 lg:py-4 rounded uppercase focus:outline-none"
-                  onClick={acceptRepeat}
+                  onClick={confirmModal}
                 >
                   yes
                 </button>
                 <button
                   className="mt-2 border border-blaze-orange text-blaze-orange py-2 lg:py-4 rounded uppercase focus:outline-none"
-                  onClick={cancelRepeat}
+                  onClick={cancelModal}
                 >
                   cancel
                 </button>
@@ -315,7 +335,7 @@ function ConfirmModal({ repeatRef, acceptRepeat, cancelRepeat, confirmed }) {
   );
 }
 
-function ProgramCardMobile({ confirmRepeat, toggleProgram, openProgram, program }) {
+function ProgramCardMobile({ handleProgramRepeat, handleProgramList, addNewProgram, openProgram, program }) {
   return (
     <div className="flex flex-col py-2 border-b border-light-grey">
       <div className="flex justify-between items-center">
@@ -336,24 +356,24 @@ function ProgramCardMobile({ confirmRepeat, toggleProgram, openProgram, program 
         <div className="text-right text-2xs text-blaze-orange">
           <button
             className="font-semibold focus:outline-none"
-            onClick={confirmRepeat(program.program_id)}
+            onClick={handleProgramRepeat(program)}
           >
             Repeat
           </button>
           <button
             className="font-semibold ml-5 focus:outline-none"
-            onClick={toggleProgram(program.program_id)}
+            onClick={handleProgramList(program)}
           >
             Add program
           </button>
         </div>
-        {openProgram === program.program_id && <ProgramList />}
+        {openProgram.program_id === program.program_id && <ProgramList addNewProgram={addNewProgram} />}
       </div>
     </div>
   );
 }
 
-function ProgramCardDesktop({ confirmRepeat, toggleProgram, openProgram, program }) {
+function ProgramCardDesktop({ handleProgramRepeat, handleProgramList, addNewProgram, openProgram, program }) {
   return (
     <div className="grid grid-cols-9 gap-4 border-b items-center rounded hover:bg-cornflower-blue">
       <div className="p-2">
@@ -373,7 +393,7 @@ function ProgramCardDesktop({ confirmRepeat, toggleProgram, openProgram, program
         xmlns="http://www.w3.org/2000/svg"
         className="col-start-8 cursor-pointer"
         style={{ justifySelf: "center" }}
-        onClick={confirmRepeat(program.program_id)}
+        onClick={handleProgramRepeat(program)}
       >
         <path
           d="M16.4199 15H4.73071V12L0.0550537 16L4.73071 20V17H18.7577V11H16.4199V15ZM4.73071 5H16.4199V8L21.0955 4L16.4199 0V3H2.39288V9H4.73071V5Z"
@@ -388,20 +408,20 @@ function ProgramCardDesktop({ confirmRepeat, toggleProgram, openProgram, program
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="cursor-pointer"
-          onClick={toggleProgram(program.program_id)}
+          onClick={handleProgramList(program)}
         >
           <path
             d="M19.3212 10H12.3078V16H7.63212V10H0.618652V6H7.63212V0H12.3078V6H19.3212V10Z"
             fill="#BEBEBE"
           />
         </svg>
-        {openProgram === program.program_id && <ProgramList />}
+        {openProgram.program_id === program.program_id && <ProgramList addNewProgram={addNewProgram} />}
       </div>
     </div>
   );
 }
 
-function ProgramList() {
+function ProgramList({ addNewProgram }) {
   const [programs, setPrograms] = useState(dummyPrograms);
   const [error, setError] = useState();
 
@@ -426,7 +446,7 @@ function ProgramList() {
       <div className="overflow-y-scroll h-64 py-2">
         {programs.length ? (
           programs.map(program => (
-            <div key={program.id} className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer">
+            <div key={program.id} className="flex flex-col py-2 px-8 lg:hover:bg-cornflower-blue lg:cursor-pointer" onClick={addNewProgram(program)}>
               <span className="text-sm font-medium">{program.name}</span>
               <span className="text-xs font-medium text-grey68">{program.length} day{program.length > 1 ? 's' : ''}</span>
             </div>
