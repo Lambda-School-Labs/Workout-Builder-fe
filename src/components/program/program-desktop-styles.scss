@@ -3,11 +3,12 @@
 $program-width: 100%;
 $program-modal-width: $program-width - 10%;
 $program-modal-margin: $program-modal-width - 27%;
+$desktop-breakpoint: 959px;
 
 // Desktop home page
 
 .d-outer-program {
-    @media (max-width: 959px) {
+    @media (max-width: $desktop-breakpoint) {
         display: none;
     }
     .d-outer-top {
@@ -59,17 +60,7 @@ $program-modal-margin: $program-modal-width - 27%;
         display: flex;
         flex-direction: column;
         margin-bottom: 5rem;
-        // .program-element:nth-last-of-type(1) {
-        //     border-radius: 0px 0px .3rem .3rem;
-        //     border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-        // }
-        // .program-element:nth-of-type(2) {
-        //     border-top: none;
-        // }
         .program-list-header {
-            background: #F7F7FA;
-            // border: 1px solid rgba(0, 0, 0, 0.25);
-            // border-radius: .3rem .3rem 0px 0px;
             border: none;
             width: 100%;
             height: 3.125rem;
@@ -120,8 +111,6 @@ $program-modal-margin: $program-modal-width - 27%;
         height: 3.125rem;
         display: flex;
         background: white;
-        // border: 1px solid rgba(0, 0, 0, 0.25);
-        // border-bottom: none;
         border: none;
         .checkbox-div {
             height: 100%;
@@ -212,7 +201,7 @@ $program-modal-margin: $program-modal-width - 27%;
 // Desktop creation page
 
 .d-program-creation {
-    @media (max-width: 959px) {
+    @media (max-width: $desktop-breakpoint) {
         display: none;
     }
     padding: 2.5rem;
@@ -390,7 +379,6 @@ $program-modal-margin: $program-modal-width - 27%;
                 }
                 .exercise-bottom-left {
                     display: flex;
-                    // justify-content: space-between;
                     align-items: center;
                     .icon-letter {
                         font-family: 'Roboto', sans-serif;
@@ -521,3 +509,157 @@ $program-modal-margin: $program-modal-width - 27%;
     }
 }
 
+// Desktop preview page
+
+.d-program-preview {
+    @media (max-width: $desktop-breakpoint) {
+        display: none;
+    }
+    padding: 2.5rem;
+    .back-div {
+        display: flex;
+        align-items: center;
+        height: 3rem;
+        margin-bottom: 1.25rem;
+        img {
+            cursor: pointer;
+            height: 1rem;
+            width: 1rem;
+        }
+        p {
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.125rem;
+            line-height: 1.3125rem;
+            padding-left: .5rem;
+        }
+    }
+    .d-preview-info {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        .info-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .preview-name {
+                font-family: 'Hind Madurai', sans-serif;
+                font-weight: 600;
+                font-size: 1.875rem;
+                line-height: 2.5625rem;
+            }
+            .preview-phase-days {
+                height: 3.3125rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+                font-size: 1.25rem;
+                line-height: 1.5rem;
+                color: #ADADAD;
+            }
+        }
+        .info-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 13.25rem;
+            height: 7rem;
+            .assign-to-client-button {
+                width: 100%;
+                background: #FD6A02;
+                border-radius: 5px;
+                height: 3rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: 1.125rem;
+                line-height: 1.3125rem;
+                color: #FFFFFF;
+                border: none;
+            }
+            .edit-button {
+                width: 100%;
+                background: #FFFFFF;
+                border-radius: 5px;
+                height: 3rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: 1.125rem;
+                line-height: 1.3125rem;
+                color: #FD6A02;
+                border: 2px solid #FD6A02;
+            }
+        }
+    }
+    .workout-schedule-table {
+        width: 100%;
+        margin-top: 5rem;
+        border-collapse: collapse;
+        td {
+            border: 1px solid #B6B6B6;
+            padding: .7%;
+            vertical-align: top;
+            width: 14.28%;
+            cursor: pointer;
+            &:hover {
+                background: rgba(253, 106, 2, 0.3);
+            }
+            h3 {
+                font-family: 'Hind Madurai', sans-serif;
+                font-weight: 600;
+                font-size: 1rem;
+                line-height: 1.375rem;
+                margin-bottom: .2rem;
+            }
+            h4 {
+                font-family: 'Hind Madurai', sans-serif;
+                font-weight: 600;
+                font-size: 0.875rem;
+                line-height: 1.1875rem;
+                margin-bottom: 1rem;
+            }
+            .table-exercise {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 1.5rem;
+                .table-exercise-title {
+                    display: flex;
+                    p {
+                        font-family: 'Roboto', sans-serif;
+                        font-weight: 600;
+                        font-size: .85rem;
+                        line-height: .85rem;
+                        width: 1.125rem;
+                        height: 1.125rem;
+                        border: 1px solid #B6B6B6;
+                        color: #FD6A02;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0 .5rem .5rem 0;
+                    }
+                    h5 {
+                        font-family: 'Hind Madurai', sans-serif;
+                        font-weight: 600;
+                        font-size: 14px;
+                        line-height: 19px;
+                    }
+                }
+                p {
+                    font-family: 'Hind Madurai', sans-serif;
+                    font-size: 14px;
+                    line-height: 19px;
+                }
+            }
+        }
+        .blank-cell {
+            background-color: rgb(235, 235, 235);
+        }
+    }
+}

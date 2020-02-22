@@ -35,7 +35,7 @@ const CreateProgram = (props) => {
         assigned_clients: []
         }
         e.preventDefault();
-        props.navigate("/program/create");
+        props.navigate("/programs/create");
         closeModal(e);
         // reset new program data
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });

@@ -3,6 +3,7 @@
 $program-width: 100%;
 $program-modal-width: $program-width - 10%;
 $program-modal-margin: $program-modal-width - 27%;
+$mobile-breakpoint: 960px;
 
 .outer-program {
     width: $program-width;
@@ -13,7 +14,7 @@ $program-modal-margin: $program-modal-width - 27%;
     flex-direction: column;
     position: relative;
     // desktop setup
-    @media (min-width: 960px) {
+    @media (min-width: $mobile-breakpoint) {
         display: none;
     }
 }
@@ -495,7 +496,7 @@ $program-modal-margin: $program-modal-width - 27%;
 // Program Creation page
 
 .program-creation {
-    @media (min-width: 960px) {
+    @media (min-width: $mobile-breakpoint) {
         display: none;
     }
     *:focus {
@@ -780,6 +781,9 @@ $program-modal-margin: $program-modal-width - 27%;
 // Preview page styles
 
 .program-preview {
+    @media (min-width: $mobile-breakpoint) {
+        display: none;
+    }
     width: $program-width;
     min-width: 375px;
     height: 100%;

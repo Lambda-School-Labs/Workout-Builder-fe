@@ -14,7 +14,7 @@ const ProgramListElement = (props) => {
         // Set the program to new program data and view it in the preview page
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: props.program });
 
-        props.navigate("/program/preview");
+        props.navigate("/programs/preview");
     }
 
 

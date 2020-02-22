@@ -13,19 +13,22 @@ import InstructionsInput from "./inputs/InstructionsInput";
 // mobile styling - desktop can be done in tailwind
 import "./program-mobile-styles.scss"
 
+// desktop styling
+import "./program-desktop-styles.scss"
+
 const ProgramCreation = (props) => {
     const Dispatch = useDispatch();
     const [confirmModal, toggleConfirmModal] = useState(false);
 
     const goBackProgramHome = e => {
         e.preventDefault();
-        props.navigate("/program");
+        props.navigate("/programs");
     };
 
     // leave the page if name is empty - to avoid errors in case user refreshes and data resets
     useEffect(() => {
         if(props.new_program.name === "") {
-            props.navigate("/program");
+            props.navigate("/programs");
         }
     }, []);
 
@@ -103,7 +106,7 @@ const ProgramCreation = (props) => {
     }
 
     const showPreview = () => {
-        props.navigate("/program/preview");
+        props.navigate("/programs/preview");
     }
 
     // publishExercise function has been moved to publishConfirm modal

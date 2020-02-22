@@ -16,10 +16,10 @@ const App = (props) => (
     <Router>
       <Home exact path="/" />
       <Dashboard exact path="/dashboard" />
-      <Program exact path="/program" {...props}/>
-      <ProgramCreation exact path="/program/create" {...props} />
-      <ProgramEdit exact path="/program/edit" {...props} />
-      <ProgramPreview exact path="/program/preview" {...props} />
+      <Program exact path="/programs" {...props}/>
+      <ProgramCreation exact path="/programs/create" {...props} />
+      <ProgramEdit exact path="/programs/edit" {...props} />
+      <ProgramPreview exact path="/programs/preview" {...props} />
       <Login exact path="/login" {...props}/>
       <SignUp exact path="/signup" {...props}/>
       <GoogleAuth path="/auth" />

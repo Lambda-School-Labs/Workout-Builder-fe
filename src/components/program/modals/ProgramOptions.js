@@ -53,7 +53,7 @@ const ProgramOptions = (props) => {
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: thisProgram });
 
         closeModal(e);
-        props.navigate("/program/edit");
+        props.navigate("/programs/edit");
     }
 
     const wrapperRef = useRef(null);
