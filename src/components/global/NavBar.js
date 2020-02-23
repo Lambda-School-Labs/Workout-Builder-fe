@@ -480,7 +480,7 @@ const NavBar = ({ children, location, navigate }) => {
             </div>
           </div>
           <div
-            className="bg-white max-w-screen-xl"
+            className="bg-white w-full max-w-screen-xl"
             style={{ borderRadius: "20px 20px 0px 0px" }}
           >
             {children}
