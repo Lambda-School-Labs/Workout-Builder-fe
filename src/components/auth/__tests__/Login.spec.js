@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom/extend-expect";
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
-import Login from "./Login";
+import Login from "../Login";
 import mockAxios from "axios";
 
 test("renders Login component", () => {
