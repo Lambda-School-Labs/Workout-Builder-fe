@@ -1,19 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
-import ExerciseInput from './modals/ExerciseInput';
-import ExerciseDetails from './modals/ExerciseDetails';
+import ExerciseInput from './inputs/ExerciseInput';
+import ExerciseDetails from './inputs/ExerciseDetails';
+import PhaseInput from "./inputs/PhaseInput";
+import LengthInput from "./inputs/LengthInput";
+import ProgramNameInput from "./inputs/ProgramNameInput";
+import WorkoutNameInput from "./inputs/WorkoutNameInput";
+import EditConfirm from "./modals/EditConfirm";
+import InstructionsInput from "./inputs/InstructionsInput";
 
 // mobile styling - desktop can be done in tailwind
 import "./program-mobile-styles.scss"
 
 const ProgramEdit = (props) => {
     const Dispatch = useDispatch();
+    const [confirmModal, toggleConfirmModal] = useState(false);
 
     const goBackProgramHome = e => {
         e.preventDefault();
         props.navigate("/program");
     };
+
+    // leave the page if name is empty - to avoid errors in case user refreshes and data resets
+    const { new_program, navigate } = props;
+    useEffect(() => {
+        if(new_program.name === "") {
+            navigate("/program");
+        }
+    }, [new_program.name, navigate]);
 
     // Current day number
     const nextDay = props.new_program.workouts.length + 1;
@@ -36,7 +51,7 @@ const ProgramEdit = (props) => {
     const deleteWorkout = (input_id) => {
         // filter out the workout from the program by id
         let updatedProgram = {...props.new_program};
-        updatedProgram.workouts = updatedProgram.workouts.filter((workout) => workout.id != input_id);
+        updatedProgram.workouts = updatedProgram.workouts.filter((workout) => workout.id !== input_id);
         // reapply day numbers - in case you delete a day in the middle of the program
         if (updatedProgram.workouts.length > 0) {
             let daynumber = 1;
@@ -89,57 +104,156 @@ const ProgramEdit = (props) => {
         Dispatch({ type: "UPDATE" });
     }
 
-    const submitEdits = () => {
+    // submitEdits function has been moved to editConfirm modal
+
+    const showPreview = () => {
+        props.navigate("/program/preview");
+    }
+
+    const discardProgram = () => {
+        // discard changes and navigate to program home
         const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
         workouts: [ ],
         assigned_clients: []
         }
-        Dispatch({ type: "UPDATE_A_PROGRAM", payload: props.new_program });
+
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
         props.navigate("/program");
     }
 
     return(
+        <>
+
+        {/* MOBILE VIEW */}
+
+
         <div className="program-creation">
             <div className="back-div">
-                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome}></img>
+                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome} alt="back"></img>
                 <p className="back-text" onClick={goBackProgramHome}>Back</p>
             </div>
             <div className="program-info">
-                <h2>{props.new_program.name}</h2>
-                <h3>Phase: {props.new_program.phase}</h3>
-                <h3>{props.new_program.length} days</h3>
+                <div className="title-line">
+                    <div className="title-left">
+                        <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => discardProgram()} alt="delete"></img>
+                        <ProgramNameInput />
+                    </div>
+                    <p className="title-preview" onClick={() => showPreview()}>Preview</p>
+                </div>
+                <div className="info-input-div">
+                    <h3>Phase: </h3><PhaseInput />
+                </div>
+                <div className="info-input-div">
+                    <h3>Days programmed: </h3><LengthInput />
+                </div>
             </div>
-            <button className="publish-button" onClick={() => submitEdits()}>Submit Edits</button>
             {props.new_program.workouts.map(day => {
                 return (
-                    <div className="day-div">
+                    <div key={day.id} className="day-div">
                         <div className="day-title-div">
-                            <h2 className="day-title">Day {day.day}: {day.name}</h2>
-                            <img className="delete-button" src="https://i.imgur.com/nGDM0fq.png" onClick={() => deleteWorkout(day.id)}></img>
+                            <h2 className="day-label">Day {day.day}:</h2>
+                            <WorkoutNameInput day={day} />
+                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteWorkout(day.id)} alt="delete"></img>
                         </div>
                         <div className="coach-instructions">
                             <h3 className="instructions-title">Coach Instructions</h3>
-                            <div className="instructions-text">Use this area to help the athlete understand goals for today’s session</div>
+                            <InstructionsInput day={day} />
                         </div>
                         {day.exercises.map(exercise => {
                             return(
-                                <div className="exercise-div">
-                                    <div className="icon-div">
+                                <div key={exercise.exercise_id} className="exercise-div">
+                                    <h3 className="exercise-label">Exercise Title</h3>
+                                    <div className="exercise-title-div">
                                         <p className="icon-letter">{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
-                                        <img className="delete-button" src="https://i.imgur.com/nGDM0fq.png" onClick={() => deleteExercise(day.id, exercise.order)}></img>
+                                        <div className="exercise-title-right">
+                                            <ExerciseInput day={day} exercise={exercise} />
+                                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteExercise(day.id, exercise.order)} alt="delete"></img>
+                                        </div>
                                     </div>
-                                    <ExerciseInput day={day} exercise={exercise} />
+                                    <h3 className="exercise-label">Sets, reps, tempo, rest, etc.</h3>
                                     <ExerciseDetails day={day} exercise={exercise} />
                                 </div>
                             )
                         })}
                         <button className="add-exercise-button" onClick={() => addExercise(day.id)}>+ Add exercise</button>
+                        <hr />
                     </div>
                 )
             })}
             <button className="add-day-button" onClick={() => addWorkout()}>+ Add day</button>
+            <button className="publish-button" onClick={() => toggleConfirmModal(true)}>Save</button>
         </div>
+
+        {/* DESKTOP VIEW */}
+
+        <div className="d-program-creation">
+            <div className="back-div">
+                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome} alt="back"></img>
+                <p className="back-text" onClick={goBackProgramHome}>Back</p>
+            </div>
+            <div className="d-creation-info">
+                <div className="info-left">
+                    <div className="creation-title">
+                        <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => discardProgram()} alt="delete"></img>
+                        <ProgramNameInput />
+                    </div>
+                    <div className="creation-phase-days">
+                        <h3>Phase: </h3><PhaseInput />
+                        <h3>Number of days in program: </h3><LengthInput />
+                    </div>
+                </div>
+                <div className="info-right">
+                    <button className="publish-button" onClick={() => toggleConfirmModal(true)}>Save</button>
+                    <button className="preview-button" onClick={() => showPreview()}>Preview</button>
+                </div>
+            </div>
+            {props.new_program.workouts.map(day => {
+                return (
+                    <div key={day.id} className="day-div">
+                        <div className="day-title-div">
+                            <h2 className="day-label">Day {day.day}:</h2>
+                            <WorkoutNameInput day={day} />
+                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteWorkout(day.id)} alt="delete"></img>
+                        </div>
+                        <div className="coach-instructions">
+                            <h3 className="instructions-title">Coach Instructions</h3>
+                            <InstructionsInput day={day} />
+                        </div>
+
+
+                        {day.exercises.map(exercise => {
+                            return(
+                                <div key={exercise.exercise_id} className="d-exercise-div">
+                                    <div className="exercise-left">
+                                        <h3 className="exercise-label">Exercise title</h3>
+                                        <div className="exercise-bottom-left">
+                                            <p className="icon-letter">{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
+                                            <ExerciseInput day={day} exercise={exercise} />
+                                        </div>
+                                    </div>
+                                    <div className="exercise-right">
+                                        <h3 className="exercise-label">Sets, reps, tempo, rest, etc.</h3>
+                                        <div className="exercise-bottom-right">
+                                            <ExerciseDetails day={day} exercise={exercise} />
+                                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteExercise(day.id, exercise.order)} alt="delete"></img>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })}
+
+
+                        <button className="add-exercise-button" onClick={() => addExercise(day.id)}>+ Add exercise</button>
+                        <hr />
+                    </div>
+                )
+            })}
+            <button className="d-add-day-button" onClick={() => addWorkout()}>+ Add day</button>
+        </div>
+        {confirmModal ? <EditConfirm thisProgram={props.new_program} 
+            confirmModal={confirmModal} toggleConfirmModal={toggleConfirmModal} {...props}/>
+            : <div />}
+        </>
     )
 }
 

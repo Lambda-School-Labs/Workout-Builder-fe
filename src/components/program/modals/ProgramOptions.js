@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
@@ -54,42 +54,42 @@ const ProgramOptions = (props) => {
 
     closeModal(e);
     props.navigate("/program/edit");
-  };
+  }
 
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
 
-  return(
-    <div className="options-modal">
-      <div ref={wrapperRef}>
-        <div className="options-element" onClick={editProgram}>
-          <div className="options-left">
-            <img src="https://i.imgur.com/L3ARWfG.png"></img>
-          </div>
-          <div className="options-right">
-            <p>Edit</p>
-          </div>
-        </div>
-        <div className="options-element" onClick={duplicateProgram}>
-          <div className="options-left">
-            <img src="https://i.imgur.com/DZgRwQr.png"></img>
-          </div>
-          <div className="options-right">
-            <p>Duplicate</p>
-          </div>
-        </div>
-        <div className="options-element" onClick={deleteProgram}>
-          <div className="options-left">
-            <img src="https://i.imgur.com/xsHoyAy.png"></img>
-          </div>
-          <div className="options-right">
-            <p>Delete Program</p>
-          </div>
-        </div>
+    return(
+      <div className="options-modal">
+              <div ref={wrapperRef}>
+              <div className="options-element" onClick={editProgram}>
+                  <div className="options-left">
+                      <img src="https://i.imgur.com/VDEt22i.png" alt="edit"></img>
+                  </div>
+                  <div className="options-right">
+                      <p>Edit</p>
+                  </div>
+              </div>
+              <div className="options-element" onClick={duplicateProgram}>
+                  <div className="options-left">
+                      <img src="https://i.imgur.com/DZgRwQr.png" alt="duplicate"></img>
+                  </div>
+                  <div className="options-right">
+                      <p>Duplicate</p>
+                  </div>
+              </div>
+              <div className="options-element" onClick={deleteProgram}>
+                  <div className="options-left">
+                      <img src="https://i.imgur.com/xsHoyAy.png" alt="delete"></img>
+                  </div>
+                  <div className="options-right">
+                      <p>Delete Program</p>
+                  </div>
+              </div>
+              </div>
       </div>
-    </div>
-  );
-};
+    )
+}
 
 const mapStateToProps = state => ({
   loggedInUser: state.loggedInUser,

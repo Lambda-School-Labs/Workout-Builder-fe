@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Exo|Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Exo|Hind+Madurai|Montserrat|Roboto&display=swap');
 
 $program-width: 100%;
 $program-modal-width: $program-width - 10%;
 $program-modal-margin: $program-modal-width - 27%;
+$mobile-breakpoint: 1024px;
 
 .outer-program {
     width: $program-width;
@@ -12,93 +13,115 @@ $program-modal-margin: $program-modal-width - 27%;
     display: flex;
     flex-direction: column;
     position: relative;
+    // desktop setup
+    @media (min-width: $mobile-breakpoint) {
+        display: none;
+    }
 }
 
-.main-title {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin: 1.9rem 0 1.6rem 1rem;
-    line-height: 1.75rem;
-}
-
-.add-program-button {
-    margin: 0 1rem;
-    background: #666666;
-    border-radius: .3rem;
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.125rem;
-    height: 2.3rem;
-}
+// Search bar
 
 .search-div {
     margin: 1rem;
-    border-bottom: 1px solid black;
+    border: 1px solid #C4C4C4;
+    border-radius: .3rem;
     display: flex;
-    height: 1.625rem;
+    height: 2.25rem;
+    display: flex;
+    align-items: center;
     .magnifying-icon {
         width: 1.25rem;
         height: 1.25rem;
+        margin: 0.5625rem;
     }
     .search-bar {
         width: calc(100% - 1.25rem);
+        font-family: 'Hind Madurai', sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.1875rem;
+        color: #C4C4C4;
+        &:focus {
+            outline-width: 0;
+        }
+        &:focus::-webkit-input-placeholder {
+            color: transparent;
+        }
     }
 }
+
+// Program list and header
 
 .program-list-div {
     margin: .7rem 1rem;
     display: flex;
     flex-direction: column;
     margin-bottom: 5rem;
-    .program-element:nth-of-type(2n) {
-        background-color: rgba(196, 196, 196, 0.7);;
+    .program-element:nth-last-of-type(1) {
+        border-radius: 0px 0px .3rem .3rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    }
+    .program-element:nth-of-type(2) {
+        border-top: none;
     }
     .program-list-header {
-        background: #C4C4C4;
+        background: #F7F7FA;
+        border: 1px solid rgba(0, 0, 0, 0.25);
         border-radius: .3rem .3rem 0px 0px;
         width: 100%;
         height: 3.125rem;
         display: flex;
         .header-title {
-            margin: 17px 0 12px calc(10% + 7px);
-            width: calc(46.6% - 14px);
-            font-family: 'Roboto', sans-serif;
+            margin: 17px 0 12px calc(10% - 16px);
+            width: calc(46.6% + 10px);
+            font-family: 'Hind Madurai', sans-serif;
             font-size: 1.125rem;
             line-height: 1.3125rem;
             font-weight: bold;
+            color: #686868;
         }
         .header-active {
-            margin: 17px 0 12px .5%;
+            margin: 17px 0 12px calc(.5%);
             width: 9.4%;
             text-align: center;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Hind Madurai', sans-serif;
             font-size: 1.125rem;
             line-height: 1.3125rem;
             font-weight: bold;
+            color: #686868;
         }
     }
-    // .program-list-footer {
-    //     width: 100%;
-    //     height: 50px;
-    //     background-color: lightgray;
-    // }
 }
+
+// Program list elements
 
 .program-element {
     width: 100%;
     height: 3.125rem;
     display: flex;
     background: white;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-bottom: none;
     .checkbox-div {
         height: 100%;
         width: 10%;
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        img {
-            height: .9rem;
-            width: .9rem;
+        input {
+            width: 1rem;
+            height: 1rem;
+            -webkit-appearance: none;
+            background-color: #ffffff;
+            border: 2px solid #686B6F;
+            border-radius: 3px;
+            &:focus {
+                outline: none;
+            }
+            &:checked {
+                background: #333333;
+                border: 2px solid #333333;
+                border: none;
+            }
         }
     }
     .title-div {
@@ -108,9 +131,10 @@ $program-modal-margin: $program-modal-width - 27%;
         justify-content: flex-start;
         align-items: center;
         p {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Hind Madurai', sans-serif;
             font-size: 14px;
             margin-left: 7px;
+            cursor: pointer;
         }
     }
     .active-div {
@@ -121,7 +145,7 @@ $program-modal-margin: $program-modal-width - 27%;
         align-items: center;
         width: 9.4%;
         p {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Hind Madurai', sans-serif;
             font-size: 14px;
         }
     }
@@ -136,6 +160,12 @@ $program-modal-margin: $program-modal-width - 27%;
             width: 22px;
             height: 16px;
         }
+        p {
+            display: none;
+        }
+    }
+    .d-assign-div {
+        display: none;
     }
     .options-div {
         position: relative;
@@ -144,11 +174,26 @@ $program-modal-margin: $program-modal-width - 27%;
         display: flex;
         justify-content: center;
         align-items: center;
-        img {
+        .vertical-dots {
             height: 20px;
             width: 5px;
         }
+        .horizontal-dots {
+            display: none;
+        }
     }
+}
+
+.add-program-button {
+    margin: 1.9rem 1rem 1.9rem 1rem;
+    background: #FD6A02;
+    border-radius: .3rem;
+    color: white;
+    font-family: 'Hind Madurai', sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.5625rem;
+    font-weight: 600;
+    padding: .75rem 0;
 }
 
 // Program Modal styles
@@ -158,54 +203,77 @@ $program-modal-margin: $program-modal-width - 27%;
     // margin: 5rem auto;
     background-color: white;
     position: absolute;
-    top: 5em;
+    top: calc(50% - 17rem);
     right: 10%;
     left:10%;
+    width: 80%;
+    height: 34rem;
     h3 {
-        padding-top: 16px;
-        font-family: 'Roboto', sans-serif;
-        font-size: 24px;
-        margin: 16px 15px;
-        font-weight: bold;
+        margin: 2rem 1rem .5rem 1rem;
+        font-family: 'Hind Madurai', sans-serif;
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    .create-row {
+        display:flex;
+        align-items: flex-start;
+        .asterix {
+            color: red;
+            margin: 1.5rem 0 .5rem 0;
+        }
     }
     p {
-        font-family: 'Roboto', sans-serif;
-        font-size: 18px;
-        margin: 16px 15px;
+        font-family: 'Hind Madurai', sans-serif;
+        font-size: 1.125rem;
+        line-height: 1.5625rem;
+        margin: 1.5rem 0 .5rem 1rem;
+        color: #666666;
     }
     input {
         margin: 0 15px;
+        padding: .5rem;
         width: calc(100% - 33px);
-        font-family: 'Roboto', sans-serif;
-        font-size: 14px;
-        border-bottom: 1px solid gray;
-    }
-    .program-button-div {
-        display: flex;
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        .cancel-button {
-            margin-top: 115px;
-            margin-bottom: 12px;
-            font-family: 'Roboto', sans-serif;
-            font-size: 18px;
-        }
-        .create-button {
-            margin: 98px 15px 0px 30px;
-            width: 143px;
-            height: 50px;
-            background: #C4C4C4;
-            border-radius: 5px;
-            color: white;
-        }
+        font-family: 'Hind Madurai', sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.1875rem;
+        background: #FFFFFF;
+        border: 1px solid #C4C4C4;
+        border-radius: 5px;
     }
     .legend-p {
-        font-family: 'Roboto', sans-serif;
-        font-size: 14px;
+        font-family: 'Hind Madurai', sans-serif;
         font-weight: 500;
-        margin: 0 0 10px 15px;
-        padding-bottom: 10px;
+        font-size: 0.875rem;
+        line-height: 1.1875rem;
+        margin: .5rem 0 0 1rem;
+        font-weight: bold;
+    }
+    .program-button-div {
+        width: 100%;
+        height: 10rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .save-button {
+            width: 12rem;
+            height: 2.25rem;
+            background: #FD6A02;
+            border-radius: 5px;
+            color: white;
+            margin-bottom: .5rem;
+            font-family: 'Hind Madurai', sans-serif;
+            font-style: normal;
+            font-size: 1.125rem;
+            line-height: 1.5625rem;
+        }
+        .cancel-button {
+            font-family: 'Hind Madurai', sans-serif;
+            font-size: 1.125rem;
+            line-height: 1.5625rem;
+            text-decoration-line: underline;
+        }
     }
     
 }
@@ -279,6 +347,8 @@ $program-modal-margin: $program-modal-width - 27%;
     background-color: rgba(0, 0, 0, 0);
 }
 
+// Assign Modal
+
 .assign-modal {
     z-index: 1;
     width: 10rem;
@@ -287,7 +357,7 @@ $program-modal-margin: $program-modal-width - 27%;
     right: 50%;
     top: 50%;
     width: 15rem;
-    height: 21rem;
+    height: 21.5rem;
     box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
     border: 0.5px solid #C4C4C4;
     .assign-internal {
@@ -339,8 +409,19 @@ $program-modal-margin: $program-modal-width - 27%;
                     input {
                         width: 1rem;
                         height: 1rem;
-                        color: red;
-                        margin-right: 1rem;
+                        -webkit-appearance: none;
+                        background-color: #ffffff;
+                        border: 2px solid #686B6F;
+                        border-radius: 3px;
+                        margin-right: 5px;
+                        &:focus {
+                            outline: none;
+                        }
+                        &:checked {
+                            background: #333333;
+                            border: 2px solid #333333;
+                            border: none;
+                        }
                     }
                 }
             }
@@ -354,20 +435,73 @@ $program-modal-margin: $program-modal-width - 27%;
             .assign-button {
                 width: 206px;
                 height: 30px;
-                background: #AFAFAF;
+                background: #FD6A02;
                 border-radius: 5px;
-                font-family: 'Roboto', sans-serif;
+                font-family: 'Hind Madurai', sans-serif;
                 font-size: 0.875rem;
-                line-height: 1rem;
+                line-height: 1.1875rem;
                 color: #FFFFFF;
+                height: 2.25rem;
             }
         }
     }
 }
 
+// Confirmation modals styles
+
+.confirm-modal {
+    z-index: 2;
+    background-color: white;
+    position: absolute;
+    left: calc(50% - 10rem);
+    top: calc(50% - 5rem);
+    width: 20rem;
+    height: 10rem;
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+    border: 0.5px solid #C4C4C4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &:focus {
+        outline: none;
+    }
+    h3 {
+        font-family: 'Hind Madurai', sans-serif;
+        font-weight: 500;
+        font-size: 1.125rem;
+        line-height: 1.5625rem;
+        margin-top: 3rem;
+    }
+    button {
+        border: 1px solid #FD6A02;
+        font-family: 'Hind Madurai', sans-serif;
+        font-weight: 500;
+        font-size: 1.125rem;
+        line-height: 1.5625rem;
+        width: 4.4rem;
+        margin: 1.375rem 0;
+    }
+}
+
+.confirm-modal-overaly {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.600);
+}
+
 // Program Creation page
 
 .program-creation {
+    @media (min-width: $mobile-breakpoint) {
+        display: none;
+    }
+    *:focus {
+        outline: none;
+    }
     width: $program-width;
     min-width: 375px;
     height: 100%;
@@ -396,22 +530,187 @@ $program-modal-margin: $program-modal-width - 27%;
     }
     .program-info {
         width: 90%;
-        margin: .5rem auto 2rem auto;
-        h2 {
-            font-family: 'Exo', sans-serif;
-            font-size: 2.5rem;
-            line-height: 3.5rem;
+        margin: .5rem auto .7rem auto;
+        .title-line {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .title-left {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                input {
+                    font-family: 'Hind Madurai', sans-serif;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 1.8rem;
+                    line-height: 2rem;
+                    margin-left: .5rem;
+                    height: 2rem;
+                    max-width: 18rem;
+                }
+            }
+            .title-preview {
+                font-family: 'Hind Madurai', sans-serif;
+                font-weight: 500;
+                font-size: 1rem;
+                line-height: 1rem;
+                text-decoration-line: underline;
+                color: #FD6A02;
+                cursor: pointer;
+            }
         }
-        h3 {
+        .info-input-div {
+            display: flex;
+            align-items: center;
+            margin: .5rem 0;
+            h3 {
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: 1rem;
+                line-height: 1.1875rem;
+                color: #7D7D7D;
+                margin-right: 1rem;
+            }
+            input {
+                border: 1px solid #D4D4D4;
+                border-radius: 5px;
+                font-family: 'Montserrat', sans-serif;
+                font-size: .9rem;
+                line-height: 0.9375rem;
+                padding: 0.375rem;
+            }
+        }
+    }
+    .delete-button {
+        height: 1.125rem;
+        width: 1rem;
+        cursor: pointer;
+    }
+    .day-div {
+        width: 90%;
+        margin: 1rem auto 0 auto;
+        .day-title-div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .day-label {
+                font-family: 'Hind Madurai', sans-serif;
+                font-weight: 600;
+                font-size: 1.2rem;
+                line-height: 1.5625rem;
+            }
+            .day-name {
+                border: 1px solid #D4D4D4;
+                border-radius: 5px;
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: .9rem;
+                line-height: 1rem;
+                padding: 0.375rem;
+                color: #333333;
+                width: calc(100% - 5rem);
+            }
+        }
+        .coach-instructions {
+            margin-top: 1rem;
+            width: 100%;
+            .instructions-title {
+                font-family: 'Hind Madurai', sans-serif;
+                font-weight: 500;
+                font-size: .85rem;
+                line-height: 1rem;
+                margin: .2rem 0;
+                color: #8D8888;
+            }
+            .instructions-text {
+                width: 100%;
+                height: 3.4375rem;
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: .85rem;
+                line-height: 1rem;
+                border: 1px solid #D4D4D4;
+                border-radius: 0.3125rem;
+                color: #333333;
+                padding: .3rem;
+            }
+        }
+        .exercise-div {
+            width: 100%;
+            .exercise-label {
+                font-family: 'Hind Madurai', sans-serif;
+                font-weight: 500;
+                font-size: .85rem;
+                line-height: 1rem;
+                margin: 1.2rem 0 .2rem 2.2rem;
+                color: #8D8888;
+            }
+            .exercise-title-div{
+                width: 100%;
+                display: flex;
+                align-items: center;
+                margin: .5rem 0;
+                .icon-letter{
+                    font-family: 'Roboto', sans-serif;
+                    font-size: .9rem;
+                    line-height: .9rem;
+                    width: 1.2rem;
+                    height: 1.2rem;
+                    text-align: center;
+                    border: 1px solid #FD6A02;
+                    color: #FD6A02;
+                    border-radius: 50%;
+                    margin: 0 .5rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .exercise-title-right {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: calc(100% - 2.2rem);
+                }
+            }
+            .exercise-details {
+                width: calc(100% - 2.2rem);
+                height: 3.5rem;
+                border: 1px solid #D4D4D4;
+                border-radius: 0.3125rem;
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: .85rem;
+                line-height: 1rem;
+                padding: .5rem .5rem;
+                margin: 0 0 0 2.2rem;
+            }
+        }
+        .add-exercise-button {
+            color: #FD6A02;
+            text-decoration-line: underline;
+            height: 2.75rem;
+            display: flex;
             font-family: 'Roboto', sans-serif;
-            font-size: 1.3rem;
-            line-height: 2rem;
+            font-size: 0.875rem;
+            line-height: 1rem;
+            margin-bottom: .5rem;
         }
+        hr {
+            margin: .5rem 0;
+        }
+    }
+    .add-day-button {
+        color: #FD6A02;
+        text-decoration-line: underline;
+        height: 2.75rem;
+        display: flex;
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.875rem;
+        line-height: 1rem;
+        margin: 1rem 0 1rem 5%;
     }
     .publish-button {
         width: 90%;
-        margin: auto;
-        background: #666666;
+        margin: 0 auto 1rem auto;
+        background: #FD6A02;
         border-radius: 5px;
         height: 2.75rem;
         display: flex;
@@ -422,102 +721,6 @@ $program-modal-margin: $program-modal-width - 27%;
         line-height: 1.3125rem;
         color: #FFFFFF;
     }
-    .delete-button {
-        height: .7rem;
-        width: .7rem;
-    }
-    .day-div {
-        width: 90%;
-        margin: 1rem auto 0 auto;
-        .day-title-div {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            .day-title {
-                font-family: 'Roboto', sans-serif;
-                font-weight: 500;
-                font-size: 1.125rem;
-                line-height: 1.3125rem;
-            }
-        }
-        .coach-instructions {
-            width: 100%;
-            background: #FFFFFF;
-            border: 1px solid #000000;
-            border-radius: 0.3125rem;
-            margin: 1.1875rem auto;
-            color: #8D8888;
-            padding: 5px 18px;
-            .instructions-title {
-                font-family: 'Roboto', sans-serif;
-                font-weight: bold;
-                font-size: 0.8125rem;
-                line-height: 0.9375rem;
-            }
-            .instructions-text {
-                font-family: 'Roboto', sans-serif;
-                font-size: 0.75rem;
-                line-height: 0.875rem;
-            }
-        }
-        .exercise-div {
-            width: 100%;
-            .icon-div{
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin: .5rem 0;
-                .icon-letter{
-                    font-family: 'Roboto', sans-serif;
-                    font-size: 0.875rem;
-                    line-height: 1rem;
-                    width: 1rem;
-                    height: 1rem;
-                    text-align: center;
-                    border: 1px solid black;
-                    border-radius: 50%;
-                }
-            }
-            .exercise-details {
-                width: 100%;
-                height: 2.5rem;
-                border: 1px solid #000000;
-                border-radius: 0.3125rem;
-                font-family: 'Exo', sans-serif;
-                font-weight: 500;
-                font-size: 0.875rem;
-                line-height: 1.1875rem;
-                padding: .5rem 1rem;
-                margin-bottom: 2rem;
-            }
-        }
-        .add-exercise-button {
-            height: 2.75rem;
-            background: #C4C4C4;
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            font-family: 'Roboto', sans-serif;
-            font-size: 0.875rem;
-            line-height: 1rem;
-        }
-    }
-    .add-day-button {
-        height: 2.75rem;
-        background: rgba(196, 196, 196, 0.5);
-        border-radius: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 90%;
-        font-family: 'Roboto', sans-serif;
-        font-size: 0.875rem;
-        line-height: 1rem;
-        margin: 1rem auto 1rem auto;
-    }
 }
 
 // specific stylings for the exercise input
@@ -525,21 +728,21 @@ $program-modal-margin: $program-modal-width - 27%;
     display: flex;
     justify-content: center;
     position: relative;
-    margin-bottom: 1rem;
+    width: calc(100% - 1.4rem);
     .exercise-input {
         position: relative;
         width: 100%;
-        height: 2.5rem;
-        border: 1px solid #000000;
+        height: 1.6875rem;
+        border: 1px solid #D4D4D4;
         border-radius: 0.3125rem;
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.125rem;
-        line-height: 1.3125rem;
-        padding: .5rem 1rem;
-        margin-bottom: 1rem;
+        font-family: 'Hind Madurai', sans-serif;
+        font-size: .85rem;
+        line-height: 1rem;
+        padding: .5rem .5rem;
         margin: auto;
     }
     .exercise-list-outer {
+        z-index: 1;
         overflow-y: hidden;
         width: 100%;
         max-height: 11rem;
@@ -562,9 +765,10 @@ $program-modal-margin: $program-modal-width - 27%;
             }
         }
         .exercise-element {
-            font-family: 'Roboto', sans-serif;
-            font-size: 1.125rem;
-            line-height: 1.5rem;
+            font-family: 'Hind Madurai', sans-serif;
+            font-size: .85rem;
+            line-height: 1.2rem;
+            padding-left: .3rem;
             cursor: pointer;
             &:hover {
                 background-color: rgb(194, 194, 194);
@@ -573,6 +777,109 @@ $program-modal-margin: $program-modal-width - 27%;
         
     }
 }
+
+// Preview page styles
+
+.program-preview {
+    @media (min-width: $mobile-breakpoint) {
+        display: none;
+    }
+    width: $program-width;
+    min-width: 375px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    .back-div {
+        display: flex;
+        align-items: center;
+        width: 90%;
+        margin: 0.6875rem auto;
+        height: 3rem;
+        img {
+            cursor: pointer;
+            height: 1rem;
+            width: 1rem;
+        }
+        p {
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.125rem;
+            line-height: 1.3125rem;
+            padding-left: .5rem;
+        }
+    }
+    .program-preview-title {
+        margin: .5rem 0 1rem 5%;
+        font-family: 'Hind Madurai', sans-serif;
+        font-weight: 600;
+        font-size: 1.8rem;
+        line-height: 2rem;
+        height: 2rem;
+        resize: horizontal;
+    }
+    .preview-workout {
+        border: 1px solid #D4D4D4;
+        width: 90%;
+        margin: .5rem auto;
+        .preview-title {
+            border-bottom: 1px solid #D4D4D4;
+            h3 {
+                font-family: 'Hind Madurai', sans-serif;
+                font-weight: 600;
+                font-size: 1.125rem;
+                line-height: 1.5625rem;
+                margin: 0.375rem 0 0.375rem 0.875rem;
+            }
+        }
+        .preview-data {
+            width: 100%;
+            font-family: 'Hind Madurai', sans-serif;
+            font-size: 1rem;
+            line-height: 1.1875rem;
+            margin-bottom: 1rem;
+            .data-top {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: .5rem;
+                .data-name {
+                    font-weight: 600;
+                    margin: 1rem 0 0 0.875rem;
+                }
+                img {
+                    width: .75rem;
+                    height: .5rem;
+                    margin: 1rem 0.875rem 0 0;
+                    cursor: pointer;
+                }
+            }
+            .data-instructions {
+                margin: .2rem 0 1rem 0.875rem;
+            }
+            .data-card {
+                width: 100%;
+                margin: .2rem 0.875rem;
+                display: flex;
+                .card-left {
+                    width: 1.5rem;
+                    font-weight: 600;
+                }
+                .card-right {
+                    width: calc(100% - 2.375rem);
+                    .card-title {
+                        font-weight: 600;
+                        margin-bottom: .2rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 
 
 

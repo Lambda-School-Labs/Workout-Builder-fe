@@ -29,47 +29,47 @@ const CreateProgram = (props) => {
     });
   };
 
-  const openProgramCreationPage = e => {
-    const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
+    const openProgramCreationPage = e => {
+      const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
       workouts: [ ],
       assigned_clients: []
-    };
-    e.preventDefault();
-    props.navigate("/program/create");
-    closeModal(e);
-    // reset new program data
-    Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
-    // update redux with entered data
-    Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: newProgramData });
-    Dispatch({ type: "UPDATE" });
+      }
+      e.preventDefault();
+      props.navigate("/program/create");
+      closeModal(e);
+      // reset new program data
+      Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
+      // update redux with entered data
+      Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: newProgramData });
+      Dispatch({ type: "UPDATE" });
   };
 
-  return(
-    <Modal isOpen={props.CreateProgramModal}
-      className="program-modal"
-      overlayClassName="program-overaly"
-      shouldCloseOnOverlayClick={true}
-      onRequestClose={closeModal}
-      // parentSelector={() => document.body.querySelector('.main-title')}
-    >
-
-      <h3>Create Program</h3>
-      <form onSubmit={openProgramCreationPage}>
-        <p htmlFor="name">Program Name *</p>
-        <input id="name" name="name" placeholder="Ex: Olympic Lifting" required type="text" value={newProgramData.program_name} onChange={handleChange}></input>
-        <p htmlFor="phase">Phase *</p>
-        <input id="phase" name="phase" placeholder="Ex: Strength" required type="text" value={newProgramData.program_phase} onChange={handleChange}></input>
-        <p htmlFor="length">Number of days in program *</p>
-        <input id="length" name="length" placeholder="Ex: 21" required type="number" value={newProgramData.program_days} onChange={handleChange}></input>
-        <div className="program-button-div">
-          <button onClick={closeModal} className="cancel-button">Cancel</button>
-          <button className="create-button" type="submit">+ Create program</button>
-        </div>
-      </form>
-      <p className="legend-p">*Required</p>
-    </Modal>
-  );
-};
+    return(
+            <Modal isOpen={props.CreateProgramModal} 
+                className="program-modal" 
+                overlayClassName="program-overaly"
+                shouldCloseOnOverlayClick={true}
+                onRequestClose={closeModal}
+                // parentSelector={() => document.body.querySelector('.main-title')}
+                >
+                
+                <h3>Create Program</h3>
+                <form onSubmit={openProgramCreationPage}>
+                    <div className="create-row"><p htmlFor="name">Program Name</p><p className="asterix">*</p></div>
+                    <input id="name" name="name" placeholder="Ex: Olympic Lifting" required type="text" value={newProgramData.program_name} onChange={handleChange}></input>
+                    <div className="create-row"><p htmlFor="phase">Phase</p><p className="asterix">*</p></div>
+                    <input id="phase" name="phase" placeholder="Ex: Strength" required type="text" value={newProgramData.program_phase} onChange={handleChange}></input>
+                    <div className="create-row"><p htmlFor="length">Number of days in program</p><p className="asterix">*</p></div>
+                    <input id="length" name="length" placeholder="Ex: 21" required type="number" value={newProgramData.program_days} onChange={handleChange}></input>
+                    <p className="legend-p">*Required</p>
+                    <div className="program-button-div">
+                        <button className="save-button" type="submit">Save</button>
+                        <button onClick={closeModal} className="cancel-button">Cancel</button>
+                    </div>
+                </form>
+            </Modal>
+    )
+}
 
 const mapStateToProps = state => ({
   loggedInUser: state.loggedInUser,

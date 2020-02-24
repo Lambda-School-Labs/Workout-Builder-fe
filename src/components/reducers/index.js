@@ -121,7 +121,28 @@ const initialState = {
     workouts: [ ],
     assigned_clients: [],
   },
-};
+  // new_program: {id: 1, name: "Program 1", description: "Test program description", coach_id: 1, length: 10, phase: "strength",
+  // workouts: [
+  //   {id: 1, name: "push day", description: "push day arm workout", day: 1, 
+  //   exercises: [
+  //     {exercise_id: 1, order: 1, exercise_details: "135lbs bar - 5 sets of 5"},
+  //     {exercise_id: 2, order: 2, exercise_details: "50lbs dumbbells - 5 sets of 5"},
+  //     {exercise_id: 3, order: 3, exercise_details: "70lbs bar - 5 sets of 5"}
+  //   ]}, 
+  //   {id: 2, name: "pull day", description: "pull day arm and back workout", day: 2, exercises: [
+  //     {exercise_id: 4, order: 1, exercise_details: "bodyweight - 5 sets of 5"},
+  //     {exercise_id: 5, order: 2, exercise_details: "135lbs bar - 5 sets of 5"},
+  //     {exercise_id: 6, order: 3, exercise_details: "30lbs dumbbells - 5 sets of 5"}
+  //   ]},
+  //   {id: 3, name: "legs and core", description: "legs and core day workout", day: 3, exercises: [
+  //     {exercise_id: 7, order: 1, exercise_details: "135lbs bar - 5 sets of 5"},
+  //     {exercise_id: 8, order: 2, exercise_details: "135lbs bar - 5 sets of 5"},
+  //     {exercise_id: 9, order: 3, exercise_details: "bodyweight - 5 sets of 5"},
+  //   ]},
+  // ],
+  // assigned_clients: [1, 3, 5, 7, 9]
+  // },
+}
 
 function reducer(state = initialState, action) {
   switch(action.type) {
@@ -144,20 +165,16 @@ function reducer(state = initialState, action) {
     /*******  Program reducers *******/
 
   case "UPDATE_A_PROGRAM":
-    console.log(action.payload);
 
     // get coach programs
     const updatedList = [...state.coach_programs];
-    console.log(updatedList);
 
     // find index of old program data
     // const programIndex = updatedList.indexOf(action.payload.old);
     const programIndex = updatedList.findIndex(i => i.id === action.payload.id);
-    console.log(programIndex);
 
     // replace old data with new data
     updatedList[programIndex] = action.payload;
-    console.log(updatedList[programIndex]);
 
     return {
       ...state,
@@ -167,7 +184,7 @@ function reducer(state = initialState, action) {
   case "DELETE_A_PROGRAM":
     return {
       ...state,
-      coach_programs: state.coach_programs.filter((program) => {return program.id != action.payload;})
+      coach_programs: state.coach_programs.filter((program) => {return program.id !== action.payload;})
     };
 
   case "CREATE_A_PROGRAM":

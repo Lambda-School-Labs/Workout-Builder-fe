@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import ProgramListElement from './ProgramListElement';
 import CreateProgram from './modals/CreateProgram'
 
-// mobile styling - desktop can be done in tailwind
+// mobile styling
 import "./program-mobile-styles.scss"
+
+// desktop styling
+import "./program-desktop-styles.scss"
 
 const ProgramHome = (props) => {
     const [CreateProgramModal, ToggleCreateProgramModal] = useState(false);
@@ -15,42 +17,77 @@ const ProgramHome = (props) => {
     useEffect(() => {
         let results = props.coach_programs.filter(program => program.name.toLowerCase().includes(searchTerm.toLowerCase()));
         setSearchResults(results);
-    }, [searchTerm, props.updates]);
+    }, [searchTerm, props.updates, props.coach_programs]);
 
     const handleChange = (e) => {
         setSearchTerm(e.target.value);
     }
 
     return(
+        <>
+
+        {/* MOBILE VIEW */}
+
         <div className="outer-program">
-            <h2 class="main-title">Programs</h2>
-            <button class="add-program-button" onClick={() => ToggleCreateProgramModal(true)}>+ Create Program</button>
 
-            <CreateProgram CreateProgramModal={CreateProgramModal} ToggleCreateProgramModal={ToggleCreateProgramModal} {...props}/>
-
-            <div class="search-div">
-                <img class="magnifying-icon" src="https://i.imgur.com/dJIfxYP.png"></img>
+            <div className="search-div" >
+                <img className="magnifying-icon" src="https://i.imgur.com/dJIfxYP.png" alt="search"></img>
                 <input 
-                    class="search-bar"
-                    placeholder="Search Program"
+                    className="search-bar"
+                    placeholder="Search"
                     onChange={handleChange}
                     value={searchTerm}
                 />
             </div>
 
-            <div class="program-list-div">
-                <div class="program-list-header">
+            <div className="program-list-div">
+                <div className="program-list-header">
                     <h4 className="header-title">Title</h4>
                     <h4 className="header-active">Active</h4>
                 </div>
                 {searchResults.map(program => {
                     return(
-                        <ProgramListElement id={program.id} title={program.name} activeUsers={program.assigned_clients.length} {...props}/>
+                        <ProgramListElement key={program.id} program={program} id={program.id} title={program.name} activeUsers={program.assigned_clients.length} {...props}/>
                     )
                 })}
-                <div class="program-element"></div>
             </div>
+
+            <button className="add-program-button" onClick={() => ToggleCreateProgramModal(true)}>Create Program</button>
+
+            <CreateProgram CreateProgramModal={CreateProgramModal} ToggleCreateProgramModal={ToggleCreateProgramModal} {...props}/>
         </div>
+
+        {/* DESKTOP VIEW */}
+
+        <div className="d-outer-program">
+            <div className="d-outer-top">
+                <div className="d-search-div" >
+                    <img className="magnifying-icon" src="https://i.imgur.com/dJIfxYP.png" alt="search"></img>
+                    <input 
+                        className="search-bar"
+                        placeholder="Search"
+                        onChange={handleChange}
+                        value={searchTerm}
+                    />
+                </div>
+                <button className="add-program-button" onClick={() => ToggleCreateProgramModal(true)}>Create Program</button>
+            </div>
+            <div className="d-program-list-div">
+                <div className="program-list-header">
+                    <h4 className="header-title">Name</h4>
+                    <h4 className="header-active">Active</h4>
+                    <h4 className="header-assign"> </h4>
+                    <h4 className="header-actions">Actions</h4>
+                </div>
+                {searchResults.map(program => {
+                        return(
+                            <ProgramListElement key={program.id} program={program} id={program.id} title={program.name} activeUsers={program.assigned_clients.length} {...props}/>
+                        )
+                    })}
+            </div>
+            
+        </div>
+        </>
     )
 }
 
