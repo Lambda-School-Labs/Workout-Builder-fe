@@ -40,7 +40,7 @@ const AssignProgram = (props) => {
     // This is the current program for which the assign list is being displayed
     const thisProgram = props.coach_programs.filter(program => program.id === props.program_id)[0];
 
-    const [clientList, setClientList] = useState([... thisProgram.assigned_clients]);
+    const [clientList, setClientList] = useState([...thisProgram.assigned_clients]);
 
     const isChecked = (client_id) => {
         // function to determine if a box should be checked for each client name
@@ -70,7 +70,7 @@ const AssignProgram = (props) => {
 
     // function to update the redux data
     const assignToClient = (e) => {
-        const updatedProgram = {... thisProgram, assigned_clients: clientList};
+        const updatedProgram = {...thisProgram, assigned_clients: clientList};
         Dispatch({ type: "UPDATE_A_PROGRAM", payload: updatedProgram });
         Dispatch({ type: "UPDATE" });
         toggleConfirmModal(true);
@@ -86,9 +86,9 @@ const AssignProgram = (props) => {
                     <div className="assign-clients" style={{}}>
                         {props.coach_clients.map(client => {
                             return(
-                                <div className="assign-clients-row" id={`assign-client-${client.id}`}>
-                                        <label class="assign-client-container">
-                                            <input type="checkbox" checked={isChecked(client.id)} onClick={() => toggleAssign(client.id)}/>
+                                <div key={client.id} className="assign-clients-row" id={`assign-client-${client.id}`}>
+                                        <label className="assign-client-container">
+                                            <input type="checkbox" checked={isChecked(client.id)} onChange={() => toggleAssign(client.id)}/>
                                             {/* checked={isChecked(client.id)} */}
                                             {client.first_name} {client.last_name}
                                         </label>

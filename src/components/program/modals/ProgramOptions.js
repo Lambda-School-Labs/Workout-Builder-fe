@@ -64,7 +64,7 @@ const ProgramOptions = (props) => {
               <div ref={wrapperRef}>
               <div className="options-element" onClick={editProgram}>
                   <div className="options-left">
-                      <img src="https://i.imgur.com/VDEt22i.png"></img>
+                      <img src="https://i.imgur.com/VDEt22i.png" alt="edit"></img>
                   </div>
                   <div className="options-right">
                       <p>Edit</p>
@@ -72,7 +72,7 @@ const ProgramOptions = (props) => {
               </div>
               <div className="options-element" onClick={duplicateProgram}>
                   <div className="options-left">
-                      <img src="https://i.imgur.com/DZgRwQr.png"></img>
+                      <img src="https://i.imgur.com/DZgRwQr.png" alt="duplicate"></img>
                   </div>
                   <div className="options-right">
                       <p>Duplicate</p>
@@ -80,7 +80,7 @@ const ProgramOptions = (props) => {
               </div>
               <div className="options-element" onClick={deleteProgram}>
                   <div className="options-left">
-                      <img src="https://i.imgur.com/xsHoyAy.png"></img>
+                      <img src="https://i.imgur.com/xsHoyAy.png" alt="delete"></img>
                   </div>
                   <div className="options-right">
                       <p>Delete Program</p>

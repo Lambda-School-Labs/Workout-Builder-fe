@@ -10,6 +10,8 @@ const ProgramListElement = (props) => {
     const [AssignProgramModal, ToggleAssignProgramModal] = useState(false);
     const [ProgramOptionsModal, ToggleProgramOptionsModal] = useState(false);
 
+    const [checked, setChecked] = useState(false);
+
     const viewProgram = () => {
         // Set the program to new program data and view it in the preview page
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: props.program });
@@ -17,19 +19,23 @@ const ProgramListElement = (props) => {
         props.navigate("/program/preview");
     }
 
+    const toggleCheck = () => {
+        setChecked(!checked);
+    }
+
 
     return(
-        <div class="program-element">
-            <div class="checkbox-div">
-            <input type="checkbox" checked=""/>
+        <div className="program-element">
+            <div className="checkbox-div">
+            <input type="checkbox" checked={checked} onChange={toggleCheck} />
             </div>
-            <div class="title-div">
+            <div className="title-div">
                 <p onClick={() => viewProgram()}>{props.title}</p>
             </div>
-            <div class="active-div">
+            <div className="active-div">
                 <p>{props.activeUsers}</p>
             </div>
-            <div class="assign-div" id={`assign-div-${props.id}`}>
+            <div className="assign-div" id={`assign-div-${props.id}`}>
                 <img src="https://i.imgur.com/kMrt2fe.png" onClick={() => ToggleAssignProgramModal(true)} alt="assign"></img>
                 <p onClick={() => ToggleAssignProgramModal(true)}>Assign to clients</p>
                 {AssignProgramModal ? <AssignProgram program_id={props.id} AssignProgramModal={AssignProgramModal} ToggleAssignProgramModal={ToggleAssignProgramModal} id={props.id} {...props}/>

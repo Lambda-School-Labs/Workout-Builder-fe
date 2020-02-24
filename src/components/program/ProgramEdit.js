@@ -23,11 +23,12 @@ const ProgramEdit = (props) => {
     };
 
     // leave the page if name is empty - to avoid errors in case user refreshes and data resets
+    const { new_program, navigate } = props;
     useEffect(() => {
-        if(props.new_program.name === "") {
-            props.navigate("/program");
+        if(new_program.name === "") {
+            navigate("/program");
         }
-    }, []);
+    }, [new_program.name, navigate]);
 
     // Current day number
     const nextDay = props.new_program.workouts.length + 1;
@@ -148,7 +149,7 @@ const ProgramEdit = (props) => {
             </div>
             {props.new_program.workouts.map(day => {
                 return (
-                    <div className="day-div">
+                    <div key={day.id} className="day-div">
                         <div className="day-title-div">
                             <h2 className="day-label">Day {day.day}:</h2>
                             <WorkoutNameInput day={day} />
@@ -160,7 +161,7 @@ const ProgramEdit = (props) => {
                         </div>
                         {day.exercises.map(exercise => {
                             return(
-                                <div className="exercise-div">
+                                <div key={exercise.exercise_id} className="exercise-div">
                                     <h3 className="exercise-label">Exercise Title</h3>
                                     <div className="exercise-title-div">
                                         <p className="icon-letter">{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
@@ -208,7 +209,7 @@ const ProgramEdit = (props) => {
             </div>
             {props.new_program.workouts.map(day => {
                 return (
-                    <div className="day-div">
+                    <div key={day.id} className="day-div">
                         <div className="day-title-div">
                             <h2 className="day-label">Day {day.day}:</h2>
                             <WorkoutNameInput day={day} />
@@ -222,7 +223,7 @@ const ProgramEdit = (props) => {
 
                         {day.exercises.map(exercise => {
                             return(
-                                <div className="d-exercise-div">
+                                <div key={exercise.exercise_id} className="d-exercise-div">
                                     <div className="exercise-left">
                                         <h3 className="exercise-label">Exercise title</h3>
                                         <div className="exercise-bottom-left">

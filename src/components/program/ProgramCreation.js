@@ -26,11 +26,12 @@ const ProgramCreation = (props) => {
     };
 
     // leave the page if name is empty - to avoid errors in case user refreshes and data resets
+    const { new_program, navigate } = props;
     useEffect(() => {
-        if(props.new_program.name === "") {
-            props.navigate("/program");
+        if(new_program.name === "") {
+            navigate("/program");
         }
-    }, []);
+    }, [navigate, new_program.name]);
 
     // Current day number
     const [currentDay, setCurrentDay] = useState(1);

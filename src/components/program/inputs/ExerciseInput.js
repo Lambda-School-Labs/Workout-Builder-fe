@@ -36,17 +36,17 @@ const ExerciseInput = (props) => {
 
   /***** Input methods *****/
 
-  const getExerciseName = (input_id) => {
+  const getExerciseName = useCallback((input_id) => {
     // find the name of the selected exercise (by id) from the exercise library
     return props.coach_exercises.filter((exercise) => {return exercise.id === input_id})[0].name;
-  }
+  },[props.coach_exercises])
 
   const [input, setInput] = useState(getExerciseName(props.exercise.exercise_id));
 
   // Ensure that the input is updated every time the "update" redux command is run
   useEffect(() => {
     setInput(getExerciseName(props.exercise.exercise_id));
-  }, [props.updates]);
+  }, [props.updates, getExerciseName, props.exercise.exercise_id]);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -60,7 +60,7 @@ const ExerciseInput = (props) => {
     } else {
         ToggleExerciseListModal(true);
     }
-  },[input]);
+  },[input, props.exercise.exercise_id, getExerciseName]);
 
   const chooseExercise = (exercise) => {
     // find index of workout and index of exercise
@@ -90,7 +90,7 @@ const ExerciseInput = (props) => {
           <div className="exercise-list-inner">
             {props.coach_exercises.filter(exercise => exercise.name.toLowerCase().includes(input.toLowerCase())).map(exercise => {
               return (
-                <div className="exercise-element" onClick={() => chooseExercise(exercise)}>
+                <div key={exercise.exercise_id} className="exercise-element" onClick={() => chooseExercise(exercise)}>
                   {exercise.name}
                 </div>
               );
