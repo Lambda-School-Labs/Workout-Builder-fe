@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProgramSearch = ({ query, handleQueryChange }) => {
+const ProgramSearch = React.memo(({ query, handleQueryChange }) => {
   return (
     <input
       type="search"
@@ -12,6 +12,6 @@ const ProgramSearch = ({ query, handleQueryChange }) => {
       className="py-2 px-4 placeholder-silver font-medium text-sm"
     />
   );
-};
+});
 
 export default ProgramSearch;

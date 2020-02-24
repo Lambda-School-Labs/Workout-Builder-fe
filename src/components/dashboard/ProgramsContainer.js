@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ProgramSearch from './ProgramSearch';
 import ProgramList from './ProgramList';
 import ConfirmModal from './ConfirmModal';
@@ -25,11 +25,11 @@ const ProgramsContainer = ({ closeProgramList }) => {
     })();
   }, []);
 
-  const handleQueryChange = (e) => {
+  const handleQueryChange = useCallback((e) => {
     setQuery(e.target.value);
-  };
+  }, []);
 
-  const handleAssignment = (p) => setAssignment(p);
+  const handleAssignment = useCallback((p) => setAssignment(p), []);
   const cancelAssignment = () => setAssignment(false);
 
   const confirmAssignment = () => {
@@ -52,7 +52,7 @@ const ProgramsContainer = ({ closeProgramList }) => {
       </div>
       {assignment ? (
         <ConfirmModal
-          text={`Are you sure you want to assign ${assignment.name}?`}
+          text={`Are you sure you want to assign ${assignment}?`}
           cancel={cancelAssignment}
           confirm={confirmAssignment}
         />
