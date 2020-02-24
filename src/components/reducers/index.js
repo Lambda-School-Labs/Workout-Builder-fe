@@ -165,20 +165,16 @@ function reducer(state = initialState, action) {
     /*******  Program reducers *******/
 
   case "UPDATE_A_PROGRAM":
-    console.log(action.payload);
 
     // get coach programs
     const updatedList = [...state.coach_programs];
-    console.log(updatedList);
 
     // find index of old program data
     // const programIndex = updatedList.indexOf(action.payload.old);
     const programIndex = updatedList.findIndex(i => i.id === action.payload.id);
-    console.log(programIndex);
 
     // replace old data with new data
     updatedList[programIndex] = action.payload;
-    console.log(updatedList[programIndex]);
 
     return {
       ...state,
