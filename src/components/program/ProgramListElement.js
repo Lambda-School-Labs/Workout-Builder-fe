@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import ProgramOptions from './modals/ProgramOptions';
@@ -30,14 +30,14 @@ const ProgramListElement = (props) => {
                 <p>{props.activeUsers}</p>
             </div>
             <div class="assign-div" id={`assign-div-${props.id}`}>
-                <img src="https://i.imgur.com/kMrt2fe.png" onClick={() => ToggleAssignProgramModal(true)}></img>
+                <img src="https://i.imgur.com/kMrt2fe.png" onClick={() => ToggleAssignProgramModal(true)} alt="assign"></img>
                 <p onClick={() => ToggleAssignProgramModal(true)}>Assign to clients</p>
                 {AssignProgramModal ? <AssignProgram program_id={props.id} AssignProgramModal={AssignProgramModal} ToggleAssignProgramModal={ToggleAssignProgramModal} id={props.id} {...props}/>
                 : <div />}
             </div>
             <div className="options-div" id={`options-div-${props.id}`}>
-                <img className="vertical-dots" src="https://i.imgur.com/DPz3fj4.png" onClick={() => ToggleProgramOptionsModal(true)}></img>
-                <img className="horizontal-dots" src="https://i.imgur.com/NOM7XwR.png" onClick={() => ToggleProgramOptionsModal(true)}></img>
+                <img className="vertical-dots" src="https://i.imgur.com/DPz3fj4.png" onClick={() => ToggleProgramOptionsModal(true)} alt="options-v"></img>
+                <img className="horizontal-dots" src="https://i.imgur.com/NOM7XwR.png" onClick={() => ToggleProgramOptionsModal(true)} alt="options-h"></img>
                 {ProgramOptionsModal ? <ProgramOptions program_id={props.id} ProgramOptionsModal={ProgramOptionsModal} ToggleProgramOptionsModal={ToggleProgramOptionsModal} id={props.id} {...props}/>
                 : <div />}
             </div>

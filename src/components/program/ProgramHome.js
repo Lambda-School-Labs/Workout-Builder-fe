@@ -30,18 +30,18 @@ const ProgramHome = (props) => {
 
         <div className="outer-program">
 
-            <div class="search-div" >
-                <img class="magnifying-icon" src="https://i.imgur.com/dJIfxYP.png"></img>
+            <div className="search-div" >
+                <img className="magnifying-icon" src="https://i.imgur.com/dJIfxYP.png" alt="search"></img>
                 <input 
-                    class="search-bar"
+                    className="search-bar"
                     placeholder="Search"
                     onChange={handleChange}
                     value={searchTerm}
                 />
             </div>
 
-            <div class="program-list-div">
-                <div class="program-list-header">
+            <div className="program-list-div">
+                <div className="program-list-header">
                     <h4 className="header-title">Title</h4>
                     <h4 className="header-active">Active</h4>
                 </div>
@@ -52,7 +52,7 @@ const ProgramHome = (props) => {
                 })}
             </div>
 
-            <button class="add-program-button" onClick={() => ToggleCreateProgramModal(true)}>Create Program</button>
+            <button className="add-program-button" onClick={() => ToggleCreateProgramModal(true)}>Create Program</button>
 
             <CreateProgram CreateProgramModal={CreateProgramModal} ToggleCreateProgramModal={ToggleCreateProgramModal} {...props}/>
         </div>
@@ -61,19 +61,19 @@ const ProgramHome = (props) => {
 
         <div className="d-outer-program">
             <div className="d-outer-top">
-                <div class="d-search-div" >
-                    <img class="magnifying-icon" src="https://i.imgur.com/dJIfxYP.png"></img>
+                <div className="d-search-div" >
+                    <img className="magnifying-icon" src="https://i.imgur.com/dJIfxYP.png" alt="search"></img>
                     <input 
-                        class="search-bar"
+                        className="search-bar"
                         placeholder="Search"
                         onChange={handleChange}
                         value={searchTerm}
                     />
                 </div>
-                <button class="add-program-button" onClick={() => ToggleCreateProgramModal(true)}>Create Program</button>
+                <button className="add-program-button" onClick={() => ToggleCreateProgramModal(true)}>Create Program</button>
             </div>
             <div className="d-program-list-div">
-                <div class="program-list-header">
+                <div className="program-list-header">
                     <h4 className="header-title">Name</h4>
                     <h4 className="header-active">Active</h4>
                     <h4 className="header-assign"></h4>

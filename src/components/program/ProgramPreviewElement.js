@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import React, { useState } from "react";
 import { connect } from 'react-redux';
 
 const ProgramPreviewElement = (props) => {
-    const Dispatch = useDispatch();
 
     const [fullView, setFullView] = useState(false);
 
@@ -29,9 +27,9 @@ const ProgramPreviewElement = (props) => {
                 <div className="data-top">
                     <p className="data-name">{props.day.name}</p>
                     {fullView ? 
-                    <img className="display-arrow" src="https://i.imgur.com/UzbSKVB.png" onClick={() => toggleFullView()}></img>
+                    <img className="display-arrow" src="https://i.imgur.com/UzbSKVB.png" onClick={() => toggleFullView()} alt="shrink"></img>
                     : 
-                    <img className="display-arrow" src="https://i.imgur.com/9Mmiusz.png" onClick={() => toggleFullView()}></img>
+                    <img className="display-arrow" src="https://i.imgur.com/9Mmiusz.png" onClick={() => toggleFullView()} alt="grow"></img>
                     }
                 </div>
                 {fullView ? 

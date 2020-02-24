@@ -184,7 +184,7 @@ function reducer(state = initialState, action) {
   case "DELETE_A_PROGRAM":
     return {
       ...state,
-      coach_programs: state.coach_programs.filter((program) => {return program.id != action.payload;})
+      coach_programs: state.coach_programs.filter((program) => {return program.id !== action.payload;})
     };
 
   case "CREATE_A_PROGRAM":

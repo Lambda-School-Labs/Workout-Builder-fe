@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from "react";
 import { connect } from 'react-redux';
 
 // mobile styling - desktop can be done in tailwind
@@ -7,7 +6,6 @@ import "./program-mobile-styles.scss"
 import ProgramPreviewElement from "./ProgramPreviewElement";
 
 const ProgramPreview = (props) => {
-    const Dispatch = useDispatch();
 
     const goBack = () => {
         window.history.back()
@@ -121,7 +119,7 @@ const ProgramPreview = (props) => {
 
         <div className="program-preview">
             <div className="back-div">
-                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={() => goBack()}></img>
+                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={() => goBack()} alt="back"></img>
                 <p className="back-text" onClick={() => goBack()}>Back</p>
             </div>
             <h3 className="program-preview-title">{props.new_program.name}</h3>
@@ -136,7 +134,7 @@ const ProgramPreview = (props) => {
 
         <div className="d-program-preview">
             <div className="back-div">
-                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={() => goBack()}></img>
+                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={() => goBack()} alt="back"></img>
                 <p className="back-text" onClick={() => goBack()}>Back</p>
             </div>
             <div className="d-preview-info">

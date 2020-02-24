@@ -1,11 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { connect } from 'react-redux';
-import { useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 
 const AssignConfirm = (props) => {
-    const Dispatch = useDispatch();
-
     /***** Modal methods *****/ 
 
     const closeModal = (e) => {

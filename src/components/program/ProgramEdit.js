@@ -50,7 +50,7 @@ const ProgramEdit = (props) => {
     const deleteWorkout = (input_id) => {
         // filter out the workout from the program by id
         let updatedProgram = {...props.new_program};
-        updatedProgram.workouts = updatedProgram.workouts.filter((workout) => workout.id != input_id);
+        updatedProgram.workouts = updatedProgram.workouts.filter((workout) => workout.id !== input_id);
         // reapply day numbers - in case you delete a day in the middle of the program
         if (updatedProgram.workouts.length > 0) {
             let daynumber = 1;
@@ -128,13 +128,13 @@ const ProgramEdit = (props) => {
 
         <div className="program-creation">
             <div className="back-div">
-                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome}></img>
+                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome} alt="back"></img>
                 <p className="back-text" onClick={goBackProgramHome}>Back</p>
             </div>
             <div className="program-info">
                 <div className="title-line">
                     <div className="title-left">
-                        <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => discardProgram()}></img>
+                        <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => discardProgram()} alt="delete"></img>
                         <ProgramNameInput />
                     </div>
                     <p className="title-preview" onClick={() => showPreview()}>Preview</p>
@@ -152,7 +152,7 @@ const ProgramEdit = (props) => {
                         <div className="day-title-div">
                             <h2 className="day-label">Day {day.day}:</h2>
                             <WorkoutNameInput day={day} />
-                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteWorkout(day.id)}></img>
+                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteWorkout(day.id)} alt="delete"></img>
                         </div>
                         <div className="coach-instructions">
                             <h3 className="instructions-title">Coach Instructions</h3>
@@ -166,7 +166,7 @@ const ProgramEdit = (props) => {
                                         <p className="icon-letter">{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
                                         <div className="exercise-title-right">
                                             <ExerciseInput day={day} exercise={exercise} />
-                                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteExercise(day.id, exercise.order)}></img>
+                                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteExercise(day.id, exercise.order)} alt="delete"></img>
                                         </div>
                                     </div>
                                     <h3 className="exercise-label">Sets, reps, tempo, rest, etc.</h3>
@@ -187,13 +187,13 @@ const ProgramEdit = (props) => {
 
         <div className="d-program-creation">
             <div className="back-div">
-                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome}></img>
+                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome} alt="back"></img>
                 <p className="back-text" onClick={goBackProgramHome}>Back</p>
             </div>
             <div className="d-creation-info">
                 <div className="info-left">
                     <div className="creation-title">
-                        <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => discardProgram()}></img>
+                        <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => discardProgram()} alt="delete"></img>
                         <ProgramNameInput />
                     </div>
                     <div className="creation-phase-days">
@@ -212,7 +212,7 @@ const ProgramEdit = (props) => {
                         <div className="day-title-div">
                             <h2 className="day-label">Day {day.day}:</h2>
                             <WorkoutNameInput day={day} />
-                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteWorkout(day.id)}></img>
+                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteWorkout(day.id)} alt="delete"></img>
                         </div>
                         <div className="coach-instructions">
                             <h3 className="instructions-title">Coach Instructions</h3>
@@ -234,7 +234,7 @@ const ProgramEdit = (props) => {
                                         <h3 className="exercise-label">Sets, reps, tempo, rest, etc.</h3>
                                         <div className="exercise-bottom-right">
                                             <ExerciseDetails day={day} exercise={exercise} />
-                                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteExercise(day.id, exercise.order)}></img>
+                                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteExercise(day.id, exercise.order)} alt="delete"></img>
                                         </div>
                                     </div>
                                 </div>
