@@ -11,7 +11,7 @@ import PublishConfirm from "./modals/PublishConfirm";
 import InstructionsInput from "./inputs/InstructionsInput";
 
 // mobile styling - desktop can be done in tailwind
-import "./program-mobile-styles.scss"
+import "./program-mobile-styles.scss";
 
 // desktop styling
 import "./program-desktop-styles.scss"
@@ -22,13 +22,13 @@ const ProgramCreation = (props) => {
 
     const goBackProgramHome = e => {
         e.preventDefault();
-        props.navigate("/programs");
+        props.navigate("/program");
     };
 
     // leave the page if name is empty - to avoid errors in case user refreshes and data resets
     useEffect(() => {
         if(props.new_program.name === "") {
-            props.navigate("/programs");
+            props.navigate("/program");
         }
     }, []);
 
@@ -106,7 +106,7 @@ const ProgramCreation = (props) => {
     }
 
     const showPreview = () => {
-        props.navigate("/programs/preview");
+        props.navigate("/program/preview");
     }
 
     // publishExercise function has been moved to publishConfirm modal
@@ -258,15 +258,15 @@ const ProgramCreation = (props) => {
 }
 
 const mapStateToProps = state => ({
-    loggedInUser: state.loggedInUser,
-    updates: state.updates,
-    coach_clients: state.coach_clients,
-    coach_exercises: state.coach_exercises,
-    coach_programs: state.coach_programs,
-    new_program: state.new_program,
-    temp_next_workout_id: state.temp_next_workout_id,
-  });
-  
-  export default connect(
-    mapStateToProps,
-  )(ProgramCreation);
+  loggedInUser: state.loggedInUser,
+  updates: state.updates,
+  coach_clients: state.coach_clients,
+  coach_exercises: state.coach_exercises,
+  coach_programs: state.coach_programs,
+  new_program: state.new_program,
+  temp_next_workout_id: state.temp_next_workout_id,
+});
+
+export default connect(
+  mapStateToProps,
+)(ProgramCreation);

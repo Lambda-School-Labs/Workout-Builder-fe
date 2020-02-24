@@ -42,7 +42,7 @@ const PublishConfirm = (props) => {
         props.toggleConfirmModal(false);
         Dispatch({ type: "CREATE_A_PROGRAM", payload: props.new_program });
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
-        props.navigate("/programs");
+        props.navigate("/program");
     }
 
     return(

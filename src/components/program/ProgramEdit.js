@@ -19,13 +19,13 @@ const ProgramEdit = (props) => {
 
     const goBackProgramHome = e => {
         e.preventDefault();
-        props.navigate("/programs");
+        props.navigate("/program");
     };
 
     // leave the page if name is empty - to avoid errors in case user refreshes and data resets
     useEffect(() => {
         if(props.new_program.name === "") {
-            props.navigate("/programs");
+            props.navigate("/program");
         }
     }, []);
 
@@ -106,7 +106,7 @@ const ProgramEdit = (props) => {
     // submitEdits function has been moved to editConfirm modal
 
     const showPreview = () => {
-        props.navigate("/programs/preview");
+        props.navigate("/program/preview");
     }
 
     const discardProgram = () => {
@@ -117,7 +117,7 @@ const ProgramEdit = (props) => {
         }
 
         Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
-        props.navigate("/programs");
+        props.navigate("/program");
     }
 
     return(

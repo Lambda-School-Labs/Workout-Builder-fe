@@ -16,7 +16,7 @@ const ProgramPreview = (props) => {
     // leave the page if name is empty - to avoid errors in case user refreshes and data resets
     useEffect(() => {
         if(props.new_program.name === "") {
-            props.navigate("/programs");
+            props.navigate("/program");
         }
     }, []);
 
@@ -149,7 +149,7 @@ const ProgramPreview = (props) => {
                 </div>
                 <div className="info-right">
                     <button className="assign-to-client-button">Assign to client</button>
-                    <button className="edit-button" onClick={() => props.navigate("/programs/edit")}>Edit</button>
+                    <button className="edit-button" onClick={() => props.navigate("/program/edit")}>Edit</button>
                 </div>
             </div>
             {generateTable()}

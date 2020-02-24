@@ -4,45 +4,45 @@ import { useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 
 const emptyForm = {
-    name: "",
-    phase: "",
-    length: null
-}
+  name: "",
+  phase: "",
+  length: null
+};
 
 const CreateProgram = (props) => {
-    const Dispatch = useDispatch();
+  const Dispatch = useDispatch();
 
-    Modal.setAppElement('#root');
+  Modal.setAppElement('#root');
 
-    const closeModal = (e) => {
-        e.stopPropagation();
-        props.ToggleCreateProgramModal(false);
-    }
+  const closeModal = (e) => {
+    e.stopPropagation();
+    props.ToggleCreateProgramModal(false);
+  };
 
-    const [newProgramData, setNewProgramData] = useState(emptyForm);
+  const [newProgramData, setNewProgramData] = useState(emptyForm);
 
-    const handleChange = (e) => {
-        e.preventDefault();
-        setNewProgramData ({
-            ...newProgramData,
-            [e.target.name]: e.target.value
-        })
-    }
+  const handleChange = (e) => {
+    e.preventDefault();
+    setNewProgramData ({
+      ...newProgramData,
+      [e.target.name]: e.target.value
+    });
+  };
 
     const openProgramCreationPage = e => {
-        const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
-        workouts: [ ],
-        assigned_clients: []
-        }
-        e.preventDefault();
-        props.navigate("/programs/create");
-        closeModal(e);
-        // reset new program data
-        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
-        // update redux with entered data
-        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: newProgramData });
-        Dispatch({ type: "UPDATE" });
-    };
+      const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
+      workouts: [ ],
+      assigned_clients: []
+      }
+      e.preventDefault();
+      props.navigate("/program/create");
+      closeModal(e);
+      // reset new program data
+      Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
+      // update redux with entered data
+      Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: newProgramData });
+      Dispatch({ type: "UPDATE" });
+  };
 
     return(
             <Modal isOpen={props.CreateProgramModal} 
@@ -72,14 +72,14 @@ const CreateProgram = (props) => {
 }
 
 const mapStateToProps = state => ({
-    loggedInUser: state.loggedInUser,
-    updates: state.updates,
-    coach_clients: state.coach_clients,
-    coach_exercises: state.coach_exercises,
-    coach_programs: state.coach_programs,
-    new_program: state.new_program,
-  });
-  
-  export default connect(
-    mapStateToProps,
-  )(CreateProgram);
+  loggedInUser: state.loggedInUser,
+  updates: state.updates,
+  coach_clients: state.coach_clients,
+  coach_exercises: state.coach_exercises,
+  coach_programs: state.coach_programs,
+  new_program: state.new_program,
+});
+
+export default connect(
+  mapStateToProps,
+)(CreateProgram);
