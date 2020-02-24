@@ -1,49 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ClientProgramItem from './ClientProgramItem';
 import serverHandshake from '../../utils/serverHandshake';
-
-const dummyClientPrograms = [
-  {
-    "client_id": 1,
-    "first_name": "Jonathan",
-    "last_name": "Picazo",
-    "start_date": "2020-2-17",
-    "program_id": 1,
-    "name": "Super Sets",
-    "length": 21,
-    "phase": "Strength"
-  },
-  {
-    "client_id": 2,
-    "first_name": "Justine",
-    "last_name": "Gennaro",
-    "start_date": "2020-2-17",
-    "program_id": 9,
-    "name": "Other Sets",
-    "length": 14,
-    "phase": "Endurance"
-  },
-  {
-    "client_id": 1,
-    "first_name": "Jonathan",
-    "last_name": "Picazo",
-    "start_date": "2020-2-17",
-    "program_id": 3,
-    "name": "Super Sets",
-    "length": 21,
-    "phase": "Strength"
-  },
-  {
-    "client_id": 2,
-    "first_name": "Justine",
-    "last_name": "Gennaro",
-    "start_date": "2020-2-17",
-    "program_id": 6,
-    "name": "Other Sets",
-    "length": 14,
-    "phase": "Endurance"
-  }
-];
+import { dummyClientPrograms } from './dummyData';
 
 const ClientProgramList = () => {
   const [clientPrograms, setClientPrograms] = useState(dummyClientPrograms);
@@ -63,6 +21,7 @@ const ClientProgramList = () => {
 
   return (
     <>
+      {/* desktop-only header */}
       <div className="hidden lg:grid grid-cols-10 items-center gap-3 font-medium text-sm text-boulder mt-4 border-b border-cornflower-blue">
         <span className="col-start-2 col-span-2">Name</span>
         <span>Program name</span>

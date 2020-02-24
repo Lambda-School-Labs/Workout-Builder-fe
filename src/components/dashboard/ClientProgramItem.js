@@ -24,6 +24,7 @@ const ClientProgramItem = ({ clientProgram }) => {
 
   return (
     <>
+      {/* mobile view */}
       <li className="py-2 lg:hidden">
         <div className="flex relative">
           <div className="flex flex-grow">
@@ -50,6 +51,7 @@ const ClientProgramItem = ({ clientProgram }) => {
         </div>
         {assigning && <ProgramsContainer closeProgramList={toggleAssigning} />}
       </li>
+      {/* desktop view */}
       <li className="hidden lg:grid grid-cols-10 gap-3 items-center hover:bg-cornflower-blue">
         <div className="p-2">
           <img src="https://picsum.photos/110/100" alt="" className="rounded"/>
