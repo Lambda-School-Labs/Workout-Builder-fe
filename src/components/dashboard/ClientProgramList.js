@@ -9,7 +9,7 @@ const ClientProgramList = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await serverHandshake('/clients-programs/dashboard');
+        const response = await serverHandshake(true).get('/clients-programs/dashboard');
         if (response.status === 200) {
           setClientPrograms(response.data);
         }

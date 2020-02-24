@@ -15,7 +15,7 @@ const ProgramsContainer = ({ closeProgramList }) => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await serverHandshake().get('/programs');
+        const response = await serverHandshake(true).get('/programs');
         if (response.status === 200) {
           setPrograms(response.data);
         }
