@@ -10,7 +10,7 @@ const ClientProgramList = () => {
     (async () => {
       try {
         const response = await serverHandshake(true).get('/clients-programs/dashboard');
-        if (response.status === 200) {
+        if (response.status === 200 && response.data?.length) {
           setClientPrograms(response.data);
         }
       } catch (error) {

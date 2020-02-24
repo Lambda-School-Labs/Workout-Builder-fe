@@ -16,7 +16,7 @@ const ProgramsContainer = ({ closeProgramList }) => {
     (async () => {
       try {
         const response = await serverHandshake(true).get('/programs');
-        if (response.status === 200) {
+        if (response.status === 200 && response.data?.length) {
           setPrograms(response.data);
         }
       } catch (error) {
