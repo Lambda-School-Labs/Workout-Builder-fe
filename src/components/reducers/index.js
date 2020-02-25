@@ -123,12 +123,12 @@ const initialState = {
   },
   // new_program: {id: 1, name: "Program 1", description: "Test program description", coach_id: 1, length: 10, phase: "strength",
   // workouts: [
-  //   {id: 1, name: "push day", description: "push day arm workout", day: 1, 
+  //   {id: 1, name: "push day", description: "push day arm workout", day: 1,
   //   exercises: [
   //     {exercise_id: 1, order: 1, exercise_details: "135lbs bar - 5 sets of 5"},
   //     {exercise_id: 2, order: 2, exercise_details: "50lbs dumbbells - 5 sets of 5"},
   //     {exercise_id: 3, order: 3, exercise_details: "70lbs bar - 5 sets of 5"}
-  //   ]}, 
+  //   ]},
   //   {id: 2, name: "pull day", description: "pull day arm and back workout", day: 2, exercises: [
   //     {exercise_id: 4, order: 1, exercise_details: "bodyweight - 5 sets of 5"},
   //     {exercise_id: 5, order: 2, exercise_details: "135lbs bar - 5 sets of 5"},
@@ -142,7 +142,7 @@ const initialState = {
   // ],
   // assigned_clients: [1, 3, 5, 7, 9]
   // },
-}
+};
 
 function reducer(state = initialState, action) {
   switch(action.type) {
@@ -213,24 +213,22 @@ function reducer(state = initialState, action) {
       temp_next_workout_id: (state.temp_next_workout_id + 1)
     };
 
-  /******* Gross Data Population *******/
-
   case "SET_CLIENT_DATA":
     return {
       ...state,
-      coach_clients: {...action.payload}
+      coach_clients: action.payload
     };
 
   case "SET_EXERCISE_DATA":
     return {
       ...state,
-      coach_exercises: {...action.payload}
+      coach_exercises: action.payload
     };
 
   case "SET_PROGRAM_DATA":
     return {
       ...state,
-      coach_programs: {...action.payload}
+      coach_programs: action.payload
     };
 
   default:

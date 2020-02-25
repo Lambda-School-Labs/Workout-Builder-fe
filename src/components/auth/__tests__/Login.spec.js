@@ -1,8 +1,16 @@
 import "@testing-library/jest-dom/extend-expect";
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
-import Login from "../Login";
 import mockAxios from "axios";
+import Login from "../Login";
+
+jest.mock('../../actions', () => ({
+  fetchAllData: jest.fn(() => Promise.resolve())
+}));
+
+jest.mock('react-redux', () => ({
+  useDispatch: () => jest.fn()
+}));
 
 test("renders Login component", () => {
   const { getByLabelText } = render(<Login />);
