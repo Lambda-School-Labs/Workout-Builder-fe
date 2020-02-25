@@ -213,6 +213,26 @@ function reducer(state = initialState, action) {
       temp_next_workout_id: (state.temp_next_workout_id + 1)
     };
 
+  /******* Gross Data Population *******/
+
+  case "SET_CLIENT_DATA":
+    return {
+      ...state,
+      coach_clients: {...action.payload}
+    };
+
+  case "SET_EXERCISE_DATA":
+    return {
+      ...state,
+      coach_exercises: {...action.payload}
+    };
+
+  case "SET_PROGRAM_DATA":
+    return {
+      ...state,
+      coach_programs: {...action.payload}
+    };
+
   default:
     return state;
   }
