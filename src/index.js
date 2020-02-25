@@ -6,12 +6,12 @@ import * as serviceWorker from "./serviceWorker";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-import reducer from "./components/reducers/index";
+import rootReducer from "./components/reducers";
 import "./styles/index.css";
 
 Sentry.init({ dsn: process.env.REACT_APP_SENTRY_DSN });
 
-const store = createStore(reducer, applyMiddleware(thunk));
+export const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>
