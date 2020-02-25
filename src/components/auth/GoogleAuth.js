@@ -1,6 +1,10 @@
 import { useEffect } from "react";
+import { useDispatch } from 'react-redux';
+import { fetchAllData } from '../actions';
 
 const GoogleAuth = props => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const urlParams = new URLSearchParams(props.location.search);
 
@@ -10,8 +14,11 @@ const GoogleAuth = props => {
       localStorage.setItem("last_name", urlParams.get("last_name"));
     }
 
-    props.navigate("/dashboard");
-  }, [props]);
+    fetchAllData(dispatch).then(values => {
+      props.navigate("/dashboard");
+    });
+
+  }, [props, dispatch]);
 
   return null;
 };
