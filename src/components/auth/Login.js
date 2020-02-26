@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "@reach/router";
+import { useDispatch } from 'react-redux';
 import serverHandshake from "../../utils/serverHandshake";
+import { fetchAllData } from '../actions';
 
 const Login = ({ navigate }) => {
   const [credentials, setCredentials] = useState({});
   const [error, setError] = useState("");
+  const dispatch = useDispatch();
 
   const handleInput = event => {
     setCredentials({
@@ -23,9 +26,8 @@ const Login = ({ navigate }) => {
     try {
       const response = await serverHandshake().post("/auth/login", credentials);
       if (response.status === 200) {
-        for (const key in response.data) {
-          localStorage.setItem(key, response.data[key]);
-        }
+        for (const key in response.data) localStorage.setItem(key, response.data[key]);
+        await fetchAllData(dispatch);
         navigate("/dashboard");
       } else {
         console.error("Something went wrong;", response.statusText);

@@ -1,61 +1,52 @@
 import "@testing-library/jest-dom/extend-expect";
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
-import SignUp from "./SignUp";
 import mockAxios from "axios";
+import Login from "../Login";
 
-test("renders SignUp component", () => {
-  const { getByLabelText } = render(<SignUp />);
+jest.mock('../../actions', () => ({
+  fetchAllData: jest.fn(() => Promise.resolve())
+}));
 
-  const first_name = getByLabelText(/First Name/i);
-  const last_name = getByLabelText(/Last Name/i);
+jest.mock('react-redux', () => ({
+  useDispatch: () => jest.fn()
+}));
+
+test("renders Login component", () => {
+  const { getByLabelText } = render(<Login />);
+
   const email = getByLabelText(/email/i);
   const password = getByLabelText(/password/i);
 
-  expect(first_name).toBeInTheDocument();
-  expect(last_name).toBeInTheDocument();
   expect(email).toBeInTheDocument();
   expect(password).toBeInTheDocument();
 });
 
-test("allows the user to sign up successfully", async () => {
+test("allows the user to login successfully", async () => {
   const fakeResponse = {
-    status: 201,
-    data: {
-      token: "12345",
-      message: "asdf",
-      first_name: "bob",
-      last_name: "bob"
-    }
+    status: 200,
+    data: { token: "12345", first_name: "bob", last_name: "bob" }
   };
 
-  mockAxios.post.mockResolvedValue(fakeResponse);
+  mockAxios.post.mockResolvedValueOnce(fakeResponse);
 
   jest.spyOn(window.localStorage.__proto__, "setItem");
   window.localStorage.__proto__.setItem = jest.fn();
 
   const navigate = jest.fn();
 
-  const { getByLabelText, getByTestId } = render(
-    <SignUp navigate={navigate} />
-  );
+  const { getByLabelText, getByTestId } = render(<Login navigate={navigate} />);
 
   // fill out the form
-  fireEvent.change(getByLabelText(/First Name/i), {
-    target: { value: "test" }
-  });
-  fireEvent.change(getByLabelText(/Last Name/i), {
-    target: { value: "test" }
-  });
   fireEvent.change(getByLabelText(/email/i), {
-    target: { value: "test@gmail.com" }
+    target: { value: "BobBobbington@gmail.com" }
   });
   fireEvent.change(getByLabelText(/password/i), {
-    target: { value: "Test12345" }
+    target: { value: "Bob12345" }
   });
 
   // click the login button
-  fireEvent.click(getByTestId("signup"));
+  fireEvent.click(getByTestId("login"));
 
   // wait 4 seconds for the server to work
   await new Promise(r => setTimeout(r, 1000));
