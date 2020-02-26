@@ -15,6 +15,10 @@ function coachExercisesReducer(state = initialState, action) {
   switch (action.type) {
   case "SET_EXERCISE_DATA":
     return action.payload;
+
+  case "CREATE_AN_EXERCISE":
+    return [...state, action.payload];
+
   default:
     return state;
   }
