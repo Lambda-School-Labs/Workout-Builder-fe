@@ -4,7 +4,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 import NavBar from "./components/global/NavBar";
 import Login from "./components/auth/Login";
 import SignUp from "./components/auth/SignUp";
-import GoogleAuth from "./utils/GoogleAuth";
+import GoogleAuth from "./components/auth/GoogleAuth";
 import Dashboard from "./components/dashboard/Dashboard";
 import Program from "./components/program/ProgramHome";
 import ProgramCreation from "./components/program/ProgramCreation";
