@@ -20,7 +20,7 @@ const initialState = {
   coach_exercises: [
     {id: 0, coach_id: 1, name: "", type: "", focal_points: "", video_url: "", thumbnail_url: ""},
     {id: 1, coach_id: 1, name: "bench press", type: "anaerobic", focal_points: "chest", video_url: "https://www.youtube.com/watch?v=vthMCtgVtFw", thumbnail_url: "http://i3.ytimg.com/vi/vthMCtgVtFw/hqdefault.jpg"},
-    {id: 2, coach_id: 1, name: "shoulder press", type: "anaerobic", focal_points: "shoulders", video_url: "https://www.youtube.com/watch?v=qEwKCR5JCog", thumbnail_url: "http://i3.ytimg.com/vi/qEwKCR5JCog/hqdefault.jpg"},
+    {id: 2, coach_id: 1, name: "shoulder press", type: "anerobiac", focal_points: "shoulders", video_url: "https://www.youtube.com/watch?v=qEwKCR5JCog", thumbnail_url: "http://i3.ytimg.com/vi/qEwKCR5JCog/hqdefault.jpg"},
     {id: 3, coach_id: 1, name: "skull crushers", type: "anaerobic", focal_points: "triceps", video_url: "https://www.youtube.com/watch?v=d_KZxkY_0cM", thumbnail_url: "http://i3.ytimg.com/vi/d_KZxkY_0cM/hqdefault.jpg"},
     {id: 4, coach_id: 1, name: "pull ups", type: "anaerobic", focal_points: "lats", video_url: "https://www.youtube.com/watch?v=K81-SLUFo9c", thumbnail_url: "http://i3.ytimg.com/vi/K81-SLUFo9c/hqdefault.jpg"},
     {id: 5, coach_id: 1, name: "barbell rows", type: "anaerobic", focal_points: "back", video_url: "https://www.youtube.com/watch?v=RQU8wZPbioA", thumbnail_url: "http://i3.ytimg.com/vi/RQU8wZPbioA/hqdefault.jpg"},
@@ -121,28 +121,7 @@ const initialState = {
     workouts: [ ],
     assigned_clients: [],
   },
-  // new_program: {id: 1, name: "Program 1", description: "Test program description", coach_id: 1, length: 10, phase: "strength",
-  // workouts: [
-  //   {id: 1, name: "push day", description: "push day arm workout", day: 1, 
-  //   exercises: [
-  //     {exercise_id: 1, order: 1, exercise_details: "135lbs bar - 5 sets of 5"},
-  //     {exercise_id: 2, order: 2, exercise_details: "50lbs dumbbells - 5 sets of 5"},
-  //     {exercise_id: 3, order: 3, exercise_details: "70lbs bar - 5 sets of 5"}
-  //   ]}, 
-  //   {id: 2, name: "pull day", description: "pull day arm and back workout", day: 2, exercises: [
-  //     {exercise_id: 4, order: 1, exercise_details: "bodyweight - 5 sets of 5"},
-  //     {exercise_id: 5, order: 2, exercise_details: "135lbs bar - 5 sets of 5"},
-  //     {exercise_id: 6, order: 3, exercise_details: "30lbs dumbbells - 5 sets of 5"}
-  //   ]},
-  //   {id: 3, name: "legs and core", description: "legs and core day workout", day: 3, exercises: [
-  //     {exercise_id: 7, order: 1, exercise_details: "135lbs bar - 5 sets of 5"},
-  //     {exercise_id: 8, order: 2, exercise_details: "135lbs bar - 5 sets of 5"},
-  //     {exercise_id: 9, order: 3, exercise_details: "bodyweight - 5 sets of 5"},
-  //   ]},
-  // ],
-  // assigned_clients: [1, 3, 5, 7, 9]
-  // },
-}
+};
 
 function reducer(state = initialState, action) {
   switch(action.type) {
@@ -165,16 +144,20 @@ function reducer(state = initialState, action) {
     /*******  Program reducers *******/
 
   case "UPDATE_A_PROGRAM":
+    console.log(action.payload);
 
     // get coach programs
     const updatedList = [...state.coach_programs];
+    console.log(updatedList);
 
     // find index of old program data
     // const programIndex = updatedList.indexOf(action.payload.old);
     const programIndex = updatedList.findIndex(i => i.id === action.payload.id);
+    console.log(programIndex);
 
     // replace old data with new data
     updatedList[programIndex] = action.payload;
+    console.log(updatedList[programIndex]);
 
     return {
       ...state,
@@ -184,7 +167,7 @@ function reducer(state = initialState, action) {
   case "DELETE_A_PROGRAM":
     return {
       ...state,
-      coach_programs: state.coach_programs.filter((program) => {return program.id !== action.payload;})
+      coach_programs: state.coach_programs.filter((program) => {return program.id != action.payload;})
     };
 
   case "CREATE_A_PROGRAM":
