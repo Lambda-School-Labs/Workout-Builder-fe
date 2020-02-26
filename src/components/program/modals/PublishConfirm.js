@@ -52,8 +52,6 @@ const PublishConfirm = (props) => {
             delete workout.id;
         })
 
-        console.log(newProgram);
-
         serverHandshake(true).post("/programs", newProgram)
         .then(res => {
             Dispatch({ type: 'SET_PROGRAM_DATA', payload: res.data });
