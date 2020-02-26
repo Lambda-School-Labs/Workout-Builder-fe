@@ -14,249 +14,247 @@ import InstructionsInput from "./inputs/InstructionsInput";
 import "./program-mobile-styles.scss";
 
 // desktop styling
-import "./program-desktop-styles.scss"
+import "./program-desktop-styles.scss";
 
 const ProgramCreation = (props) => {
-    const Dispatch = useDispatch();
-    const [confirmModal, toggleConfirmModal] = useState(false);
+  const Dispatch = useDispatch();
+  const [confirmModal, toggleConfirmModal] = useState(false);
 
-    const goBackProgramHome = e => {
-        e.preventDefault();
-        props.navigate("/program");
-    };
+  const goBackProgramHome = e => {
+    e.preventDefault();
+    props.navigate("/program");
+  };
 
-    // leave the page if name is empty - to avoid errors in case user refreshes and data resets
-    const { new_program, navigate } = props;
-    useEffect(() => {
-        if(new_program.name === "") {
-            navigate("/program");
-        }
-    }, [navigate, new_program.name]);
-
-    // Current day number
-    const [currentDay, setCurrentDay] = useState(1);
-
-    const addWorkout = () => {
-        // Add a workout to the data
-        let updatedProgram = {...props.new_program};
-        updatedProgram.workouts.push({ id: props.temp_next_workout_id, name: "", description: "",  day: currentDay,
-            exercises: []
-        });
-        // cycle the current day
-        setCurrentDay(currentDay + 1);
-        // update the program data in redux
-        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
-        // cycle the next workout id - temp dispatch until backend integration
-        Dispatch({ type: "CYCLE_WORKOUT_ID" });
-    };
-
-    const deleteWorkout = (input_id) => {
-        // filter out the workout from the program by id
-        let updatedProgram = {...props.new_program};
-        updatedProgram.workouts = updatedProgram.workouts.filter((workout) => workout.id !== input_id);
-        // reapply day numbers - in case you delete a day in the middle of the program
-        if (updatedProgram.workouts.length > 0) {
-            let daynumber = 1;
-            updatedProgram.workouts.forEach(workout => {
-                workout.day = daynumber;
-                daynumber += 1;
-                setCurrentDay(daynumber);
-            });
-        } else {
-            // all workout days have been deleted so reset the day to 1
-            setCurrentDay(1);
-        }
-        // update the program data in redux
-        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
-        Dispatch({ type: "UPDATE" });
-    };
-
-    const addExercise = (workout_id) => {
-        // hard copy props.newprogram
-        // CAN NOT use a spread here because for some ungodly reason the .push() command three lines down was still modifying the original.
-        let updatedProgram = JSON.parse(JSON.stringify(props.new_program));
-        let index = updatedProgram.workouts.findIndex(workout => workout.id === workout_id);
-        updatedProgram.workouts[index].exercises.push({ exercise_id: 0, order: 0, exercise_details: ""});
-        // reapply order numbers
-        let ordernumber = 1
-        updatedProgram.workouts[index].exercises.forEach(exercise => {
-            exercise.order = ordernumber;
-            ordernumber += 1;
-        });
-        // update the program data in redux
-        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
-    };
-
-    const deleteExercise = (workout_id, order) => {
-        // hard copy props.newprogram
-        // another issue where the spread operator doesn't create a separate duplicate
-        let updatedProgram = JSON.parse(JSON.stringify(props.new_program));
-        let index = updatedProgram.workouts.findIndex(workout => workout.id === workout_id);
-        updatedProgram.workouts[index].exercises = updatedProgram.workouts[index].exercises.filter((exercise) => (exercise.order !== order));
-
-        // reapply order numbers
-        let ordernumber = 1
-        updatedProgram.workouts[index].exercises.forEach(exercise => {
-            exercise.order = ordernumber;
-            ordernumber += 1;
-        });
-
-        // update the program data in redux
-        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
-        Dispatch({ type: "UPDATE" });
+  // leave the page if name is empty - to avoid errors in case user refreshes and data resets
+  const { new_program, navigate } = props;
+  useEffect(() => {
+    if(new_program.name === "") {
+      navigate("/program");
     }
+  }, [navigate, new_program.name]);
 
-    const showPreview = () => {
-        props.navigate("/program/preview");
+  // Current day number
+  const [currentDay, setCurrentDay] = useState(1);
+
+  const addWorkout = () => {
+    // Add a workout to the data
+    let updatedProgram = {...props.new_program};
+    updatedProgram.workouts.push({ id: props.temp_next_workout_id, name: "", description: "",  day: currentDay,
+      exercises: []
+    });
+    // cycle the current day
+    setCurrentDay(currentDay + 1);
+    // update the program data in redux
+    Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
+    // cycle the next workout id - temp dispatch until backend integration
+    Dispatch({ type: "CYCLE_WORKOUT_ID" });
+  };
+
+  const deleteWorkout = (input_id) => {
+    // filter out the workout from the program by id
+    let updatedProgram = {...props.new_program};
+    updatedProgram.workouts = updatedProgram.workouts.filter((workout) => workout.id !== input_id);
+    // reapply day numbers - in case you delete a day in the middle of the program
+    if (updatedProgram.workouts.length > 0) {
+      let daynumber = 1;
+      updatedProgram.workouts.forEach(workout => {
+        workout.day = daynumber;
+        daynumber += 1;
+        setCurrentDay(daynumber);
+      });
+    } else {
+      // all workout days have been deleted so reset the day to 1
+      setCurrentDay(1);
     }
+    // update the program data in redux
+    Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
+    Dispatch({ type: "UPDATE" });
+  };
 
-    // publishExercise function has been moved to publishConfirm modal
+  const addExercise = (workout_id) => {
+    // hard copy props.newprogram
+    // CAN NOT use a spread here because for some ungodly reason the .push() command three lines down was still modifying the original.
+    let updatedProgram = JSON.parse(JSON.stringify(props.new_program));
+    let index = updatedProgram.workouts.findIndex(workout => workout.id === workout_id);
+    updatedProgram.workouts[index].exercises.push({ exercise_id: 0, order: 0, exercise_details: ""});
+    // reapply order numbers
+    let ordernumber = 1;
+    updatedProgram.workouts[index].exercises.forEach(exercise => {
+      exercise.order = ordernumber;
+      ordernumber += 1;
+    });
+    // update the program data in redux
+    Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
+  };
 
-    const discardProgram = () => {
-        // discard changes and navigate to program home
-        const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
-        workouts: [ ],
-        assigned_clients: []
-        }
+  const deleteExercise = (workout_id, order) => {
+    // hard copy props.newprogram
+    // another issue where the spread operator doesn't create a separate duplicate
+    let updatedProgram = JSON.parse(JSON.stringify(props.new_program));
+    let index = updatedProgram.workouts.findIndex(workout => workout.id === workout_id);
+    updatedProgram.workouts[index].exercises = updatedProgram.workouts[index].exercises.filter((exercise) => (exercise.order !== order));
 
-        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
-        props.navigate("/program");
-    }
+    // reapply order numbers
+    let ordernumber = 1;
+    updatedProgram.workouts[index].exercises.forEach(exercise => {
+      exercise.order = ordernumber;
+      ordernumber += 1;
+    });
 
-    return(
-        <>
+    // update the program data in redux
+    Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: updatedProgram });
+    Dispatch({ type: "UPDATE" });
+  };
 
-        {/* MOBILE VIEW */}
+  const showPreview = () => {
+    props.navigate("/program/preview");
+  };
 
-        <div className="program-creation">
-            <div className="back-div">
-                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome} alt="back"></img>
-                <p className="back-text" onClick={goBackProgramHome}>Back</p>
+  // publishExercise function has been moved to publishConfirm modal
+
+  const discardProgram = () => {
+    // discard changes and navigate to program home
+    const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
+      workouts: [ ],
+      assigned_clients: []
+    };
+
+    Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
+    props.navigate("/program");
+  };
+
+  return(
+    <>
+
+      {/* MOBILE VIEW */}
+
+      <div className="program-creation">
+        <div className="back-div">
+          <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome} alt="back"></img>
+          <p className="back-text" onClick={goBackProgramHome}>Back</p>
+        </div>
+        <div className="program-info">
+          <div className="title-line">
+            <div className="title-left">
+              <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => discardProgram()} alt="delete"></img>
+              <ProgramNameInput />
             </div>
-            <div className="program-info">
-                <div className="title-line">
-                    <div className="title-left">
-                        <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => discardProgram()} alt="delete"></img>
-                        <ProgramNameInput />
+            <p className="title-preview" onClick={() => showPreview()}>Preview</p>
+          </div>
+          <div className="info-input-div">
+            <h3>Phase: </h3><PhaseInput />
+          </div>
+          <div className="info-input-div">
+            <h3>Days programmed: </h3><LengthInput />
+          </div>
+        </div>
+        {props.new_program.workouts.map(day => {
+          return (
+            <div className="day-div">
+              <div className="day-title-div">
+                <h2 className="day-label">Day {day.day}:</h2>
+                <WorkoutNameInput day={day} />
+                <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteWorkout(day.id)} alt="delete"></img>
+              </div>
+              <div className="coach-instructions">
+                <h3 className="instructions-title">Coach Instructions</h3>
+                <InstructionsInput day={day} />
+              </div>
+              {day.exercises.map(exercise => {
+                return(
+                  <div className="exercise-div">
+                    <h3 className="exercise-label">Exercise Title</h3>
+                    <div className="exercise-title-div">
+                      <p className="icon-letter">{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
+                      <div className="exercise-title-right">
+                        <ExerciseInput day={day} exercise={exercise} />
+                        <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteExercise(day.id, exercise.order)} alt="delete"></img>
+                      </div>
                     </div>
-                    <p className="title-preview" onClick={() => showPreview()}>Preview</p>
-                </div>
-                <div className="info-input-div">
-                    <h3>Phase: </h3><PhaseInput />
-                </div>
-                <div className="info-input-div">
-                    <h3>Days programmed: </h3><LengthInput />
-                </div>
+                    <h3 className="exercise-label">Sets, reps, tempo, rest, etc.</h3>
+                    <ExerciseDetails day={day} exercise={exercise} />
+                  </div>
+                );
+              })}
+              <button className="add-exercise-button" onClick={() => addExercise(day.id)}>+ Add exercise</button>
+              <hr />
             </div>
-            {props.new_program.workouts.map(day => {
-                return (
-                    <div className="day-div">
-                        <div className="day-title-div">
-                            <h2 className="day-label">Day {day.day}:</h2>
-                            <WorkoutNameInput day={day} />
-                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteWorkout(day.id)} alt="delete"></img>
-                        </div>
-                        <div className="coach-instructions">
-                            <h3 className="instructions-title">Coach Instructions</h3>
-                            <InstructionsInput day={day} />
-                        </div>
-                        {day.exercises.map(exercise => {
-                            return(
-                                <div className="exercise-div">
-                                    <h3 className="exercise-label">Exercise Title</h3>
-                                    <div className="exercise-title-div">
-                                        <p className="icon-letter">{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
-                                        <div className="exercise-title-right">
-                                            <ExerciseInput day={day} exercise={exercise} />
-                                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteExercise(day.id, exercise.order)} alt="delete"></img>
-                                        </div>
-                                    </div>
-                                    <h3 className="exercise-label">Sets, reps, tempo, rest, etc.</h3>
-                                    <ExerciseDetails day={day} exercise={exercise} />
-                                </div>
-                            )
-                        })}
-                        <button className="add-exercise-button" onClick={() => addExercise(day.id)}>+ Add exercise</button>
-                        <hr />
-                    </div>
-                )
-            })}
-            <button className="add-day-button" onClick={() => addWorkout()}>+ Add day</button>
+          );
+        })}
+        <button className="add-day-button" onClick={() => addWorkout()}>+ Add day</button>
+        <button className="publish-button" onClick={() => toggleConfirmModal(true)}>Publish Program</button>
+      </div>
+
+      {/* DESKTOP VIEW */}
+
+      <div className="d-program-creation">
+        <div className="back-div">
+          <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome} alt="back"></img>
+          <p className="back-text" onClick={goBackProgramHome}>Back</p>
+        </div>
+        <div className="d-creation-info">
+          <div className="info-left">
+            <div className="creation-title">
+              <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => discardProgram()} alt="delete"></img>
+              <ProgramNameInput />
+            </div>
+            <div className="creation-phase-days">
+              <h3>Phase: </h3><PhaseInput />
+              <h3>Number of days in program: </h3><LengthInput />
+            </div>
+          </div>
+          <div className="info-right">
             <button className="publish-button" onClick={() => toggleConfirmModal(true)}>Publish Program</button>
+            <button className="preview-button" onClick={() => showPreview()}>Preview</button>
+          </div>
         </div>
+        {props.new_program.workouts.map(day => {
+          return (
+            <div className="day-div">
+              <div className="day-title-div">
+                <h2 className="day-label">Day {day.day}:</h2>
+                <WorkoutNameInput day={day} />
+                <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteWorkout(day.id)} alt="delete"></img>
+              </div>
+              <div className="coach-instructions">
+                <h3 className="instructions-title">Coach Instructions</h3>
+                <InstructionsInput day={day} />
+              </div>
 
-        {/* DESKTOP VIEW */}
+              {day.exercises.map(exercise => {
+                return(
+                  <div className="d-exercise-div">
+                    <div className="exercise-left">
+                      <h3 className="exercise-label">Exercise title</h3>
+                      <div className="exercise-bottom-left">
+                        <p className="icon-letter">{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
+                        <ExerciseInput day={day} exercise={exercise} />
+                      </div>
+                    </div>
+                    <div className="exercise-right">
+                      <h3 className="exercise-label">Sets, reps, tempo, rest, etc.</h3>
+                      <div className="exercise-bottom-right">
+                        <ExerciseDetails day={day} exercise={exercise} />
+                        <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteExercise(day.id, exercise.order)} alt="delete"></img>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
 
-        <div className="d-program-creation">
-            <div className="back-div">
-                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome} alt="back"></img>
-                <p className="back-text" onClick={goBackProgramHome}>Back</p>
+              <button className="add-exercise-button" onClick={() => addExercise(day.id)}>+ Add exercise</button>
+              <hr />
             </div>
-            <div className="d-creation-info">
-                <div className="info-left">
-                    <div className="creation-title">
-                        <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => discardProgram()} alt="delete"></img>
-                        <ProgramNameInput />
-                    </div>
-                    <div className="creation-phase-days">
-                        <h3>Phase: </h3><PhaseInput />
-                        <h3>Number of days in program: </h3><LengthInput />
-                    </div>
-                </div>
-                <div className="info-right">
-                    <button className="publish-button" onClick={() => toggleConfirmModal(true)}>Publish Program</button>
-                    <button className="preview-button" onClick={() => showPreview()}>Preview</button>
-                </div>
-            </div>
-            {props.new_program.workouts.map(day => {
-                return (
-                    <div className="day-div">
-                        <div className="day-title-div">
-                            <h2 className="day-label">Day {day.day}:</h2>
-                            <WorkoutNameInput day={day} />
-                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteWorkout(day.id)} alt="delete"></img>
-                        </div>
-                        <div className="coach-instructions">
-                            <h3 className="instructions-title">Coach Instructions</h3>
-                            <InstructionsInput day={day} />
-                        </div>
-
-
-                        {day.exercises.map(exercise => {
-                            return(
-                                <div className="d-exercise-div">
-                                    <div className="exercise-left">
-                                        <h3 className="exercise-label">Exercise title</h3>
-                                        <div className="exercise-bottom-left">
-                                            <p className="icon-letter">{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
-                                            <ExerciseInput day={day} exercise={exercise} />
-                                        </div>
-                                    </div>
-                                    <div className="exercise-right">
-                                        <h3 className="exercise-label">Sets, reps, tempo, rest, etc.</h3>
-                                        <div className="exercise-bottom-right">
-                                            <ExerciseDetails day={day} exercise={exercise} />
-                                            <img className="delete-button" src="https://i.imgur.com/58I3xb1.png" onClick={() => deleteExercise(day.id, exercise.order)} alt="delete"></img>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })}
-
-
-                        <button className="add-exercise-button" onClick={() => addExercise(day.id)}>+ Add exercise</button>
-                        <hr />
-                    </div>
-                )
-            })}
-            <button className="d-add-day-button" onClick={() => addWorkout()}>+ Add day</button>
-        </div>
-        {confirmModal ? <PublishConfirm thisProgram={props.new_program} 
-            confirmModal={confirmModal} toggleConfirmModal={toggleConfirmModal} {...props}/>
-            : <div />}
-        </>
-    )
-}
+          );
+        })}
+        <button className="d-add-day-button" onClick={() => addWorkout()}>+ Add day</button>
+      </div>
+      {confirmModal ? <PublishConfirm thisProgram={props.new_program}
+        confirmModal={confirmModal} toggleConfirmModal={toggleConfirmModal} {...props}/>
+        : <div />}
+    </>
+  );
+};
 
 const mapStateToProps = state => ({
   loggedInUser: state.loggedInUser,

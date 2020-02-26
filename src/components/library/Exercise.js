@@ -1,29 +1,30 @@
 import React, { useState, useEffect } from "react";
 import serverHandshake from '../../utils/serverHandshake';
 import { Link }   from '@reach/router';
+import { connect } from "react-redux";
+import {fetchExercise} from '../actions/index';
 
 function Exercise(props){
 
-  const [exercise, setExercise] = useState([]);
+  const {exercise} = props;
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    props.fetchExercise(props.id);
+    // serverHandshake(true)
+    //   .get(`/exercises/${props.id}`)
+    //   .then(res => {
 
-    serverHandshake(token)
-      .get(`/exercises/${props.id}`)
-      .then(res => {
-    
-        setExercise(res.data);
-      })
-      .catch(err => {
-        console.log("There was an error, ", err);
-      });
-  }, [props.id]);
+    //     setExercise(res.data);
+    //   })
+    //   .catch(err => {
+    //     console.log("There was an error, ", err);
+    //   });
+  }, []);
 
   return(
     <>
       <div>
-        <h1> name: {exercise.name} </h1>
+        <h1> name: {props.exercise.name} </h1>
         <h1>  focal_points:{exercise.focal_points}</h1>
         <h1>  video_url:{exercise.video_url}</h1>
       </div>
@@ -31,11 +32,19 @@ function Exercise(props){
         <button>Back</button>
       </Link>
 
-      <div>
-        <button>edit</button>
-      </div>
+      <Link to = {`/library/edit/${props.exercise.id}`}>
+        <div>
+          <button>edit</button>
+        </div>
+      </Link>
     </>
   );
 }
+const mapStateToProps = state => {
 
-export default Exercise;
+  return {
+    exercise: state.coach_exercises.exercise
+  };
+};
+
+export default connect(mapStateToProps, {fetchExercise})(Exercise);

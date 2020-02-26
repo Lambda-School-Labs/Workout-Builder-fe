@@ -22,8 +22,8 @@ function ExerciseAdd  (props) {
 
       <form>
         <input
-          name="exercise"
-          label = "exercise"
+          name="name"
+          label = "name"
           // className={classes.textField}
           value={exercise.name}
           onChange ={changeHandler}

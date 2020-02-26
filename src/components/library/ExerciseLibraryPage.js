@@ -2,26 +2,28 @@ import React, { useState, useEffect } from "react";
 import ExerciseAdd from "./ExerciseAdd";
 import serverHandshake from '../../utils/serverHandshake';
 import { Link }   from '@reach/router';
-
-import ExerciseList from './ExerciseCard';
+import { connect } from "react-redux";
+import ExerciseCard from './ExerciseCard';
+import {fetchExercises} from '../actions/index';
 const ExerciseLibraryPage = (props) => {
 
-  const [exercises, setExercises] = useState([]);
+  const {exercises} = props;
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
 
-    serverHandshake(token)
-      .get('/exercises')
-      .then(res => {
+    // props.fetchExercises();
+    props.fetchExercises();
+    // serverHandshake(true)
+    //   .get('/exercises')
+    //   .then(res => {
 
-        setExercises(res.data);
-      })
-      .catch(err => {
-        console.log("There was an error, ", err);
-      });
+    //     setExercises(res.data);
+    //   })
+    //   .catch(err => {
+    //     console.log("There was an error, ", err);
+    //   });
   }, []);
-
+  console.log(exercises);
   return (
     <>
       <Link to ="library/add">
@@ -29,7 +31,7 @@ const ExerciseLibraryPage = (props) => {
       </Link>
       <div>
         {exercises.map(e => (
-          <ExerciseList key ={e.exercise_id} exercise ={e}/>
+          <ExerciseCard key ={e.exercise_id} exercise ={e}/>
         ))}
       </div>
     </>
@@ -37,4 +39,13 @@ const ExerciseLibraryPage = (props) => {
   );
 };
 
-export default ExerciseLibraryPage;
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    exercises: state.coach_exercises.exercises
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {fetchExercises})(ExerciseLibraryPage);
