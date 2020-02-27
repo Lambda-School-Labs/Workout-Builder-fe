@@ -25,10 +25,7 @@ const App = props => (
       <PrivateRoute as={ProgramCreation} path="program/create" {...props} />
       <PrivateRoute as={ProgramEdit} path="program/edit" {...props} />
       <PrivateRoute as={ProgramPreview} path="program/preview" {...props} />
-      {/* <LibraryDisplay path="library" />
-      <ExerciseView path="library/:id" />
-      <ExerciseEdit path="library/:id/edit" /> */}
-      <AddExercise path="library/new" />
+      <PrivateRoute as={AddExercise} path="library/new" />
     </NavBar>
   </Router>
 );
