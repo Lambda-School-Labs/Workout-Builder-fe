@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import AssignConfirm from './AssignConfirm';
+import serverHandshake from '../../../utils/serverHandshake';
+import axios from 'axios';
 
 const AssignProgram = (props) => {
     const Dispatch = useDispatch();
@@ -41,6 +43,8 @@ const AssignProgram = (props) => {
     const thisProgram = props.coach_programs.filter(program => program.id === props.program_id)[0];
 
     const [clientList, setClientList] = useState([...thisProgram.assigned_clients]);
+    const [clientsToAdd, setClientsToAdd] = useState([]);
+    const [clientsToRemove, setClientsToRemove] = useState([]);
 
     const isChecked = (client_id) => {
         // function to determine if a box should be checked for each client name
@@ -51,28 +55,95 @@ const AssignProgram = (props) => {
         }
     }
 
+    // useEffect(() => {
+    //     console.log("Client List", clientList);
+    //     console.log("Clients To Add", clientsToAdd);
+    //     console.log("Clients To Remove", clientsToRemove);
+    // }, [clientList]);
   
     const toggleAssign = (client_id) => {
-        // function to check / uncheck boxes
+        // function to check / uncheck boxes and determine which clients have to be added / removed
         if (clientList.includes(client_id)) {
-            // remove client
+            // remove client from the local client list
             let tempList = [...clientList];
             const index = clientList.indexOf(client_id);
             tempList.splice(index, 1);
             setClientList(tempList);
+
+            // remove the client from the clientsToAdd list (if it's there)
+            let tempAddList = [...clientsToAdd];
+            if (tempAddList.includes(client_id)) {
+                const indexAdd = tempAddList.indexOf(client_id);
+                tempAddList.splice(indexAdd, 1);
+                setClientsToAdd(tempAddList);
+            } else {
+                // otherwise add the client to the clientsToRemove list
+                let tempRemoveList = [...clientsToRemove];
+                tempRemoveList.push(client_id);
+                setClientsToRemove(tempRemoveList);
+            }
         } else {
-            // add client
+            // add client to local client list
             let tempList = [...clientList];
             tempList.push(client_id);
             setClientList(tempList);
+
+            // remove the client from the clientsToRemove list (if it's there)
+            let tempRemoveList = [...clientsToRemove];
+            if (tempRemoveList.includes(client_id)) {
+                const indexRemove = tempRemoveList.indexOf(client_id);
+                tempRemoveList.splice(indexRemove, 1);
+                setClientsToRemove(tempRemoveList);
+            } else {
+                // add the client to the clientsToAdd list
+                let tempAddList = [...clientsToAdd];
+                tempAddList.push(client_id);
+                setClientsToAdd(tempAddList);
+            }
+            
         }
     }
 
     // function to update the redux data
     const assignToClient = (e) => {
-        const updatedProgram = {...thisProgram, assigned_clients: clientList};
-        Dispatch({ type: "UPDATE_A_PROGRAM", payload: updatedProgram });
-        Dispatch({ type: "UPDATE" });
+        // send a post request if there are clients to add
+        if (clientsToAdd.length > 0) {
+            const payload = {
+                program_id: props.program_id,
+                client_ids: clientsToAdd
+            }
+            serverHandshake(true).post("/clients-programs", payload)
+            .then(res => {
+            })
+            .catch(err => {
+                console.log("there was an error", err);
+            })
+        }
+
+        // send delete requests for each client to delete
+        if (clientsToRemove.length > 0) {
+            clientsToRemove.forEach(clientRemoveID => {
+                const payload = {
+                    program_id: props.program_id,
+                    client_id: clientRemoveID
+                }
+                serverHandshake(true).delete("/clients-programs", {data: payload})
+                .then(res => {
+                })
+                .catch(err => {
+                    console.log("there was an error", err);
+                })
+            })
+        }
+
+        serverHandshake(true).get('/programs')
+        .then(res => {
+            Dispatch({ type: 'SET_PROGRAM_DATA', payload: res.data });
+        })
+        .catch(err => {
+            console.log("there was an error", err);
+        })
+
         toggleConfirmModal(true);
     }
 
