@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Exo|Hind+Madurai|Montserrat|Roboto&display=swap');
+
+.e-creation-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.e-header {
+    font-style: normal;
+    color: #333333;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    position: absolute;
+    left: 31.5%;
+}
+
+.e-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+    width: 90%;
+    //height: 50vh;
+    padding: 2%;
+    border-radius: 15px;
+    margin-top: 25px;
+}
+
+.e-label {
+    font-size: 12px;
+    line-height: 17px;
+    font-weight: 600;
+    color: #7D7D7D;
+}
+
+.e-input {
+    border: 0.5px solid #D4D4D4;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.e-asterisk {
+    color: red;
+}

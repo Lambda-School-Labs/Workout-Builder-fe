@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import serverHandshake from '../../utils/serverHandshake';
 
+import './exercise-mobile-styles.scss';
+
 const ExerciseCreation = (props) => {
   const Dispatch = useDispatch();
 
@@ -30,7 +32,7 @@ const ExerciseCreation = (props) => {
       const response = await serverHandshake(true).post('/exercises', newExercise);
       console.log(response);
       if (response.status === 201) {
-        Dispatch({ type: "CREATE_AN_EXERCISE", payload: newExercise });
+        Dispatch({ type: "CREATE_AN_EXERCISE", payload: response.data });
         props.navigate('/library');
       }
     } catch (error) {
@@ -39,11 +41,11 @@ const ExerciseCreation = (props) => {
   };
 
   return (
-    <div>
-      <h2>Create Exercise</h2>
-      <form onSubmit={addExercise}>
-        <label htmlFor='name'>Name:<span>*</span> </label>
-        <input
+    <div className='e-creation-div'>
+      <h2 className='e-header'>Create Exercise</h2>
+      <form className='e-form'>
+        <label className='e-label' htmlFor='name'>Name:<span className='e-asterisk'>*</span> </label>
+        <input className='e-input'
           type='text'
           name='name'
           id='name'
@@ -53,8 +55,8 @@ const ExerciseCreation = (props) => {
           required
         />
 
-        <label htmlFor='thumbnail_url'>Link to photo:</label>
-        <input
+        <label className='e-label' htmlFor='thumbnail_url'>Link to photo:</label>
+        <input className='e-input'
           type='text'
           name='thumbnail_url'
           id='thumbnail_url'
@@ -62,8 +64,8 @@ const ExerciseCreation = (props) => {
           onChange={changeHandler}
         />
 
-        <label htmlFor='focal_points'>Focal points:</label>
-        <input
+        <label className='e-label' htmlFor='focal_points'>Focal points:</label>
+        <input className='e-input'
           type='text'
           name='focal_points'
           id='focal_points'
@@ -71,20 +73,20 @@ const ExerciseCreation = (props) => {
           onChange={changeHandler}
         />
 
-        <label htmlFor='video_url'>Link to video:</label>
-        <input
+        <label className='e-label' htmlFor='video_url'>Link to video:</label>
+        <input className='e-input'
           type='text'
           name='video_url'
           id='video_url'
           value={newExercise.video_url}
           onChange={changeHandler}
         />
-
-        <div>
-          <button onClick={goBackExerciseHome}>Cancel</button>
-          <button type='submit'>Save</button>
-        </div>
       </form>
+      <div>
+        <button onClick={goBackExerciseHome}>Cancel</button>
+        <button onClick={addExercise}>Save</button>
+      </div>
+
     </div>
   );
 };
