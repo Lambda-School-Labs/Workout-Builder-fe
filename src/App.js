@@ -11,7 +11,7 @@ import ProgramCreation from "./components/program/ProgramCreation";
 import ProgramEdit from "./components/program/ProgramEdit";
 import Home from './components/global/Home';
 import ProgramPreview from './components/program/ProgramPreview';
-import ExerciseLibraryPage from './components/library/ExerciseLibraryPage';
+// import ExerciseLibraryPage from './components/library/ExerciseLibraryPage';
 
 import Exercise from "./components/library/Exercise";
 import ExerciseEdit from "./components/library/ExerciseEdit"
