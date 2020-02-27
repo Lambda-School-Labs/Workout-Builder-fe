@@ -11,6 +11,7 @@ import ProgramCreation from "./components/program/ProgramCreation";
 import ProgramEdit from "./components/program/ProgramEdit";
 import Home from './components/global/Home';
 import ProgramPreview from './components/program/ProgramPreview';
+import ClientsHome from "./components/clients/ClientsHome";
 
 const App = props => (
   <Router>
@@ -24,6 +25,7 @@ const App = props => (
       <PrivateRoute as={ProgramCreation} path="program/create" {...props} />
       <PrivateRoute as={ProgramEdit} path="program/edit" {...props} />
       <PrivateRoute as={ProgramPreview} path="program/preview" {...props} />
+      <PrivateRoute as={ClientsHome} path="clients" />
     </NavBar>
   </Router>
 );

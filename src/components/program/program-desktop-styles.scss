@@ -8,6 +8,7 @@ $desktop-breakpoint: 1023px;
 // Desktop home page
 
 .d-outer-program {
+    padding: 2.5rem;
     @media (max-width: $desktop-breakpoint) {
         display: none;
     }
