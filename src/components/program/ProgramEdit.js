@@ -116,7 +116,6 @@ const ProgramEdit = (props) => {
       workouts: [ ],
       assigned_clients: []
     };
-
     Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
     props.navigate("/program");
   };

@@ -112,13 +112,13 @@ const ProgramCreation = (props) => {
 
   // publishExercise function has been moved to publishConfirm modal
 
+
   const discardProgram = () => {
     // discard changes and navigate to program home
     const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
       workouts: [ ],
       assigned_clients: []
     };
-
     Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
     props.navigate("/program");
   };

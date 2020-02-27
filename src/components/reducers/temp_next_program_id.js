@@ -1,4 +1,4 @@
-const initialState = 5;
+const initialState = -10000;
 
 function tempNextProgramIDReducer(state = initialState, action) {
   switch (action.type) {

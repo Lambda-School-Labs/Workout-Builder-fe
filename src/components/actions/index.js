@@ -16,7 +16,6 @@ export const fetchAllData = async (dispatch) => {
   } catch (error) {
     console.error(error.response.data.message);
   }
-
 };
 
 //update exercise
@@ -26,9 +25,7 @@ export const updateExercise = (id, exercise, props) => dispatch => {
   serverHandshake(true)
     .put(`exercises/${id}`, exercise)
     .then(res=> dispatch({ type: EDIT_EXERCISE, payload: exercise}))
-
     .catch(err=> {console.log("something broke", err);} );
-
 };
 
 // fetch all Exercises for that coach
@@ -40,11 +37,30 @@ export const fetchExercises = () => dispatch => {
     .catch(err => {console.log("something broke", err);});
 };
 
-// fetch 1 Exercises for that coach
+export function deleteExercise(ex_id) {
+  return function(dispatch) {
+    serverHandshake(true)
+      .delete(`/exercises/${ex_id}`)
+      .then(res=>{
+        // console.log("This is res in deleteExercise:",res);
+        dispatch({type:'DELETE_EXERCISE',payload:ex_id});
+      })
+      .catch(error => {
+        console.error(error.response.data.message);
+      });
+  };
+}
 
-export const fetchExercise = (id) => dispatch => {
-  serverHandshake(true)
-    .get(`/exercises/${id}`)
-    .then(res => dispatch({ type: FETCH_EXERCISE_DATA, payload: res.data})& console.log(res.data, "data for exercise"))
-    .catch(err => {console.log("something broke", err);});
-};
+export function duplicateExercise(exeObj) {
+  return function(dispatch) {
+    serverHandshake(true)
+      .post(`/exercises`,exeObj)
+      .then(res=>{
+        // console.log("This is in duplicateExercise:",res);
+        dispatch({type:'DUPLICATE_EXERCISE',payload:res.data});
+      })
+      .catch(error => {
+        console.error(error.response.data.message);
+      });
+  };
+}

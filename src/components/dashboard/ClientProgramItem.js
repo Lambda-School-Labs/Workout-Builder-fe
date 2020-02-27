@@ -42,8 +42,8 @@ const ClientProgramItem = ({ clientProgram }) => {
             </div>
           </div>
           <div className="flex flex-col items-end justify-between mr-2">
-            <p className="font-bold text-sm text-blaze-orange text-right">
-              {clientProgram.length} days left
+            <p className="px-3" style={{backgroundColor:'#FFE0E0', borderRadius:20}}>
+              <span className="font-bold text-2xs align-middle" style={{color:'#B82C00'}}>{clientProgram.length} days left</span>
             </p>
             <button className="font-semibold text-2xs underline" onClick={handleRepeat}>Repeat</button>
             <button className="font-semibold text-2xs underline" onClick={toggleAssigning}>Add program</button>
@@ -60,8 +60,10 @@ const ClientProgramItem = ({ clientProgram }) => {
         <span className="font-medium">{clientProgram.name}</span>
         <span className="font-medium">{clientProgram.phase}</span>
         <span className="font-medium">{clientProgram.start_date}</span>
-        <span className="col-span-2 font-semibold text-blaze-orange">{clientProgram.length} days left</span>
-        <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="cursor-pointer" onClick={handleRepeat}>
+        <div className="text-center" style={{backgroundColor:'#FFE0E0', borderRadius:20}}>
+          <span className="font-bold text-xs align-middle" style={{color:'#B82C00'}}>{clientProgram.length} days left</span>
+        </div>
+        <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="col-start-9 cursor-pointer" onClick={handleRepeat}>
           <path d="M14 15H4V12L0 16L4 20V17H16V11H14V15ZM4 5H14V8L18 4L14 0V3H2V9H4V5Z" fill="#BEBEBE"/>
         </svg>
         <div className="relative">
