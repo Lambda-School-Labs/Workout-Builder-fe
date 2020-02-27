@@ -16,8 +16,8 @@ function Exercise(props){
   console.log(coachExercise);
   return(
 
-    <div className= " ">
-      <div className= "m-4 ">
+    <div className= "flex flex-col px-4 py-5 ">
+      <div className= "">
         <h1 className ="text-2xxl">{coachExercise.name} </h1>
 
         <div >
@@ -32,17 +32,30 @@ function Exercise(props){
 
         </div>
 
-        <h1>  video_url:{coachExercise.video_url}</h1>
+        <h2 className ="text-dove-grey text-sm">  Link to video</h2>
+        <iframe width="420" height="200" src={coachExercise.video_url}>
+        </iframe>
 
-        <Link to ="/library">
-          <button>Back</button>
-        </Link>
+        {/* <video width="320" height="240" controls>
+          <source src={coachExercise.video_url}/>
 
-        <Link to = {`/library/${coachExercise.id}/edit`}>
-          <div>
-            <button>edit</button>
-          </div>
-        </Link>
+          Your browser does not support the video tag.
+        </video> */}
+
+        <div className ="flex flex-row w-6/6">
+          <Link to ="/library">
+            <button className=" bg-blaze-orange text-white font-semibold text-lg text-center rounded py-2 lg:hidden">
+              Back
+            </button>
+          </Link>
+
+          <Link to = {`/library/${coachExercise.id}/edit`}>
+            <button className=" bg-blaze-orange text-white font-semibold text-lg text-center rounded py-2 lg:hidden">
+              Edit
+            </button>
+
+          </Link>
+        </div>
       </div>
     </div>
   );

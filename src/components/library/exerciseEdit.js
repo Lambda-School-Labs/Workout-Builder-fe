@@ -31,15 +31,16 @@ const ExerciseEdit = (props) => {
   const submitHandler = event => {
     event.preventDefault();
     props.updateExercise(props.id, exerciseData);
+
   };
   return (
-    <>
+
+    <div className= "flex flex-col px-4 py-5 ">
       <h1> Edit your exercise! </h1>
 
       <form onSubmit = {submitHandler}>
-        
-        
-        <input
+
+        <input className ="text-2xxl"
           name="name"
           label = "name"
           // className={classes.textField}
@@ -53,11 +54,15 @@ const ExerciseEdit = (props) => {
         >
         </input>
 
-        name
+        <div >
+          <img src= {coachExercise.thumbnail_url } className ="w-5/5 h-58"/>
+        </div>
+
+        Image url:
         <input
           name="thumbnail_url"
           label = "thumbnail_url"
-          // className={classes.textField}
+
           value={exerciseData.thumbnail_url}
           onChange ={changeHandler}
 
@@ -66,10 +71,12 @@ const ExerciseEdit = (props) => {
           placeholder = "Enter thumbnail_url Here"
         >
         </input>
+
+        <h2 className ="text-dove-grey text-sm">  Focal Points</h2>
         <input
           name="focal_points"
           label = "focal_points"
-          // className={classes.textField}
+
           value={exerciseData.focal_points}
           onChange ={changeHandler}
           required
@@ -78,25 +85,30 @@ const ExerciseEdit = (props) => {
           placeholder = "Enter focal_points Here"
         >
         </input>
+
+        <h2 className ="text-dove-grey text-sm">  Video Link (needs to be an embedded link</h2>
         <input
           name="video_url"
           label = "video_url"
-          // className={classes.textField}
           value={exerciseData.video_url}
           onChange ={changeHandler}
-
           margin="normal"
           variant ="outlined"
           placeholder = "Enter video_url Here"
         >
         </input>
-        <button type ="submit">edit</button>
+        <div className = "flex flex-row w-6/6">
+          <button className=" bg-blaze-orange text-white font-semibold text-lg text-center rounded py-2 lg:hidden" type ="submit">Save Changes</button>
+
+          <Link to ="/library">
+            <button className=" bg-blaze-orange text-white font-semibold text-lg text-center rounded py-2 lg:hidden">
+              Back
+            </button>
+          </Link>
+        </div>
       </form>
 
-      <Link to ="/library">
-        <button>Back</button>
-      </Link>
-    </>
+    </div>
 
   );
 };
