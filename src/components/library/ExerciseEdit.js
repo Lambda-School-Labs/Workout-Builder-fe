@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link }   from '@reach/router';
 import { connect, useSelector } from "react-redux";
-
 import {updateExercise} from "../actions/index";
-import {fetchExercise} from '../actions/index';
 const ExerciseEdit = (props) => {
   const coachExercise = useSelector(state => state.coach_exercises.find(c=> c.id === Number(props.id)));
 
@@ -21,12 +19,6 @@ const ExerciseEdit = (props) => {
   const changeHandler = event => {
     setExerciseData({ ...exerciseData, [event.target.name]: event.target.value });
   };
-
-  // useEffect(() => {
-  //   props.fetchExercise(props.id);
-  //   setExerciseData(exercise);
-
-  // }, []);
 
   const submitHandler = event => {
     event.preventDefault();
@@ -121,4 +113,4 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  {updateExercise,fetchExercise})(ExerciseEdit);
+  {updateExercise})(ExerciseEdit);
