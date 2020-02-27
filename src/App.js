@@ -29,7 +29,7 @@ const App = props => (
       <PrivateRoute as={ProgramCreation} path="program/create" {...props} />
       <PrivateRoute as={ProgramEdit} path="program/edit" {...props} />
       <PrivateRoute as={ProgramPreview} path="program/preview" {...props} />
-      <PrivateRoute as={ExerciseLibraryPage} path = "library" {...props} />
+      {/* <PrivateRoute as={ExerciseLibraryPage} path = "library" {...props} /> */}
       <PrivateRoute as ={Exercise} path = "library/:id" />
       <PrivateRoute as ={ExerciseEdit} path = "library/:id/edit"/>
     </NavBar>
