@@ -11,7 +11,7 @@ import ProgramCreation from "./components/program/ProgramCreation";
 import ProgramEdit from "./components/program/ProgramEdit";
 import Home from './components/global/Home';
 import ProgramPreview from './components/program/ProgramPreview';
-import AddExercise from './components/library/ExerciseCreation';
+import ExerciseCreation from './components/library/ExerciseCreation';
 
 const App = props => (
   <Router>
@@ -25,7 +25,7 @@ const App = props => (
       <PrivateRoute as={ProgramCreation} path="program/create" {...props} />
       <PrivateRoute as={ProgramEdit} path="program/edit" {...props} />
       <PrivateRoute as={ProgramPreview} path="program/preview" {...props} />
-      <PrivateRoute as={AddExercise} path="library/new" />
+      <PrivateRoute as={ExerciseCreation} path="library/new" />
     </NavBar>
   </Router>
 );
