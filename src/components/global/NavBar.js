@@ -45,9 +45,8 @@ const NavBar = ({ children, location, navigate }) => {
 
   const name = localStorage.getItem("first_name");
 
-  let title = location?.pathname
-    ? location.pathname[1].toUpperCase() + location.pathname.slice(2)
-    : "???";
+  let title = location?.pathname?.match("^/([^/]+)")[1] ?? '?';
+  if (title) title = title[0].toUpperCase() + title.slice(1);
 
   return (
     <div className="font-body">
