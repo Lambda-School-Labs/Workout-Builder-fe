@@ -3,19 +3,20 @@ import ReactDOM from "react-dom";
 import * as Sentry from "@sentry/browser";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-import rootReducer from "./components/reducers";
+import { PersistGate } from 'redux-persist/integration/react';
+import configureStore from './configureStore';
 import "./styles/index.css";
 
 Sentry.init({ dsn: process.env.REACT_APP_SENTRY_DSN });
 
-export const store = createStore(rootReducer, applyMiddleware(thunk));
+export const { store, persistor } = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

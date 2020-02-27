@@ -1,4 +1,4 @@
-const initialState = 13;
+const initialState = -10000;
 
 function tempNextWorkoutIDReducer(state = initialState, action) {
   switch (action.type) {

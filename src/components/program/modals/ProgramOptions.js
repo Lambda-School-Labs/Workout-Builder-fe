@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import serverHandshake from '../../../utils/serverHandshake';
 
 const ProgramOptions = (props) => {
   const Dispatch = useDispatch();
@@ -27,21 +28,57 @@ const ProgramOptions = (props) => {
     });
   }
 
-  // Delete a program from the list and the redux store
+  const defaultProgram = {id: 0, name: "", description: "test", coach_id: 1, length: 0, phase: "",
+        workouts: [],
+        assigned_clients: []
+        }
+
   const deleteProgram = (e) => {
-    Dispatch({ type: "DELETE_A_PROGRAM", payload: props.program_id });
-    Dispatch({ type: "UPDATE" });
+    // Delete a program from the list and the redux store
+    serverHandshake(true).delete(`/programs/${props.program_id}`)
+    .then(res => {
+        serverHandshake(true).get('/programs')
+        .then(res => {
+          Dispatch({ type: 'SET_PROGRAM_DATA', payload: res.data });
+          Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
+        })
+        .catch(err => {
+          console.log("there was an error", err);
+        })
+    })
+    .catch(err => {
+        console.log("there was an error", err);
+    })
     closeModal(e);
   };
 
-  // Duplicate a program from the list and add it to the redux store
+
   const duplicateProgram = (e) => {
+    // Duplicate a program from the list and send it to the back end as a new program
     // This is the current program for which the options menu is being displayed
     const thisProgram = props.coach_programs.filter(program => program.id === props.program_id)[0];
-    const newProgram = {...thisProgram, name: `${thisProgram.name} (copy)`, assigned_clients: []};
-
-    Dispatch({ type: "CREATE_A_PROGRAM", payload: newProgram });
-    Dispatch({ type: "UPDATE" });
+    // Create a hard copy and change the name
+    let newProgram = JSON.parse(JSON.stringify(thisProgram));
+    newProgram.name = `${thisProgram.name} (copy)`;
+    // delete the program id, assigned_clients fields and add a test value to description prior to sending to the back end
+    delete newProgram.id;
+    delete newProgram.assigned_clients;
+    delete newProgram.coach_id;
+    newProgram.description = "test";
+    // delete the workout ids
+    newProgram.workouts.forEach(workout => {
+        delete workout.id;
+    })
+    serverHandshake(true).post("/programs", newProgram)
+    .then(res => {
+        Dispatch({ type: 'SET_PROGRAM_DATA', payload: res.data });
+        Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
+        props.toggleConfirmModal(false);
+        props.navigate("/program");
+    })
+    .catch(err => {
+        console.log("there was an error", err);
+    })
     closeModal(e);
   };
 
