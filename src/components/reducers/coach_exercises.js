@@ -1,9 +1,16 @@
+import {EDIT_EXERCISE} from "../actions";
+
 const initialState = [ ];
+
 
 function coachExercisesReducer(state = initialState, action) {
   switch (action.type) {
   case "SET_EXERCISE_DATA":
     return action.payload;
+      
+  case EDIT_EXERCISE:
+    const filtered_exercises = state.exercise.map(e => e.id === action.payload.id? action.payload : e);
+    return filtered_exercises;
 
   case 'DELETE_EXERCISE': {
     const ex_id = action.payload;
@@ -20,6 +27,7 @@ function coachExercisesReducer(state = initialState, action) {
   default:
     return state;
   }
+
 }
 
 export default coachExercisesReducer;

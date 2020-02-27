@@ -11,7 +11,7 @@ export default function ExerciseCard(props) {
 
   return (
     <div className="exer-card">
-      <Link to={`/library/${id}`} >{name}</Link>
+      <Link to={`/library/${id}`}>{name}</Link>
       <img className="exer-card-hide-mobile" src={thumbnail_url} alt="thumbnail_url" />
       <p>{type}</p>
       <img className="exer-card-hide-mobile" src={video_url} alt="video_url" />
@@ -41,4 +41,3 @@ export default function ExerciseCard(props) {
   );
 
 }
-

@@ -15,13 +15,17 @@ import LibraryDisplay from './components/library/LibraryDisplay';
 import Exercise from './components/library/Exercise';
 import ExerciseCreation from './components/library/ExerciseCreation';
 import ExerciseEdit from './components/library/ExerciseEdit';
+import Exercise from "./components/library/Exercise";
+import ExerciseEdit from "./components/library/ExerciseEdit"
 
 const App = props => (
+
   <Router>
     <Login path="login" {...props} />
     <SignUp path="signup" {...props} />
     <GoogleAuth path="auth" />
     <Home path="/" />
+
     <NavBar path="/">
       <PrivateRoute as={Dashboard} path="dashboard" />
       <PrivateRoute as={Program} path="program" {...props} />
@@ -33,6 +37,7 @@ const App = props => (
       <PrivateRoute as={ExerciseEdit} path="library/:id/edit" />
       <PrivateRoute as={ExerciseCreation} path="library/new" />
     </NavBar>
+
   </Router>
 );
 
