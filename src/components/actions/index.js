@@ -36,11 +36,11 @@ export const updateExercise = (id, exercise, props) => dispatch => {
 export const fetchExercises = () => dispatch => {
   serverHandshake(true)
     .get('/exercises')
-    .then(res => dispatch({ type: FETCH_EXERCISES_DATA, payload: res.data})& console.log(res.data, "data for exercises"))
+    .then(res => dispatch({ type: 'SET_EXERCISE_DATA', payload: res.data})& console.log(res.data, "data for exercises"))
     .catch(err => {console.log("something broke", err);});
 };
 
-// fetch all Exercises for that coach
+// fetch 1 Exercises for that coach
 
 export const fetchExercise = (id) => dispatch => {
   serverHandshake(true)

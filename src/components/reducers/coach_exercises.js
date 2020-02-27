@@ -1,7 +1,9 @@
-import {EDIT_EXERCISE, FETCH_EXERCISES_DATA,FETCH_EXERCISE_DATA} from "../actions";
+import {EDIT_EXERCISE} from "../actions";
 
-// const initialState = [
-//   {id: 0, coach_id: 1, name: "", type: "", focal_points: "", video_url: "", thumbnail_url: ""},
+const initialState = [
+
+];
+// {id: 0, coach_id: 1, name: "", type: "", focal_points: "", video_url: "", thumbnail_url: ""},
 //   {id: 1, coach_id: 1, name: "bench press", type: "anaerobic", focal_points: "chest", video_url: "https://www.youtube.com/watch?v=vthMCtgVtFw", thumbnail_url: "http://i3.ytimg.com/vi/vthMCtgVtFw/hqdefault.jpg"},
 //   {id: 2, coach_id: 1, name: "shoulder press", type: "anaerobic", focal_points: "shoulders", video_url: "https://www.youtube.com/watch?v=qEwKCR5JCog", thumbnail_url: "http://i3.ytimg.com/vi/qEwKCR5JCog/hqdefault.jpg"},
 //   {id: 3, coach_id: 1, name: "skull crushers", type: "anaerobic", focal_points: "triceps", video_url: "https://www.youtube.com/watch?v=d_KZxkY_0cM", thumbnail_url: "http://i3.ytimg.com/vi/d_KZxkY_0cM/hqdefault.jpg"},
@@ -11,39 +13,16 @@ import {EDIT_EXERCISE, FETCH_EXERCISES_DATA,FETCH_EXERCISE_DATA} from "../action
 //   {id: 7, coach_id: 1, name: "barbell squats", type: "anaerobic", focal_points: "legs and core", video_url: "https://www.youtube.com/watch?v=1oed-UmAxFs", thumbnail_url: "http://i3.ytimg.com/vi/1oed-UmAxFs/hqdefault.jpg"},
 //   {id: 8, coach_id: 1, name: "deadlifts", type: "anaerobic", focal_points: "legs and core", video_url: "https://www.youtube.com/watch?v=ytGaGIn3SjE", thumbnail_url: "http://i3.ytimg.com/vi/ytGaGIn3SjE/hqdefault.jpg"},
 //   {id: 9, coach_id: 1, name: "situps", type: "anaerobic", focal_points: "core", video_url: "https://www.youtube.com/watch?v=jDwoBqPH0jk", thumbnail_url: "http://i3.ytimg.com/vi/jDwoBqPH0jk/hqdefault.jpg"},
-// ];
-const initialState ={
-  isFetching: false,
-  exercises:[],
-  exercise:[]
 
-};
 function coachExercisesReducer(state = initialState, action) {
   switch (action.type) {
   case "SET_EXERCISE_DATA":
     return action.payload;
 
-  case FETCH_EXERCISES_DATA:
-
-    return{
-      ...state,
-      exercises: action.payload,
-    };
-
-  case FETCH_EXERCISE_DATA:
-
-    return{
-      ...state,
-      exercise: action.payload,
-    };
 
   case EDIT_EXERCISE:
     const filtered_exercises = state.exercise.map(e => e.id === action.payload.id? action.payload : e);
-    return{
-      ...state,
-      isFetching:false,
-      exercises: filtered_exercises
-    };
+    return filtered_exercises;
 
   default:
     return state;

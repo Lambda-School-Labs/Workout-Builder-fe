@@ -1,18 +1,20 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useState, useEffect } from "react";
 import { Link }   from '@reach/router';
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 import {updateExercise} from "../actions/index";
 import {fetchExercise} from '../actions/index';
 const ExerciseEdit = (props) => {
-  const {exercise} = props;
+  const coachExercise = useSelector(state => state.coach_exercises.find(c=> c.id === Number(props.id)));
+
+  // const {exercise} = props;
   console.log(props);
   const [exerciseData,setExerciseData] = useState({
-    name: "",
-    thumbnail_url: "",
-    focal_points: "",
-    video_url: ""
+    name: coachExercise.name,
+    thumbnail_url: coachExercise.thumbnail_url,
+    focal_points: coachExercise.focal_points,
+    video_url: coachExercise.video_url
 
   });
 
@@ -20,11 +22,11 @@ const ExerciseEdit = (props) => {
     setExerciseData({ ...exerciseData, [event.target.name]: event.target.value });
   };
 
-  useEffect(() => {
-    props.fetchExercise(props.id);
-    setExerciseData(exercise);
+  // useEffect(() => {
+  //   props.fetchExercise(props.id);
+  //   setExerciseData(exercise);
 
-  }, []);
+  // }, []);
 
   const submitHandler = event => {
     event.preventDefault();
@@ -35,6 +37,8 @@ const ExerciseEdit = (props) => {
       <h1> Edit your exercise! </h1>
 
       <form onSubmit = {submitHandler}>
+        
+        
         <input
           name="name"
           label = "name"
@@ -48,6 +52,8 @@ const ExerciseEdit = (props) => {
           placeholder = "Enter name Here"
         >
         </input>
+
+        name
         <input
           name="thumbnail_url"
           label = "thumbnail_url"
