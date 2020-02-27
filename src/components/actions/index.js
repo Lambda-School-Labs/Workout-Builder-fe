@@ -13,3 +13,31 @@ export const fetchAllData = async (dispatch) => {
     console.error(error.response.data.message);
   }
 };
+
+export function deleteExercise(ex_id) {
+  return function(dispatch) {
+    serverHandshake(true)
+      .delete(`/exercises/${ex_id}`)
+      .then(res=>{
+        // console.log("This is res in deleteExercise:",res);
+        dispatch({type:'DELETE_EXERCISE',payload:ex_id});
+      })
+      .catch(error => {
+        console.error(error.response.data.message);
+      });
+  };
+}
+
+export function duplicateExercise(exeObj) {
+  return function(dispatch) {
+    serverHandshake(true)
+      .post(`/exercises`,exeObj)
+      .then(res=>{
+        // console.log("This is in duplicateExercise:",res);
+        dispatch({type:'DUPLICATE_EXERCISE',payload:res.data});
+      })
+      .catch(error => {
+        console.error(error.response.data.message);
+      });
+  };
+}
