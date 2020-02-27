@@ -38,7 +38,14 @@ const ExerciseInput = (props) => {
 
   const getExerciseName = useCallback((input_id) => {
     // find the name of the selected exercise (by id) from the exercise library
-    return props.coach_exercises.filter((exercise) => {return exercise.id === input_id})[0].name;
+
+    if (!props.coach_exercises.length) {
+      return '';
+    } else if (!props.coach_exercises.filter((exercise) => {return exercise.id === input_id}).length) {
+      return '';
+    } else {
+      return props.coach_exercises.filter((exercise) => {return exercise.id === input_id})[0].name;
+    }
   },[props.coach_exercises])
 
   const [input, setInput] = useState(getExerciseName(props.exercise.exercise_id));

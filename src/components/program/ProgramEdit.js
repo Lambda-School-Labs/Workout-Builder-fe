@@ -112,8 +112,8 @@ const ProgramEdit = (props) => {
 
     const discardProgram = () => {
         // discard changes and navigate to program home
-        const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
-        workouts: [ ],
+        const defaultProgram = {id: 0, name: "", description: "test", coach_id: 1, length: 0, phase: "",
+        workouts: [],
         assigned_clients: []
         }
 
