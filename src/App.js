@@ -15,8 +15,6 @@ import LibraryDisplay from './components/library/LibraryDisplay';
 import Exercise from './components/library/Exercise';
 import ExerciseCreation from './components/library/ExerciseCreation';
 import ExerciseEdit from './components/library/ExerciseEdit';
-import Exercise from "./components/library/Exercise";
-import ExerciseEdit from "./components/library/ExerciseEdit"
 
 const App = props => (
 

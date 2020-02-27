@@ -7,6 +7,9 @@ function coachExercisesReducer(state = initialState, action) {
   switch (action.type) {
   case "SET_EXERCISE_DATA":
     return action.payload;
+
+  case "CREATE_AN_EXERCISE":
+    return [...state, action.payload];
       
   case EDIT_EXERCISE:
     const filtered_exercises = state.exercise.map(e => e.id === action.payload.id? action.payload : e);
