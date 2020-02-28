@@ -13,6 +13,7 @@
     font-size: 18px;
     line-height: 25px;
     text-align: left;
+    font-family: 'Hind Madurai', sans-serif;
 }
 
 .e-form {
@@ -28,6 +29,7 @@
     line-height: 17px;
     font-weight: 600;
     color: #7D7D7D;
+    font-family: 'Hind Madurai', sans-serif;
 }
 
 .e-label-name {
@@ -51,10 +53,16 @@
     padding-top: 3px;
     font-size: 14px;
     margin-bottom: 2%;
+    color: #333333;
+    font-family: 'Hind Madurai', sans-serif;
 }
 
 .e-input-name {
     font-size: 16px;
+}
+
+.e-input::placeholder {
+    color: #BEBEBE;
 }
 
 .e-input-focal {
