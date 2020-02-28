@@ -11,10 +11,10 @@ function Exercise(props){
   console.log(coachExercise);
   return(
 
-    <div className= "flex flex-col px-8 py-4 ">
+    <div className= "flex flex-col px-6 py-3 ">
       <div className= "">
-        <h1 className ="text-3xl pb-4 font-semibold">{coachExercise.name} </h1>
-        <div className ="pb-6">
+        <h1 className ="text-3xl pb-2 font-semibold">{coachExercise.name} </h1>
+        <div className ="pb-4">
           <img src= {coachExercise.thumbnail_url } className =" h-25 w-full"/>
         </div>
         <div>
@@ -29,7 +29,7 @@ function Exercise(props){
         </iframe>
 
 
-        <div className ="mt-16">
+        <div className ="mt-16 whitespace-no-wrap">
           <Link to ="/library">
             <button className="mr-6 border-solid border-2 border-blaze-orange bg-white text-blaze-orange font-semibold text-xl text-center rounded-lg py-3 px-12">
               Back

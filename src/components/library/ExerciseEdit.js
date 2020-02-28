@@ -47,11 +47,11 @@ const ExerciseEdit = (props) => {
 
   return (
 
-    <div className= "flex flex-col px-4 py-5 ">
+    <div className= "flex flex-col px-6 py-4 ">
 
       <form onSubmit = {submitHandler}>
 
-        <input className ="text-5xl pb-4 font-semibold"
+        <input className ="text-3xl pb-2 font-semibold"
           name="name"
           value={exerciseData.name}
           onChange ={changeHandler}
@@ -62,8 +62,8 @@ const ExerciseEdit = (props) => {
           placeholder = "Enter name Here"
         >
         </input>
-        <div >
-          <img src= {coachExercise.thumbnail_url } className ="w-5/5 h-58"/>
+        <div className ="pb-4" >
+          <img src= {coachExercise.thumbnail_url } className ="w-full h-58"/>
         </div>
 
         {/* <label>Image url:
@@ -81,19 +81,24 @@ const ExerciseEdit = (props) => {
           </input>
         </label> */}
         <div>
-          <label className ="text-xl text-silver">Focal Points: <br/>
-            <input
-              className= "text-2xl text-black"
+          <label className ="text-lg text-silver">Focal Points: <br/>
+            <textarea
+              rows="4"
+              cols= "30"
+              className= "border-solid border border-silver rounded-lg text-2xl text-black"
               name="focal_points"
               value={exerciseData.focal_points}
               onChange ={changeHandler}
               placeholder = "Enter focal points Here"
             >
-            </input>
+            </textarea>
           </label>
         </div>
-        <h2 className ="text-dove-grey text-sm">  Video Link (needs to be an embedded link</h2>
-        <input
+        <h2 className ="text-dove-grey text-lg">  Video Link (needs to be an embedded link)</h2>
+        <textarea
+          className= "border-solid border border-silver rounded-lg text-2xl text-black"
+          cols= "30"
+          rows ="1"
           name="video_url"
           label = "video_url"
           value={exerciseData.video_url}
@@ -102,19 +107,18 @@ const ExerciseEdit = (props) => {
           variant ="outlined"
           placeholder = "Enter video_url Here"
         >
-        </input>
+        </textarea>
 
-        <iframe className ="pt-5 w-full" width="480" height="220" src={coachExercise.video_url}>
+        <iframe className ="pt-5 w-full" width="480" height="200" src={coachExercise.video_url}>
         </iframe>
 
-        <div className = "flex flex-row w-6/6">
-          <button   className=" mr-12 border-solid border-2 border-blaze-orange bg-white text-blaze-orange font-semibold text-2xl text-center rounded-lg py-6 px-24" >Save Changes</button>
-
+        <div className = "whitespace-no-wrap mt-16 ">
           <Link to ="/library">
-            <button className=" bg-blaze-orange text-white font-semibold text-lg text-center rounded py-2 lg:hidden">
+            <button className="mr-6 border-solid border-2 border-blaze-orange bg-white text-blaze-orange font-semibold text-xl text-center rounded-lg py-3 px-12">
               Back
             </button>
           </Link>
+          <button   className="border-solid border-2 border-blaze-orange bg-blaze-orange text-white font-semibold text-xl text-center rounded-lg py-3 px-12" >Save</button>
         </div>
       </form>
       {success ?(
