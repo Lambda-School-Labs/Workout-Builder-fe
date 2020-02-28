@@ -7,12 +7,7 @@ import {fetchExercise} from '../actions/index';
 
 function Exercise(props){
   const coachExercise = useSelector(state => state.coach_exercises.find(c=> c.id === Number(props.id)));
-  // const {exercise} = props;
 
-  // useEffect(() => {
-  //   props.fetchExercise(props.id);
-
-  // }, []);
   console.log(coachExercise);
   return(
 

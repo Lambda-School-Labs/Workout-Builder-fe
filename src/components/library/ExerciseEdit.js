@@ -3,11 +3,11 @@ import React, { useState, useEffect } from "react";
 import { Link }   from '@reach/router';
 import { connect, useSelector } from "react-redux";
 import {updateExercise} from "../actions/index";
+
 const ExerciseEdit = (props) => {
   const coachExercise = useSelector(state => state.coach_exercises.find(c=> c.id === Number(props.id)));
+  const [confirmed,setConfirmed] = useState(false);
 
-  // const {exercise} = props;
-  console.log(props);
   const [exerciseData,setExerciseData] = useState({
     name: coachExercise.name,
     thumbnail_url: coachExercise.thumbnail_url,
@@ -23,61 +23,62 @@ const ExerciseEdit = (props) => {
   const submitHandler = event => {
     event.preventDefault();
     props.updateExercise(props.id, exerciseData);
-
+    props.navigate('/library');
   };
+
   return (
 
     <div className= "flex flex-col px-4 py-5 ">
       <h1> Edit your exercise! </h1>
 
       <form onSubmit = {submitHandler}>
+        <label> Exercise Name
+          <input className ="text-2xxl"
+            name="name"
 
-        <input className ="text-2xxl"
-          name="name"
-          label = "name"
-          // className={classes.textField}
-          value={exerciseData.name}
-          onChange ={changeHandler}
-          type= "text"
-          required
-          margin="normal"
-          variant ="outlined"
-          placeholder = "Enter name Here"
-        >
-        </input>
-
+            // className={classes.textField}
+            value={exerciseData.name}
+            onChange ={changeHandler}
+            type= "text"
+            required
+            margin="normal"
+            variant ="outlined"
+            placeholder = "Enter name Here"
+          >
+          </input>
+        </label>
         <div >
           <img src= {coachExercise.thumbnail_url } className ="w-5/5 h-58"/>
         </div>
 
-        Image url:
-        <input
-          name="thumbnail_url"
-          label = "thumbnail_url"
+        <label>Image url:
+          <input
+            name="thumbnail_url"
+            label = "thumbnail_url"
 
-          value={exerciseData.thumbnail_url}
-          onChange ={changeHandler}
+            value={exerciseData.thumbnail_url}
+            onChange ={changeHandler}
 
-          margin="normal"
-          variant ="outlined"
-          placeholder = "Enter thumbnail_url Here"
-        >
-        </input>
+            margin="normal"
+            variant ="outlined"
+            placeholder = "Enter thumbnail_url Here"
+          >
+          </input>
+        </label>
+        <label className ="text-dove-grey text-sm">Focal Points
+          <input
+            name="focal_points"
+            label = "focal_points"
 
-        <h2 className ="text-dove-grey text-sm">  Focal Points</h2>
-        <input
-          name="focal_points"
-          label = "focal_points"
-
-          value={exerciseData.focal_points}
-          onChange ={changeHandler}
-          required
-          margin="normal"
-          variant ="outlined"
-          placeholder = "Enter focal_points Here"
-        >
-        </input>
-
+            value={exerciseData.focal_points}
+            onChange ={changeHandler}
+            required
+            margin="normal"
+            variant ="outlined"
+            placeholder = "Enter focal_points Here"
+          >
+          </input>
+        </label>
         <h2 className ="text-dove-grey text-sm">  Video Link (needs to be an embedded link</h2>
         <input
           name="video_url"

@@ -24,16 +24,24 @@ export const updateExercise = (id, exercise, props) => dispatch => {
 
   serverHandshake(true)
     .put(`exercises/${id}`, exercise)
-    .then(res=> dispatch({ type: EDIT_EXERCISE, payload: exercise}))
+    .then(res=>{
+      dispatch({ type: EDIT_EXERCISE, payload: exercise});
+
+      serverHandshake(true)
+        .get('/exercises')
+        .then(res => dispatch({ type: 'SET_EXERCISE_DATA', payload: res.data}))
+        .catch(err => {console.log("something broke", err);});
+    })
     .catch(err=> {console.log("something broke", err);} );
 };
 
 // fetch all Exercises for that coach
 
 export const fetchExercises = () => dispatch => {
+
   serverHandshake(true)
     .get('/exercises')
-    .then(res => dispatch({ type: 'SET_EXERCISE_DATA', payload: res.data})& console.log(res.data, "data for exercises"))
+    .then(res => dispatch({ type: 'SET_EXERCISE_DATA', payload: res.data}))
     .catch(err => {console.log("something broke", err);});
 };
 
