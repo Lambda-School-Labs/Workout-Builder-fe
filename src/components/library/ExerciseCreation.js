@@ -1,52 +1,63 @@
 import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
-import serverHandshake from '../../utils/serverHandshake';
-import videoIcon from '../../img/video-icon.svg';
+//import { useDispatch } from 'react-redux';
+//import serverHandshake from '../../utils/serverHandshake';
+//import videoIcon from '../../img/video-icon.svg';
+import ExerciseCreationModal from './ExerciseCreationModal';
 
-import './exercise-mobile-styles.scss';
+//import './exercise-mobile-styles.scss';
 
 const ExerciseCreation = (props) => {
-  const Dispatch = useDispatch();
+  // const Dispatch = useDispatch();
 
-  const [newExercise, setNewExercise] = useState({
-    name: '',
-    focal_points: '',
-    thumbnail_url: '',
-    video_url: ''
-  });
+  // const [newExercise, setNewExercise] = useState({
+  //   name: '',
+  //   focal_points: '',
+  //   thumbnail_url: '',
+  //   video_url: ''
+  // });
 
-  const goBackExerciseHome = e => {
-    e.preventDefault();
-    props.navigate("/library");
+  const [creating, setCreating] = useState(false);
+
+  const handleCreating = () => setCreating(true);
+  const cancelCreating = () => setCreating(false);
+
+  const confirmCreating = () => {
+    setCreating(false);
   };
 
-  const changeHandler = e => {
-    setNewExercise({
-      ...newExercise,
-      [e.target.name]: e.target.value
-    });
-  };
+  // const goBackExerciseHome = e => {
+  //   e.preventDefault();
+  //   props.navigate("/library");
+  // };
 
-  const addExercise = async e => {
-    e.preventDefault();
-    try {
-      const response = await serverHandshake(true).post('/exercises', newExercise);
-      console.log(response);
-      if (response.status === 201) {
-        Dispatch({ type: "CREATE_AN_EXERCISE", payload: response.data });
-        props.navigate('/library');
-      }
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
+  // const changeHandler = e => {
+  //   setNewExercise({
+  //     ...newExercise,
+  //     [e.target.name]: e.target.value
+  //   });
+  // };
+
+  // const addExercise = async e => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await serverHandshake(true).post('/exercises', newExercise);
+  //     console.log(response);
+  //     if (response.status === 201) {
+  //       Dispatch({ type: "CREATE_AN_EXERCISE", payload: response.data });
+  //       props.navigate('/library');
+  //     }
+  //   } catch (error) {
+  //     console.log(error.response);
+  //   }
+  // };
 
   return (
-    <div className='e-creation-div'>
+    // <div className='e-creation-div'>
+    <div>
       <div className='e-header-div'>
-        <h2 className='e-header'>Create Exercise</h2>
+        <h2 className='e-header' onClick={handleCreating}>Create Exercise</h2>
       </div>
-      <form className='e-form' onSubmit={addExercise}>
+      {/* <form className='e-form' onSubmit={addExercise}>
         <label className='e-label e-label-name' htmlFor='name'>Name:<span className='e-asterisk'> *</span> </label>
         <input className='e-input e-input-name'
           type='text'
@@ -68,13 +79,6 @@ const ExerciseCreation = (props) => {
         />
 
         <label className='e-label' htmlFor='focal_points'>Focal points:</label>
-        {/* <input className='e-input-focal'
-          type='text'
-          name='focal_points'
-          id='focal_points'
-          value={newExercise.focal_points}
-          onChange={changeHandler}
-        /> */}
         <textarea className='e-input e-input-focal'
           type='text'
           name='focal_points'
@@ -98,7 +102,13 @@ const ExerciseCreation = (props) => {
           <button className='e-button-cancel' type='button' onClick={goBackExerciseHome}>Cancel</button>
           <button className='e-button-save' type='submit'>Save</button>
         </div>
-      </form>
+      </form> */}
+      {creating && (
+        <ExerciseCreationModal
+          cancel = {cancelCreating}
+          confirm = {confirmCreating}
+        />
+      )}
 
     </div>
   );
