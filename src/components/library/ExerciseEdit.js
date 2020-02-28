@@ -32,7 +32,17 @@ const ExerciseEdit = (props) => {
 
   };
 
+  const preventDefaultKeyPress = (event) => {
+    if (event.which === 13 /* enter */){
+      event.preventDefault();
+    }
+  };
+  function noenter() {
+    return !(window.event && window.event.keyCode == 13); }
+
   const submitHandler  = event => {
+    // event.preventDefaultKeyPress();
+    noenter()
     event.preventDefault();
     successHandler();
 
@@ -121,7 +131,7 @@ const ExerciseEdit = (props) => {
           </Link>
         </div>
       </form>
-      <button onClick = {() => successHandler()}>modal test</button>
+      {/* <button onClick = {() => successHandler()}>modal test</button> */}
       <div>
 
       </div>
