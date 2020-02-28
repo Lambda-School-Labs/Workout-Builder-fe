@@ -31,21 +31,10 @@ const ExerciseEdit = (props) => {
     }, 1500);
 
   };
-
-  const preventDefaultKeyPress = (event) => {
-    if (event.which === 13 /* enter */){
-      event.preventDefault();
-    }
-  };
-  function noenter() {
-    return !(window.event && window.event.keyCode == 13); }
-
   const submitHandler  = event => {
-    // event.preventDefaultKeyPress();
-    noenter()
+
     event.preventDefault();
     successHandler();
-
     props.updateExercise(props.id, exerciseData);
 
   };
@@ -59,27 +48,25 @@ const ExerciseEdit = (props) => {
   return (
 
     <div className= "flex flex-col px-4 py-5 ">
-      <h1> Edit your exercise! </h1>
 
       <form onSubmit = {submitHandler}>
-        <label> Exercise Name
-          <input className ="text-2xxl"
-            name="name"
-            value={exerciseData.name}
-            onChange ={changeHandler}
-            type= "text"
-            required
-            margin="normal"
-            variant ="outlined"
-            placeholder = "Enter name Here"
-          >
-          </input>
-        </label>
+
+        <input className ="text-5xl pb-4 font-semibold"
+          name="name"
+          value={exerciseData.name}
+          onChange ={changeHandler}
+          type= "text"
+          required
+          margin="normal"
+          variant ="outlined"
+          placeholder = "Enter name Here"
+        >
+        </input>
         <div >
           <img src= {coachExercise.thumbnail_url } className ="w-5/5 h-58"/>
         </div>
 
-        <label>Image url:
+        {/* <label>Image url:
           <input
             name="thumbnail_url"
             label = "thumbnail_url"
@@ -92,21 +79,19 @@ const ExerciseEdit = (props) => {
             placeholder = "Enter thumbnail_url Here"
           >
           </input>
-        </label>
-        <label className ="text-dove-grey text-sm">Focal Points
-          <input
-            name="focal_points"
-            label = "focal_points"
-
-            value={exerciseData.focal_points}
-            onChange ={changeHandler}
-            required
-            margin="normal"
-            variant ="outlined"
-            placeholder = "Enter focal_points Here"
-          >
-          </input>
-        </label>
+        </label> */}
+        <div>
+          <label className ="text-xl text-silver">Focal Points: <br/>
+            <input
+              className= "text-2xl text-black"
+              name="focal_points"
+              value={exerciseData.focal_points}
+              onChange ={changeHandler}
+              placeholder = "Enter focal points Here"
+            >
+            </input>
+          </label>
+        </div>
         <h2 className ="text-dove-grey text-sm">  Video Link (needs to be an embedded link</h2>
         <input
           name="video_url"
@@ -118,11 +103,12 @@ const ExerciseEdit = (props) => {
           placeholder = "Enter video_url Here"
         >
         </input>
-        {success ?(
-          <EditModal/>
-        ): null}
+
+        <iframe className ="pt-5 w-full" width="480" height="220" src={coachExercise.video_url}>
+        </iframe>
+
         <div className = "flex flex-row w-6/6">
-          <button   className=" bg-blaze-orange text-white font-semibold text-lg text-center rounded py-2 lg:hidden" >Save Changes</button>
+          <button   className=" mr-12 border-solid border-2 border-blaze-orange bg-white text-blaze-orange font-semibold text-2xl text-center rounded-lg py-6 px-24" >Save Changes</button>
 
           <Link to ="/library">
             <button className=" bg-blaze-orange text-white font-semibold text-lg text-center rounded py-2 lg:hidden">
@@ -131,6 +117,9 @@ const ExerciseEdit = (props) => {
           </Link>
         </div>
       </form>
+      {success ?(
+        <EditModal/>
+      ): null}
       {/* <button onClick = {() => successHandler()}>modal test</button> */}
       <div>
 
