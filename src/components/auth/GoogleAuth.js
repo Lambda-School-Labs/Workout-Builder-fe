@@ -14,7 +14,7 @@ const GoogleAuth = props => {
       localStorage.setItem("last_name", urlParams.get("last_name"));
     }
 
-    fetchAllData(dispatch).then(() => {
+    dispatch(fetchAllData()).then(() => {
       props.navigate("/dashboard");
     });
 

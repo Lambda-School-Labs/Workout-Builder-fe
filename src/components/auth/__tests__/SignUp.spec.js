@@ -1,12 +1,11 @@
 import "@testing-library/jest-dom/extend-expect";
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
-import mockAxios from "axios";
-import SignUp from "../SignUp";
+import MockAdapter from 'axios-mock-adapter';
+import axios from 'axios';
+import { SignUp } from "../SignUp";
 
-jest.mock('../../actions', () => ({
-  fetchAllData: jest.fn(() => Promise.resolve())
-}));
+const mockAxios = new MockAdapter(axios);
 
 jest.mock('react-redux', () => ({
   useDispatch: () => jest.fn()
@@ -27,17 +26,12 @@ test("renders SignUp component", () => {
 });
 
 test("allows the user to sign up successfully", async () => {
-  const fakeResponse = {
-    status: 201,
-    data: {
-      token: "12345",
-      message: "asdf",
-      first_name: "bob",
-      last_name: "bob"
-    }
-  };
-
-  mockAxios.post.mockResolvedValue(fakeResponse);
+  mockAxios.onPost('/auth/register').replyOnce(201, {
+    token: "12345",
+    message: "success",
+    first_name: "woof",
+    last_name: "woof"
+  });
 
   jest.spyOn(window.localStorage.__proto__, "setItem");
   window.localStorage.__proto__.setItem = jest.fn();
@@ -69,7 +63,6 @@ test("allows the user to sign up successfully", async () => {
   await new Promise(r => setTimeout(r, 1000));
 
   // expecting localstorage filled
-  expect(mockAxios.post).toHaveBeenCalledTimes(1);
   expect(navigate).toHaveBeenCalledTimes(1);
   expect(localStorage.setItem).toHaveBeenCalled();
 });

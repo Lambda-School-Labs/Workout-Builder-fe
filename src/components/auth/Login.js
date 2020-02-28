@@ -27,7 +27,7 @@ const Login = ({ navigate }) => {
       const response = await serverHandshake().post("/auth/login", credentials);
       if (response.status === 200) {
         for (const key in response.data) localStorage.setItem(key, response.data[key]);
-        await fetchAllData(dispatch);
+        await dispatch(fetchAllData());
         navigate("/dashboard");
       } else {
         console.error("Something went wrong;", response.statusText);

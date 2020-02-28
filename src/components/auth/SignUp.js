@@ -4,7 +4,7 @@ import { Link } from "@reach/router";
 import serverHandshake from "../../utils/serverHandshake";
 import { fetchAllData } from '../actions';
 
-const SignUp = ({ navigate }) => {
+export const SignUp = ({ navigate }) => {
   const [credentials, setCredentials] = useState({});
   const [error, setError] = useState("");
   const dispatch = useDispatch();
@@ -24,13 +24,10 @@ const SignUp = ({ navigate }) => {
   const handleSignup = async event => {
     event.preventDefault();
     try {
-      const response = await serverHandshake().post(
-        "/auth/register",
-        credentials
-      );
+      const response = await serverHandshake().post("/auth/register", credentials);
       if (response.status === 201) {
         for (const key in response.data) localStorage.setItem(key, response.data[key]);
-        await fetchAllData(dispatch);
+        await dispatch(fetchAllData());
         navigate("/dashboard");
       } else {
         console.error("Something went wrong;", response.statusText);
