@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
 
-const ProgramListElement = (props) => {
+const ClientListElement = (props) => {
 
     const [ClientOptionsModal, ToggleClientOptionsModal] = useState(false);
 
@@ -17,12 +17,12 @@ const ProgramListElement = (props) => {
 
     return(
         <div className="client-element">
-            <div className="pic-div" onClick={() => viewClient()}>
-                <img src="https://i.imgur.com/1zfsBE6.png" alt="client-image"></img>
+            <div className="pic-div">
+                <img src="https://i.imgur.com/1zfsBE6.png" alt="client-image" onClick={() => viewClient()}></img>
             </div>
-            <div className="name-div" onClick={() => viewClient()}>
-                <p>{props.first_name}</p>
-                <p>{props.last_name}</p>
+            <div className="name-div">
+                <p onClick={() => viewClient()}>{props.first_name}</p>
+                <p onClick={() => viewClient()}>{props.last_name}</p>
             </div>
             <div className="days-div">
                 <div className="days-highlight">
@@ -45,8 +45,8 @@ const mapStateToProps = state => ({
     coach_clients: state.coach_clients,
     coach_exercises: state.coach_exercises,
     coach_programs: state.coach_programs,
-  });
-  
-  export default connect(
+});
+
+export default connect(
     mapStateToProps,
-  )(ProgramListElement);
+)(ClientListElement);

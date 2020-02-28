@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
+import ClientListElement from "./ClientListElement";
+import CreateClient from "./modals/CreateClient";
 
 // mobile styling
 
 
 // desktop styling
 import "./clients-desktop-styles.scss"
-import ClientListElement from "./ClientListElement";
 
 const ProgramHome = (props) => {
     const [AddClientModal, ToggleAddClientModal] = useState(false);
@@ -17,8 +18,7 @@ const ProgramHome = (props) => {
         if(!props.coach_clients.length) {
             return "";
         }
-        let results = props.coach_clients.filter(client => (client.first_name + client.last_name).toLowerCase().includes(searchTerm.toLowerCase()));
-        console.log(results);
+        let results = props.coach_clients.filter(client => (client.first_name + " " + client.last_name).toLowerCase().includes(searchTerm.toLowerCase()));
         setSearchResults(results);
     }, [searchTerm, props.updates, props.coach_clients]);
 
@@ -58,6 +58,7 @@ const ProgramHome = (props) => {
                     })}
             </div>
             
+            <CreateClient AddClientModal={AddClientModal} ToggleAddClientModal={ToggleAddClientModal} {...props}/>
         </div>
         </>
     )
