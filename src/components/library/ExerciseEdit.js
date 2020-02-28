@@ -3,10 +3,12 @@ import React, { useState, useEffect } from "react";
 import { Link }   from '@reach/router';
 import { connect, useSelector } from "react-redux";
 import {updateExercise} from "../actions/index";
+import EditModal from "./EditModal";
 
 const ExerciseEdit = (props) => {
   const coachExercise = useSelector(state => state.coach_exercises.find(c=> c.id === Number(props.id)));
-  const [confirmed,setConfirmed] = useState(false);
+  const [success,setSuccess] = useState(false);
+  const [route, setRoute] = useState(false);
 
   const [exerciseData,setExerciseData] = useState({
     name: coachExercise.name,
@@ -20,11 +22,29 @@ const ExerciseEdit = (props) => {
     setExerciseData({ ...exerciseData, [event.target.name]: event.target.value });
   };
 
-  const submitHandler = event => {
-    event.preventDefault();
-    props.updateExercise(props.id, exerciseData);
-    props.navigate('/library');
+  const successHandler =  () => {
+    setSuccess(true);
+    setTimeout(() => {
+      setSuccess(false);
+      setRoute(true);
+
+    }, 1500);
+
   };
+
+  const submitHandler  = event => {
+    event.preventDefault();
+    successHandler();
+
+    props.updateExercise(props.id, exerciseData);
+
+  };
+
+  useEffect(() => {
+    if (route === true){
+      props.navigate('/library');
+    }
+  },[props, route]);
 
   return (
 
@@ -35,8 +55,6 @@ const ExerciseEdit = (props) => {
         <label> Exercise Name
           <input className ="text-2xxl"
             name="name"
-
-            // className={classes.textField}
             value={exerciseData.name}
             onChange ={changeHandler}
             type= "text"
@@ -90,8 +108,11 @@ const ExerciseEdit = (props) => {
           placeholder = "Enter video_url Here"
         >
         </input>
+        {success ?(
+          <EditModal/>
+        ): null}
         <div className = "flex flex-row w-6/6">
-          <button className=" bg-blaze-orange text-white font-semibold text-lg text-center rounded py-2 lg:hidden" type ="submit">Save Changes</button>
+          <button   className=" bg-blaze-orange text-white font-semibold text-lg text-center rounded py-2 lg:hidden" >Save Changes</button>
 
           <Link to ="/library">
             <button className=" bg-blaze-orange text-white font-semibold text-lg text-center rounded py-2 lg:hidden">
@@ -100,7 +121,10 @@ const ExerciseEdit = (props) => {
           </Link>
         </div>
       </form>
+      <button onClick = {() => successHandler()}>modal test</button>
+      <div>
 
+      </div>
     </div>
 
   );
