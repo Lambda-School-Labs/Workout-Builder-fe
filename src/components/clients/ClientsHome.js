@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import ClientListElement from "./ClientListElement";
 import CreateClient from "./modals/CreateClient";
+import EditClient from "./modals/EditClient";
 
 // mobile styling
 
@@ -11,6 +12,7 @@ import "./clients-desktop-styles.scss"
 
 const ProgramHome = (props) => {
     const [AddClientModal, ToggleAddClientModal] = useState(false);
+    const [EditClientModal, ToggleEditClientModal] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState(props.coach_clients);
 
@@ -53,12 +55,18 @@ const ProgramHome = (props) => {
                 </div>
                 {searchResults.map(client => {
                         return(
-                            <ClientListElement key={client.id} client={client} id={client.id} first_name={client.first_name} last_name={client.last_name} {...props}/>
+                            <ClientListElement 
+                            key={client.id} 
+                            client={client} 
+                            EditClientModal={EditClientModal}
+                            ToggleEditClientModal={ToggleEditClientModal}
+                            {...props}/>
                         )
                     })}
             </div>
             
             <CreateClient AddClientModal={AddClientModal} ToggleAddClientModal={ToggleAddClientModal} {...props}/>
+            <EditClient EditClientModal={EditClientModal} ToggleEditClientModal={ToggleEditClientModal} {...props}/>
         </div>
         </>
     )
