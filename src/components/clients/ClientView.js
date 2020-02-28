@@ -1,5 +1,7 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { connect } from 'react-redux';
+import EditClient from './modals/EditClient';
+import { useDispatch } from 'react-redux';
 
 // mobile styling
 
@@ -8,6 +10,13 @@ import { connect } from 'react-redux';
 import "./clients-desktop-styles.scss"
 
 const ClientView = (props) => {
+    const Dispatch = useDispatch();
+    const [EditClientModal, ToggleEditClientModal] = useState(false);
+
+    // Open the edit client modal
+    const editClient = () => {
+        ToggleEditClientModal(true);
+    }
 
     const goBack = () => {
         window.history.back()
@@ -17,8 +26,11 @@ const ClientView = (props) => {
     useEffect(() => {
         if(props.client_data.name === "") {
             props.navigate("/clients");
+        } else {
+            const updatedData = props.coach_clients.filter(client => (client.id === Number(props.id)))[0];
+            Dispatch({ type: "UPDATE_CLIENT_DATA", payload: updatedData });
         }
-    }, [props.client_data]);
+    }, [props.coach_clients]);
 
 
     const getExerciseName = useCallback((input_id) => {
@@ -139,7 +151,7 @@ const ClientView = (props) => {
                 </div>
                 <div className="info-right">
                     <button className="assign-to-client-button">Assign to client</button>
-                    <button className="edit-button">Edit</button>
+                    <button className="edit-button" onClick={() => editClient()}>Edit</button>
                 </div>
             </div>
             <div className="client-card">
@@ -153,6 +165,7 @@ const ClientView = (props) => {
             </div>
             {/* {generateTable()} */}
         </div>
+        <EditClient EditClientModal={EditClientModal} ToggleEditClientModal={ToggleEditClientModal} {...props}/>
         </>
     )
 }

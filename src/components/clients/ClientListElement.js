@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import ClientOptions from "./modals/ClientOptions";
@@ -11,14 +11,14 @@ const ClientListElement = (props) => {
     const viewClient = () => {
         // Set the program to new program data and view it in the preview page
         Dispatch({ type: "UPDATE_CLIENT_DATA", payload: props.client });
-        props.navigate("/clients/view");
+        props.navigate(`/clients/view/${props.client.id}`);
     }
 
 
     return(
         <div className="client-element">
             <div className="pic-div">
-                <img src="https://i.imgur.com/1zfsBE6.png" alt="client-image" onClick={() => viewClient()}></img>
+                <img src="https://i.imgur.com/1zfsBE6.png" alt="client-face" onClick={() => viewClient()}></img>
             </div>
             <div className="name-div">
                 <p onClick={() => viewClient()}>{props.client.first_name}</p>

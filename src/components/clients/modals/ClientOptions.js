@@ -32,9 +32,18 @@ const ClientOptions = (props) => {
         // Delete a client from the back end and your list
         serverHandshake(true).delete(`/clients/${props.client.id}`)
         .then(res => {
+            // get a new list of clients
             serverHandshake(true).get('/clients')
             .then(res => {
                 Dispatch({ type: 'SET_CLIENT_DATA', payload: res.data });
+                // get a new list of programs (updated for deleted client)
+                serverHandshake(true).get('/programs')
+                .then(res => {
+                    Dispatch({ type: 'SET_PROGRAM_DATA', payload: res.data });
+                })
+                .catch(err => {
+                    console.log("there was an error", err);
+                })
             })
             .catch(err => {
             console.log("there was an error", err);
