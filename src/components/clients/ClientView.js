@@ -22,16 +22,20 @@ const ClientView = (props) => {
         window.history.back()
     };
 
-    // leave the page if name is empty - to avoid errors in case user refreshes and data resets
+    // leave the page if first_name is empty - to avoid errors in case user refreshes and data resets
     useEffect(() => {
-        if(props.client_data.name === "") {
+        if(!props.client_data.first_name) {
             props.navigate("/clients");
         } else {
+            // if this client's info is edited while on this page, update the information on this page
             const updatedData = props.coach_clients.filter(client => (client.id === Number(props.id)))[0];
             Dispatch({ type: "UPDATE_CLIENT_DATA", payload: updatedData });
         }
     }, [props.coach_clients]);
 
+    
+    // Get a list of the client's programs
+    const listOfClientsPrograms = props.coach_programs.filter(program => program.assigned_clients.includes(props.client_data.id));
 
     const getExerciseName = useCallback((input_id) => {
         // find the name of the selected exercise (by id) from the exercise library
@@ -45,15 +49,10 @@ const ClientView = (props) => {
         }
     },[props.coach_exercises])
 
-    // Variables necessary for generating tables
-    const workoutList = JSON.parse(JSON.stringify(props.new_program.workouts));
-    const fullRowsNumber = Math.floor(workoutList.length / 7);
-    const lastRowCells = workoutList.length % 7;
 
-
-    const generateLastRow = () => {
+    const generateLastRow = (program, lastRowCells, fullRowsNumber) => {
         // Generates the last row of the table (including blanks)
-        const tempList = JSON.parse(JSON.stringify(props.new_program.workouts));
+        const tempList = JSON.parse(JSON.stringify(program.workouts));
         let lastRowList = tempList.splice((fullRowsNumber * 7), lastRowCells);
         let blankCellList = [];
         if(lastRowCells > 0) {
@@ -92,7 +91,12 @@ const ClientView = (props) => {
         )
     }
 
-    const generateTable = () => {
+    const generateTable = (program) => {
+        // Variables necessary for generating tables
+        const workoutList = JSON.parse(JSON.stringify(program.workouts));
+        const fullRowsNumber = Math.floor(workoutList.length / 7);
+        const lastRowCells = workoutList.length % 7;
+
         // Generates the full rows of the table
         // Also appends the last row to the table from the generateLastRow function
         let fullRowsList = []
@@ -129,7 +133,7 @@ const ClientView = (props) => {
                             </tr>
                         )
                     })}
-                    {generateLastRow()}
+                    {generateLastRow(program, lastRowCells, fullRowsNumber)}
                 </tbody>
             </table>
         )
@@ -155,7 +159,7 @@ const ClientView = (props) => {
                 </div>
             </div>
             <div className="client-card">
-                <img src="https://i.imgur.com/rqosIgi.png" alt="client-image"></img>
+                <img src="https://i.imgur.com/rqosIgi.png" alt="client-face"></img>
                 <div className="info-div">
                     <p>{props.client_data.email}</p>
                     <p>(720) 123-4567</p>
@@ -163,7 +167,17 @@ const ClientView = (props) => {
                     <p>6' 2'', 225 lbs</p>
                 </div>
             </div>
-            {/* {generateTable()} */}
+            {listOfClientsPrograms.map(program => {
+                return (
+                    <>
+                    <div className="table-title">
+                        <h2>{program.name},</h2>
+                        <h3>{program.phase}</h3>
+                    </div>
+                    {generateTable(program)}
+                    </>
+                )
+            })}
         </div>
         <EditClient EditClientModal={EditClientModal} ToggleEditClientModal={ToggleEditClientModal} {...props}/>
         </>
