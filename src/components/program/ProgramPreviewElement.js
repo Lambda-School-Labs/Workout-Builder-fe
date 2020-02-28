@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { connect } from 'react-redux';
 
 const ProgramPreviewElement = (props) => {
 
     const [fullView, setFullView] = useState(false);
 
-    const getExerciseName = (input_id) => {
+    const getExerciseName = useCallback((input_id) => {
         // find the name of the selected exercise (by id) from the exercise library
-        return props.coach_exercises.filter((exercise) => {return exercise.id === input_id})[0].name;
-    }
+    
+        if (!props.coach_exercises.length) {
+            return '';
+        } else if (!props.coach_exercises.filter((exercise) => {return exercise.id === input_id}).length) {
+            return '';
+        } else {
+            return props.coach_exercises.filter((exercise) => {return exercise.id === input_id})[0].name;
+        }
+    },[props.coach_exercises])
 
     const toggleFullView = () => {
         if(fullView) {

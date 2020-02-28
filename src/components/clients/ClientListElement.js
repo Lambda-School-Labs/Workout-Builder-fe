@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import ClientOptions from "./modals/ClientOptions";
 
 const ClientListElement = (props) => {
+    const Dispatch = useDispatch();
 
     const [ClientOptionsModal, ToggleClientOptionsModal] = useState(false);
 
     const viewClient = () => {
         // Set the program to new program data and view it in the preview page
-        // Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: props.program });
-        console.log("viewing clinet");
-        // props.navigate("/program/preview");
+        Dispatch({ type: "UPDATE_CLIENT_DATA", payload: props.client });
+        props.navigate("/clients/view");
     }
 
 

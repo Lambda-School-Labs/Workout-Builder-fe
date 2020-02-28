@@ -1,11 +1,13 @@
 import React, { useEffect, useCallback } from "react";
 import { connect } from 'react-redux';
 
-// mobile styling - desktop can be done in tailwind
-import "./program-mobile-styles.scss"
-import ProgramPreviewElement from "./ProgramPreviewElement";
+// mobile styling
 
-const ProgramPreview = ({ navigate, new_program, coach_exercises }) => {
+
+// desktop styling
+import "./clients-desktop-styles.scss"
+
+const ClientView = (props) => {
 
     const goBack = () => {
         window.history.back()
@@ -13,33 +15,33 @@ const ProgramPreview = ({ navigate, new_program, coach_exercises }) => {
 
     // leave the page if name is empty - to avoid errors in case user refreshes and data resets
     useEffect(() => {
-        if(new_program.name === "") {
-            navigate("/program");
+        if(props.client_data.name === "") {
+            props.navigate("/clients");
         }
-    }, [new_program.name, navigate]);
+    }, [props.client_data]);
+
 
     const getExerciseName = useCallback((input_id) => {
         // find the name of the selected exercise (by id) from the exercise library
     
-        if (!coach_exercises.length) {
+        if (!props.coach_exercises.length) {
             return '';
-        } else if (!coach_exercises.filter((exercise) => {return exercise.id === input_id}).length) {
+        } else if (!props.coach_exercises.filter((exercise) => {return exercise.id === input_id}).length) {
             return '';
         } else {
-            return coach_exercises.filter((exercise) => {return exercise.id === input_id})[0].name;
+            return props.coach_exercises.filter((exercise) => {return exercise.id === input_id})[0].name;
         }
-    },[coach_exercises])
-
+    },[props.coach_exercises])
 
     // Variables necessary for generating tables
-    const workoutList = JSON.parse(JSON.stringify(new_program.workouts));
+    const workoutList = JSON.parse(JSON.stringify(props.new_program.workouts));
     const fullRowsNumber = Math.floor(workoutList.length / 7);
     const lastRowCells = workoutList.length % 7;
 
 
     const generateLastRow = () => {
         // Generates the last row of the table (including blanks)
-        const tempList = JSON.parse(JSON.stringify(new_program.workouts));
+        const tempList = JSON.parse(JSON.stringify(props.new_program.workouts));
         let lastRowList = tempList.splice((fullRowsNumber * 7), lastRowCells);
         let blankCellList = [];
         if(lastRowCells > 0) {
@@ -124,42 +126,32 @@ const ProgramPreview = ({ navigate, new_program, coach_exercises }) => {
     return(
         <>
 
-        {/* MOBILE VIEW */}
-
-        <div className="program-preview">
-            <div className="back-div">
-                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={() => goBack()} alt="back"></img>
-                <p className="back-text" onClick={() => goBack()}>Back</p>
-            </div>
-            <h3 className="program-preview-title">{new_program.name}</h3>
-            {new_program.workouts.map(day => {
-                return (
-                    <ProgramPreviewElement key={day.id} day={day} />
-                )
-            })}
-        </div>
-
         {/* DESKTOP VIEW */}
 
-        <div className="d-program-preview">
-            <div className="back-div">
-                <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={() => goBack()} alt="back"></img>
-                <p className="back-text" onClick={() => goBack()}>Back</p>
-            </div>
-            <div className="d-preview-info">
+        <div className="d-view-client">
+            <div className="d-view-info">
                 <div className="info-left">
-                    <h2 className="preview-name">{new_program.name}</h2>
-                    <div className="preview-phase-days">
-                        <h3>{new_program.phase}</h3>
-                        <h3>{new_program.length} Days</h3>
+                    <div className="back-div">
+                        <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={() => goBack()} alt="back"></img>
+                        <p className="back-text" onClick={() => goBack()}>Back</p>
                     </div>
+                    <h2>{props.client_data.first_name} {props.client_data.last_name}</h2>
                 </div>
                 <div className="info-right">
                     <button className="assign-to-client-button">Assign to client</button>
-                    <button className="edit-button" onClick={() => navigate("/program/edit")}>Edit</button>
+                    <button className="edit-button">Edit</button>
                 </div>
             </div>
-            {generateTable()}
+            <div className="client-card">
+                <img src="https://i.imgur.com/rqosIgi.png" alt="client-image"></img>
+                <div className="info-div">
+                    <p>{props.client_data.email}</p>
+                    <p>(720) 123-4567</p>
+                    <p>25 years old, male</p>
+                    <p>6' 2'', 225 lbs</p>
+                </div>
+            </div>
+            {/* {generateTable()} */}
         </div>
         </>
     )
@@ -173,8 +165,9 @@ const mapStateToProps = state => ({
     coach_programs: state.coach_programs,
     new_program: state.new_program,
     temp_next_workout_id: state.temp_next_workout_id,
+    client_data: state.client_data,
   });
   
   export default connect(
     mapStateToProps,
-  )(ProgramPreview);
+  )(ClientView);

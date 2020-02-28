@@ -354,3 +354,97 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0);
 }
+
+// View Client Styles
+
+.d-view-client {
+    padding: 2.5rem;
+    .d-view-info {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        .info-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .back-div {
+                display: flex;
+                align-items: center;
+                height: 3rem;
+                margin-bottom: 1.25rem;
+                img {
+                    cursor: pointer;
+                    height: 1rem;
+                    width: 1rem;
+                }
+                p {
+                    cursor: pointer;
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 1.125rem;
+                    line-height: 1.3125rem;
+                    padding-left: .5rem;
+                }
+            }
+            h2 {
+                font-family: 'Hind Madurai', sans-serif;
+                font-weight: 600;
+                font-size: 1.875rem;
+                line-height: 2.5625rem;
+            }
+        }
+        .info-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 13.25rem;
+            height: 7rem;
+            .assign-to-client-button {
+                width: 100%;
+                background: #FD6A02;
+                border-radius: 5px;
+                height: 3rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: 1.125rem;
+                line-height: 1.3125rem;
+                color: #FFFFFF;
+                border: none;
+            }
+            .edit-button {
+                width: 100%;
+                background: #FFFFFF;
+                border-radius: 5px;
+                height: 3rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: 1.125rem;
+                line-height: 1.3125rem;
+                color: #FD6A02;
+                border: 2px solid #FD6A02;
+            }
+        }
+    }
+    .client-card {
+        display: flex;
+        margin-top: 1rem;
+        img {
+            height: 10rem;
+            width: auto;
+        }
+        .info-div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 1.875rem;
+            p {
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: 1rem;
+                line-height: 1.7rem;
+            }
+        }
+    }
+}
