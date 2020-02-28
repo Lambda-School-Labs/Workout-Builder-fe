@@ -3,7 +3,7 @@
 .e-creation-div {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    padding: 2%;
 }
 
 .e-header {
@@ -12,18 +12,14 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 25px;
-    position: absolute;
-    left: 31.5%;
+    text-align: left;
 }
 
 .e-form {
     display: flex;
     flex-direction: column;
-    max-width: 450px;
-    width: 90%;
-    //height: 50vh;
-    padding: 2%;
-    border-radius: 15px;
+    justify-content: space-evenly;
+    width: 100%;
     margin-top: 25px;
 }
 
@@ -34,10 +30,62 @@
     color: #7D7D7D;
 }
 
+.e-label-name {
+    color: #333333;
+}
+
+.e-label-video-div {
+    display: flex;
+    justify-content: start;
+}
+
+.videoIcon {
+    margin-left: 10px;
+}
+
 .e-input {
     border: 0.5px solid #D4D4D4;
     box-sizing: border-box;
     border-radius: 5px;
+    padding-left: 1%;
+    padding-top: 3px;
+    font-size: 14px;
+    margin-bottom: 2%;
+}
+
+.e-input-name {
+    font-size: 16px;
+}
+
+.e-input-focal {
+    height: 50px;
+}
+
+.e-button-div {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+}
+
+.e-button-cancel {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #333333;
+    font-family: 'Hind Madurai', sans-serif;
+}
+
+.e-button-save {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    text-decoration-line: underline;
+    color: #FD6A02;
+    margin-left: 5%;
+    font-family: 'Hind Madurai', sans-serif;
+    padding-bottom: 4px;
 }
 
 .e-asterisk {

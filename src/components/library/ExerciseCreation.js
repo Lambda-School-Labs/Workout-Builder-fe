@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import serverHandshake from '../../utils/serverHandshake';
+import videoIcon from '../../img/video-icon.svg';
 
 import './exercise-mobile-styles.scss';
 
@@ -42,10 +43,12 @@ const ExerciseCreation = (props) => {
 
   return (
     <div className='e-creation-div'>
-      <h2 className='e-header'>Create Exercise</h2>
-      <form className='e-form'>
-        <label className='e-label' htmlFor='name'>Name:<span className='e-asterisk'>*</span> </label>
-        <input className='e-input'
+      <div className='e-header-div'>
+        <h2 className='e-header'>Create Exercise</h2>
+      </div>
+      <form className='e-form' onSubmit={addExercise}>
+        <label className='e-label e-label-name' htmlFor='name'>Name:<span className='e-asterisk'> *</span> </label>
+        <input className='e-input e-input-name'
           type='text'
           name='name'
           id='name'
@@ -65,7 +68,14 @@ const ExerciseCreation = (props) => {
         />
 
         <label className='e-label' htmlFor='focal_points'>Focal points:</label>
-        <input className='e-input'
+        {/* <input className='e-input-focal'
+          type='text'
+          name='focal_points'
+          id='focal_points'
+          value={newExercise.focal_points}
+          onChange={changeHandler}
+        /> */}
+        <textarea className='e-input e-input-focal'
           type='text'
           name='focal_points'
           id='focal_points'
@@ -73,7 +83,10 @@ const ExerciseCreation = (props) => {
           onChange={changeHandler}
         />
 
-        <label className='e-label' htmlFor='video_url'>Link to video:</label>
+        <div className='e-label-video-div'>
+          <label className='e-label' htmlFor='video_url'>Link to video</label>
+          <img className='videoIcon' src={videoIcon} alt='video icon' />
+        </div>
         <input className='e-input'
           type='text'
           name='video_url'
@@ -81,11 +94,11 @@ const ExerciseCreation = (props) => {
           value={newExercise.video_url}
           onChange={changeHandler}
         />
+        <div className='e-button-div'>
+          <button className='e-button-cancel' type='button' onClick={goBackExerciseHome}>Cancel</button>
+          <button className='e-button-save' type='submit'>Save</button>
+        </div>
       </form>
-      <div>
-        <button onClick={goBackExerciseHome}>Cancel</button>
-        <button onClick={addExercise}>Save</button>
-      </div>
 
     </div>
   );
