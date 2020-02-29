@@ -1,4 +1,4 @@
-const initialState = 0;
+export const initialState = 0;
 
 function updatesReducer(state = initialState, action) {
   switch (action.type) {

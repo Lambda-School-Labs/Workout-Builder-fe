@@ -1,4 +1,4 @@
-const initialState = [ ];
+const initialState = [];
 
 function coachClientsReducer(state = initialState, action) {
   switch (action.type) {

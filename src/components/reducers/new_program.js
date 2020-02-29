@@ -1,6 +1,11 @@
-const initialState = {
-  id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
-  workouts: [ ],
+export const initialState = {
+  id: 0,
+  name: "",
+  description: "",
+  coach_id: 1,
+  length: 0,
+  phase: "",
+  workouts: [],
   assigned_clients: [],
 };
 

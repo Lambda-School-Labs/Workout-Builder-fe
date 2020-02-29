@@ -1,6 +1,4 @@
-import { store } from '../../index';
-
-const initialState = [ ];
+const initialState = [];
 
 function coachProgramsReducer(state = initialState, action) {
   switch (action.type) {
@@ -24,10 +22,8 @@ function coachProgramsReducer(state = initialState, action) {
     // get coach programs
     let createList = [...state];
 
-    const temp_next_program_id = store.getState().temp_next_program_id;
-
     // add a new program
-    createList.push({...action.payload, id: temp_next_program_id});
+    createList.push(action.payload);
 
     return createList;
   default:

@@ -1,7 +1,6 @@
 import {EDIT_EXERCISE} from "../actions";
 
-const initialState = [ ];
-
+const initialState = [];
 
 function coachExercisesReducer(state = initialState, action) {
   switch (action.type) {
@@ -10,9 +9,9 @@ function coachExercisesReducer(state = initialState, action) {
 
   case "CREATE_AN_EXERCISE":
     return [...state, action.payload];
-      
+
   case EDIT_EXERCISE:
-    const filtered_exercises = state.exercise.map(e => e.id === action.payload.id? action.payload : e);
+    const filtered_exercises = state.map(e => e.id === action.payload.id ? action.payload : e);
     return filtered_exercises;
 
   case 'DELETE_EXERCISE': {
