@@ -96,7 +96,7 @@ const ExerciseEdit = (props) => {
         </div>
         <h2 className ="text-dove-grey text-lg">  Video Link (needs to be an embedded link)</h2>
         <textarea
-          className= "border-solid border border-silver rounded-lg text-2xl text-black"
+          className= "border-solid border border-silver rounded-lg text-2xl text-black "
           cols= "30"
           rows ="1"
           name="video_url"

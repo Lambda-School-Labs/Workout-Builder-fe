@@ -18,13 +18,13 @@ function Exercise(props){
           <img src= {coachExercise.thumbnail_url } className =" h-25 w-full"/>
         </div>
         <div>
-          <h1 className ="text-lg text-silver">  Focal Points:</h1>
+          <h1 className ="text-lg text-silver ">  Focal Points:</h1>
           <div className= "">
-            <p className= "text-xl">{coachExercise.focal_points}</p>
+            <p className= "text-xl break-words">{coachExercise.focal_points}</p>
           </div>
         </div>
         <h2 className ="text-lg text-silver text-sm pt-5">  Link to video:</h2>
-        <p className ="text-xl">{coachExercise.video_url}</p>
+        <p className ="text-xl break-words">{coachExercise.video_url}</p>
         <iframe className ="pt-5 w-full" width="480" height="200" src={coachExercise.video_url}>
         </iframe>
 
