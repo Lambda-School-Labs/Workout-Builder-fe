@@ -2,20 +2,30 @@
 import React from "react";
 import magGlass from '../../img/MagnifyGlass.png';
 
-import "./library-display.css";
-
-
 export default function ExerciseSearchInput(props) {
-  const {searchTerm,handleChange} = props;
+  const {searchTerm,handleChange,handleBtn} = props;
   return (
-    <div className="exer-search-div">
-      <img className="exer-search-img" src={magGlass} alt="Magnifying Glass" />
-      <input
-        type="text"
-        placeholder="Search"
-        value={searchTerm}
-        onChange={handleChange}
-      />
+    <div className="bf-exer-search-and-btn">
+
+      <div className="bf-exer-search-div">
+        <img className="bf-exer-search-img" src={magGlass} alt="Magnifying Glass" />
+
+        <input className="bf-exer-search-box"
+          type="search"
+          placeholder="Search"
+          value={searchTerm}
+          onChange={handleChange}
+        />
+      </div>
+
+
+      <button
+        className="bf-search-btn-dtop"
+        onClick={handleBtn} >
+        Create Exercise
+      </button>
+
     </div>
+
   );
 }

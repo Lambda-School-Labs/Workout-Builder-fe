@@ -8,7 +8,8 @@ import ExerciseCard from './ExerciseCard';
 import ExerciseCardTitle from './ExerciseCardTitle';
 import ExerciseSearchInput from './ExerciseSearchInput';
 
-import "./library-display.css";
+// import "./library-display.css";
+import "./css/library-display.css";
 
 function LibraryDisplay(props) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -37,33 +38,37 @@ function LibraryDisplay(props) {
 
 
   return (
-    <div>
+    <div className="bf-whole-lib-disp">
 
       <ExerciseSearchInput
         handleChange={handleSearch}
         searchTerm={searchTerm}
+        handleBtn={handleBtn}
       />
 
-      <div className="lib-disp-title">
-        <h2 className="lib-disp-title-ex  lib-disp-title-ct">Exercises</h2>
-        <h2 className="lib-disp-title-wa lib-disp-title-ct">Warmups</h2>
+      <div className="bf-lib-disp-title">
+        <h2 className="bf-lib-disp-title-ex">Exercises</h2>
+        <h2 className="bf-lib-disp-title-wa">Warmups</h2>
       </div>
 
       <ExerciseCardTitle />
+
 
       {searchResults.map(el=>
         <ExerciseCard key={el.id} exerObj={el} />
       )}
 
+      <div className="bf-lib-disp-buffer-above-btn-mobile"></div>
 
 
-      <button
-        className="lib-disp-btn"
-        onClick={handleBtn} >
+
+      <div className="bf-lib-disp-div-for-btn-mobile">
+        <button
+          className="bf-lib-disp-btn-mobile"
+          onClick={handleBtn} >
         Create Exercise
-      </button>
-
-
+        </button>
+      </div>
 
 
 
@@ -83,7 +88,7 @@ function LibraryDisplay(props) {
 
 
 const mapStateToProps = function(state) {
-  // console.log("In LibraryDisplay.js and state:",state);
+  console.log("In LibraryDisplay.js and state:",state);
   return {coach_exercises: state.coach_exercises};
 };
 
