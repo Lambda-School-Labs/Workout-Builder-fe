@@ -14,6 +14,7 @@ module.exports = {
         "forest-green": "#27CF2D",
         boulder: "#7D7D7D",
         silver: "#BEBEBE",
+        grey: "#B1B1B1"
       },
       lineHeight: {
         middle: "0.1em"
