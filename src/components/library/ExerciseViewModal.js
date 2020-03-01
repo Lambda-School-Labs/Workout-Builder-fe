@@ -41,14 +41,6 @@ const ExerciseViewModal = (props) => {
   };
 
   const duplicateExercise = (e) => {
-    // This is the current program for which the options menu is being displayed
-    // const thisProgram = props.coach_programs.filter(program => program.id === props.program_id)[0];
-    // const newProgram = {...thisProgram, name: `${thisProgram.name} (copy)`, assigned_clients: []};
-
-    // Dispatch({ type: "CREATE_A_PROGRAM", payload: newProgram });
-
-    // Dispatch({ type: "UPDATE" });
-
     // console.log("In the exercise view modal and clicked on duplicateExercise",props.exerObj);
     const dupObj = {...props.exerObj};
     delete dupObj.id;
@@ -60,32 +52,32 @@ const ExerciseViewModal = (props) => {
   useOutsideAlerter(wrapperRef);
 
   return(
-    <div className="options-modal">
+    <div className="bf-options-modal">
       <div ref={wrapperRef}>
 
-        <div className="options-element" onClick={editExercise}>
-          <div className="options-left">
+        <div className="bf-options-element" onClick={editExercise}>
+          <div className="bf-options-left">
             <img src="https://i.imgur.com/VDEt22i.png" alt="edit"></img>
           </div>
-          <div className="options-right">
+          <div className="bf-options-right">
             <p>Edit</p>
           </div>
         </div>
 
-        <div className="options-element" onClick={duplicateExercise}>
-          <div className="options-left">
+        <div className="bf-options-element" onClick={duplicateExercise}>
+          <div className="bf-options-left">
             <img src="https://i.imgur.com/DZgRwQr.png" alt="duplicate"></img>
           </div>
-          <div className="options-right">
+          <div className="bf-options-right">
             <p>Duplicate</p>
           </div>
         </div>
 
-        <div className="options-element" onClick={deleteExercise}>
-          <div className="options-left">
+        <div className="bf-options-element" onClick={deleteExercise}>
+          <div className="bf-options-left">
             <img src="https://i.imgur.com/xsHoyAy.png" alt="delete"></img>
           </div>
-          <div className="options-right">
+          <div className="bf-options-right">
             <p>Delete Exercise</p>
           </div>
         </div>
