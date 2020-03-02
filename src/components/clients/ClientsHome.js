@@ -63,6 +63,8 @@ const ProgramHome = (props) => {
                         )
                     })}
             </div>
+
+            <button className="add-client-button" onClick={() => ToggleAddClientModal(true)}>+ Add</button>
             
             <CreateClient AddClientModal={AddClientModal} ToggleAddClientModal={ToggleAddClientModal} {...props}/>
             <EditClient EditClientModal={EditClientModal} ToggleEditClientModal={ToggleEditClientModal} {...props}/>

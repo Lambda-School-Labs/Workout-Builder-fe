@@ -97,6 +97,19 @@ $mobile-breakpoint: 1024px;
             }
         }
     }
+    .add-client-button {
+        position: absolute;
+        bottom: 1rem;
+        width: calc(100% - 2rem);
+        height: 3.125rem;
+        background: #FD6A02;
+        border-radius: .3rem;
+        color: white;
+        font-family: 'Hind Madurai', sans-serif;
+        font-size: 1.125rem;
+        line-height: 1.5625rem;
+        font-weight: 600;
+    }
 }
 
 .m-client-element {
