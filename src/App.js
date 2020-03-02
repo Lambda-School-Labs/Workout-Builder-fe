@@ -13,7 +13,6 @@ import Home from './components/global/Home';
 import ProgramPreview from './components/program/ProgramPreview';
 import LibraryDisplay from './components/library/LibraryDisplay';
 import Exercise from './components/library/Exercise';
-import ExerciseCreation from './components/library/ExerciseCreation';
 import ExerciseEdit from './components/library/ExerciseEdit';
 
 const App = props => (
@@ -33,7 +32,6 @@ const App = props => (
       <PrivateRoute as={LibraryDisplay} path="library" />
       <PrivateRoute as={Exercise} path="library/:id" />
       <PrivateRoute as={ExerciseEdit} path="library/:id/edit" />
-      <PrivateRoute as={ExerciseCreation} path="library/new" />
     </NavBar>
 
   </Router>
