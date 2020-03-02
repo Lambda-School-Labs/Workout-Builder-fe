@@ -53,9 +53,3 @@ export default function ExerciseCard(props) {
   );
 
 }
-
-/* <iframe width="560" height="315" src=" https://www.youtube.com/watch?v=1oed-UmAxFs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */
-/* <iframe width="200" height="90" src="https://www.youtube.com/embed/1oed-UmAxFs" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */
-/* https://www.youtube.com/embed/1oed-UmAxFs */
-/* https://www.youtube.com/watch?v=1oed-UmAxFs */
-

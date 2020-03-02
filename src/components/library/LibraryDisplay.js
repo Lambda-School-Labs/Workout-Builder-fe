@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react';
 import {connect} from 'react-redux';
 import { navigate } from "@reach/router";
 
-
 import ExerciseCard from './ExerciseCard';
 import ExerciseCardTitle from './ExerciseCardTitle';
 import ExerciseSearchInput from './ExerciseSearchInput';
 
-// import "./library-display.css";
+import ExerciseCreationModal from './ExerciseCreationModal';
+
 import "./css/library-display.css";
 
 function LibraryDisplay(props) {
@@ -16,6 +16,14 @@ function LibraryDisplay(props) {
   const [searchResults, setSearchResults] = useState([]);
   const exeObjAry = props.coach_exercises;
 
+  const [creating, setCreating] = useState(false);
+
+  const handleCreating = () => setCreating(true);
+  const cancelCreating = () => setCreating(false);
+
+  const confirmCreating = () => {
+    setCreating(false);
+  };
 
   useEffect(() => {
     const results = exeObjAry.filter(exr =>
@@ -23,7 +31,6 @@ function LibraryDisplay(props) {
     );
     setSearchResults(results);
   }, [searchTerm,exeObjAry]);
-
 
   const handleSearch = ev => {
     ev.preventDefault();
@@ -35,11 +42,8 @@ function LibraryDisplay(props) {
     navigate("/library/new");
   };
 
-
-
   return (
     <div className="bf-whole-lib-disp">
-
       <ExerciseSearchInput
         handleChange={handleSearch}
         searchTerm={searchTerm}
@@ -53,36 +57,28 @@ function LibraryDisplay(props) {
 
       <ExerciseCardTitle />
 
-
       {searchResults.map(el=>
         <ExerciseCard key={el.id} exerObj={el} />
       )}
 
       <div className="bf-lib-disp-buffer-above-btn-mobile"></div>
 
-
-
       <div className="bf-lib-disp-div-for-btn-mobile">
         <button
           className="bf-lib-disp-btn-mobile"
-          onClick={handleBtn} >
+          onClick={handleCreating} >
         Create Exercise
         </button>
       </div>
 
-
-
-
+      {creating && (
+        <ExerciseCreationModal
+          cancel = {cancelCreating}
+          confirm = {confirmCreating}
+        />
+      )}
     </div>
-
-
-
   );
-
-
-
-
-
 } //End of LibraryDisplay function
 
 
