@@ -168,7 +168,7 @@ const AssignToClient = (props) => {
                         })}
                     </div>
                     <div className="assign-button-div">
-                        <button className="cancel-button" onClick={assignProgramsToClient}>Cancel</button>
+                        <button className="cancel-button" onClick={closeModal}>Cancel</button>
                         <button className="assign-button" onClick={assignProgramsToClient}>Assign</button>
                     </div>
                     {confirmModal ? <AssignProgramsConfirm

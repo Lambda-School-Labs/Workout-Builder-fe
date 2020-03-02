@@ -5,7 +5,7 @@ import CreateClient from "./modals/CreateClient";
 import EditClient from "./modals/EditClient";
 
 // mobile styling
-
+import "./clients-mobile-styles.scss"
 
 // desktop styling
 import "./clients-desktop-styles.scss"
@@ -30,6 +30,43 @@ const ProgramHome = (props) => {
 
     return(
         <>
+
+        {/* MOBILE VIEW */}
+
+        <div className="m-client-home">
+            <div className="m-client-home-top">
+                <div className="m-search-div" >
+                    <img className="magnifying-icon" src="https://i.imgur.com/dJIfxYP.png" alt="search"></img>
+                    <input 
+                        className="search-bar"
+                        placeholder="Search"
+                        onChange={handleChange}
+                        value={searchTerm}
+                    />
+                </div>
+            </div>
+            <div className="m-client-list-div">
+                <div className="client-list-header">
+                    <h4 className="header-pic">Name</h4>
+                    <h4 className="header-name"> </h4>
+                    <h4 className="header-days"> </h4>
+                    <h4 className="header-actions"> </h4>
+                </div>
+                {searchResults.map(client => {
+                        return(
+                            <ClientListElement 
+                            key={client.id} 
+                            client={client} 
+                            EditClientModal={EditClientModal}
+                            ToggleEditClientModal={ToggleEditClientModal}
+                            {...props}/>
+                        )
+                    })}
+            </div>
+            
+            <CreateClient AddClientModal={AddClientModal} ToggleAddClientModal={ToggleAddClientModal} {...props}/>
+            <EditClient EditClientModal={EditClientModal} ToggleEditClientModal={ToggleEditClientModal} {...props}/>
+        </div>
 
         {/* DESKTOP VIEW */}
 
