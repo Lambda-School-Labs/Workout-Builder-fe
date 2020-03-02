@@ -5,10 +5,14 @@ import { updateExercise } from '../actions';
 import EditModal from './EditModal';
 
 const Wrapper = ({ children, editing }) => {
-  return editing ? (
-    <form>{children}</form>
-  ) : (
-    <div>{children}</div>
+  return (
+    <div className="bg-white h-full overflow-y-scroll lg:w-1/2 lg:h-120 lg:rounded">
+      {editing ? (
+        <form>{children}</form>
+      ) : (
+        <div>{children}</div>
+      )}
+    </div>
   );
 };
 
@@ -24,14 +28,14 @@ const ExerciseLabel = ({ children, editing, id }) => {
   );
 };
 
-function Exercise({ id, navigate }){
+function Exercise({ id, navigate, location }){
   const coachExercise = useSelector(
     state => state.coach_exercises.find(c => c.id === Number(id))
   );
 
   const dispatch = useDispatch();
 
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(location.pathname.endsWith('edit'));
   const [saving, setSaving] = useState(false);
   const [values, setValues] = useState(coachExercise);
 
@@ -47,11 +51,11 @@ function Exercise({ id, navigate }){
   };
 
   const handleEdit = () => {
-    setEditing(true);
+    navigate(`/library/${id}/edit`);
   };
 
   const cancelEdit = () => {
-    setEditing(false);
+    navigate(`/library/${id}`);
   };
 
   const handleSubmit = async (e) => {
@@ -63,6 +67,7 @@ function Exercise({ id, navigate }){
       setTimeout(() => {
         setSaving(false);
         setEditing(false);
+        navigate('/library');
       }, 1500);
     } catch (error) {
       console.error(error.response);
@@ -70,9 +75,9 @@ function Exercise({ id, navigate }){
   };
 
   return(
-    <>
+    <div className="fixed top-0 left-0 w-full h-screen z-10 lg:flex lg:items-center lg:justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.4)' }}>
       <Wrapper editing={editing}>
-        <div className="flex flex-col px-4 py-5" style={{ minHeight: 'calc(100vh - 4.10rem)' }}>
+        <div className="flex flex-col px-4 py-5">
           {editing ? (
             <input
               type="text"
@@ -100,7 +105,7 @@ function Exercise({ id, navigate }){
               ? <p className="text-sm break-words">{values.video_url}</p>
               : <p className="text-red-600 text-sm">No thumbnail provided</p>
             }
-            {values.thumbnail_url && <img src={values.thumbnail_url} className="py-1" alt="exercise thumbnail"/>}
+            {values.thumbnail_url && <img src={values.thumbnail_url} className="py-1 max-w-full lg:w-64" alt="exercise thumbnail"/>}
           </div>
           <div className="py-2">
             <ExerciseLabel editing={editing} id="focal_points">Focal Points:</ExerciseLabel>
@@ -147,13 +152,14 @@ function Exercise({ id, navigate }){
                 <p className="text-red-600 text-sm">No video provided</p>
               )}
             {values.video_url && (
-              <ReactPlayer
-                url={values.video_url}
-                width="100%"
-                height="100%"
-                style={{ paddingTop: '.25rem', paddingBottom: '.25rem' }}
-                controls
-              />
+              <div className="py-1 max-w-full w-84 h-48">
+                <ReactPlayer
+                  url={values.video_url}
+                  width="100%"
+                  height="100%"
+                  controls
+                />
+              </div>
             )}
           </div>
           <div className="flex justify-between">
@@ -167,7 +173,7 @@ function Exercise({ id, navigate }){
         </div>
       </Wrapper>
       {saving && <EditModal />}
-    </>
+    </div>
   );
 }
 
