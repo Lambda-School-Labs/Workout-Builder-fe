@@ -1,0 +1,48 @@
+import React, { useState } from "react";
+import { Link } from '@reach/router';
+import ExerciseViewModal from './ExerciseViewModal';
+import "./library-display.css";
+import vDots from '../../img/vDots.png';
+import hDots from '../../img/hDots.png';
+
+export default function ExerciseCard(props) {
+  const {id,name,type,video_url,thumbnail_url} = props.exerObj;
+  const [ExModalOn, ToggleExModal] = useState(false);
+
+  const div1Style = {
+
+  }
+
+  return (
+    <div className="grid grid-cols-3 lg:grid-cols-5 grid-rows-1 border-b border-t h-12 " style={{ grid-template-columns:"1rem" }} >
+      <Link to={`/library/${id}`}  className="col-start-1 col-span-2 lg:col-span-4 grid grid-cols-2 lg:grid-cols-4 grid-rows-1 ">
+        <p className="self-center text-center">{name}</p>
+        <img className="hidden lg:block" src={thumbnail_url} alt="thumbnail_url" />
+        <p className="self-center text-center">{type}</p>
+        <img className="hidden lg:block" src={video_url} alt="video_url" />
+
+        {/* <video width="50" preload="metadata">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4#t=0.5" type="video/mp4" />
+        </video> */}
+      </Link>
+      <div className="border border-gray-400 flex flex-row justify-center items-center">
+        <img
+          className="block w-2 h-6 lg:hidden"
+          src={vDots}
+          onClick={() => ToggleExModal(true)}
+          alt="vertical dots">
+        </img>
+        <img
+          className="hidden w-7 h-2 lg:block"
+          src={hDots}
+          onClick={() => ToggleExModal(true)}
+          alt="horizontal dots">
+        </img>
+        {ExModalOn &&
+            <ExerciseViewModal ToggleExModal={ToggleExModal} exerObj={props.exerObj} />
+        }
+      </div>
+    </div>
+  );
+
+}

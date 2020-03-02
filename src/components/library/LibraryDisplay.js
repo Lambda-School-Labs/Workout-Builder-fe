@@ -3,18 +3,27 @@ import React, { useState, useEffect } from 'react';
 import {connect} from 'react-redux';
 import { navigate } from "@reach/router";
 
-
 import ExerciseCard from './ExerciseCard';
 import ExerciseCardTitle from './ExerciseCardTitle';
 import ExerciseSearchInput from './ExerciseSearchInput';
 
-import "./library-display.css";
+import ExerciseCreationModal from './ExerciseCreationModal';
+
+import "./css/library-display.css";
 
 function LibraryDisplay(props) {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const exeObjAry = props.coach_exercises;
 
+  const [creating, setCreating] = useState(false);
+
+  const handleCreating = () => setCreating(true);
+  const cancelCreating = () => setCreating(false);
+
+  const confirmCreating = () => {
+    setCreating(false);
+  };
 
   useEffect(() => {
     const results = exeObjAry.filter(exr =>
@@ -22,7 +31,6 @@ function LibraryDisplay(props) {
     );
     setSearchResults(results);
   }, [searchTerm,exeObjAry]);
-
 
   const handleSearch = ev => {
     ev.preventDefault();
@@ -34,19 +42,17 @@ function LibraryDisplay(props) {
     navigate("/library/new");
   };
 
-
-
   return (
-    <div>
-
+    <div className="bf-whole-lib-disp">
       <ExerciseSearchInput
         handleChange={handleSearch}
         searchTerm={searchTerm}
+        handleBtn={handleBtn}
       />
 
-      <div className="lib-disp-title">
-        <h2 className="lib-disp-title-ex  lib-disp-title-ct">Exercises</h2>
-        <h2 className="lib-disp-title-wa lib-disp-title-ct">Warmups</h2>
+      <div className="bf-lib-disp-title">
+        <h2 className="bf-lib-disp-title-ex">Exercises</h2>
+        <h2 className="bf-lib-disp-title-wa">Warmups</h2>
       </div>
 
       <ExerciseCardTitle />
@@ -55,35 +61,30 @@ function LibraryDisplay(props) {
         <ExerciseCard key={el.id} exerObj={el} />
       )}
 
+      <div className="bf-lib-disp-buffer-above-btn-mobile"></div>
 
-
-      <button
-        className="lib-disp-btn"
-        onClick={handleBtn} >
+      <div className="bf-lib-disp-div-for-btn-mobile">
+        <button
+          className="bf-lib-disp-btn-mobile"
+          onClick={handleCreating} >
         Create Exercise
-      </button>
+        </button>
+      </div>
 
-
-
-
-
-
+      {creating && (
+        <ExerciseCreationModal
+          cancel = {cancelCreating}
+          confirm = {confirmCreating}
+        />
+      )}
     </div>
-
-
-
   );
-
-
-
-
-
 } //End of LibraryDisplay function
 
 
 
 const mapStateToProps = function(state) {
-  // console.log("In LibraryDisplay.js and state:",state);
+  console.log("In LibraryDisplay.js and state:",state);
   return {coach_exercises: state.coach_exercises};
 };
 

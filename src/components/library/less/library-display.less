@@ -1,0 +1,381 @@
+@desktop: ~"(min-width: 1024px)";
+
+// **********************************************
+// Whole lib display
+// **********************************************
+.bf-whole-lib-disp {
+  margin-left:1rem;
+  margin-right:1rem;
+
+  @media @desktop {
+    margin-left:40px;
+    margin-right:40px;
+  }
+  
+}
+
+// **********************************************
+// Exercise search & desktop button
+// **********************************************
+.bf-exer-search-and-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .bf-exer-search-div {
+    width:100%;
+    display: flex;
+    align-items: center;
+    height: 2.25rem;
+    border: 1px solid #D4D4D4;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-top:30px;
+    font-size:0.875rem;
+    color: #C4C4C4;
+  
+    @media @desktop {
+      height:3.125rem;
+      font-size:1rem;
+      margin-top:40px;
+    }
+  
+    .bf-exer-search-img {
+      height: 1.25rem;
+      width: 1.25rem;
+      margin-top:0.5rem;
+      margin-bottom: 0.5rem;
+      margin-left:15px;
+      margin-right:10px;
+    }
+  
+    .bf-exer-search-box {
+      outline-style:none;
+      width:100%;
+      margin-right:15px;
+    }
+  
+  }
+
+
+  .bf-search-btn-dtop {
+    display:none;
+
+    @media @desktop {
+      width:13.25rem;
+      display:block;
+      border:1px solid lightgrey;
+      height:3.125rem;
+      margin-top:40px;
+      margin-left:49px;
+      color: #FFFFFF;
+      font-size: 1rem;
+      background-color: #FD6A02;
+      border-radius: 5px;
+    }
+
+
+  }
+
+
+}
+
+
+
+// **********************************************
+// Exercise & Warmups title
+// **********************************************
+.bf-lib-disp-title {
+  height:55px;
+  font-size:1rem;
+  display:flex;
+  justify-content: left;
+  align-items: flex-end;
+  border-bottom: 1px solid #D4D4D4;
+
+  @media @desktop {
+    height:83px;
+  }
+
+
+
+  .bf-lib-disp-title-ex {
+    width:5rem;
+    height:1.375rem;
+    margin-right: 1.125rem;
+    border-bottom: 3px solid #666666;
+
+    @media @desktop {
+      font-size:1.25rem;
+      width:242px;
+      height:1.75rem;
+      margin-right: 0;
+      text-align: center;
+      
+    }
+
+
+  }
+
+  .bf-lib-disp-title-wa {
+    width:5rem;
+    height:1.375rem;
+    color: #BEBEBE;
+    border-bottom: 3px solid transparent;
+
+    @media @desktop {
+      font-size:1.25rem;
+      width:242px;
+      height:1.75rem;
+      text-align: center;
+    }
+
+
+  }
+
+}
+
+
+// **********************************************
+// Components in Exercise Card & Exercise Card Title
+// **********************************************
+.bf-exer-card {
+  display: grid;
+  grid-template-columns: 1fr 4rem;
+  grid-column-gap: 0.25rem;
+  min-height:3rem;
+  box-shadow: 0px 2px 0px #F7F7FA;
+  
+  @media @desktop {
+    min-height:5rem;
+  }
+
+
+
+  // * {
+  //     border:1px solid lightgrey;
+  //   }
+
+  .bf-exer-link {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0.25rem;
+    grid-row-gap: 0.25rem;
+
+    @media @desktop {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    .bf-exer-name {
+      justify-self: center;
+      align-self: center;
+      font-size: 0.875rem;
+      color: #333333;
+
+      @media @desktop {
+        font-size: 1rem;
+      }
+
+    }
+
+    .bf-exer-name-title{
+      color: #7D7D7D;
+    }
+
+
+
+    .bf-exer-card-thumbnail {
+      max-height:64px;
+      max-width:130px;
+      display:none;
+      justify-self: center;
+      align-self: center;
+      font-size:0.75rem;
+
+      @media @desktop {
+        display:block;
+      }
+    }
+
+    .bf-exer-card-video-link {
+      display:none;
+      justify-self: center;
+      align-self: center;
+      position: relative;
+      z-index: 1;
+
+      @media @desktop {
+        display:block;
+      }
+
+      .bf-exer-card-video {
+        max-height:30px;
+        max-width:65px;
+        border-radius: 5px;
+  
+        
+      }
+
+
+
+    }
+
+
+
+    
+  
+
+  }
+
+
+  .bf-exer-card-action {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    //Note that the modal is placed relative to this div
+    position:relative;
+
+    .bf-vertical-dots {
+      width:5px;
+      height:25px;
+
+      @media @desktop {
+        display:none;
+      }
+    }
+
+    .bf-horizontal-dots {
+      width:31px;
+      height:7px;
+      align-self:center;
+      display:none;
+      @media @desktop {
+        display:block;
+      }
+    }
+
+  }
+
+}
+
+.bf-exer-card-title {
+  height:3.125rem;
+  box-shadow: 0px 3px 0px #F7F7FA;
+  margin-top:13px;
+}
+
+@media @desktop {
+  margin-top: 32px;
+}
+
+
+.bf-exer-card-title-desktop {
+  justify-self: center;
+  align-self: center;
+  font-size: 0.875rem;
+  color: #7D7D7D;
+  display:none;
+
+  @media @desktop {
+    display:block;
+  }
+}
+
+
+
+// *********************************************************
+// Modal styling
+// *********************************************************
+.bf-options-modal {
+  position:absolute;
+  top:50%;
+  right:50%;
+  z-index: 1;
+  width:8rem;
+  background-color: #FFFFFF;
+  border: 0.5px solid #EFEFEF;
+  box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.1);
+  
+  .bf-options-element {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(194, 194, 194);
+    }
+  
+    
+  
+    .bf-options-left {
+      img {
+          width: 0.75rem;
+          height: 0.75rem;
+          margin-right: 0.3125rem;
+      }   
+    }
+  
+    .bf-options-right {
+      font-size: 0.75rem;
+    }
+  
+  
+  
+  }
+
+
+}
+
+
+
+
+
+
+
+// **********************************************
+// Mobile bottom button and buffer above it
+// Note the button is positioned relative to the 
+// screen
+// **********************************************
+.bf-lib-disp-buffer-above-btn-mobile {
+  //Note this buffer is there so that if the button overlaps
+  //the list as you scroll down to the last item, the 
+  //button will overlap the buffer and not the list 
+  height:6.375rem;
+  border:1px solid #FFFFFF;
+  @media @desktop {
+    display:none;
+  }
+}
+
+.bf-lib-disp-div-for-btn-mobile {
+  background-color: #FFFFFF;
+  width:100%;
+  position:fixed;
+  bottom:0;
+  left:0;
+
+  .bf-lib-disp-btn-mobile {
+    color: #FFFFFF;
+    font-size: 1.125rem;
+    background-color: #FD6A02;
+    border-radius: 5px;
+    width:calc(100% - 32px);   
+    margin-top:21px;
+    margin-left: 16px;
+    margin-right:16px;
+    margin-bottom:21px;
+    
+  
+    @media @desktop {
+      display:none;
+    }
+  }
+
+}
+
+
+
+
+
