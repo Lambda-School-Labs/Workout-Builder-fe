@@ -5,7 +5,6 @@ import magGlass from '../../img/MagnifyGlass.png';
 import ExerciseCreationModal from './ExerciseCreationModal';
 
 export default function ExerciseSearchInput(props) {
-  // const {searchTerm,handleChange,handleBtn} = props;
   const {searchTerm,handleChange} = props;
 
   const [creating, setCreating] = useState(false);
@@ -19,7 +18,6 @@ export default function ExerciseSearchInput(props) {
 
   return (
     <div className="bf-exer-search-and-btn">
-
       <div className="bf-exer-search-div">
         <img className="bf-exer-search-img" src={magGlass} alt="Magnifying Glass" />
 
@@ -30,13 +28,6 @@ export default function ExerciseSearchInput(props) {
           onChange={handleChange}
         />
       </div>
-
-
-      {/* <button
-        className="bf-search-btn-dtop"
-        onClick={handleBtn} >
-        Create Exercise
-      </button> */}
 
       <button
         className="bf-search-btn-dtop"
@@ -50,8 +41,6 @@ export default function ExerciseSearchInput(props) {
           confirm = {confirmCreating}
         />
       )}
-
     </div>
-
   );
 }

@@ -3,7 +3,7 @@ import { Link } from '@reach/router';
 import ExerciseViewModal from './ExerciseViewModal';
 import vDots from '../../img/vDots.png';
 import hDots from '../../img/hDots.png';
-//import vPlay from '../../img/VideoPlayback.png';
+import vPlay from '../../img/VideoPlayback.png';
 
 export default function ExerciseCard(props) {
   const {id,name,type,video_url,thumbnail_url} = props.exerObj;
@@ -22,7 +22,7 @@ export default function ExerciseCard(props) {
         <p className="bf-exer-name">{type}</p>
         { video_url &&
           <a href={video_url} target="_blank" rel="noopener noreferrer" className="bf-exer-card-video-link" onClick={handleAtag}>
-            {/* <img className="bf-exer-card-video" src={vPlay} alt="video_url" /> */}
+            <img className="bf-exer-card-video" src={vPlay} alt="video_url" />
           </a>
 
           // <iframe width="130" height="64" src="https://www.youtube.com/embed/1oed-UmAxFs" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -53,8 +53,3 @@ export default function ExerciseCard(props) {
   );
 
 }
-
-/* <iframe width="560" height="315" src=" https://www.youtube.com/watch?v=1oed-UmAxFs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */
-/* <iframe width="200" height="90" src="https://www.youtube.com/embed/1oed-UmAxFs" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */
-/* https://www.youtube.com/embed/1oed-UmAxFs */
-/* https://www.youtube.com/watch?v=1oed-UmAxFs */

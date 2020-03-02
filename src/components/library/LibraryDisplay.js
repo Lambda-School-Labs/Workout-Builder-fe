@@ -3,14 +3,12 @@ import React, { useState, useEffect } from 'react';
 import {connect} from 'react-redux';
 import { navigate } from "@reach/router";
 
-
 import ExerciseCard from './ExerciseCard';
 import ExerciseCardTitle from './ExerciseCardTitle';
 import ExerciseSearchInput from './ExerciseSearchInput';
 
 import ExerciseCreationModal from './ExerciseCreationModal';
 
-// import "./library-display.css";
 import "./css/library-display.css";
 
 function LibraryDisplay(props) {
@@ -27,14 +25,12 @@ function LibraryDisplay(props) {
     setCreating(false);
   };
 
-
   useEffect(() => {
     const results = exeObjAry.filter(exr =>
       exr.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
   }, [searchTerm,exeObjAry]);
-
 
   const handleSearch = ev => {
     ev.preventDefault();
@@ -46,11 +42,8 @@ function LibraryDisplay(props) {
     navigate("/library/new");
   };
 
-
-
   return (
     <div className="bf-whole-lib-disp">
-
       <ExerciseSearchInput
         handleChange={handleSearch}
         searchTerm={searchTerm}
@@ -64,22 +57,11 @@ function LibraryDisplay(props) {
 
       <ExerciseCardTitle />
 
-
       {searchResults.map(el=>
         <ExerciseCard key={el.id} exerObj={el} />
       )}
 
       <div className="bf-lib-disp-buffer-above-btn-mobile"></div>
-
-
-
-      {/* <div className="bf-lib-disp-div-for-btn-mobile">
-        <button
-          className="bf-lib-disp-btn-mobile"
-          onClick={handleBtn} >
-        Create Exercise
-        </button>
-      </div> */}
 
       <div className="bf-lib-disp-div-for-btn-mobile">
         <button
@@ -95,20 +77,8 @@ function LibraryDisplay(props) {
           confirm = {confirmCreating}
         />
       )}
-
-
-
-
     </div>
-
-
-
   );
-
-
-
-
-
 } //End of LibraryDisplay function
 
 
