@@ -1,44 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 import serverHandshake from '../../../utils/serverHandshake';
 
-const emptyForm = {
-    first_name: "",
-    last_name: "",
-    email: ""
-};
-
-const CreateClient_M = (props) => {
+const EditClient_D = (props) => {
     const Dispatch = useDispatch();
     
     Modal.setAppElement('#root');
 
     const closeModal = (e) => {
         e.stopPropagation();
-        props.ToggleAddClientModal(false);
+        props.ToggleEditClientModal(false);
     };
 
-    const [newClientData, setNewClientData] = useState(emptyForm);
+    const initialClientData = {
+        id: props.client_data.id,
+        first_name: props.client_data.first_name,
+        last_name: props.client_data.last_name,
+        email: props.client_data.email
+    };
+
+    const [updatedClientData, setUpdatedClientData] = useState(initialClientData);
+
+    useEffect(() => {
+        setUpdatedClientData(props.client_data);
+    },[props.client_data]);
 
     const handleChange = (e) => {
         e.preventDefault();
-        setNewClientData ({
-        ...newClientData,
+        setUpdatedClientData ({
+        ...updatedClientData,
         [e.target.name]: e.target.value
         });
     };
 
-    const createClient = (e) => {
+    const updateClient = (e) => {
         e.preventDefault();
 
-        serverHandshake(true).post("/clients", newClientData)
+        // hard copy data and remove the id
+        let updatedInfo = JSON.parse(JSON.stringify(updatedClientData));
+        delete updatedInfo.id;
+
+        serverHandshake(true).put(`/clients/${updatedClientData.id}`, updatedInfo)
         .then(res => {
             serverHandshake(true).get("/clients")
             .then(res => {
                 Dispatch({ type: 'SET_CLIENT_DATA', payload: res.data });
-                setNewClientData(emptyForm);
             })
         })
         .catch(err => {
@@ -49,13 +57,13 @@ const CreateClient_M = (props) => {
     };
 
     return(
-        <Modal isOpen={props.AddClientModal} 
-            className="m-client-modal" 
-            overlayClassName="client-overaly"
-            shouldCloseOnOverlayClick={true}
-            onRequestClose={closeModal}
-            >
-            <form onSubmit={createClient}>
+            <Modal isOpen={props.EditClientModal} 
+                className="m-client-modal" 
+                overlayClassName="client-overaly"
+                shouldCloseOnOverlayClick={true}
+                onRequestClose={closeModal}
+                >
+                <form onSubmit={updateClient}>
                 <h3>Add new Client</h3>
                 <div className="profile-row">
                     <p htmlFor="picture">Profile pic:</p>
@@ -66,7 +74,7 @@ const CreateClient_M = (props) => {
                         <div className="label-div">
                             <p htmlFor="first_name">First Name</p><p className="asterix">*</p>
                         </div>
-                        <input id="first_name" name="first_name" placeholder="" required type="text" value={newClientData.first_name} onChange={handleChange}></input>
+                        <input id="first_name" name="first_name" placeholder="" required type="text" value={updatedClientData.first_name} onChange={handleChange}></input>
                     </div>
                 </div>
                 <div className="create-client-row">
@@ -74,7 +82,7 @@ const CreateClient_M = (props) => {
                         <div className="label-div">
                             <p htmlFor="last_name">Last Name</p><p className="asterix">*</p>
                         </div>
-                        <input id="last_name" name="last_name" placeholder="" required type="text" value={newClientData.last_name} onChange={handleChange}></input>
+                        <input id="last_name" name="last_name" placeholder="" required type="text" value={updatedClientData.last_name} onChange={handleChange}></input>
                     </div>
                 </div>
                 <div className="create-client-row">
@@ -82,7 +90,7 @@ const CreateClient_M = (props) => {
                         <div className="label-div">
                             <p htmlFor="email">Email</p><p className="asterix">*</p>
                         </div>
-                        <input id="email" name="email" placeholder="" required type="email" value={newClientData.email} onChange={handleChange}></input>
+                        <input id="email" name="email" placeholder="" required type="email" value={updatedClientData.email} onChange={handleChange}></input>
                     </div>
                 </div>
                 <div className="create-client-row">
@@ -116,10 +124,10 @@ const CreateClient_M = (props) => {
                 </div>
                 <div className="button-row">
                     <button onClick={closeModal} className="cancel-button">Cancel</button>
-                    <button className="save-button" type="submit">Save</button>
+                    <button className="save-button" type="submit">Save Edits</button>
                 </div>
             </form>
-        </Modal>
+            </Modal>
     )
 }
 
@@ -130,8 +138,9 @@ const mapStateToProps = state => ({
     coach_exercises: state.coach_exercises,
     coach_programs: state.coach_programs,
     new_program: state.new_program,
+    client_data: state.client_data
 });
 
 export default connect(
     mapStateToProps,
-)(CreateClient_M);
+)(EditClient_D);

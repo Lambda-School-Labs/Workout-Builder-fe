@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { connect } from 'react-redux';
-import EditClient from './modals/EditClient';
+import EditClient from './modals/EditClient_D';
 import { useDispatch } from 'react-redux';
 import AssignToClient from "./modals/AssignToClient";
 

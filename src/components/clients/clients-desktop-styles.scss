@@ -180,6 +180,9 @@ $desktop-breakpoint: 1023px;
     *:focus {
         outline: none;
     }
+    @media (max-width: $desktop-breakpoint) {
+        display: none;
+    }
     background-color: white;
     position: absolute;
     top: calc(50% - 22rem);

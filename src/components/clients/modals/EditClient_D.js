@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 import serverHandshake from '../../../utils/serverHandshake';
 
-const EditClient = (props) => {
+const EditClient_D = (props) => {
     const Dispatch = useDispatch();
     
     Modal.setAppElement('#root');
@@ -141,4 +141,4 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-)(EditClient);
+)(EditClient_D);

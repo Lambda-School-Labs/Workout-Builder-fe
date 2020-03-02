@@ -187,19 +187,22 @@ $mobile-breakpoint: 1024px;
     *:focus {
         outline: none;
     }
+    @media (min-width: $mobile-breakpoint) {
+        display: none;
+    }
     background-color: white;
     position: absolute;
-    top: calc(50% - 22rem);
-    right: calc(50% - 18rem);
-    width: 35rem;
-    height: 45rem;
-    padding: 2.5rem;
+    top: calc(50% - 20rem);
+    right: calc(5%);
+    width: 90%;
+    height: 40rem;
+    padding: 1rem;
     h3 {
         font-family: 'Hind Madurai', sans-serif;
         font-weight: 600;
         font-size: 1.5rem;
         line-height: 2rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
     .profile-row {
         margin: .5rem 0;
@@ -212,6 +215,7 @@ $mobile-breakpoint: 1024px;
             font-size: 1rem;
             line-height: 1.5625rem;
             color: #666666;
+            margin-right: 1rem;
         }
         input {
             padding: .5rem;
@@ -276,7 +280,7 @@ $mobile-breakpoint: 1024px;
     .button-row {
         display: flex;
         justify-content: space-between;
-        margin-top: 7.5rem;
+        margin-top: 1rem;
         .cancel-button {
             width: 48%;
             height: 3.125rem;
