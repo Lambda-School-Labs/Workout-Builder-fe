@@ -15,11 +15,6 @@ const ExerciseCreation = (props) => {
     video_url: ''
   });
 
-  //   const goBackExerciseHome = e => {
-  //     e.preventDefault();
-  //     props.navigate("/library");
-  //   };
-
   const changeHandler = e => {
     setNewExercise({
       ...newExercise,
@@ -34,7 +29,6 @@ const ExerciseCreation = (props) => {
       console.log(response);
       if (response.status === 201) {
         Dispatch({ type: "CREATE_AN_EXERCISE", payload: response.data });
-        //props.navigate('/library');
         props.cancel();
       }
     } catch (error) {
