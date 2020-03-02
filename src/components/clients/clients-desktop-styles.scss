@@ -531,3 +531,211 @@
         }
     }
 }
+
+// Assign Programs to Client Modal
+
+.assign-modal {
+    z-index: 1;
+    background-color: white;
+    position: absolute;
+    top: calc(50% - 22rem);
+    right: calc(50% - 18rem);
+    width: 35rem;
+    height: 45rem;
+    padding: 2.5rem;
+    .assign-internal {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 40rem;
+        .assign-header {
+            margin-left: 1rem;
+            font-family: 'Hind Madurai', sans-serif;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 33px;
+        }
+        .assign-programs {
+            height: 30rem;
+            overflow-y: scroll;
+            &::-webkit-scrollbar {
+                width: 3px;
+                background: #cecece;
+            } 
+            &::-webkit-scrollbar-thumb {
+                width: 3px;
+                background: #666666;
+            }
+            margin-right: 5px;
+            .assign-programs-row {
+                color: #666666;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 3rem;
+                .assign-program-container {
+                    display: flex;
+                    align-items: center;
+                    font-family: 'Hind Madurai', sans-serif;
+                    font-size: 1.25rem;
+                    color: #333333;
+                    position: relative;
+                    padding-left: 1rem;
+                    input {
+                        width: 1rem;
+                        height: 1rem;
+                        -webkit-appearance: none;
+                        background-color: #ffffff;
+                        border: 2px solid #686B6F;
+                        border-radius: 3px;
+                        margin-right: 5px;
+                        &:focus {
+                            outline: none;
+                        }
+                        &:checked {
+                            background: #333333;
+                            border: 2px solid #333333;
+                            border: none;
+                        }
+                    }
+                }
+                p {
+                    font-family: 'Hind Madurai', sans-serif;
+                    font-size: 1rem;
+                    color: #ADADAD;
+                    margin-right: 1rem;
+                }
+            }
+        }
+        .assign-button-div {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            height: 3rem;
+            .cancel-button {
+                width: 12rem;
+                height: 3.125rem;
+                background: #FFFFFF;
+                border: 1px solid #FD6A02;
+                border-radius: 5px;
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: 1rem;
+                color: #FD6A02;
+                height: 2.25rem;
+            }
+            .assign-button {
+                width: 12rem;
+                height: 3.125rem;
+                background: #FD6A02;
+                border-radius: 5px;
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: 1rem;
+                color: #FFFFFF;
+                height: 2.25rem;
+            }
+        }
+    }
+}
+
+
+// Assign programs mobile
+
+// .assign-modal {
+//     z-index: 1;
+//     width: 10rem;
+//     background-color: white;
+//     position: absolute;
+//     right: 50%;
+//     top: 50%;
+//     width: 15rem;
+//     height: 21.5rem;
+//     box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+//     border: 0.5px solid #C4C4C4;
+//     .assign-internal {
+//         display: flex;
+//         flex-direction: column;
+//         .assign-header {
+//             display: flex;
+//             height: 3rem;
+//             align-items: center;
+//             font-family: 'Exo', sans-serif;
+//             font-weight: 500;
+//             font-size: 1.1rem;
+//             line-height: 1.3rem;
+//             .assign-header-programs {
+//                 margin-left: 1rem;
+//                 border-bottom: 2px solid black;
+//                 padding: 1rem .8rem .7rem .4rem;
+//             }
+//             .assign-header-teams {
+//                 border-bottom: 2px solid #979797;;
+//                 padding: 1rem .8rem .7rem 0.4rem;
+//                 color: #a8a8a8;
+//             }
+//         }
+//         .assign-programs {
+//             height: 15rem;
+//             overflow-y: scroll;
+//             &::-webkit-scrollbar {
+//                 width: 3px;
+//                 background: #cecece;
+//             } 
+//             &::-webkit-scrollbar-thumb {
+//                 width: 3px;
+//                 background: #666666;
+//             }
+//             margin-right: 5px;
+//             .assign-programs-row {
+//                 color: #666666;
+//                 display: flex;
+//                 align-items: center;
+//                 height: 3rem;
+//                 .assign-program-container {
+//                     display: flex;
+//                     align-items: center;
+//                     font-family: 'Exo', sans-serif;
+//                     font-size: 1rem;
+//                     position: relative;
+//                     padding-left: 1rem;
+//                     input {
+//                         width: 1rem;
+//                         height: 1rem;
+//                         -webkit-appearance: none;
+//                         background-color: #ffffff;
+//                         border: 2px solid #686B6F;
+//                         border-radius: 3px;
+//                         margin-right: 5px;
+//                         &:focus {
+//                             outline: none;
+//                         }
+//                         &:checked {
+//                             background: #333333;
+//                             border: 2px solid #333333;
+//                             border: none;
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//         .assign-button-div {
+//             display: flex;
+//             justify-content: center;
+//             align-items: center;
+//             width: 100%;
+//             height: 3rem;
+//             .assign-button {
+//                 width: 206px;
+//                 height: 30px;
+//                 background: #FD6A02;
+//                 border-radius: 5px;
+//                 font-family: 'Hind Madurai', sans-serif;
+//                 font-size: 0.875rem;
+//                 line-height: 1.1875rem;
+//                 color: #FFFFFF;
+//                 height: 2.25rem;
+//             }
+//         }
+//     }
+// }
+

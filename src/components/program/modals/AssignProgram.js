@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import AssignConfirm from './AssignConfirm';
 import serverHandshake from '../../../utils/serverHandshake';
-import axios from 'axios';
 
 const AssignProgram = (props) => {
     const Dispatch = useDispatch();

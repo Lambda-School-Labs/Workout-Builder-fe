@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { connect } from 'react-redux';
 import EditClient from './modals/EditClient';
 import { useDispatch } from 'react-redux';
+import AssignToClient from "./modals/AssignToClient";
 
 // mobile styling
 
@@ -12,6 +13,7 @@ import "./clients-desktop-styles.scss"
 const ClientView = (props) => {
     const Dispatch = useDispatch();
     const [EditClientModal, ToggleEditClientModal] = useState(false);
+    const [AssignToClientModal, ToggleAssignToClientModal] = useState(false);
 
     // Open the edit client modal
     const editClient = () => {
@@ -31,7 +33,7 @@ const ClientView = (props) => {
             const updatedData = props.coach_clients.filter(client => (client.id === Number(props.id)))[0];
             Dispatch({ type: "UPDATE_CLIENT_DATA", payload: updatedData });
         }
-    }, [props.coach_clients]);
+    }, [props.coach_clients, props.coach_programs]);
 
     
     // Get a list of the client's programs
@@ -64,12 +66,12 @@ const ClientView = (props) => {
             <tr className="last-row">
                 {lastRowList.map(day => {
                     return (
-                        <td key={day.id}>
+                        <td>
                             <h3>Day {day.day}</h3>
                             <h4>{day.name}</h4>
                             {day.exercises.map(exercise => {
                                 return (
-                                    <div key={exercise.exercise_id} className="table-exercise">
+                                    <div className="table-exercise">
                                         <div className="table-exercise-title">
                                             <p>{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
                                             <h5>{getExerciseName(exercise.exercise_id)}</h5>
@@ -83,7 +85,7 @@ const ClientView = (props) => {
                 })}
                 {blankCellList.map((emptyCell, idx) => {
                     return (
-                        <td className="blank-cell" key={idx}>
+                        <td className="blank-cell">
                         </td>
                     )
                 })}
@@ -154,7 +156,9 @@ const ClientView = (props) => {
                     <h2>{props.client_data.first_name} {props.client_data.last_name}</h2>
                 </div>
                 <div className="info-right">
-                    <button className="assign-to-client-button">Assign to client</button>
+                    <button className="assign-to-client-button" onClick={() => ToggleAssignToClientModal(true)}>Assign to client</button>
+                    {AssignToClientModal ? <AssignToClient program_id={props.id} AssignToClientModal={AssignToClientModal} ToggleAssignToClientModal={ToggleAssignToClientModal} {...props}/>
+                    : <div />}
                     <button className="edit-button" onClick={() => editClient()}>Edit</button>
                 </div>
             </div>
