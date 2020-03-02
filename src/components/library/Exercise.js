@@ -1,82 +1,173 @@
-import React from "react";
-import { Link }   from '@reach/router';
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import ReactPlayer from 'react-player';
+import { updateExercise } from '../actions';
+import EditModal from './EditModal';
 
-function Exercise(props){
-  const coachExercise = useSelector(state => state.coach_exercises.find(c=> c.id === Number(props.id)));
+const Wrapper = ({ children, editing }) => {
+  return editing ? (
+    <form>{children}</form>
+  ) : (
+    <div>{children}</div>
+  );
+};
 
-  console.log(coachExercise);
+const ExerciseLabel = ({ children, editing, id }) => {
+  return editing ? (
+    <label className="text-xs font-semibold text-silver" htmlFor={id}>
+      {children}
+    </label>
+  ) : (
+    <h2 className="text-xs font-semibold text-silver">
+      {children}
+    </h2>
+  );
+};
+
+function Exercise({ id, navigate }){
+  const coachExercise = useSelector(
+    state => state.coach_exercises.find(c => c.id === Number(id))
+  );
+
+  const dispatch = useDispatch();
+
+  const [editing, setEditing] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [values, setValues] = useState(coachExercise);
+
+  const handleChange = (e) => {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleBack = () => {
+    navigate('/library');
+  };
+
+  const handleEdit = () => {
+    setEditing(true);
+  };
+
+  const cancelEdit = () => {
+    setEditing(false);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { id, ...exercise } = values;
+      await dispatch(updateExercise(id, exercise));
+      setSaving(true);
+      setTimeout(() => {
+        setSaving(false);
+        setEditing(false);
+      }, 1500);
+    } catch (error) {
+      console.error(error.response);
+    }
+  };
+
   return(
-    <div>
-      <div className= " lg:hidden flex flex-col px-6 py-3 ">
-        <div className= "">
-          <h1 className ="text-3xl pb-2 font-semibold">{coachExercise.name} </h1>
-          <div className ="pb-4">
-            <img src= {coachExercise.thumbnail_url } className =" h-25 w-full"  alt ="an exercise"/>
+    <>
+      <Wrapper editing={editing}>
+        <div className="flex flex-col px-4 py-5" style={{ minHeight: 'calc(100vh - 4.10rem)' }}>
+          {editing ? (
+            <input
+              type="text"
+              name="name"
+              className="text-2xl w-full border border-silver rounded p-1"
+              value={values.name}
+              onChange={handleChange}
+              required
+            />
+          ) : (
+            <h1 className="text-2xl font-medium">{values.name}</h1>
+          )}
+          <div className="py-2">
+            <ExerciseLabel editing={editing} id="thumbnail_url">Link to thumbnail:</ExerciseLabel>
+            {editing ? (
+              <input
+                type="text"
+                name="thumbnail_url"
+                id="thumbnail_url"
+                className="w-full border border-silver rounded text-sm p-1"
+                value={values.thumbnail_url}
+                onChange={handleChange}
+              />
+            ) : values.thumbnail_url
+              ? <p className="text-sm break-words">{values.video_url}</p>
+              : <p className="text-red-600 text-sm">No thumbnail provided</p>
+            }
+            {values.thumbnail_url && <img src={values.thumbnail_url} className="py-1" alt="exercise thumbnail"/>}
           </div>
-          <div>
-            <h1 className ="text-lg text-silver ">  Focal Points:</h1>
-            <div className= "">
-              <p className= "text-xl break-words">{coachExercise.focal_points}</p>
+          <div className="py-2">
+            <ExerciseLabel editing={editing} id="focal_points">Focal Points:</ExerciseLabel>
+            {editing ? (
+              <textarea
+                name="focal_points"
+                id="focal_points"
+                className="w-full h-16 border border-silver rounded text-sm p-1"
+                value={values.focal_points}
+                onChange={handleChange}
+              />
+            ) : (
+              <p className="text-sm break-words">{values.focal_points}</p>
+            )}
+          </div>
+          <div className="py-2 flex-grow">
+            <div className="flex items-center">
+              <ExerciseLabel editing={editing} id="video_url">Link to video:</ExerciseLabel>
+              <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="ml-2">
+                <path d="M10.333 2.99992V1.66659C10.333 1.31296 10.1925 0.973825 9.94248 0.723776C9.69244 0.473728 9.3533 0.333252 8.99967 0.333252H1.66634C1.31272 0.333252 0.973581 0.473728 0.723532 0.723776C0.473484 0.973825 0.333008 1.31296 0.333008 1.66659V8.33325C0.333008 8.68688 0.473484 9.02602 0.723532 9.27606C0.973581 9.52611 1.31272 9.66659 1.66634 9.66659H8.99967C9.3533 9.66659 9.69244 9.52611 9.94248 9.27606C10.1925 9.02602 10.333 8.68688 10.333 8.33325V6.99992L13.6663 9.66659V0.333252L10.333 2.99992Z" fill="#666666"/>
+              </svg>
+              {editing && (
+                <>
+                  <span className="text-xs font-medium mx-2">OR</span>
+                  <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.5125 4.94841C14.0025 2.21716 11.73 0.166748 9 0.166748C6.8325 0.166748 4.95 1.46508 4.0125 3.36508C1.755 3.61841 0 5.63716 0 8.08341C0 9.34319 0.474106 10.5514 1.31802 11.4422C2.16193 12.333 3.30653 12.8334 4.5 12.8334H14.25C14.7425 12.8334 15.2301 12.731 15.6851 12.5321C16.14 12.3332 16.5534 12.0416 16.9016 11.674C17.2499 11.3065 17.5261 10.8701 17.7145 10.3899C17.903 9.90962 18 9.3949 18 8.87508C18 6.78508 16.4625 5.09091 14.5125 4.94841ZM14.25 11.2501H4.5C3.70435 11.2501 2.94129 10.9165 2.37868 10.3226C1.81607 9.72872 1.5 8.92327 1.5 8.08341C1.5 6.4605 2.6475 5.10675 4.17 4.9405L4.9725 4.85341L5.3475 4.10133C6.06 2.65258 7.455 1.75008 9 1.75008C10.965 1.75008 12.66 3.22258 13.0425 5.25716L13.2675 6.44466L14.415 6.53175C15.585 6.61091 16.5 7.648 16.5 8.87508C16.5 9.50497 16.2629 10.1091 15.841 10.5545C15.419 10.9999 14.8467 11.2501 14.25 11.2501ZM6 7.29175H7.9125V9.66675H10.0875V7.29175H12L9 4.12508L6 7.29175Z" fill="black"/>
+                  </svg>
+                </>
+              )}
             </div>
+            {editing ? (
+              <input
+                type="text"
+                name="video_url"
+                id="video_url"
+                className="w-full border border-silver rounded text-sm p-1"
+                value={values.video_url}
+                onChange={handleChange}
+              />
+            ) : values.video_url
+              ? (
+                <p className="text-sm break-words">{values.video_url}</p>
+              ) : (
+                <p className="text-red-600 text-sm">No video provided</p>
+              )}
+            {values.video_url && (
+              <ReactPlayer
+                url={values.video_url}
+                width="100%"
+                height="100%"
+                style={{ paddingTop: '.25rem', paddingBottom: '.25rem' }}
+                controls
+              />
+            )}
           </div>
-          <h2 className ="text-lg text-silver text-sm pt-5">  Link to video:</h2>
-          <p className ="text-xl break-words">{coachExercise.video_url}</p>
-          <iframe className ="pt-5 w-full" width="480" height="200" src={coachExercise.video_url}>
-          </iframe>
-
-          <div className ="mt-16 whitespace-no-wrap w-4/4">
-            <Link to ="/library">
-              <button className="relative mr-6 border-solid border-2 border-blaze-orange bg-white text-blaze-orange font-semibold text-xl text-center rounded-lg py-3 px-12 w-4/4">
-              Back
-              </button>
-            </Link>
-
-            <Link to = {`/library/${coachExercise.id}/edit`}>
-              <button className=" border-solid border-2 border-blaze-orange bg-blaze-orange text-white font-semibold text-xl text-center rounded-lg py-3 px-12 ">
-              Edit
-              </button>
-
-            </Link>
+          <div className="flex justify-between">
+            <button type="button" onClick={editing ? cancelEdit : handleBack} className="py-3 w-5/12 rounded bg-white text-blaze-orange border border-blaze-orange">
+              {editing ? 'Cancel' : 'Back'}
+            </button>
+            <button type="submit" onClick={editing ? handleSubmit : handleEdit} className="py-3 w-5/12 rounded bg-blaze-orange text-white" disabled={saving}>
+              {editing ? 'Save' : 'Edit'}
+            </button>
           </div>
         </div>
-      </div>
-      {/*Desktop View*/}
-
-      <div className= "hidden lg:flex flex-col self-center border-solid pl-64 pt-20">
-        <div className =" ml-64 justify-center border-solid ">
-          <h1 className ="text-3xl pb-6 font-semibold">{coachExercise.name} </h1>
-          <div className ="pb-12">
-            <img src= {coachExercise.thumbnail_url } className =" w-1/3" alt ="an exercise"/>
-          </div>
-          <div>
-            <h1 className ="text-lg text-silver  ">  Focal Points:</h1>
-            <div className= "w-2/6">
-              <p className= "text-lg break-words">{coachExercise.focal_points}</p>
-            </div>
-          </div>
-          <h2 className ="text-lg text-silver text-sm pt-5">  Link to video:</h2>
-          <p className ="text-lg break-words w-2/6">{coachExercise.video_url}</p>
-          <iframe className ="pt-5 w-3/3"src={coachExercise.video_url}>
-          </iframe>
-
-          <div className ="mt-16 ">
-            <Link to ="/library">
-              <button className=" mr-6 border-solid border-2 border-blaze-orange bg-white text-blaze-orange font-semibold text-xl text-center rounded-lg py-3 px-12">
-              Back
-              </button>
-            </Link>
-
-            <Link to = {`/library/${coachExercise.id}/edit`}>
-              <button className=" border-solid border-2 border-blaze-orange bg-blaze-orange text-white font-semibold text-xl text-center rounded-lg py-3 px-12 ">
-              Edit
-              </button>
-
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
+      </Wrapper>
+      {saving && <EditModal />}
+    </>
   );
 }
 
