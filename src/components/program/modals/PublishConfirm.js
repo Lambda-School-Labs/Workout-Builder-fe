@@ -54,13 +54,29 @@ const PublishConfirm = (props) => {
 
         serverHandshake(true).post("/programs", newProgram)
         .then(res => {
+            serverHandshake(true).get('/programs')
+            .then(res => {
             Dispatch({ type: 'SET_PROGRAM_DATA', payload: res.data });
             Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
+            })
+            .catch(err => {
+            console.log("there was an error", err);
+            })
             props.toggleConfirmModal(false);
             props.navigate("/program");
         })
         .catch(err => {
             console.log("there was an error", err);
+            serverHandshake(true).get('/programs')
+            .then(res => {
+            Dispatch({ type: 'SET_PROGRAM_DATA', payload: res.data });
+            Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
+            })
+            .catch(err => {
+            console.log("there was an error", err);
+            })
+            props.toggleConfirmModal(false);
+            props.navigate("/program");
         })
     }
 

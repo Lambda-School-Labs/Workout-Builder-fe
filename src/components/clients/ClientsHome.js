@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import ClientListElement from "./ClientListElement";
-import CreateClient from "./modals/CreateClient";
+import CreateClient_D from "./modals/CreateClient_D";
+import CreateClient_M from "./modals/CreateClient_M";
 import EditClient from "./modals/EditClient";
 
 // mobile styling
@@ -11,7 +12,8 @@ import "./clients-mobile-styles.scss"
 import "./clients-desktop-styles.scss"
 
 const ProgramHome = (props) => {
-    const [AddClientModal, ToggleAddClientModal] = useState(false);
+    const [AddClientModal_D, ToggleAddClientModal_D] = useState(false);
+    const [AddClientModal_M, ToggleAddClientModal_M] = useState(false);
     const [EditClientModal, ToggleEditClientModal] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState(props.coach_clients);
@@ -64,9 +66,9 @@ const ProgramHome = (props) => {
                     })}
             </div>
 
-            <button className="add-client-button" onClick={() => ToggleAddClientModal(true)}>+ Add</button>
+            <button className="add-client-button" onClick={() => ToggleAddClientModal_M(true)}>+ Add</button>
             
-            <CreateClient AddClientModal={AddClientModal} ToggleAddClientModal={ToggleAddClientModal} {...props}/>
+            <CreateClient_M AddClientModal={AddClientModal_M} ToggleAddClientModal={ToggleAddClientModal_M} {...props}/>
             <EditClient EditClientModal={EditClientModal} ToggleEditClientModal={ToggleEditClientModal} {...props}/>
         </div>
 
@@ -83,7 +85,7 @@ const ProgramHome = (props) => {
                         value={searchTerm}
                     />
                 </div>
-                <button className="add-client-button" onClick={() => ToggleAddClientModal(true)}>Add New Client</button>
+                <button className="add-client-button" onClick={() => ToggleAddClientModal_D(true)}>Add New Client</button>
             </div>
             <div className="d-client-list-div">
                 <div className="client-list-header">
@@ -104,7 +106,7 @@ const ProgramHome = (props) => {
                     })}
             </div>
             
-            <CreateClient AddClientModal={AddClientModal} ToggleAddClientModal={ToggleAddClientModal} {...props}/>
+            <CreateClient_D AddClientModal={AddClientModal_D} ToggleAddClientModal={ToggleAddClientModal_D} {...props}/>
             <EditClient EditClientModal={EditClientModal} ToggleEditClientModal={ToggleEditClientModal} {...props}/>
         </div>
         </>

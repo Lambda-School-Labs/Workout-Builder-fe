@@ -182,3 +182,137 @@ $mobile-breakpoint: 1024px;
         }
     }
 }
+
+.m-client-modal {
+    *:focus {
+        outline: none;
+    }
+    background-color: white;
+    position: absolute;
+    top: calc(50% - 22rem);
+    right: calc(50% - 18rem);
+    width: 35rem;
+    height: 45rem;
+    padding: 2.5rem;
+    h3 {
+        font-family: 'Hind Madurai', sans-serif;
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        margin-bottom: 2rem;
+    }
+    .profile-row {
+        margin: .5rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 3rem;
+        p {
+            font-family: 'Hind Madurai', sans-serif;
+            font-size: 1rem;
+            line-height: 1.5625rem;
+            color: #666666;
+        }
+        input {
+            padding: .5rem;
+            width: 70%;
+            height: 1.5rem;
+            font-family: 'Hind Madurai', sans-serif;
+            font-size: 0.875rem;
+            line-height: 1.1875rem;
+            background: #FFFFFF;
+            border: 1px solid #C4C4C4;
+            border-radius: 5px;
+        }
+    }
+    .create-client-row {
+        margin: .5rem 0;
+        display: flex;
+        height: 4rem;
+        justify-content: space-between;
+        align-items: center;
+        input {
+            height: 2.2rem;
+            padding: .5rem;
+            width: 100%;
+            font-family: 'Hind Madurai', sans-serif;
+            font-size: 0.875rem;
+            line-height: 1.1875rem;
+            background: #FFFFFF;
+            border: 1px solid #C4C4C4;
+            border-radius: 5px;
+        }
+        .vertical {
+            width: 100%;
+        }
+        .create-client-left {
+            width: 48%;
+            .split-div {
+                display: flex;
+                justify-content: space-between;
+                input {
+                    width: 48%;
+                }
+            }
+        }
+        .create-client-right {
+            width: 48%;
+        }
+
+    }
+    .label-div {
+        display:flex;
+        align-items: flex-start;
+        p {
+            font-family: 'Hind Madurai', sans-serif;
+            font-size: 1rem;
+            line-height: 1.5625rem;
+            color: #666666;
+        }
+        .asterix {
+            color: red;
+        }
+    }
+    .button-row {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 7.5rem;
+        .cancel-button {
+            width: 48%;
+            height: 3.125rem;
+            background: #FFFFFF;
+            border: 1px solid #FD6A02;
+            border-radius: 5px;
+            font-family: 'Hind Madurai', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #FD6A02;
+        }
+        .save-button {
+            width: 48%;
+            height: 3.125rem;
+            background: #FD6A02;
+            border-radius: 5px;
+            font-family: 'Hind Madurai', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgb(255, 255, 255);
+        }
+    }
+    
+}
+
+.client-overaly {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.600);
+}
