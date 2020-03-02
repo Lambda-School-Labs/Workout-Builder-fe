@@ -42,9 +42,9 @@ const ProgramPreviewElement = (props) => {
                 {fullView ? 
                 <>
                 <p className="data-instructions">{props.day.description}</p>
-                {props.day.exercises.map(exercise => {
+                {props.day.exercises.map((exercise, idx) => {
                     return (
-                        <div className="data-card">
+                        <div className="data-card" key={`preview-${exercise.order}-${idx}`}>
                             <div className="card-left">
                                 <p>{String.fromCharCode(exercise.order+64).toUpperCase()}.</p>
                             </div>

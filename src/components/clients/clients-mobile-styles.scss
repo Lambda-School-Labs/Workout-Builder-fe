@@ -320,3 +320,182 @@ $mobile-breakpoint: 1024px;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.600);
 }
+
+// View Client Styles Mobile
+
+.m-view-client {
+    @media (min-width: $mobile-breakpoint) {
+        display: none;
+    }
+    padding: 1rem;
+    .m-view-info {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+            .back-div {
+                display: flex;
+                align-items: center;
+                height: 2rem;
+                margin-bottom: 1.25rem;
+                img {
+                    cursor: pointer;
+                    height: 1rem;
+                    width: 1rem;
+                }
+                p {
+                    cursor: pointer;
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 1.125rem;
+                    line-height: 1.3125rem;
+                    padding-left: .5rem;
+                }
+            }
+        .m-view-button-div {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            height: 3rem;
+            margin-bottom: 1rem;
+            .assign-to-client-button {
+                width: 47%;
+                background: #FD6A02;
+                border-radius: 5px;
+                height: 3rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: 1.125rem;
+                line-height: 1.3125rem;
+                color: #FFFFFF;
+                border: none;
+            }
+            .edit-button {
+                width: 47%;
+                background: #FFFFFF;
+                border-radius: 5px;
+                height: 3rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: 1.125rem;
+                line-height: 1.3125rem;
+                color: #FD6A02;
+                border: 2px solid #FD6A02;
+            }
+        }
+    }
+    .client-card {
+        display: flex;
+        margin-top: 1rem;
+        img {
+            height: 4.875rem;
+            width: auto;
+        }
+        .info-div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 1rem;
+            color: #333333;
+            h4 {
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: 1rem;
+                font-weight: bold;
+                line-height: 1.2rem;
+            }
+            p {
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: 1rem;
+                line-height: 1.2rem;
+            }
+            .img-p {
+                display: flex;
+                img {
+                    height: 0.875rem;
+                    width: 0.875rem;
+                    margin-right: .4rem;
+                }
+            }
+        }
+    }
+    .table-title {
+        display: flex;
+        align-items: center;
+        margin-top: 1.5rem;
+        h2 {
+            font-family: 'Hind Madurai', sans-serif;
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-right: .3rem;
+        }
+        h3 {
+            font-family: 'Hind Madurai', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #7D7D7D;
+        }
+    }
+}
+
+// Mobile preview styles
+
+.preview-workout {
+    border: 1px solid #D4D4D4;
+    width: 100%;
+    margin: .5rem auto;
+    .preview-title {
+        border-bottom: 1px solid #D4D4D4;
+        h3 {
+            font-family: 'Hind Madurai', sans-serif;
+            font-weight: 600;
+            font-size: 1.125rem;
+            line-height: 1.5625rem;
+            margin: 0.375rem 0 0.375rem 0.875rem;
+        }
+    }
+    .preview-data {
+        width: 100%;
+        font-family: 'Hind Madurai', sans-serif;
+        font-size: 1rem;
+        line-height: 1.1875rem;
+        margin-bottom: 1rem;
+        .data-top {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: .5rem;
+            .data-name {
+                font-weight: 600;
+                margin: 1rem 0 0 0.875rem;
+            }
+            img {
+                width: .75rem;
+                height: .5rem;
+                margin: 1rem 0.875rem 0 0;
+                cursor: pointer;
+            }
+        }
+        .data-instructions {
+            margin: .2rem 0 1rem 0.875rem;
+        }
+        .data-card {
+            width: 100%;
+            margin: .2rem 0.875rem;
+            display: flex;
+            .card-left {
+                width: 1.5rem;
+                font-weight: 600;
+            }
+            .card-right {
+                width: calc(100% - 2.375rem);
+                .card-title {
+                    font-weight: 600;
+                    margin-bottom: .2rem;
+                }
+            }
+        }
+    }
+}

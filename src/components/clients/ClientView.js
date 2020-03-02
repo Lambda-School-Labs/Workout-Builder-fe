@@ -1,24 +1,22 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { connect } from 'react-redux';
-import EditClient from './modals/EditClient_D';
+import EditClient_D from './modals/EditClient_D';
+import EditClient_M from './modals/EditClient_M';
 import { useDispatch } from 'react-redux';
 import AssignToClient from "./modals/AssignToClient";
+import ProgramPreviewElement from "../program/ProgramPreviewElement";
 
 // mobile styling
-
+import "./clients-mobile-styles.scss"
 
 // desktop styling
 import "./clients-desktop-styles.scss"
 
 const ClientView = (props) => {
     const Dispatch = useDispatch();
-    const [EditClientModal, ToggleEditClientModal] = useState(false);
+    const [EditClientModal_D, ToggleEditClientModal_D] = useState(false);
+    const [EditClientModal_M, ToggleEditClientModal_M] = useState(false);
     const [AssignToClientModal, ToggleAssignToClientModal] = useState(false);
-
-    // Open the edit client modal
-    const editClient = () => {
-        ToggleEditClientModal(true);
-    }
 
     const goBack = () => {
         window.history.back()
@@ -52,7 +50,7 @@ const ClientView = (props) => {
     },[props.coach_exercises])
 
 
-    const generateLastRow = (program, lastRowCells, fullRowsNumber) => {
+    const generateLastRow = (program, lastRowCells, fullRowsNumber, tableNumber) => {
         // Generates the last row of the table (including blanks)
         const tempList = JSON.parse(JSON.stringify(program.workouts));
         let lastRowList = tempList.splice((fullRowsNumber * 7), lastRowCells);
@@ -66,12 +64,12 @@ const ClientView = (props) => {
             <tr className="last-row">
                 {lastRowList.map(day => {
                     return (
-                        <td>
+                        <td key={`${tableNumber}-lastrow-${day.id}`}>
                             <h3>Day {day.day}</h3>
                             <h4>{day.name}</h4>
                             {day.exercises.map(exercise => {
                                 return (
-                                    <div className="table-exercise">
+                                    <div className="table-exercise" key={`${tableNumber}-lastrow-${day.id}-${exercise.order}`}>
                                         <div className="table-exercise-title">
                                             <p>{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
                                             <h5>{getExerciseName(exercise.exercise_id)}</h5>
@@ -85,7 +83,7 @@ const ClientView = (props) => {
                 })}
                 {blankCellList.map((emptyCell, idx) => {
                     return (
-                        <td className="blank-cell">
+                        <td className="blank-cell" key={`${tableNumber}-blank-${idx}`}>
                         </td>
                     )
                 })}
@@ -93,7 +91,7 @@ const ClientView = (props) => {
         )
     }
 
-    const generateTable = (program) => {
+    const generateTable = (program, tableNumber) => {
         // Variables necessary for generating tables
         const workoutList = JSON.parse(JSON.stringify(program.workouts));
         const fullRowsNumber = Math.floor(workoutList.length / 7);
@@ -108,18 +106,18 @@ const ClientView = (props) => {
         return (
             <table className="workout-schedule-table">
                 <tbody>
-                    {fullRowsList.map(row => {
+                    {fullRowsList.map((row, idx) => {
                         return (
-                            <tr className="full-row">
+                            <tr className="full-row" key={`${tableNumber}-fullrow-${idx}`}>
                                 {row.map(day => {
                                     return (
-                                        <td className="filled-cell">
+                                        <td className="filled-cell" key={`${tableNumber}-fullrow-${idx}-${day.id}`}>
                                             <div>
                                                 <h3>Day {day.day}</h3>
                                                 <h4>{day.name}</h4>
                                                 {day.exercises.map(exercise => {
                                                     return (
-                                                        <div className="table-exercise">
+                                                        <div className="table-exercise" key={`${tableNumber}-fullrow-${idx}-${day.id}-${exercise.order}`}>
                                                             <div className="table-exercise-title">
                                                                 <p>{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
                                                                 <h5>{getExerciseName(exercise.exercise_id)}</h5>
@@ -135,7 +133,7 @@ const ClientView = (props) => {
                             </tr>
                         )
                     })}
-                    {generateLastRow(program, lastRowCells, fullRowsNumber)}
+                    {generateLastRow(program, lastRowCells, fullRowsNumber, tableNumber)}
                 </tbody>
             </table>
         )
@@ -143,6 +141,50 @@ const ClientView = (props) => {
 
     return(
         <>
+
+        {/* MOBILE VIEW */}
+
+        <div className="m-view-client">
+            <div className="m-view-info">
+                <div className="back-div">
+                    <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={() => goBack()} alt="back"></img>
+                    <p className="back-text" onClick={() => goBack()}>Back</p>
+                </div>
+                <div className="m-view-button-div">
+                    <button className="assign-to-client-button" onClick={() => ToggleAssignToClientModal(true)}>Assign to client</button>
+                    {AssignToClientModal ? <AssignToClient program_id={props.id} AssignToClientModal={AssignToClientModal} ToggleAssignToClientModal={ToggleAssignToClientModal} {...props}/>
+                    : <div />}
+                    <button className="edit-button" onClick={() => ToggleEditClientModal_M(true)}>Edit</button>
+                </div>
+            </div>
+            <div className="client-card">
+                <img src="https://i.imgur.com/rqosIgi.png" alt="client-face"></img>
+                <div className="info-div">
+                    <h4>{props.client_data.first_name} {props.client_data.last_name}</h4>
+                    <p>{props.client_data.email}</p>
+                    <p>(720) 123-4567</p>
+                    <div className="img-p">
+                        <img src="https://i.imgur.com/X0EPfBY.png" alt="client-oj"></img><p>25M 225lbs 6' 2''</p>
+                    </div>
+                </div>
+            </div>
+            {listOfClientsPrograms.map((program, idx) => {
+                return (
+                    <div key={`programtable-${idx}`}>
+                        <div className="table-title">
+                            <h2>{program.name},</h2>
+                            <h3>{program.phase}</h3>
+                        </div>
+                        {program.workouts.map(day => {
+                            return (
+                                <ProgramPreviewElement key={`preview-day-${day.id}`} day={day} />
+                            )
+                        })}
+                    </div>
+                )
+            })}
+        </div>
+        <EditClient_M EditClientModal={EditClientModal_M} ToggleEditClientModal={ToggleEditClientModal_M} {...props}/>
 
         {/* DESKTOP VIEW */}
 
@@ -159,7 +201,7 @@ const ClientView = (props) => {
                     <button className="assign-to-client-button" onClick={() => ToggleAssignToClientModal(true)}>Assign to client</button>
                     {AssignToClientModal ? <AssignToClient program_id={props.id} AssignToClientModal={AssignToClientModal} ToggleAssignToClientModal={ToggleAssignToClientModal} {...props}/>
                     : <div />}
-                    <button className="edit-button" onClick={() => editClient()}>Edit</button>
+                    <button className="edit-button" onClick={() => ToggleEditClientModal_D(true)}>Edit</button>
                 </div>
             </div>
             <div className="client-card">
@@ -171,19 +213,19 @@ const ClientView = (props) => {
                     <p>6' 2'', 225 lbs</p>
                 </div>
             </div>
-            {listOfClientsPrograms.map(program => {
+            {listOfClientsPrograms.map((program, idx) => {
                 return (
-                    <>
-                    <div className="table-title">
-                        <h2>{program.name},</h2>
-                        <h3>{program.phase}</h3>
+                    <div key={`programtable-${idx}`}>
+                        <div className="table-title">
+                            <h2>{program.name},</h2>
+                            <h3>{program.phase}</h3>
+                        </div>
+                        {generateTable(program, idx)}
                     </div>
-                    {generateTable(program)}
-                    </>
                 )
             })}
         </div>
-        <EditClient EditClientModal={EditClientModal} ToggleEditClientModal={ToggleEditClientModal} {...props}/>
+        <EditClient_D EditClientModal={EditClientModal_D} ToggleEditClientModal={ToggleEditClientModal_D} {...props}/>
         </>
     )
 }

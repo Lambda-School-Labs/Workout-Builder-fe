@@ -376,6 +376,9 @@ $desktop-breakpoint: 1023px;
 // View Client Styles
 
 .d-view-client {
+    @media (max-width: $desktop-breakpoint) {
+        display: none;
+    }
     padding: 2.5rem;
     .d-view-info {
         display: flex;
