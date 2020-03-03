@@ -22,11 +22,12 @@ const ProgramHome = (props) => {
     const [searchResults, setSearchResults] = useState(props.coach_clients);
 
     useEffect(() => {
-        if(!props.coach_clients.length) {
-            return "";
+        if(props.coach_clients.length) {
+            let results = props.coach_clients.filter(client => (client.first_name + " " + client.last_name).toLowerCase().includes(searchTerm.toLowerCase()));
+            setSearchResults(results);
+        } else {
+            setSearchResults([]);
         }
-        let results = props.coach_clients.filter(client => (client.first_name + " " + client.last_name).toLowerCase().includes(searchTerm.toLowerCase()));
-        setSearchResults(results);
     }, [searchTerm, props.updates, props.coach_clients]);
 
     const handleChange = (e) => {

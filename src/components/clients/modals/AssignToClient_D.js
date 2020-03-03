@@ -146,35 +146,37 @@ const AssignToClient_D = (props) => {
     }
 
     return(
-        <div isOpen={props.AssignToClientModal} 
-                className="assign-modal-d" 
-                overlayClassName="client-overaly"
-                shouldCloseOnOverlayClick={true}
-                onRequestClose={closeModal}
-                >
-                <div ref={wrapperRef} className="assign-internal">
-                    <div className="assign-header">Assign Programs</div>
-                    <div className="assign-programs" style={{}}>
-                        {props.coach_programs.map(program => {
-                            return(
-                                <div key={program.id} className="assign-programs-row" id={`assign-program-${program.id}`}>
-                                        <label className="assign-program-container">
-                                            <input type="checkbox" checked={isChecked(program.id)} onChange={() => toggleAssign(program.id)}/>
-                                            {program.name}
-                                        </label>
-                                        <p>{program.length} days</p>
-                                </div>
-                            )
-                        })}
-                    </div>
-                    <div className="assign-button-div">
-                        <button className="cancel-button" onClick={closeModal}>Cancel</button>
-                        <button className="assign-button" onClick={assignProgramsToClient}>Assign</button>
-                    </div>
-                    {confirmModal ? <AssignProgramsConfirm
-                    confirmModal={confirmModal} toggleConfirmModal={toggleConfirmModal} {...props}/>
-                    : <div />}
+        <div 
+            // isOpen={props.AssignToClientModal} 
+            className="assign-modal-d" 
+            // overlayClassName="client-overaly"
+            // shouldCloseOnOverlayClick={true}
+            // onRequestClose={closeModal}
+            ref={wrapperRef}
+            >
+            <div className="assign-internal">
+                <div className="assign-header">Assign Programs</div>
+                <div className="assign-programs" style={{}}>
+                    {props.coach_programs.map(program => {
+                        return(
+                            <div key={program.id} className="assign-programs-row" id={`assign-program-${program.id}`}>
+                                    <label className="assign-program-container">
+                                        <input type="checkbox" checked={isChecked(program.id)} onChange={() => toggleAssign(program.id)}/>
+                                        {program.name}
+                                    </label>
+                                    <p>{program.length} days</p>
+                            </div>
+                        )
+                    })}
                 </div>
+                <div className="assign-button-div">
+                    <button className="cancel-button" onClick={closeModal}>Cancel</button>
+                    <button className="assign-button" onClick={assignProgramsToClient}>Assign</button>
+                </div>
+                {confirmModal ? <AssignProgramsConfirm
+                confirmModal={confirmModal} toggleConfirmModal={toggleConfirmModal} {...props}/>
+                : <div />}
+            </div>
         </div>
     )
 }

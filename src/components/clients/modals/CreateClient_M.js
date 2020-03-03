@@ -72,11 +72,12 @@ const CreateClient_M = (props) => {
     };
 
     return(
-        <div isOpen={props.AddClientModal} 
+        <div 
+            // isOpen={props.AddClientModal} 
             className="m-client-modal" 
-            overlayClassName="client-overaly"
-            shouldCloseOnOverlayClick={true}
-            onRequestClose={closeModal}
+            // overlayClassName="client-overaly"
+            // shouldCloseOnOverlayClick={true}
+            // onRequestClose={closeModal}
             ref={wrapperRef}
             >
             <form onSubmit={createClient}>

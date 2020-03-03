@@ -81,11 +81,12 @@ const EditClient_D = (props) => {
     };
 
     return(
-            <div isOpen={props.EditClientModal} 
+            <div 
+                // isOpen={props.EditClientModal} 
                 className="client-modal" 
-                overlayClassName="client-overaly"
-                shouldCloseOnOverlayClick={true}
-                onRequestClose={closeModal}
+                // overlayClassName="client-overaly"
+                // shouldCloseOnOverlayClick={true}
+                // onRequestClose={closeModal}
                 ref={wrapperRef}
                 >
                 <form onSubmit={updateClient}>
