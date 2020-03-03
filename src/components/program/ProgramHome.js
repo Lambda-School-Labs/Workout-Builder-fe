@@ -11,7 +11,6 @@ import "./program-desktop-styles.scss";
 
 const ProgramHome = (props) => {
 
-  console.log(props, "program stuff");
   const [CreateProgramModal, ToggleCreateProgramModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState(props.coach_programs);
