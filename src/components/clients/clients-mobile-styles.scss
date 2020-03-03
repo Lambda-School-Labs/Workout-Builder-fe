@@ -216,10 +216,11 @@ $mobile-breakpoint: 1024px;
             line-height: 1.5625rem;
             color: #666666;
             margin-right: 1rem;
+            width: 5rem;
         }
         input {
             padding: .5rem;
-            width: 70%;
+            width: calc(100% - 6rem);
             height: 1.5rem;
             font-family: 'Hind Madurai', sans-serif;
             font-size: 0.875rem;
@@ -326,6 +327,9 @@ $mobile-breakpoint: 1024px;
 .m-view-client {
     @media (min-width: $mobile-breakpoint) {
         display: none;
+    }
+    *:focus {
+        outline: none;
     }
     padding: 1rem;
     .m-view-info {
@@ -442,6 +446,12 @@ $mobile-breakpoint: 1024px;
 // Mobile preview styles
 
 .preview-workout {
+    @media (min-width: $mobile-breakpoint) {
+        display: none;
+    }
+    *:focus {
+        outline: none;
+    }
     border: 1px solid #D4D4D4;
     width: 100%;
     margin: .5rem auto;
@@ -495,6 +505,122 @@ $mobile-breakpoint: 1024px;
                     font-weight: 600;
                     margin-bottom: .2rem;
                 }
+            }
+        }
+    }
+}
+
+// Mobile Assign Programs to Client Modal
+
+.assign-modal-m {
+    @media (min-width: $mobile-breakpoint) {
+        display: none;
+    }
+    *:focus {
+        outline: none;
+    }
+    z-index: 1;
+    background-color: white;
+    position: absolute;
+    top: calc(50% - 20rem);
+    right: calc(5%);
+    width: 90%;
+    height: 40rem;
+    padding: 1rem;
+    .assign-internal {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 40rem;
+        .assign-header {
+            margin-left: 1rem;
+            display: flex;
+            height: 3rem;
+            align-items: flex-end;
+            h2 {
+                font-family: 'Hind Madurai', sans-serif;
+                font-weight: 600;
+                font-size: 1.5rem;
+            }
+        }
+        .assign-programs {
+            height: 28rem;
+            overflow-y: scroll;
+            &::-webkit-scrollbar {
+                width: 3px;
+                background: #cecece;
+            } 
+            &::-webkit-scrollbar-thumb {
+                width: 3px;
+                background: #666666;
+            }
+            margin-right: 5px;
+            .assign-programs-row {
+                color: #666666;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 3rem;
+                .assign-program-container {
+                    display: flex;
+                    align-items: center;
+                    font-family: 'Hind Madurai', sans-serif;
+                    font-size: 1.25rem;
+                    color: #333333;
+                    position: relative;
+                    padding-left: 1rem;
+                    input {
+                        width: 1rem;
+                        height: 1rem;
+                        -webkit-appearance: none;
+                        background-color: #ffffff;
+                        border: 2px solid #686B6F;
+                        border-radius: 3px;
+                        margin-right: 5px;
+                        &:focus {
+                            outline: none;
+                        }
+                        &:checked {
+                            background: #333333;
+                            border: 2px solid #333333;
+                            border: none;
+                        }
+                    }
+                }
+                p {
+                    font-family: 'Hind Madurai', sans-serif;
+                    font-size: 1rem;
+                    color: #ADADAD;
+                    margin-right: 1rem;
+                }
+            }
+        }
+        .assign-button-div {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            height: 4rem;
+            .cancel-button {
+                width: 47%;
+                height: 3.125rem;
+                background: #FFFFFF;
+                border: 1px solid #FD6A02;
+                border-radius: 5px;
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: 1rem;
+                color: #FD6A02;
+                height: 2.25rem;
+            }
+            .assign-button {
+                width: 47%;
+                height: 3.125rem;
+                background: #FD6A02;
+                border-radius: 5px;
+                font-family: 'Hind Madurai', sans-serif;
+                font-size: 1rem;
+                color: #FFFFFF;
+                height: 2.25rem;
             }
         }
     }

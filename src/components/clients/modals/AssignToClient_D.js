@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import serverHandshake from '../../../utils/serverHandshake';
 import AssignProgramsConfirm from "./AssignProgramsConfirm";
 
-const AssignToClient = (props) => {
+const AssignToClient_D = (props) => {
     const Dispatch = useDispatch();
     
     /***** Modal methods *****/ 
@@ -147,7 +147,7 @@ const AssignToClient = (props) => {
 
     return(
         <Modal isOpen={props.AssignToClientModal} 
-                className="assign-modal" 
+                className="assign-modal-d" 
                 overlayClassName="client-overaly"
                 shouldCloseOnOverlayClick={true}
                 onRequestClose={closeModal}
@@ -190,4 +190,4 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-)(AssignToClient);
+)(AssignToClient_D);
