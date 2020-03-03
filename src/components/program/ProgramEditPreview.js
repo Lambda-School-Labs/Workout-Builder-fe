@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import "./program-mobile-styles.scss"
 import ProgramPreviewElement from "./ProgramPreviewElement";
 
-const ProgramPreview = ({ navigate, new_program, coach_exercises }) => {
+const ProgramEditPreview = ({ navigate, new_program, coach_exercises }) => {
 
     const goBack = () => {
         window.history.back()
@@ -155,6 +155,8 @@ const ProgramPreview = ({ navigate, new_program, coach_exercises }) => {
                     </div>
                 </div>
                 <div className="info-right">
+                    <button className="assign-to-client-button">Assign to client</button>
+                    <button className="edit-button" onClick={() => navigate("/program/edit")}>Edit</button>
                 </div>
             </div>
             {generateTable()}
@@ -175,4 +177,4 @@ const mapStateToProps = state => ({
   
   export default connect(
     mapStateToProps,
-  )(ProgramPreview);
+  )(ProgramEditPreview);

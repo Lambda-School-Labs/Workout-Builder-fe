@@ -16,6 +16,7 @@ import "./program-mobile-styles.scss";
 const ProgramEdit = (props) => {
   const Dispatch = useDispatch();
   const [confirmModal, toggleConfirmModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const goBackProgramHome = e => {
     e.preventDefault();
@@ -104,10 +105,8 @@ const ProgramEdit = (props) => {
     Dispatch({ type: "UPDATE" });
   };
 
-  // submitEdits function has been moved to editConfirm modal
-
   const showPreview = () => {
-    props.navigate("/program/preview");
+    props.navigate("/program/edit/preview");
   };
 
   const discardProgram = () => {
@@ -120,6 +119,38 @@ const ProgramEdit = (props) => {
     props.navigate("/program");
   };
 
+  const checkErrors = () => {
+    let errorMsg = false;
+    if (!props.new_program.workouts.length > 0) {
+      errorMsg = "Please add at least one day to your program"
+    } else {
+      props.new_program.workouts.forEach(workout => {
+        if(workout.exercises.length <= 0) {
+          errorMsg = "Please add at least one exercise per each day of your program."
+        }
+        workout.exercises.forEach(exercise => {
+          if(exercise.exercise_id === 0) {
+            errorMsg = "Please fill out every Exercise Title with an exercise from your library."
+          } else if (exercise.exercise_details.length <= 0) {
+            errorMsg = "Please fill out the Sets, reps, tempo, rest, etc. category for each exercise."
+          }
+          else if (workout.name.length <= 0 || workout.description.length <= 0) {
+            errorMsg = "Please add a Title and Coach Instructions for every day in your program."
+          }
+        })
+      })
+    }
+    return errorMsg;
+  }
+
+  const submitEditsConfirm = () => {
+    if (!checkErrors()) {
+      toggleConfirmModal(true);
+    } else {
+      setErrorMessage(checkErrors())
+    }
+  }
+
   return(
     <>
 
@@ -130,6 +161,7 @@ const ProgramEdit = (props) => {
           <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome} alt="back"></img>
           <p className="back-text" onClick={goBackProgramHome}>Back</p>
         </div>
+        <div className="error-message-div">{errorMessage}</div>
         <div className="program-info">
           <div className="title-line">
             <div className="title-left">
@@ -179,7 +211,7 @@ const ProgramEdit = (props) => {
           );
         })}
         <button className="add-day-button" onClick={() => addWorkout()}>+ Add day</button>
-        <button className="publish-button" onClick={() => toggleConfirmModal(true)}>Save</button>
+        <button className="publish-button" onClick={() => submitEditsConfirm()}>Save</button>
       </div>
 
       {/* DESKTOP VIEW */}
@@ -189,6 +221,7 @@ const ProgramEdit = (props) => {
           <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome} alt="back"></img>
           <p className="back-text" onClick={goBackProgramHome}>Back</p>
         </div>
+        <div className="error-message-div">{errorMessage}</div>
         <div className="d-creation-info">
           <div className="info-left">
             <div className="creation-title">
@@ -201,7 +234,7 @@ const ProgramEdit = (props) => {
             </div>
           </div>
           <div className="info-right">
-            <button className="publish-button" onClick={() => toggleConfirmModal(true)}>Save</button>
+            <button className="publish-button" onClick={() => submitEditsConfirm()}>Save</button>
             <button className="preview-button" onClick={() => showPreview()}>Preview</button>
           </div>
         </div>

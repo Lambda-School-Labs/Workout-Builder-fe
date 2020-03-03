@@ -5,9 +5,10 @@ $program-modal-width: $program-width - 10%;
 $program-modal-margin: $program-modal-width - 27%;
 $desktop-breakpoint: 1023px;
 
-// Desktop home page
+// Desktop program home page
 
 .d-outer-program {
+    padding: 2.5rem;
     @media (max-width: $desktop-breakpoint) {
         display: none;
     }
@@ -225,6 +226,18 @@ $desktop-breakpoint: 1023px;
             line-height: 1.3125rem;
             padding-left: .5rem;
         }
+    }
+    .error-message-div{
+        font-family: 'Roboto', sans-serif;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        padding-left: .5rem;
+        background-color: pink;
+        color: red;
+        margin: .3rem 0;
+        display: flex;
+        justify-content: center;
+        border-radius: .5rem;
     }
     .d-creation-info {
         width: 100%;
