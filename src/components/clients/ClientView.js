@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { connect } from 'react-redux';
-import EditClient_D from './modals/EditClient_D';
-import EditClient_M from './modals/EditClient_M';
+import EDITCLIENT_D from './modals/EditClient_D';
+import EDITCLIENT_M from './modals/EditClient_M';
 import { useDispatch } from 'react-redux';
-import AssignToClient_D from "./modals/AssignToClient_D";
-import AssignToClient_M from "./modals/AssignToClient_M";
+import ASSIGNTOCLIENT_D from "./modals/AssignToClient_D";
+import ASSIGNTOCLIENT_M from "./modals/AssignToClient_M";
 import ProgramPreviewElement from "../program/ProgramPreviewElement";
 
 // mobile styling
@@ -25,15 +25,16 @@ const ClientView = (props) => {
     };
 
     // leave the page if first_name is empty - to avoid errors in case user refreshes and data resets
+    const {client_data, navigate, coach_clients, id} = props;
     useEffect(() => {
-        if(!props.client_data.first_name) {
-            props.navigate("/clients");
+        if(!client_data.first_name) {
+            navigate("/clients");
         } else {
             // if this client's info is edited while on this page, update the information on this page
-            const updatedData = props.coach_clients.filter(client => (client.id === Number(props.id)))[0];
+            const updatedData = coach_clients.filter(client => (client.id === Number(id)))[0];
             Dispatch({ type: "UPDATE_CLIENT_DATA", payload: updatedData });
         }
-    }, [props.coach_clients, props.coach_programs]);
+    }, [coach_clients, props.coach_programs, client_data.first_name, id, navigate, Dispatch]);
 
     
     // Get a list of the client's programs
@@ -154,7 +155,7 @@ const ClientView = (props) => {
                 </div>
                 <div className="m-view-button-div">
                     <button className="assign-to-client-button" onClick={() => ToggleAssignToClientModal_M(true)}>Assign to client</button>
-                    {AssignToClientModal_M ? <AssignToClient_M program_id={props.id} AssignToClientModal={AssignToClientModal_M} ToggleAssignToClientModal={ToggleAssignToClientModal_M} {...props}/>
+                    {AssignToClientModal_M ? <ASSIGNTOCLIENT_M program_id={props.id} AssignToClientModal={AssignToClientModal_M} ToggleAssignToClientModal={ToggleAssignToClientModal_M} {...props}/>
                     : <div />}
                     <button className="edit-button" onClick={() => ToggleEditClientModal_M(true)}>Edit</button>
                 </div>
@@ -187,7 +188,7 @@ const ClientView = (props) => {
             })}
         </div>
         {EditClientModal_M ?
-        <EditClient_M EditClientModal={EditClientModal_M} ToggleEditClientModal={ToggleEditClientModal_M} {...props}/>
+        <EDITCLIENT_M EditClientModal={EditClientModal_M} ToggleEditClientModal={ToggleEditClientModal_M} {...props}/>
         : <div />}
 
         {/* DESKTOP VIEW */}
@@ -203,7 +204,7 @@ const ClientView = (props) => {
                 </div>
                 <div className="info-right">
                     <button className="assign-to-client-button" onClick={() => ToggleAssignToClientModal_D(true)}>Assign to client</button>
-                    {AssignToClientModal_D ? <AssignToClient_D program_id={props.id} AssignToClientModal={AssignToClientModal_D} ToggleAssignToClientModal={ToggleAssignToClientModal_D} {...props}/>
+                    {AssignToClientModal_D ? <ASSIGNTOCLIENT_D program_id={props.id} AssignToClientModal={AssignToClientModal_D} ToggleAssignToClientModal={ToggleAssignToClientModal_D} {...props}/>
                     : <div />}
                     <button className="edit-button" onClick={() => ToggleEditClientModal_D(true)}>Edit</button>
                 </div>
@@ -230,7 +231,7 @@ const ClientView = (props) => {
             })}
         </div>
         {EditClientModal_D ?
-            <EditClient_D EditClientModal={EditClientModal_D} ToggleEditClientModal={ToggleEditClientModal_D} {...props}/>
+            <EDITCLIENT_D EditClientModal={EditClientModal_D} ToggleEditClientModal={ToggleEditClientModal_D} {...props}/>
         : <div />}
         </>
     )

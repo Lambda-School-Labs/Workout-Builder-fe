@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import Modal from 'react-modal';
 import serverHandshake from '../../../utils/serverHandshake';
 import AssignProgramsConfirm from "./AssignProgramsConfirm";
 

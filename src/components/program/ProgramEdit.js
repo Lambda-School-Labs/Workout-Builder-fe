@@ -121,7 +121,6 @@ const ProgramEdit = (props) => {
 
   const checkErrors = () => {
     let errorMsg = false;
-    console.log(props.new_program);
     if (!props.new_program.workouts.length > 0) {
       errorMsg = "Please add at least one day to your program"
     } else {

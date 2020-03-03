@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import ClientListElement from "./ClientListElement";
-import CreateClient_D from "./modals/CreateClient_D";
-import CreateClient_M from "./modals/CreateClient_M";
-import EditClient_D from "./modals/EditClient_D";
-import EditClient_M from "./modals/EditClient_M";
+import CREATECLIENT_D from "./modals/CreateClient_D";
+import CREATECLIENT_M from "./modals/CreateClient_M";
+import EDITCLIENT_D from "./modals/EditClient_D";
+import EDITCLIENT_M from "./modals/EditClient_M";
 
 // mobile styling
 import "./clients-mobile-styles.scss"
@@ -72,10 +72,10 @@ const ProgramHome = (props) => {
 
             <button className="add-client-button" onClick={() => ToggleAddClientModal_M(true)}>+ Add</button>
             {AddClientModal_M ? 
-                <CreateClient_M AddClientModal={AddClientModal_M} ToggleAddClientModal={ToggleAddClientModal_M} {...props}/>
+                <CREATECLIENT_M AddClientModal={AddClientModal_M} ToggleAddClientModal={ToggleAddClientModal_M} {...props}/>
             : <div/>}
             {EditClientModal_M ?
-                <EditClient_M EditClientModal={EditClientModal_M} ToggleEditClientModal={ToggleEditClientModal_M} {...props}/>
+                <EDITCLIENT_M EditClientModal={EditClientModal_M} ToggleEditClientModal={ToggleEditClientModal_M} {...props}/>
             : <div/>
             }
             
@@ -115,10 +115,10 @@ const ProgramHome = (props) => {
                     })}
             </div>
             {AddClientModal_D ? 
-                <CreateClient_D AddClientModal={AddClientModal_D} ToggleAddClientModal={ToggleAddClientModal_D} {...props}/>
+                <CREATECLIENT_D AddClientModal={AddClientModal_D} ToggleAddClientModal={ToggleAddClientModal_D} {...props}/>
             : <div/>}
             {EditClientModal_D ?
-                <EditClient_D EditClientModal={EditClientModal_D} ToggleEditClientModal={ToggleEditClientModal_D} {...props}/>
+                <EDITCLIENT_D EditClientModal={EditClientModal_D} ToggleEditClientModal={ToggleEditClientModal_D} {...props}/>
             : <div />}
         </div>
         </>
