@@ -19,13 +19,14 @@ const ClientView = (props) => {
     const [EditClientModal_M, ToggleEditClientModal_M] = useState(false);
     const [AssignToClientModal_D, ToggleAssignToClientModal_D] = useState(false);
     const [AssignToClientModal_M, ToggleAssignToClientModal_M] = useState(false);
+    const [listOfClientsPrograms, setListOfClientsPrograms] = useState([]);
 
     const goBack = () => {
         window.history.back()
     };
 
     // leave the page if first_name is empty - to avoid errors in case user refreshes and data resets
-    const {client_data, navigate, coach_clients, id} = props;
+    const {client_data, navigate, coach_clients, id, coach_programs} = props;
     useEffect(() => {
         if(!client_data.first_name) {
             navigate("/clients");
@@ -33,12 +34,13 @@ const ClientView = (props) => {
             // if this client's info is edited while on this page, update the information on this page
             const updatedData = coach_clients.filter(client => (client.id === Number(id)))[0];
             Dispatch({ type: "UPDATE_CLIENT_DATA", payload: updatedData });
+            setListOfClientsPrograms(coach_programs.filter(program => program.assigned_clients.includes(client_data.id)));
         }
-    }, [coach_clients, props.coach_programs, client_data.first_name, id, navigate, Dispatch]);
+    }, [coach_clients, coach_programs, id, navigate, Dispatch]);
 
     
     // Get a list of the client's programs
-    const listOfClientsPrograms = props.coach_programs.filter(program => program.assigned_clients.includes(props.client_data.id));
+    // const listOfClientsPrograms = props.coach_programs.filter(program => program.assigned_clients.includes(props.client_data.id));
 
     const getExerciseName = useCallback((input_id) => {
         // find the name of the selected exercise (by id) from the exercise library
