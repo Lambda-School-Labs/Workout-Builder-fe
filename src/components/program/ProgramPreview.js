@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { connect } from 'react-redux';
 
 // mobile styling - desktop can be done in tailwind
@@ -18,10 +18,17 @@ const ProgramPreview = ({ navigate, new_program, coach_exercises }) => {
         }
     }, [new_program.name, navigate]);
 
-    const getExerciseName = (input_id) => {
+    const getExerciseName = useCallback((input_id) => {
         // find the name of the selected exercise (by id) from the exercise library
-        return coach_exercises.filter((exercise) => {return exercise.id === input_id})[0].name;
-    }
+    
+        if (!coach_exercises.length) {
+            return '';
+        } else if (!coach_exercises.filter((exercise) => {return exercise.id === input_id}).length) {
+            return '';
+        } else {
+            return coach_exercises.filter((exercise) => {return exercise.id === input_id})[0].name;
+        }
+    },[coach_exercises])
 
 
     // Variables necessary for generating tables

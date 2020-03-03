@@ -5,9 +5,10 @@ $program-modal-width: $program-width - 10%;
 $program-modal-margin: $program-modal-width - 27%;
 $desktop-breakpoint: 1023px;
 
-// Desktop home page
+// Desktop program home page
 
 .d-outer-program {
+    padding: 2.5rem;
     @media (max-width: $desktop-breakpoint) {
         display: none;
     }

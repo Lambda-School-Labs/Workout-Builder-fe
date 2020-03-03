@@ -8,6 +8,7 @@ import temp_next_program_id from './temp_next_program_id';
 import temp_next_workout_id from './temp_next_workout_id';
 import updates from './updates';
 import userID from './userID';
+import client_data from './client_data';
 
 export default combineReducers({
   coach_clients,
@@ -18,5 +19,6 @@ export default combineReducers({
   temp_next_program_id,
   temp_next_workout_id,
   updates,
-  userID
+  userID,
+  client_data
 });

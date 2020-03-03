@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { connect } from 'react-redux';
 
 const ProgramPreviewElement = (props) => {
 
     const [fullView, setFullView] = useState(false);
 
-    const getExerciseName = (input_id) => {
+    const getExerciseName = useCallback((input_id) => {
         // find the name of the selected exercise (by id) from the exercise library
-        return props.coach_exercises.filter((exercise) => {return exercise.id === input_id})[0].name;
-    }
+    
+        if (!props.coach_exercises.length) {
+            return '';
+        } else if (!props.coach_exercises.filter((exercise) => {return exercise.id === input_id}).length) {
+            return '';
+        } else {
+            return props.coach_exercises.filter((exercise) => {return exercise.id === input_id})[0].name;
+        }
+    },[props.coach_exercises])
 
     const toggleFullView = () => {
         if(fullView) {
@@ -35,9 +42,9 @@ const ProgramPreviewElement = (props) => {
                 {fullView ? 
                 <>
                 <p className="data-instructions">{props.day.description}</p>
-                {props.day.exercises.map(exercise => {
+                {props.day.exercises.map((exercise, idx) => {
                     return (
-                        <div className="data-card">
+                        <div className="data-card" key={`preview-${exercise.order}-${idx}`}>
                             <div className="card-left">
                                 <p>{String.fromCharCode(exercise.order+64).toUpperCase()}.</p>
                             </div>
