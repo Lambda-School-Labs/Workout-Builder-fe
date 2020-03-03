@@ -118,9 +118,9 @@ const ClientView = (props) => {
                                             <div>
                                                 <h3>Day {day.day}</h3>
                                                 <h4>{day.name}</h4>
-                                                {day.exercises.map(exercise => {
+                                                {day.exercises.map((exercise, idx) => {
                                                     return (
-                                                        <div className="table-exercise" key={`${tableNumber}-fullrow-${idx}-${day.id}-${exercise.order}`}>
+                                                        <div className="table-exercise" key={`${tableNumber}-fullrow-${day.id}-${idx}-${exercise.order}`}>
                                                             <div className="table-exercise-title">
                                                                 <p>{String.fromCharCode(exercise.order+64).toUpperCase()}</p>
                                                                 <h5>{getExerciseName(exercise.exercise_id)}</h5>

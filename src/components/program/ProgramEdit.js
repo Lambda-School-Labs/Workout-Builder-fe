@@ -106,7 +106,7 @@ const ProgramEdit = (props) => {
   };
 
   const showPreview = () => {
-    props.navigate("/program/preview");
+    props.navigate("/program/edit/preview");
   };
 
   const discardProgram = () => {
