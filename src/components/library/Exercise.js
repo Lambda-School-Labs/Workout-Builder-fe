@@ -162,11 +162,11 @@ function Exercise({ id, navigate, location }){
               </div>
             )}
           </div>
-          <div className="flex justify-between">
-            <button type="button" onClick={editing ? cancelEdit : handleBack} className="py-3 w-5/12 rounded bg-white text-blaze-orange border border-blaze-orange">
+          <div className="flex justify-between lg:justify-start">
+            <button type="button" onClick={editing ? cancelEdit : handleBack} className="py-3 w-5/12 rounded bg-white text-blaze-orange border border-blaze-orange lg:w-1/4 mr-4">
               {editing ? 'Cancel' : 'Back'}
             </button>
-            <button type="submit" onClick={editing ? handleSubmit : handleEdit} className="py-3 w-5/12 rounded bg-blaze-orange text-white" disabled={saving}>
+            <button type="submit" onClick={editing ? handleSubmit : handleEdit} className="py-3 w-5/12 rounded bg-blaze-orange text-white lg:w-1/4" disabled={saving}>
               {editing ? 'Save' : 'Edit'}
             </button>
           </div>
