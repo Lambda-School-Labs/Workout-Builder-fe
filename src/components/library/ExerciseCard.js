@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from '@reach/router';
+import { navigate } from '@reach/router';
 import ExerciseViewModal from './ExerciseViewModal';
 import vDots from '../../img/vDots.png';
 import hDots from '../../img/hDots.png';
@@ -9,19 +9,21 @@ export default function ExerciseCard(props) {
   const {id,name,type,video_url,thumbnail_url} = props.exerObj;
   const [ExModalOn, ToggleExModal] = useState(false);
 
-  function handleAtag(e) {
-    e.stopPropagation();
+  function handleCardClick(e) {
+    navigate(`/library/${id}`);
   }
+
+  const stopPropagation = e => e.stopPropagation();
 
   return (
     <div className="bf-exer-card">
-      <Link to={`/library/${id}`} className="bf-exer-link">
+      <div className="bf-exer-link cursor-pointer" onClick={handleCardClick}>
         <p className="bf-exer-name">{name}</p>
         { thumbnail_url && <img className="bf-exer-card-thumbnail" src={thumbnail_url} alt="thumbnail_url" /> }
         { !thumbnail_url && <p className="bf-exer-card-thumbnail"></p> }
         <p className="bf-exer-name">{type}</p>
         { video_url &&
-          <a href={video_url} target="_blank" rel="noopener noreferrer" className="bf-exer-card-video-link" onClick={handleAtag}>
+          <a href={video_url} target="_blank" rel="noopener noreferrer" className="bf-exer-card-video-link" onClick={stopPropagation}>
             <img className="bf-exer-card-video" src={vPlay} alt="video_url" />
           </a>
 
@@ -30,7 +32,7 @@ export default function ExerciseCard(props) {
         }
         { !video_url && <p className="bf-exer-card-video"></p> }
 
-      </Link>
+      </div>
 
       <div className="bf-exer-card-action">
         <img

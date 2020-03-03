@@ -20,13 +20,11 @@ export const fetchAllData = async (dispatch) => {
 
 //update exercise
 
-export const updateExercise = (id, exercise, props) => dispatch => {
-
+export const updateExercise = (id, exercise) => dispatch => {
   serverHandshake(true)
     .put(`exercises/${id}`, exercise)
     .then(res=>{
       dispatch({ type: EDIT_EXERCISE, payload: exercise});
-
       serverHandshake(true)
         .get('/exercises')
         .then(res => dispatch({ type: 'SET_EXERCISE_DATA', payload: res.data}))

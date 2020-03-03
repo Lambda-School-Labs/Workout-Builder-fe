@@ -4,7 +4,7 @@ import ClientProgramList from './ClientProgramList';
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-col px-4 py-5 lg:w-full lg:h-auto lg:px-8 py-10" style={{ height: 'calc(100vh - 4.10rem)' }}>
+    <div className="flex flex-col px-4 py-5 lg:w-full lg:h-auto lg:px-8 py-10" style={{ minHeight: 'calc(100vh - 4.10rem)' }}>
       <DashboardHeader />
       <ClientProgramList />
       {/* mobile-only button */}

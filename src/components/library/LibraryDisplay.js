@@ -43,41 +43,39 @@ function LibraryDisplay(props) {
   };
 
   return (
-    <div className="bf-whole-lib-disp">
-      <ExerciseSearchInput
-        handleChange={handleSearch}
-        searchTerm={searchTerm}
-        handleBtn={handleBtn}
-      />
-
-      <div className="bf-lib-disp-title">
-        <h2 className="bf-lib-disp-title-ex">Exercises</h2>
-        <h2 className="bf-lib-disp-title-wa">Warmups</h2>
-      </div>
-
-      <ExerciseCardTitle />
-
-      {searchResults.map(el=>
-        <ExerciseCard key={el.id} exerObj={el} />
-      )}
-
-      <div className="bf-lib-disp-buffer-above-btn-mobile"></div>
-
-      <div className="bf-lib-disp-div-for-btn-mobile">
-        <button
-          className="bf-lib-disp-btn-mobile"
-          onClick={handleCreating} >
-        Create Exercise
-        </button>
-      </div>
-
-      {creating && (
-        <ExerciseCreationModal
-          cancel = {cancelCreating}
-          confirm = {confirmCreating}
+    <>
+      <div className="bf-whole-lib-disp">
+        <ExerciseSearchInput
+          handleChange={handleSearch}
+          searchTerm={searchTerm}
+          handleBtn={handleBtn}
         />
-      )}
-    </div>
+        <div className="bf-lib-disp-title">
+          <h2 className="bf-lib-disp-title-ex">Exercises</h2>
+          <h2 className="bf-lib-disp-title-wa">Warmups</h2>
+        </div>
+        <ExerciseCardTitle />
+        {searchResults.map(el=>
+          <ExerciseCard key={el.id} exerObj={el} />
+        )}
+        <div className="bf-lib-disp-buffer-above-btn-mobile"></div>
+        <div className="bf-lib-disp-div-for-btn-mobile">
+          <button
+            className="bf-lib-disp-btn-mobile py-2"
+            onClick={handleCreating}
+          >
+            Create Exercise
+          </button>
+        </div>
+        {creating && (
+          <ExerciseCreationModal
+            cancel = {cancelCreating}
+            confirm = {confirmCreating}
+          />
+        )}
+      </div>
+      {props.children}
+    </>
   );
 } //End of LibraryDisplay function
 
