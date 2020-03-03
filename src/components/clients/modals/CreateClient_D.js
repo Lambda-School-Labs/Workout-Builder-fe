@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import Modal from 'react-modal';
@@ -12,6 +12,8 @@ const emptyForm = {
 
 const CreateClient_D = (props) => {
     const Dispatch = useDispatch();
+
+    // Modal code
     
     Modal.setAppElement('#root');
 
@@ -19,6 +21,28 @@ const CreateClient_D = (props) => {
         e.stopPropagation();
         props.ToggleAddClientModal(false);
     };
+
+    function useOutsideAlerter(ref) {
+        function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                closeModal(event);
+            }
+        }
+    
+        useEffect(() => {
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        });
+    }
+
+    const wrapperRef = useRef(null);
+    useOutsideAlerter(wrapperRef);
+
+    // Client code
 
     const [newClientData, setNewClientData] = useState(emptyForm);
 
@@ -49,12 +73,13 @@ const CreateClient_D = (props) => {
     };
 
     return(
-        <Modal isOpen={props.AddClientModal} 
+        <div 
+            // isOpen={props.AddClientModal} 
             className="client-modal" 
-            overlayClassName="client-overaly"
-            shouldCloseOnOverlayClick={true}
-            onRequestClose={closeModal}
-            >
+            // overlayClassName="client-overaly"
+            // shouldCloseOnOverlayClick={true}
+            // onRequestClose={closeModal}
+            ref={wrapperRef}>
             <form onSubmit={createClient}>
                 <h3>Add new Client</h3>
                 <div className="profile-row">
@@ -117,7 +142,7 @@ const CreateClient_D = (props) => {
                     <button className="save-button" type="submit">Save</button>
                 </div>
             </form>
-        </Modal>
+        </div>
     )
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import Modal from 'react-modal';
@@ -13,12 +13,35 @@ const emptyForm = {
 const CreateClient_M = (props) => {
     const Dispatch = useDispatch();
     
+    // Modal code
+    
     Modal.setAppElement('#root');
 
     const closeModal = (e) => {
         e.stopPropagation();
         props.ToggleAddClientModal(false);
     };
+
+    function useOutsideAlerter(ref) {
+        function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                closeModal(event);
+            }
+        }
+    
+        useEffect(() => {
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        });
+    }
+
+    const wrapperRef = useRef(null);
+    useOutsideAlerter(wrapperRef);
+
 
     const [newClientData, setNewClientData] = useState(emptyForm);
 
@@ -49,11 +72,13 @@ const CreateClient_M = (props) => {
     };
 
     return(
-        <Modal isOpen={props.AddClientModal} 
+        <div 
+            // isOpen={props.AddClientModal} 
             className="m-client-modal" 
-            overlayClassName="client-overaly"
-            shouldCloseOnOverlayClick={true}
-            onRequestClose={closeModal}
+            // overlayClassName="client-overaly"
+            // shouldCloseOnOverlayClick={true}
+            // onRequestClose={closeModal}
+            ref={wrapperRef}
             >
             <form onSubmit={createClient}>
                 <h3>Add new Client</h3>
@@ -119,7 +144,7 @@ const CreateClient_M = (props) => {
                     <button className="save-button" type="submit">Save</button>
                 </div>
             </form>
-        </Modal>
+        </div>
     )
 }
 

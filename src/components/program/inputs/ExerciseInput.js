@@ -95,9 +95,9 @@ const ExerciseInput = (props) => {
       {ExerciseListModal ?
         <div className="exercise-list-outer">
           <div className="exercise-list-inner">
-            {props.coach_exercises.filter(exercise => exercise.name.toLowerCase().includes(input.toLowerCase())).map(exercise => {
+            {props.coach_exercises.filter(exercise => exercise.name.toLowerCase().includes(input.toLowerCase())).map((exercise, idx) => {
               return (
-                <div key={exercise.exercise_id} className="exercise-element" onClick={() => chooseExercise(exercise)}>
+                <div key={`input-${idx}-${exercise.exercise_id}`} className="exercise-element" onClick={() => chooseExercise(exercise)}>
                   {exercise.name}
                 </div>
               );
