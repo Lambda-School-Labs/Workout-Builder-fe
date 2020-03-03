@@ -19,6 +19,7 @@ import "./program-desktop-styles.scss";
 const ProgramCreation = (props) => {
   const Dispatch = useDispatch();
   const [confirmModal, toggleConfirmModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const goBackProgramHome = e => {
     e.preventDefault();
@@ -110,9 +111,6 @@ const ProgramCreation = (props) => {
     props.navigate("/program/preview");
   };
 
-  // publishExercise function has been moved to publishConfirm modal
-
-
   const discardProgram = () => {
     // discard changes and navigate to program home
     const defaultProgram = {id: 0, name: "", description: "", coach_id: 1, length: 0, phase: "",
@@ -122,6 +120,39 @@ const ProgramCreation = (props) => {
     Dispatch({ type: "UPDATE_NEW_PROGRAM_DATA", payload: defaultProgram });
     props.navigate("/program");
   };
+
+  const checkErrors = () => {
+    let errorMsg = false;
+    console.log(props.new_program);
+    if (!props.new_program.workouts.length > 0) {
+      errorMsg = "Please add at least one day to your program"
+    } else {
+      props.new_program.workouts.forEach(workout => {
+        if(workout.exercises.length <= 0) {
+          errorMsg = "Please add at least one exercise per each day of your program."
+        }
+        workout.exercises.forEach(exercise => {
+          if(exercise.exercise_id === 0) {
+            errorMsg = "Please fill out every Exercise Title with an exercise from your library."
+          } else if (exercise.exercise_details.length <= 0) {
+            errorMsg = "Please fill out the Sets, reps, tempo, rest, etc. category for each exercise."
+          }
+          else if (workout.name.length <= 0 || workout.description.length <= 0) {
+            errorMsg = "Please add a Title and Coach Instructions for every day in your program."
+          }
+        })
+      })
+    }
+    return errorMsg;
+  }
+
+  const publishConfirm = () => {
+    if (!checkErrors()) {
+      toggleConfirmModal(true);
+    } else {
+      setErrorMessage(checkErrors())
+    }
+  }
 
   return(
     <>
@@ -133,6 +164,7 @@ const ProgramCreation = (props) => {
           <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome} alt="back"></img>
           <p className="back-text" onClick={goBackProgramHome}>Back</p>
         </div>
+        <div className="error-message-div">{errorMessage}</div>
         <div className="program-info">
           <div className="title-line">
             <div className="title-left">
@@ -182,7 +214,7 @@ const ProgramCreation = (props) => {
           );
         })}
         <button className="add-day-button" onClick={() => addWorkout()}>+ Add day</button>
-        <button className="publish-button" onClick={() => toggleConfirmModal(true)}>Publish Program</button>
+        <button className="publish-button" onClick={() => publishConfirm()}>Publish Program</button>
       </div>
 
       {/* DESKTOP VIEW */}
@@ -192,6 +224,7 @@ const ProgramCreation = (props) => {
           <img className="back-arrow" src="https://i.imgur.com/xiLK0TW.png" onClick={goBackProgramHome} alt="back"></img>
           <p className="back-text" onClick={goBackProgramHome}>Back</p>
         </div>
+        <div className="error-message-div">{errorMessage}</div>
         <div className="d-creation-info">
           <div className="info-left">
             <div className="creation-title">
@@ -204,7 +237,7 @@ const ProgramCreation = (props) => {
             </div>
           </div>
           <div className="info-right">
-            <button className="publish-button" onClick={() => toggleConfirmModal(true)}>Publish Program</button>
+            <button className="publish-button" onClick={() => publishConfirm()}>Publish Program</button>
             <button className="preview-button" onClick={() => showPreview()}>Preview</button>
           </div>
         </div>

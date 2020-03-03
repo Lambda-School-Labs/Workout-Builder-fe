@@ -227,6 +227,18 @@ $desktop-breakpoint: 1023px;
             padding-left: .5rem;
         }
     }
+    .error-message-div{
+        font-family: 'Roboto', sans-serif;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        padding-left: .5rem;
+        background-color: pink;
+        color: red;
+        margin: .3rem 0;
+        display: flex;
+        justify-content: center;
+        border-radius: .5rem;
+    }
     .d-creation-info {
         width: 100%;
         display: flex;

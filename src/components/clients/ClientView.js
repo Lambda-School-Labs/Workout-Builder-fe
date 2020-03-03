@@ -186,7 +186,9 @@ const ClientView = (props) => {
                 )
             })}
         </div>
+        {EditClientModal_M ?
         <EditClient_M EditClientModal={EditClientModal_M} ToggleEditClientModal={ToggleEditClientModal_M} {...props}/>
+        : <div />}
 
         {/* DESKTOP VIEW */}
 
@@ -227,7 +229,9 @@ const ClientView = (props) => {
                 )
             })}
         </div>
-        <EditClient_D EditClientModal={EditClientModal_D} ToggleEditClientModal={ToggleEditClientModal_D} {...props}/>
+        {EditClientModal_D ?
+            <EditClient_D EditClientModal={EditClientModal_D} ToggleEditClientModal={ToggleEditClientModal_D} {...props}/>
+        : <div />}
         </>
     )
 }

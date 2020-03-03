@@ -190,6 +190,7 @@ $desktop-breakpoint: 1023px;
     width: 35rem;
     height: 45rem;
     padding: 2.5rem;
+    border: 1px solid black;
     h3 {
         font-family: 'Hind Madurai', sans-serif;
         font-weight: 600;
@@ -567,6 +568,7 @@ $desktop-breakpoint: 1023px;
     width: 35rem;
     height: 45rem;
     padding: 2.5rem;
+    border: 1px solid black;
     .assign-internal {
         display: flex;
         flex-direction: column;

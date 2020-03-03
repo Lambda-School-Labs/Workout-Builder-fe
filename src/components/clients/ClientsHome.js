@@ -70,9 +70,14 @@ const ProgramHome = (props) => {
             </div>
 
             <button className="add-client-button" onClick={() => ToggleAddClientModal_M(true)}>+ Add</button>
+            {AddClientModal_M ? 
+                <CreateClient_M AddClientModal={AddClientModal_M} ToggleAddClientModal={ToggleAddClientModal_M} {...props}/>
+            : <div/>}
+            {EditClientModal_M ?
+                <EditClient_M EditClientModal={EditClientModal_M} ToggleEditClientModal={ToggleEditClientModal_M} {...props}/>
+            : <div/>
+            }
             
-            <CreateClient_M AddClientModal={AddClientModal_M} ToggleAddClientModal={ToggleAddClientModal_M} {...props}/>
-            <EditClient_M EditClientModal={EditClientModal_M} ToggleEditClientModal={ToggleEditClientModal_M} {...props}/>
         </div>
 
         {/* DESKTOP VIEW */}
@@ -108,9 +113,12 @@ const ProgramHome = (props) => {
                         )
                     })}
             </div>
-            
-            <CreateClient_D AddClientModal={AddClientModal_D} ToggleAddClientModal={ToggleAddClientModal_D} {...props}/>
-            <EditClient_D EditClientModal={EditClientModal_D} ToggleEditClientModal={ToggleEditClientModal_D} {...props}/>
+            {AddClientModal_D ? 
+                <CreateClient_D AddClientModal={AddClientModal_D} ToggleAddClientModal={ToggleAddClientModal_D} {...props}/>
+            : <div/>}
+            {EditClientModal_D ?
+                <EditClient_D EditClientModal={EditClientModal_D} ToggleEditClientModal={ToggleEditClientModal_D} {...props}/>
+            : <div />}
         </div>
         </>
     )

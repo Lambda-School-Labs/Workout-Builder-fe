@@ -146,7 +146,7 @@ const AssignToClient_M = (props) => {
     }
 
     return(
-        <Modal isOpen={props.AssignToClientModal} 
+        <div isOpen={props.AssignToClientModal} 
                 className="assign-modal-m" 
                 overlayClassName="client-overaly"
                 shouldCloseOnOverlayClick={true}
@@ -175,7 +175,7 @@ const AssignToClient_M = (props) => {
                     confirmModal={confirmModal} toggleConfirmModal={toggleConfirmModal} {...props}/>
                     : <div />}
                 </div>
-        </Modal>
+        </div>
     )
 }
 

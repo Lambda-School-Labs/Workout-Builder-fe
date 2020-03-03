@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import Modal from 'react-modal';
@@ -7,12 +7,36 @@ import serverHandshake from '../../../utils/serverHandshake';
 const EditClient_D = (props) => {
     const Dispatch = useDispatch();
     
+    // Modal Code
+    
     Modal.setAppElement('#root');
 
     const closeModal = (e) => {
         e.stopPropagation();
-        props.ToggleEditClientModal(false);
+        props.ToggleAddClientModal(false);
     };
+
+    function useOutsideAlerter(ref) {
+        function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                closeModal(event);
+            }
+        }
+    
+        useEffect(() => {
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        });
+    }
+
+    const wrapperRef = useRef(null);
+    useOutsideAlerter(wrapperRef);
+
+    // Client Code
 
     const initialClientData = {
         id: props.client_data.id,
@@ -57,7 +81,7 @@ const EditClient_D = (props) => {
     };
 
     return(
-            <Modal isOpen={props.EditClientModal} 
+            <div isOpen={props.EditClientModal} 
                 className="m-client-modal" 
                 overlayClassName="client-overaly"
                 shouldCloseOnOverlayClick={true}
@@ -127,7 +151,7 @@ const EditClient_D = (props) => {
                     <button className="save-button" type="submit">Save Edits</button>
                 </div>
             </form>
-            </Modal>
+            </div>
     )
 }
 
