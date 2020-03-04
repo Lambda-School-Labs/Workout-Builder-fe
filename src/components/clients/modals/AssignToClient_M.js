@@ -142,10 +142,9 @@ const AssignToClient_M = (props) => {
             .catch(err => {
                 console.log("there was an error", err);
             })
-        }, 1500);
+        }, 1000);
 
-
-        toggleConfirmModal(true);
+        toggleConfirmModal(true)
     }
 
     return(
