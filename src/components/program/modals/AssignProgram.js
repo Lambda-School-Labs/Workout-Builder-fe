@@ -135,15 +135,18 @@ const AssignProgram = (props) => {
             })
         }
 
-        serverHandshake(true).get('/programs')
-        .then(res => {
-            Dispatch({ type: 'SET_PROGRAM_DATA', payload: res.data });
-        })
-        .catch(err => {
-            console.log("there was an error", err);
-        })
+        // get new program data
+        setTimeout(() => {
+            serverHandshake(true).get('/programs')
+            .then(res => {
+                Dispatch({ type: 'SET_PROGRAM_DATA', payload: res.data });
+            })
+            .catch(err => {
+                console.log("there was an error", err);
+            })
+        }, 1000);
 
-        toggleConfirmModal(true);
+        toggleConfirmModal(true)
     }
 
     return(
