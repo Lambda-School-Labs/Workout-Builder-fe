@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ClientProgramItem from './ClientProgramItem';
 import serverHandshake from '../../utils/serverHandshake';
-import { dummyClientPrograms } from './dummyData';
 
 const ClientProgramList = () => {
-  const [clientPrograms, setClientPrograms] = useState(dummyClientPrograms);
+  const [clientPrograms, setClientPrograms] = useState([]);
 
   useEffect(() => {
     (async () => {

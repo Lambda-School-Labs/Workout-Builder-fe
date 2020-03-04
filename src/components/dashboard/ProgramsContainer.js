@@ -4,11 +4,10 @@ import ProgramList from './ProgramList';
 import ConfirmModal from './ConfirmModal';
 import SuccessModal from './SuccessModal';
 import serverHandshake from '../../utils/serverHandshake';
-import { dummyPrograms } from './dummyData';
 
 const ProgramsContainer = ({ closeProgramList }) => {
   const [query, setQuery] = useState('');
-  const [programs, setPrograms] = useState(dummyPrograms);
+  const [programs, setPrograms] = useState([]);
   const [assignment, setAssignment] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
 
